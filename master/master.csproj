@@ -70,6 +70,8 @@
     <Compile Include="Models\Components\Mparticipant.cs" />
     <Compile Include="Models\Components\Mtransaction.cs" />
     <Compile Include="Models\Mfile.cs" />
+    <Compile Include="Models\Variables\Mvariable.cs" />
+    <Compile Include="Util\ListUtil.cs" />
     <Compile Include="Util\StringUtil.cs" />
     <Compile Include="VariableConfigStackPanel.cs" />
     <Compile Include="VariableStackPanel.cs" />
@@ -114,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ExampleFiles\" />
+    <Folder Include="Models\Variables\Structure\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,7 +10,7 @@ namespace master.Models
     {
         protected string documentation;
         protected string name;
-        //protected string content;
+        protected string content;
 
         public string Documentation
         {
@@ -24,10 +24,10 @@ namespace master.Models
             set { this.name = value; }
         }
 
-        //public string Content
-        //{
-        //    get { return this.content; }
-        //    set { this.content = value; }
-        //}
+        public string Content
+        {
+            get { return this.content; }
+            set { this.content = value; }
+        }
     }
 }

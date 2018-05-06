@@ -5,11 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using master.Models;
+using System.Text.RegularExpressions;
 
 namespace master.FileReaders
 {
     abstract class Rbase
     {
+        protected readonly Regex regexNewLine = new Regex(@"\r\n|\r|\n");
+        protected readonly Regex regexComment = new Regex(@"^[*|/|\\].*");
+
+
         //protected Dictionary<string>
         protected List<string> fileList;
         protected string extension;
