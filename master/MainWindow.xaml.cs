@@ -1,7 +1,10 @@
 ﻿using master.FileReaders;
+using master.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,9 +35,26 @@ namespace master
 
         public void TestMyStuff()
         {
-            CTOreader r = new CTOreader();
-            r.AddFile(@"C:\Users\T\Documents\Visual Studio 2017\Projects\master\master\ExampleFiles\sample.cto");
-            r.ProcessFile(0);
+            Mfile doc = Mfile.KoopmanCTO();
+
+
+            //Create a stream to serialize the object to.  
+            MemoryStream ms = new MemoryStream();
+
+            // Serializer the User object to the stream.  
+            var ser = new DataContractJsonSerializer(typeof(Mfile));
+            ser.WriteObject(ms, doc);
+            byte[] json = ms.ToArray();
+            ms.Close();
+            string x = Encoding.UTF8.GetString(json, 0, json.Length);
+
+
+
+
+
+            //CTOreader r = new CTOreader();
+            //r.AddFile(@"C:\Users\T\Documents\Visual Studio 2017\Projects\master\master\ExampleFiles\sample.cto");
+            //r.ProcessFile(0);
 
         }
     }

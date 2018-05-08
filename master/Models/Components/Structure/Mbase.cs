@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace master.Models
 {
+    [DataContract]
     abstract class Mbase
     {
-        protected string documentation;
+        [DataMember]
+        protected string docs;
+        [DataMember]
         protected string name;
-        protected string content;
 
-        public string Documentation
+        public string Docs
         {
-            get { return this.documentation; }
-            set { this.documentation = value; }
+            get { return this.docs; }
+            set { this.docs = value; }
         }
 
         public string Name
@@ -24,10 +27,10 @@ namespace master.Models
             set { this.name = value; }
         }
 
-        public string Content
+        public Mbase(string name)
         {
-            get { return this.content; }
-            set { this.content = value; }
+            this.name = name;
+            this.docs = string.Empty;
         }
     }
 }

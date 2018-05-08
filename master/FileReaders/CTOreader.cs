@@ -20,7 +20,7 @@ namespace master.FileReaders
         {
             var input = File.ReadAllText(this.fileList[index]);
 
-            var outputFile = new Mfile()
+            var outputFile = new Mfile("dummie value")
             {
                 Namespace = this.ExtractNameSpace(ref input)
             };
@@ -74,7 +74,7 @@ namespace master.FileReaders
                 var top = input.Substring(topStart, topLenght);
                 var content = input.Substring(contentStart, contentLenght);
 
-                var item = new Masset();
+                var item = new Masset("dummy value");
                 this.ClassifyTop(top, item);
                 this.ClassifyVars(content, item);
                 output.Add(item);
@@ -107,7 +107,7 @@ namespace master.FileReaders
             var comment = String.Join("\r\n", docLines);
             var header = String.Join(" ", headLines);
 
-            output.Documentation = String.Join("\r\n", docLines);
+            output.Docs = String.Join("\r\n", docLines);
             this.ClassifyHeader(header, output);
         }
 
