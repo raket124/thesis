@@ -80,6 +80,11 @@ namespace master.Models
             }
         }
 
+        public List<Masset> GetAssets()
+        {
+            return this.assetComponents;
+        }
+
 
         public static Mfile KoopmanCTO()
         {

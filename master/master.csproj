@@ -34,6 +34,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GongSolutions.WPF.DragDrop">
+      <HintPath>dll\GongSolutions.WPF.DragDrop.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphSharp">
+      <HintPath>dll\GraphSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphSharp.Controls">
+      <HintPath>dll\GraphSharp.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph">
+      <HintPath>dll\QuickGraph.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -49,6 +61,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFExtensions">
+      <HintPath>dll\WPFExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="Xceed.Wpf.Toolkit">
       <HintPath>dll\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>

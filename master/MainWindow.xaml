@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:master"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:dd="urn:gong-wpf-dragdrop"
+        xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="724">
+        Title="MainWindow" Height="350" Width="724"
+        x:Name="root">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -14,7 +17,13 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel>
+        <graphsharp:GraphLayout x:Name="graphLayout"
+                                    Graph="{Binding ElementName=root,Path=GraphToVisualize}"
+                                    LayoutAlgorithmType="FR"
+                                    OverlapRemovalAlgorithmType="FSA"
+                                    HighlightAlgorithmType="Simple" />
+
+        <!--<StackPanel>
             <TextBox Text="Function name" />
             <Expander Header="Description">
                 <TextBox Text="Function summary" />
@@ -29,27 +38,44 @@
 
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
 
+        <Canvas x:Name="canvas" Grid.Column="2">
+            <ListBox Height="400" Width="200" x:Name="LeftListBoxOfDragDropKeyStatesSample"
+                dd:DragDrop.DragDropCopyKeyState="LeftMouseButton"
+                dd:DragDrop.IsDragSource="True"
+                dd:DragDrop.IsDropTarget="false"
+                dd:DragDrop.UseDefaultEffectDataTemplate="True" />
 
-        <Canvas Grid.Column="2">
-            <ListView>
+            <ListBox Height="400" Width="200" Canvas.Left="210" x:Name="testDest"
+                dd:DragDrop.IsDragSource="true"
+                dd:DragDrop.IsDropTarget="True"
+                dd:DragDrop.UseDefaultEffectDataTemplate="True" />
+
+            --><!--<ComboBox Width="200"
+                Margin="5 0 0 0"
+                VerticalAlignment="Center"
+                ItemsSource="{Binding Source={StaticResource DragDropKeyStatesEnumValues}}"
+                SelectedItem="{Binding ElementName=LeftListBoxOfDragDropKeyStatesSample, Path=(dd:DragDrop.DragDropCopyKeyState), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->        
+            
+            <!--<Rectangle x:Name="rect" Height="100" Canvas.Left="220" Stroke="Purple" StrokeThickness="2" Canvas.Top="95" Width="100">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="Blue" Opacity="0.4"/>
+                </Rectangle.Fill>
+            </Rectangle>-->
+
+            <!--<ListView x:Name="xxx" Canvas.Top="400">
+                <ListView.Resources>
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </Style>
+                </ListView.Resources>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}" />
-                        <GridViewColumn Header="Mail" DisplayMemberBinding="{Binding Mail}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Relation}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Type}" />
                     </GridView>
                 </ListView.View>
-            </ListView>
-
-            <ListView Canvas.Top="100">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}" />
-                        <GridViewColumn Header="Mail" DisplayMemberBinding="{Binding Mail}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Canvas>
+            </ListView>--><!--
+        </Canvas>-->
     </Grid>
 </Window>

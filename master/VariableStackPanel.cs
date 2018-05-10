@@ -10,12 +10,6 @@ namespace master
 {
     class VariableStackPanel : StackPanel
     {
-        //public string VariableName
-        //{
-        //    get { return this.name.Text; }
-        //    set { this.name.Text = value; }
-        //}
-        /*key = display name, value = actual type*/
         enum Types { String, Integer, Double, Long, Date, Time, DateTime, Boolean, Enum };
         private Dictionary<string, Types> availableTypes;
 
@@ -34,7 +28,7 @@ namespace master
                 { "Date",  Types.Date },
                 { "Time",  Types.Time },
                 { "Date & Time",  Types.DateTime },
-                { "Choice",  Types.Enum },
+                { "Bounded choice",  Types.Enum },
             };
 
             this.delete = this.ButtonDelete();
@@ -48,39 +42,23 @@ namespace master
 
         private Button ButtonDelete()
         {
-            Button button = new Button()
-            {
-                Content = "X"
-            };
+            Button button = new Button() { Content = "X" };
             button.Click += this.RemoveSelf;
             return button;
         }
 
         private ComboBox ComboBoxTypes()
         {
-            ComboBox comboBox = new ComboBox()
-            {
-                SelectedIndex = 0,
-                Width = 150
-            };
+            ComboBox comboBox = new ComboBox() { SelectedIndex = 0, Width = 150 };
             comboBox.SelectionChanged += this.SelectionChanged;
             foreach (String s in this.availableTypes.Keys)
-            {
-                comboBox.Items.Add(new ComboBoxItem()
-                {
-                    Content = s
-                });
-            }
+                comboBox.Items.Add(new ComboBoxItem() { Content = s });
             return comboBox;
         }
 
         private StackPanel StackPanel()
         {
-            StackPanel stackPanel = new StackPanel()
-            {
-                Orientation = Orientation.Horizontal
-            };
-            return stackPanel;
+            return new StackPanel() { Orientation = Orientation.Horizontal };
         }
 
 
@@ -102,60 +80,31 @@ namespace master
             switch (this.availableTypes[type])
             {
                 case Types.String:
-                    this.panel.Children.Add(new TextBox()
-                    {
-                        Text = "Variable1"
-                    });
-                    break;
+                    this.panel.Children.Add(new TextBox() { Text = "Variable1" });
+                    return;
                 case Types.Integer:
-                    this.panel.Children.Add(new IntegerUpDown()
-                    {
-                        Value = 0
-                    });
-                    break;
+                    this.panel.Children.Add(new IntegerUpDown() { Value = 0 });
+                    return;
                 case Types.Double:
-                    this.panel.Children.Add(new DoubleUpDown()
-                    {
-                        Value = 0
-                    });
-                    break;
+                    this.panel.Children.Add(new DoubleUpDown() { Value = 0 });
+                    return;
                 case Types.Date:
-                    this.panel.Children.Add(new DatePicker()
-                    {
-                        SelectedDate = DateTime.Today
-                    });
-                    break;
+                    this.panel.Children.Add(new DatePicker() { SelectedDate = DateTime.Today });
+                    return;
                 case Types.Time:
-                    this.panel.Children.Add(new TimePicker()
-                    {
-                        Value = DateTime.Now
-                    });
-                    break;
+                    this.panel.Children.Add(new TimePicker() { Value = DateTime.Now });
+                    return;
                 case Types.DateTime:
-                    this.panel.Children.Add(new DateTimePicker()
-                    {
-                        Value = DateTime.Now
-                    });
-                    break;
+                    this.panel.Children.Add(new DateTimePicker() { Value = DateTime.Now });
+                    return;
                 case Types.Enum:
-                    ComboBox comboBox = new ComboBox()
-                    {
-                        SelectedIndex = 0,
-                        Width = 150
-                    };
+                    ComboBox comboBox = new ComboBox() { SelectedIndex = 0, Width = 150 };
                     foreach (String s in new string[] { "Apple", "Banana", "Grape" })
-                    {
-                        comboBox.Items.Add(new ComboBoxItem()
-                        {
-                            Content = s
-                        });
-                    }
+                        comboBox.Items.Add(new ComboBoxItem() { Content = s });
                     this.panel.Children.Add(comboBox);
-                    break;
-
-
+                    return;
                 default:
-                    break;
+                    return;
             }
 
 
