@@ -18,7 +18,15 @@
         </Grid.RowDefinitions>
 
         <controls:ZoomControl Grid.Row="0">
-            <graphs:MyGraphArea x:Name="graphArea" />
+            <graphs:MyGraphArea x:Name="graphArea">
+                <graphs:MyGraphArea.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="/Graphs/Template.xaml"/>
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </graphs:MyGraphArea.Resources>
+            </graphs:MyGraphArea>
         </controls:ZoomControl>
         
         <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
@@ -26,18 +34,26 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <GroupBox Header="Information">
                 <StackPanel>
-                    <CheckBox x:Name="CheckBoxAssets" Content="Assets" IsChecked="True" Checked="InformationChecked"/>
-                    <CheckBox x:Name="CheckBoxConcepts" Content="Concepts" IsChecked="True" Checked="InformationChecked"/>
-                    <CheckBox x:Name="CheckBoxEnums" Content="Enums" IsChecked="True" Checked="InformationChecked"/>
-                    <CheckBox x:Name="CheckBoxEvents" Content="Events" IsChecked="True" Checked="InformationChecked"/>
-                    <CheckBox x:Name="CheckBoxParticipants" Content="Participants" IsChecked="True" Checked="InformationChecked"/>
-                    <CheckBox x:Name="CheckBoxTransactions" Content="Transactions" IsChecked="True" Checked="InformationChecked"/>
+                    <CheckBox x:Name="CheckBoxAssets" Content="Assets" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
+                    <CheckBox x:Name="CheckBoxConcepts" Content="Concepts" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
+                    <CheckBox x:Name="CheckBoxEnums" Content="Enums" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
+                    <CheckBox x:Name="CheckBoxEvents" Content="Events" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
+                    <CheckBox x:Name="CheckBoxParticipants" Content="Participants" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
+                    <CheckBox x:Name="CheckBoxTransactions" Content="Transactions" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Relations">
                 <StackPanel>
                     <CheckBox Content="Inclusion" IsChecked="True"/>
                     <CheckBox Content="Abstraction" IsChecked="True"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Graph" Width="125">
+                <StackPanel>
+                    <ComboBox x:Name="ComboBoxLayout" />
+                    <ComboBox x:Name="ComboBoxOverlapRemoval" />
+                    <ComboBox x:Name="ComboBoxEdgeRouting" />
+                    <ComboBox />
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Other group">

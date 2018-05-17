@@ -25,5 +25,10 @@ namespace master.Util
                 Where(s => s != String.Empty).
                 ToList();
         }
+
+        public static T EnumConversion<T>(this string input)
+        {
+            return (T)Enum.Parse(typeof(T), input);
+        }
     }
 }
