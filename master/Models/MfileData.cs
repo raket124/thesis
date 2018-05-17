@@ -8,15 +8,12 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    class Mfile : Mbase
+    partial class Mfile : Mbase
     {
-        protected enum TYPES { Asset, Participant, Transaction, Event, Concept, Enum };
-        protected Dictionary<Type, TYPES> sorter;
-
         [DataMember]
         protected List<Masset> assetComponents;
         [DataMember]
-        protected List<Mconcept> conceptsComponents;
+        protected List<Mconcept> conceptComponents;
         [DataMember]
         protected List<Menum> enumComponents;
         [DataMember]
@@ -34,57 +31,12 @@ namespace master.Models
             set { this.fileNamespace = value; }
         }
 
-        public Mfile(string name) : base(name)
-        {
-            this.sorter = new Dictionary<Type, TYPES>
-            {
-                { typeof(Masset), TYPES.Asset },
-                { typeof(Mconcept), TYPES.Concept },
-                { typeof(Menum), TYPES.Enum },
-                { typeof(Mevent), TYPES.Event },
-                { typeof(Mparticipant), TYPES.Participant },
-                { typeof(Mtransaction), TYPES.Transaction }
-            };
-            this.assetComponents = new List<Masset>();
-            this.conceptsComponents = new List<Mconcept>();
-            this.enumComponents = new List<Menum>();
-            this.eventComponents = new List<Mevent>();
-            this.participantComponents = new List<Mparticipant>();
-            this.transactionComponents = new List<Mtransaction>();
-        }
-
-        public void AddComponent(Mbase component)
-        {
-            switch (this.sorter[component.GetType()])
-            {
-                case TYPES.Asset:
-                    this.assetComponents.Add(component as Masset);
-                    break;
-                case TYPES.Concept:
-                    this.conceptsComponents.Add(component as Mconcept);
-                    break;
-                case TYPES.Enum:
-                    this.enumComponents.Add(component as Menum);
-                    break;
-                case TYPES.Event:
-                    this.eventComponents.Add(component as Mevent);
-                    break;
-                case TYPES.Participant:
-                    this.participantComponents.Add(component as Mparticipant);
-                    break;
-                case TYPES.Transaction:
-                    this.transactionComponents.Add(component as Mtransaction);
-                    break;
-                default:
-                    throw new Exception("Invalid class is provided");
-            }
-        }
-
-        public List<Masset> GetAssets()
-        {
-            return this.assetComponents;
-        }
-
+        public List<Masset> Asset { get { return this.assetComponents; } }
+        public List<Mconcept> Concept { get { return this.conceptComponents; } }
+        public List<Menum> Enum { get { return this.enumComponents; } }
+        public List<Mevent> Event { get { return this.eventComponents; } }
+        public List<Mparticipant> Participant { get { return this.participantComponents; } }
+        public List<Mtransaction> Transaction { get { return this.transactionComponents; } }
 
         public static Mfile KoopmanCTO()
         {
@@ -204,7 +156,7 @@ namespace master.Models
 
         private static void User(Mfile doc)
         {
-            var output = new Masset("User") { Identifier = "userID", Abstract = true };
+            var output = new Mparticipant("User") { Identifier = "userID", Abstract = true };
             output.AddComponent(new Mvariable("String", "userID", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "userName", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "firstName", Mvariable.RELATION.variable));

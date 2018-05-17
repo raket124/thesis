@@ -29,6 +29,11 @@ namespace master.Models
             set { this.isAbstract = value; }
         }
 
+        public List<Mvariable> Components
+        {
+            get { return this.components; }
+        }
+
         public Minheritance(string name) : base(name)
         {
             this.parent = string.Empty;

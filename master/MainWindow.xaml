@@ -6,24 +6,57 @@
         xmlns:local="clr-namespace:master"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:dd="urn:gong-wpf-dragdrop"
-        xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="724"
+        Title="MainWindow" Height="400" Width="800"
         x:Name="root">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="5" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Click="FileOpenClick"/>
+                <MenuItem Header="Save" Click="FileSaveClick"/>
+                <MenuItem Header="Save as" Click="FileSaveAsClick"/>
+            </MenuItem>
+            <MenuItem Header="Data model" Click="DataModelClick"/>
+        </Menu>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <graphsharp:GraphLayout x:Name="graphLayout"
-                                    Graph="{Binding ElementName=root,Path=GraphToVisualize}"
-                                    LayoutAlgorithmType="FR"
-                                    OverlapRemovalAlgorithmType="FSA"
-                                    HighlightAlgorithmType="Simple" />
+            <StackPanel Grid.Column="0" />
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <StackPanel Grid.Column="2" />
+            <GridSplitter Grid.Column="3" Width="5" HorizontalAlignment="Stretch" />
+            <StackPanel Grid.Column="4" />
+        </Grid>
+    </DockPanel>
 
-        <!--<StackPanel>
+
+
+    <!--<Grid>
+
+
+
+        --><!--<Button Content="Hello" Click="Button_Click"/>--><!--
+
+
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Open"/>
+                    <MenuItem Header="_Close"/>
+                    <MenuItem Header="_Save"/>
+                </MenuItem>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
+
+
+        --><!--<StackPanel>
             <TextBox Text="Function name" />
             <Expander Header="Description">
                 <TextBox Text="Function summary" />
@@ -76,6 +109,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>--><!--
-        </Canvas>-->
-    </Grid>
+        </Canvas>--><!--
+    </Grid>-->
 </Window>

@@ -58,5 +58,21 @@ namespace master.Models
             this.defaultValue = string.Empty;
             this.regex = string.Empty;
         }
+
+        public override string ToString()
+        {
+            var output = new List<string>()
+            {
+                this.Relation == Mvariable.RELATION.variable ? "  o" : "-->",
+                this.Type,
+                this.List ? "[]" : string.Empty,
+                this.Name,
+                //this.defaultValue != string.Empty ? string.Format("default=", this.defaultValue) : string.Empty,
+                this.Optional ? "optional" : string.Empty
+
+            };
+
+            return string.Join(" ", output);
+        }
     }
 }

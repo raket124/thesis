@@ -1,0 +1,51 @@
+﻿<Window x:Class="master.Windows.ObjectView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:master.Windows"
+        xmlns:graphs="clr-namespace:master.Graphs"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:controls="http://schemas.panthernet.ru/graphx/"
+        mc:Ignorable="d"
+        x:Name="root"
+        Title="Data model" Height="500" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <controls:ZoomControl Grid.Row="0">
+            <graphs:MyGraphArea x:Name="graphArea" />
+        </controls:ZoomControl>
+        
+        <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <GroupBox Header="Information">
+                <StackPanel>
+                    <CheckBox x:Name="CheckBoxAssets" Content="Assets" IsChecked="True" Checked="InformationChecked"/>
+                    <CheckBox x:Name="CheckBoxConcepts" Content="Concepts" IsChecked="True" Checked="InformationChecked"/>
+                    <CheckBox x:Name="CheckBoxEnums" Content="Enums" IsChecked="True" Checked="InformationChecked"/>
+                    <CheckBox x:Name="CheckBoxEvents" Content="Events" IsChecked="True" Checked="InformationChecked"/>
+                    <CheckBox x:Name="CheckBoxParticipants" Content="Participants" IsChecked="True" Checked="InformationChecked"/>
+                    <CheckBox x:Name="CheckBoxTransactions" Content="Transactions" IsChecked="True" Checked="InformationChecked"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Relations">
+                <StackPanel>
+                    <CheckBox Content="Inclusion" IsChecked="True"/>
+                    <CheckBox Content="Abstraction" IsChecked="True"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Other group">
+                <StackPanel>
+                    <CheckBox Content="Color"/>
+                    <Button Content="Help"/>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</Window>

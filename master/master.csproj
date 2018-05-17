@@ -37,11 +37,16 @@
     <Reference Include="GongSolutions.WPF.DragDrop">
       <HintPath>dll\GongSolutions.WPF.DragDrop.dll</HintPath>
     </Reference>
-    <Reference Include="GraphSharp">
-      <HintPath>dll\GraphSharp.dll</HintPath>
+    <Reference Include="GraphX.PCL.Common, Version=2.3.8.0, Culture=neutral, PublicKeyToken=a6cdb671d651b60a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\GraphX.PCL.Common.dll</HintPath>
     </Reference>
-    <Reference Include="GraphSharp.Controls">
-      <HintPath>dll\GraphSharp.Controls.dll</HintPath>
+    <Reference Include="GraphX.PCL.Logic">
+      <HintPath>dll\GraphX.PCL.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphX.WPF.Controls, Version=2.3.8.0, Culture=neutral, PublicKeyToken=bab23663f80c9e76, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\GraphX.WPF.Controls.dll</HintPath>
     </Reference>
     <Reference Include="QuickGraph">
       <HintPath>dll\QuickGraph.dll</HintPath>
@@ -76,6 +81,11 @@
     <Compile Include="DataObject.cs" />
     <Compile Include="FileReaders\CTOreader.cs" />
     <Compile Include="FileReaders\Rbase.cs" />
+    <Compile Include="Graphs\DataEdge.cs" />
+    <Compile Include="Graphs\DataVertex.cs" />
+    <Compile Include="Graphs\MyGraph.cs" />
+    <Compile Include="Graphs\MyGraphArea.cs" />
+    <Compile Include="Graphs\MyLogicCore.cs" />
     <Compile Include="Models\Components\Structure\Midentity.cs" />
     <Compile Include="Models\Components\Masset.cs" />
     <Compile Include="Models\Components\Structure\Mbase.cs" />
@@ -85,12 +95,16 @@
     <Compile Include="Models\Components\Structure\Minheritance.cs" />
     <Compile Include="Models\Components\Mparticipant.cs" />
     <Compile Include="Models\Components\Mtransaction.cs" />
-    <Compile Include="Models\Mfile.cs" />
+    <Compile Include="Models\MfileData.cs" />
+    <Compile Include="Models\MfileLogic.cs" />
     <Compile Include="Models\Variables\Mvariable.cs" />
     <Compile Include="Util\ListUtil.cs" />
     <Compile Include="Util\StringUtil.cs" />
     <Compile Include="VariableConfigStackPanel.cs" />
     <Compile Include="VariableStackPanel.cs" />
+    <Compile Include="Windows\ObjectView.xaml.cs">
+      <DependentUpon>ObjectView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -103,6 +117,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\ObjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -122,6 +140,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ExampleFiles\sample.cto" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -131,7 +150,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ExampleFiles\" />
     <Folder Include="Models\Variables\Structure\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

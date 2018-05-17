@@ -13,6 +13,11 @@ namespace master.Models
         [DataMember]
         protected List<string> options;
 
+        public List<string> Options
+        {
+            get { return this.options; }
+        }
+
         public Menum(string name) : base(name)
         {
             this.options = new List<string>();
