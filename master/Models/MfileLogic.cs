@@ -57,7 +57,7 @@ namespace master.Models
             }
         }
 
-        public List<T> getComponent<T>()
+        public List<T> GetComponent<T>()
         {
             switch (this.sorter[typeof(T)])
             {
@@ -78,29 +78,43 @@ namespace master.Models
             }
         }
 
-        public Dictionary<string, Tuple<TYPES, int>> GetReferenceTable()
+        public Dictionary<string, Tuple<Type, int>> GetReferenceTable()
         {
-            var output = new Dictionary<string, Tuple<TYPES, int>>();
-
-            for (int i = 0; i < this.assetComponents.Count; i++)
-                output.Add(this.assetComponents[i].Name, Tuple.Create<TYPES, int>(TYPES.Asset, i));
-
-            for (int i = 0; i < this.conceptComponents.Count; i++)
-                output.Add(this.conceptComponents[i].Name, Tuple.Create<TYPES, int>(TYPES.Concept, i));
-
-            for (int i = 0; i < this.enumComponents.Count; i++)
-                output.Add(this.enumComponents[i].Name, Tuple.Create<TYPES, int>(TYPES.Enum, i));
-
-            for (int i = 0; i < this.eventComponents.Count; i++)
-                output.Add(this.eventComponents[i].Name, Tuple.Create<TYPES, int>(TYPES.Event, i));
-
-            for (int i = 0; i < this.participantComponents.Count; i++)
-                output.Add(this.participantComponents[i].Name, Tuple.Create<TYPES, int>(TYPES.Participant, i));
-
-            for (int i = 0; i < this.transactionComponents.Count; i++)
-                output.Add(this.transactionComponents[i].Name, Tuple.Create<TYPES, int>(TYPES.Transaction, i));
-
+            var output = new Dictionary<string, Tuple<Type, int>>();
+            this.GetReferenceTable<Masset>(output);
+            this.GetReferenceTable<Mconcept>(output);
+            this.GetReferenceTable<Menum>(output);
+            this.GetReferenceTable<Mevent>(output);
+            this.GetReferenceTable<Mparticipant>(output);
+            this.GetReferenceTable<Mtransaction>(output);
             return output;
+        }
+
+        public Dictionary<string, Tuple<Type, int>> GetReferenceTable(Dictionary<Type, bool> activeComponents)
+        {
+            var output = new Dictionary<string, Tuple<Type, int>>();
+            this.GetReferenceTable<Masset>(activeComponents, output);
+            this.GetReferenceTable<Mconcept>(activeComponents, output);
+            this.GetReferenceTable<Menum>(activeComponents, output);
+            this.GetReferenceTable<Mevent>(activeComponents, output);
+            this.GetReferenceTable<Mparticipant>(activeComponents, output);
+            this.GetReferenceTable<Mtransaction>(activeComponents, output);
+            return output;
+        }
+
+        private void GetReferenceTable<T>(Dictionary<string, Tuple<Type, int>> output) where T : Mbase
+        {
+            this.GetReferenceTable<T>(new Dictionary<Type, bool>() { { typeof(T), true } }, output);
+        }
+
+        private void GetReferenceTable<T>(Dictionary<Type, bool> addition, Dictionary<string, Tuple<Type, int>> output) where T : Mbase
+        {
+            if (addition[typeof(T)])
+                return;
+
+            var componentList = this.GetComponent<T>();
+            for (int i = 0; i < componentList.Count; i++)
+                output.Add(componentList[i].Name, Tuple.Create<Type, int>(typeof(T), i));
         }
     }
 }

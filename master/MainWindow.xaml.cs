@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
 using master.Windows;
 using Microsoft.Win32;
+using master.Windows.Controls;
 
 namespace master
 {
@@ -46,7 +47,7 @@ namespace master
             };
             this.objectView = null;
 
-
+            DataContext = new ContractListBox();
 
             //test.Content = new VariableConfigStackPanel();
             //test2.Content = new VariableConfigStackPanel();

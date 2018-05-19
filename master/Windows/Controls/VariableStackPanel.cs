@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Xceed.Wpf.Toolkit;
 
-namespace master
+namespace master.Windows.Controls
 {
     class VariableStackPanel : StackPanel
     {

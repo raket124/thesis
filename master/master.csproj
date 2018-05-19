@@ -78,7 +78,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataObject.cs" />
     <Compile Include="FileReaders\CTOreader.cs" />
     <Compile Include="FileReaders\Rbase.cs" />
     <Compile Include="Graphs\DataEdge.cs" />
@@ -100,8 +99,10 @@
     <Compile Include="Models\Variables\Mvariable.cs" />
     <Compile Include="Util\ListUtil.cs" />
     <Compile Include="Util\StringUtil.cs" />
-    <Compile Include="VariableConfigStackPanel.cs" />
-    <Compile Include="VariableStackPanel.cs" />
+    <Compile Include="Windows\Controls\ContractListBox.cs" />
+    <Compile Include="Windows\Controls\BlockListBox.cs" />
+    <Compile Include="Windows\Controls\TransactionStackPanel.cs" />
+    <Compile Include="Windows\Controls\VariableStackPanel.cs" />
     <Compile Include="Windows\ObjectView.xaml.cs">
       <DependentUpon>ObjectView.xaml</DependentUpon>
     </Compile>

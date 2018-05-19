@@ -33,9 +33,6 @@ namespace master.Windows
             InitializeComboBoxes();
             this.doc = Mfile.KoopmanCTO();
             this.graph = new MyGraph();
-
-            graphArea.SetVerticesDrag(true, true);
-            graphArea.SetEdgesDrag(true);
             graphArea.LogicCore = this.GetCore();
 
             this.BuildGraph();
@@ -126,69 +123,87 @@ namespace master.Windows
                 this.BuildGraph();
         }
 
+        private Dictionary<Type, bool> GetActiveComponents()
+        {
+            return new Dictionary<Type, bool>()
+            {
+                {typeof(Masset), this.CheckBoxAssets.IsChecked.GetValueOrDefault() },
+                {typeof(Mconcept), this.CheckBoxConcepts.IsChecked.GetValueOrDefault() },
+                {typeof(Menum), this.CheckBoxEnums.IsChecked.GetValueOrDefault() },
+                {typeof(Mevent), this.CheckBoxEvents.IsChecked.GetValueOrDefault() },
+                {typeof(Mparticipant), this.CheckBoxParticipants.IsChecked.GetValueOrDefault() },
+                {typeof(Mtransaction), this.CheckBoxTransactions.IsChecked.GetValueOrDefault() }
+            };
+        }
+
         private void BuildGraph()
         {
             this.graph.Clear();
-            var references = doc.GetReferenceTable();
+            var activeComponents = this.GetActiveComponents();
+            var activeReferences = this.CheckBoxReferences.IsChecked.GetValueOrDefault();
+            var activeAbstractions = this.CheckBoxAbstractions.IsChecked.GetValueOrDefault();
             var components = new Dictionary<string, DataVertex>();
+            var references = doc.GetReferenceTable(activeComponents);
 
-            if (this.CheckBoxAssets.IsChecked == true)
-                foreach (Masset a in doc.getComponent<Masset>())
-                    components.Add(a.Name, View(a.Name, a.Components));
-            if (this.CheckBoxConcepts.IsChecked == true)
-                foreach (Mconcept a in doc.getComponent<Mconcept>())
-                    components.Add(a.Name, View(a.Name, a.Components));
+            this.AddComponents<Masset>(activeComponents, components);
+            this.AddComponents<Mconcept>(activeComponents, components);
+            //this.AddComponents<Menum>(activeComponents, components);
+            this.AddComponents<Mevent>(activeComponents, components);
+            this.AddComponents<Mparticipant>(activeComponents, components);
+            this.AddComponents<Mtransaction>(activeComponents, components);
+
             if (this.CheckBoxEnums.IsChecked == true)
-                foreach (Menum a in doc.getComponent<Menum>())
+                foreach (Menum a in doc.GetComponent<Menum>())
                     components.Add(a.Name, View(a.Name, a.Options));
-            if (this.CheckBoxEvents.IsChecked == true)
-                foreach (Mevent a in doc.getComponent<Mevent>())
-                    components.Add(a.Name, View(a.Name, a.Components));
-            if (this.CheckBoxParticipants.IsChecked == true)
-                foreach (Mparticipant a in doc.getComponent<Mparticipant>())
-                    components.Add(a.Name, View(a.Name, a.Components));
-            if (this.CheckBoxTransactions.IsChecked == true)
-                foreach (Mtransaction a in doc.getComponent<Mtransaction>())
-                    components.Add(a.Name, View(a.Name, a.Components));
+
 
             foreach (var gb in components.Values)
                 this.graph.AddVertex(gb);
 
-
-            foreach (Masset a in doc.getComponent<Masset>())
-            {
-                if (references.TryGetValue(a.Parent, out Tuple<Mfile.TYPES, int> parent))
-                    this.graph.AddEdge(new DataEdge(components[a.Parent], components[a.Name]));
-                foreach (Mvariable b in a.Components)
-                    if (references.TryGetValue(b.Type, out Tuple<Mfile.TYPES, int> output))
-                        this.graph.AddEdge(new DataEdge(components[b.Type], components[a.Name]));
-            }
-            foreach (Mconcept a in doc.getComponent<Mconcept>())
-            {
-                if (references.TryGetValue(a.Parent, out Tuple<Mfile.TYPES, int> parent))
-                    this.graph.AddEdge(new DataEdge(components[a.Parent], components[a.Name]));
-                foreach (Mvariable b in a.Components)
-                    if (references.TryGetValue(b.Type, out Tuple<Mfile.TYPES, int> output))
-                        this.graph.AddEdge(new DataEdge(components[b.Type], components[a.Name]));
-            }
-            foreach (Mevent a in doc.getComponent<Mevent>())
-            {
-                if (references.TryGetValue(a.Parent, out Tuple<Mfile.TYPES, int> parent))
-                    this.graph.AddEdge(new DataEdge(components[a.Parent], components[a.Name]));
-                foreach (Mvariable b in a.Components)
-                    if (references.TryGetValue(b.Type, out Tuple<Mfile.TYPES, int> output))
-                        this.graph.AddEdge(new DataEdge(components[b.Type], components[a.Name]));
-            }
-            foreach (Mparticipant a in doc.getComponent<Mparticipant>())
-            {
-                if (references.TryGetValue(a.Parent, out Tuple<Mfile.TYPES, int> parent))
-                    this.graph.AddEdge(new DataEdge(components[a.Parent], components[a.Name]));
-                foreach (Mvariable b in a.Components)
-                    if (references.TryGetValue(b.Type, out Tuple<Mfile.TYPES, int> output))
-                        this.graph.AddEdge(new DataEdge(components[b.Type], components[a.Name]));
-            }
+            this.AddEdges<Masset>(activeComponents, activeReferences, activeAbstractions, components);
+            this.AddEdges<Mconcept>(activeComponents, activeReferences, activeAbstractions, components);
+            //this.AddEdges<Menum>(activeComponents, activeReferences, activeAbstractions, components);
+            this.AddEdges<Mevent>(activeComponents, activeReferences, activeAbstractions, components);
+            this.AddEdges<Mparticipant>(activeComponents, activeReferences, activeAbstractions, components);
+            this.AddEdges<Mtransaction>(activeComponents, activeReferences, activeAbstractions, components);
 
             graphArea.GenerateGraph(this.graph);
+            zoomctrl.ZoomToFill();
+        }
+        private void AddComponents<T>(Dictionary<Type, bool> active, Dictionary<string, DataVertex> output) where T : Minheritance
+        {
+            if (active[typeof(T)])
+                foreach (T c in doc.GetComponent<T>())
+                    output.Add(c.Name, View(c.Name, c.Components));
+        }
+        private void AddEdges<T>(Dictionary<Type, bool> active, bool activeRefs, bool activeAbs, Dictionary<string, DataVertex> refs) where T : Minheritance
+        {
+            if (!active[typeof(T)] || (!activeRefs && !activeAbs))
+                return;
+
+            foreach (T c in doc.GetComponent<T>())
+            {
+                if (activeAbs)
+                    if (refs.TryGetValue(c.Parent, out _))
+                        this.graph.AddEdge(new DataEdge(refs[c.Parent], refs[c.Name]) { Text = string.Empty });
+
+                if (activeRefs)
+                    foreach (Mvariable var in c.Components)
+                        if (refs.TryGetValue(var.Type, out _))
+                            this.graph.AddEdge(new DataEdge(refs[var.Type], refs[c.Name]));
+            }
+
+
+
+
+            //foreach (Masset a in doc.getComponent<Masset>())
+            //{
+            //    if (references.TryGetValue(a.Parent, out Tuple<Mfile.TYPES, int> parent))
+            //        this.graph.AddEdge(new DataEdge(components[a.Parent], components[a.Name]));
+            //    foreach (Mvariable b in a.Components)
+            //        if (references.TryGetValue(b.Type, out Tuple<Mfile.TYPES, int> output))
+            //            this.graph.AddEdge(new DataEdge(components[b.Type], components[a.Name]));
+            //}
         }
 
         private DataVertex View(string name, List<Mvariable> vars)

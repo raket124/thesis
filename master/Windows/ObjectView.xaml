@@ -1,4 +1,4 @@
-﻿<Window x:Class="master.Windows.ObjectView"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,7 @@
         xmlns:graphs="clr-namespace:master.Graphs"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:controls="http://schemas.panthernet.ru/graphx/"
+        xmlns:master="clr-namespace:master" x:Class="master.Windows.ObjectView"
         mc:Ignorable="d"
         x:Name="root"
         Title="Data model" Height="500" Width="800">
@@ -17,7 +18,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <controls:ZoomControl Grid.Row="0">
+        <controls:ZoomControl Grid.Row="0" x:Name="zoomctrl">
             <graphs:MyGraphArea x:Name="graphArea">
                 <graphs:MyGraphArea.Resources>
                     <ResourceDictionary>
@@ -28,7 +29,7 @@
                 </graphs:MyGraphArea.Resources>
             </graphs:MyGraphArea>
         </controls:ZoomControl>
-        
+
         <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
@@ -44,8 +45,8 @@
             </GroupBox>
             <GroupBox Header="Relations">
                 <StackPanel>
-                    <CheckBox Content="Inclusion" IsChecked="True"/>
-                    <CheckBox Content="Abstraction" IsChecked="True"/>
+                    <CheckBox x:Name="CheckBoxReferences" Content="References" IsChecked="True"/>
+                    <CheckBox x:Name="CheckBoxAbstractions" Content="Abstraction" IsChecked="True"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Graph" Width="125">
