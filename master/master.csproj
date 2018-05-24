@@ -78,6 +78,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Blocks\BlockAssign.cs" />
+    <Compile Include="Blocks\BlockAssignSimple.cs" />
+    <Compile Include="Blocks\BlockBase.cs" />
+    <Compile Include="Blocks\BlockChainObject.cs" />
+    <Compile Include="Blocks\BlockContent.cs" />
+    <Compile Include="Blocks\BlockEmpty.cs" />
+    <Compile Include="Blocks\BlockIfElse.cs" />
+    <Compile Include="Blocks\CodeBlock.cs" />
     <Compile Include="FileReaders\CTOreader.cs" />
     <Compile Include="FileReaders\Rbase.cs" />
     <Compile Include="Graphs\DataEdge.cs" />
@@ -96,9 +104,12 @@
     <Compile Include="Models\Components\Mtransaction.cs" />
     <Compile Include="Models\MfileData.cs" />
     <Compile Include="Models\MfileLogic.cs" />
-    <Compile Include="Models\Variables\Mvariable.cs" />
+    <Compile Include="Models\Mvariable.cs" />
     <Compile Include="Util\ListUtil.cs" />
     <Compile Include="Util\StringUtil.cs" />
+    <Compile Include="Windows\CodeView.xaml.cs">
+      <DependentUpon>CodeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Controls\ContractListBox.cs" />
     <Compile Include="Windows\Controls\BlockListBox.cs" />
     <Compile Include="Windows\Controls\TransactionStackPanel.cs" />
@@ -122,6 +133,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\CodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ObjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,8 +169,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Variables\Structure\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

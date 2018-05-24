@@ -12,11 +12,12 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Open" Click="FileOpenClick"/>
-                <MenuItem Header="Save" Click="FileSaveClick"/>
-                <MenuItem Header="Save as" Click="FileSaveAsClick"/>
+                <MenuItem Header="Open" Click="FileOpenClick" />
+                <MenuItem Header="Save" Click="FileSaveClick" />
+                <MenuItem Header="Save as" Click="FileSaveAsClick" />
             </MenuItem>
-            <MenuItem Header="Data model" Click="DataModelClick"/>
+            <MenuItem Header="Data model" Click="DataModelClick" />
+            <MenuItem Header="Chain code" Click="ChainCodeClick" />
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -27,7 +28,40 @@
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" />
+            <TreeView Grid.Column="0">
+                <TreeViewItem Header="vehicleRules">
+                    <TreeViewItem Header="+ createVehicles" />
+                    <TreeViewItem Header="+ updateRegistrationCountry" />
+                    <TreeViewItem Header="- updateEcmrListInVin" />
+                    <TreeViewItem Header="- retrieveAndUpdateVin" />
+                </TreeViewItem>
+                <TreeViewItem Header="ecmrRules">
+                    <TreeViewItem Header="+ createECMRs" />
+                    <TreeViewItem Header="+ updateEcmrStatusToLoaded" />
+                    <TreeViewItem Header="+ updateEcmrStatusToInTransit" />
+                    <TreeViewItem Header="+ updateEcmrStatusToConfirmedDelivered" />
+                    <TreeViewItem Header="+ updateECMRStatusToCancelled" />
+                    <TreeViewItem Header="+ updateExpectedPickupWindow" />
+                    <TreeViewItem Header="+ updateExpectedDeliveryWindow" />
+                </TreeViewItem>
+                <TreeViewItem Header="transportOrderRules">
+                    <TreeViewItem Header="+ createTransportOrder" />
+                    <TreeViewItem Header="+ createTransportOrders" />
+                    <TreeViewItem Header="- updateTransportOrderToInProgress" />
+                    <TreeViewItem Header="- updateTransportOrderStatusToCompleted" />
+                    <TreeViewItem Header="- validateVinIds" />
+                    <TreeViewItem Header="+ updateTransportOrderPickupWindow" />
+                    <TreeViewItem Header="+ updateTransportOrderDeliveryWindow" />
+                    <TreeViewItem Header="+ updateTransportOrderStatusToCancelled" />
+                </TreeViewItem>
+                <TreeViewItem Header="orgRules">
+                    <TreeViewItem Header="+ createLegalOwnerOrg" />
+                    <TreeViewItem Header="+ createCompoundOrg" />
+                    <TreeViewItem Header="+ createCarrierOrg" />
+                    <TreeViewItem Header="+ createRecipientOrg" />
+                </TreeViewItem>
+            </TreeView>
+
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
             <Controls:ContractListBox Grid.Column="2"
                                       dd:DragDrop.IsDragSource="True"

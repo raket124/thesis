@@ -20,6 +20,7 @@ using Xceed.Wpf.Toolkit;
 using master.Windows;
 using Microsoft.Win32;
 using master.Windows.Controls;
+using master.Blocks;
 
 namespace master
 {
@@ -30,8 +31,8 @@ namespace master
         private const string defaultFileName = "Blockchain definition";
 
         private ObjectView objectView;
-
-        private string currentFile = string.Empty;
+        private CodeView codeView;
+        private List<object> contractList;
 
         public MainWindow()
         {
@@ -52,7 +53,10 @@ namespace master
             //test.Content = new VariableConfigStackPanel();
             //test2.Content = new VariableConfigStackPanel();
 
+            var a = new BlockChainObject();
+            a.Set(BlockChainObject.OPTION.Add, BlockChainObject.OBJECT_CATEGORY.Asset, false, "com.biz", "Business", "movementDeparture.to");
 
+            var b = a.ToCode();
 
             //Create a stream to serialize the object to.  
             //MemoryStream ms = new MemoryStream();
@@ -92,6 +96,13 @@ namespace master
             if (this.objectView == null || !this.objectView.IsLoaded)
                 this.objectView = new ObjectView();
             this.objectView.Show();
+        }
+
+        private void ChainCodeClick(object sender, RoutedEventArgs e)
+        {
+            if (this.codeView == null || !this.codeView.IsLoaded)
+                this.codeView = new CodeView();
+            this.codeView.Show();
         }
 
         private void FileSave(string fileName)

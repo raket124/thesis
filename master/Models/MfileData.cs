@@ -31,13 +31,6 @@ namespace master.Models
             set { this.fileNamespace = value; }
         }
 
-        public List<Masset> Asset { get { return this.assetComponents; } }
-        public List<Mconcept> Concept { get { return this.conceptComponents; } }
-        public List<Menum> Enum { get { return this.enumComponents; } }
-        public List<Mevent> Event { get { return this.eventComponents; } }
-        public List<Mparticipant> Participant { get { return this.participantComponents; } }
-        public List<Mtransaction> Transaction { get { return this.transactionComponents; } }
-
         public static Mfile KoopmanCTO()
         {
             var doc = new Mfile("businessModel")
