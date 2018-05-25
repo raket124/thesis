@@ -34,26 +34,42 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GongSolutions.WPF.DragDrop">
-      <HintPath>dll\GongSolutions.WPF.DragDrop.dll</HintPath>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
     </Reference>
-    <Reference Include="GraphX.PCL.Common, Version=2.3.8.0, Culture=neutral, PublicKeyToken=a6cdb671d651b60a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dll\GraphX.PCL.Common.dll</HintPath>
+    <Reference Include="GongSolutions.Wpf.DragDrop, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\gong-wpf-dragdrop.1.1.0\lib\net45\GongSolutions.Wpf.DragDrop.dll</HintPath>
     </Reference>
-    <Reference Include="GraphX.PCL.Logic">
-      <HintPath>dll\GraphX.PCL.Logic.dll</HintPath>
+    <Reference Include="GraphX.PCL.Common, Version=2.3.6.0, Culture=neutral, PublicKeyToken=a6cdb671d651b60a, processorArchitecture=MSIL">
+      <HintPath>..\packages\GraphX.2.3.6.0\lib\net40-client\GraphX.PCL.Common.dll</HintPath>
     </Reference>
-    <Reference Include="GraphX.WPF.Controls, Version=2.3.8.0, Culture=neutral, PublicKeyToken=bab23663f80c9e76, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dll\GraphX.WPF.Controls.dll</HintPath>
+    <Reference Include="GraphX.PCL.Logic, Version=2.3.6.0, Culture=neutral, PublicKeyToken=3b65ef85075e278f, processorArchitecture=MSIL">
+      <HintPath>..\packages\GraphX.2.3.6.0\lib\net40-client\GraphX.PCL.Logic.dll</HintPath>
     </Reference>
-    <Reference Include="QuickGraph">
-      <HintPath>dll\QuickGraph.dll</HintPath>
+    <Reference Include="GraphX.WPF.Controls, Version=2.3.6.0, Culture=neutral, PublicKeyToken=bab23663f80c9e76, processorArchitecture=MSIL">
+      <HintPath>..\packages\GraphX.2.3.6.0\lib\net40-client\GraphX.WPF.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Material, Version=2.2.0.12, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.Material.2.2.0\lib\net45\MahApps.Metro.IconPacks.Material.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickGraphPCL.3.6.61114.2\lib\net40-client\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Data, Version=3.6.61114.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickGraphPCL.3.6.61114.2\lib\net40-client\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickGraphPCL.3.6.61114.2\lib\net40-client\QuickGraph.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Serialization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickGraphPCL.3.6.61114.2\lib\net40-client\QuickGraph.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -66,9 +82,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFExtensions">
-      <HintPath>dll\WPFExtensions.dll</HintPath>
-    </Reference>
     <Reference Include="Xceed.Wpf.Toolkit">
       <HintPath>dll\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
@@ -86,6 +99,7 @@
     <Compile Include="Blocks\BlockEmpty.cs" />
     <Compile Include="Blocks\BlockIfElse.cs" />
     <Compile Include="Blocks\CodeBlock.cs" />
+    <Compile Include="CloneTest.cs" />
     <Compile Include="FileReaders\CTOreader.cs" />
     <Compile Include="FileReaders\Rbase.cs" />
     <Compile Include="Graphs\DataEdge.cs" />
@@ -105,6 +119,9 @@
     <Compile Include="Models\MfileData.cs" />
     <Compile Include="Models\MfileLogic.cs" />
     <Compile Include="Models\Mvariable.cs" />
+    <Compile Include="SimpleCommand.cs" />
+    <Compile Include="SubTest.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="Util\ListUtil.cs" />
     <Compile Include="Util\StringUtil.cs" />
     <Compile Include="Windows\CodeView.xaml.cs">
@@ -161,6 +178,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ExampleFiles\sample.cto" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

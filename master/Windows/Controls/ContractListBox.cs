@@ -11,28 +11,41 @@ namespace master.Windows.Controls
 {
     class ContractListBox : ListBox
     {
-        public ObservableCollection<string> ClonableCollection1 { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<CloneTest> ClonableCollection1 { get; set; } = new ObservableCollection<CloneTest>();
 
-        public ObservableCollection<string> ClonableCollection2 { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<CloneTest> ClonableCollection2 { get; set; } = new ObservableCollection<CloneTest>();
 
 
         public ContractListBox() : base()
         {
-            ClonableCollection1.Add("Block 01");
-            ClonableCollection1.Add("Block 02");
-            ClonableCollection1.Add("Block 03");
+            this.Add(ClonableCollection1, 3);
+            this.Add(ClonableCollection2, 10);
+        }
 
-            ClonableCollection2.Add("Block 01");
-            ClonableCollection2.Add("Block 02");
-            ClonableCollection2.Add("Block 03");
-            ClonableCollection2.Add("Block 04");
-            ClonableCollection2.Add("Block 05");
-            ClonableCollection2.Add("Block 06");
-            ClonableCollection2.Add("Block 07");
-            ClonableCollection2.Add("Block 08");
-            ClonableCollection2.Add("Block 09");
-            ClonableCollection2.Add("Block 10");
-            ClonableCollection2.Add("Block 11");
+        private void Add(ObservableCollection<CloneTest> oc, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                oc.Add(new CloneTest());
+                //oc.Add(string.Format("Block {0:00}", i + 1));
+
+
+                //< Grid Background = "#FDA07E" >
+                //< StackPanel Orientation = "Horizontal" >
+                //< Button Margin = "20 0 10 0"
+                //VerticalAlignment = "Center"
+                //Command = "{Binding ButtonTestCommand}"
+                //Content = "{Binding Caption}" />
+                //< RadioButton VerticalAlignment = "Center"
+                //Content = "Option A"
+                //IsChecked = "{Binding BindableOptionA}" />
+                //< RadioButton VerticalAlignment = "Center"
+                //Content = "Option B"
+                //IsChecked = "{Binding BindableOptionB}" />
+                //< TextBlock VerticalAlignment = "Center" Text = "{Binding BindableValue}" />
+                //</ StackPanel >
+                //</ Grid >
+            }
         }
     }
 }
