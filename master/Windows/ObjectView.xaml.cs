@@ -52,8 +52,9 @@ namespace master.Windows
         }
         private void ComboBoxGraph_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            graphArea.LogicCore = this.GetCore();
-            graphArea.GenerateGraph(graph);
+            this.graphArea.LogicCore = this.GetCore();
+            this.graphArea.GenerateGraph(graph);
+            this.zoomctrl.ZoomToFill();
         }
 
         private void HandleLayout(MyLogicCore core)

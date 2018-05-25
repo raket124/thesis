@@ -29,13 +29,13 @@
             </Grid.ColumnDefinitions>
 
             <TreeView Grid.Column="0">
-                <TreeViewItem Header="vehicleRules">
+                <TreeViewItem Header="vehicleRules" IsExpanded="True">
                     <TreeViewItem Header="+ createVehicles" />
                     <TreeViewItem Header="+ updateRegistrationCountry" />
                     <TreeViewItem Header="- updateEcmrListInVin" />
                     <TreeViewItem Header="- retrieveAndUpdateVin" />
                 </TreeViewItem>
-                <TreeViewItem Header="ecmrRules">
+                <TreeViewItem Header="ecmrRules" IsExpanded="True">
                     <TreeViewItem Header="+ createECMRs" />
                     <TreeViewItem Header="+ updateEcmrStatusToLoaded" />
                     <TreeViewItem Header="+ updateEcmrStatusToInTransit" />
@@ -44,7 +44,7 @@
                     <TreeViewItem Header="+ updateExpectedPickupWindow" />
                     <TreeViewItem Header="+ updateExpectedDeliveryWindow" />
                 </TreeViewItem>
-                <TreeViewItem Header="transportOrderRules">
+                <TreeViewItem Header="transportOrderRules" IsExpanded="True">
                     <TreeViewItem Header="+ createTransportOrder" />
                     <TreeViewItem Header="+ createTransportOrders" />
                     <TreeViewItem Header="- updateTransportOrderToInProgress" />
@@ -54,14 +54,13 @@
                     <TreeViewItem Header="+ updateTransportOrderDeliveryWindow" />
                     <TreeViewItem Header="+ updateTransportOrderStatusToCancelled" />
                 </TreeViewItem>
-                <TreeViewItem Header="orgRules">
+                <TreeViewItem Header="orgRules" IsExpanded="True">
                     <TreeViewItem Header="+ createLegalOwnerOrg" />
                     <TreeViewItem Header="+ createCompoundOrg" />
                     <TreeViewItem Header="+ createCarrierOrg" />
                     <TreeViewItem Header="+ createRecipientOrg" />
                 </TreeViewItem>
             </TreeView>
-
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
             <Controls:ContractListBox Grid.Column="2"
                                       dd:DragDrop.IsDragSource="True"
@@ -77,60 +76,4 @@
                                    ItemsSource="{Binding ClonableCollection2}" />
         </Grid>
     </DockPanel>
-
-<!--<StackPanel>
-            <TextBox Text="Function name" />
-            <Expander Header="Description">
-                <TextBox Text="Function summary" />
-            </Expander>
-            <Expander Header="Input">
-                <GroupBox x:Name="test" />
-            </Expander>
-            <Expander Header="Output">
-                <GroupBox x:Name="test2" />
-            </Expander>
-        </StackPanel>
-
-        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-
-        <Canvas x:Name="canvas" Grid.Column="2">
-            <ListBox Height="400" Width="200" x:Name="LeftListBoxOfDragDropKeyStatesSample"
-                dd:DragDrop.DragDropCopyKeyState="LeftMouseButton"
-                dd:DragDrop.IsDragSource="True"
-                dd:DragDrop.IsDropTarget="false"
-                dd:DragDrop.UseDefaultEffectDataTemplate="True" />
-
-            <ListBox Height="400" Width="200" Canvas.Left="210" x:Name="testDest"
-                dd:DragDrop.IsDragSource="true"
-                dd:DragDrop.IsDropTarget="True"
-                dd:DragDrop.UseDefaultEffectDataTemplate="True" />
-
-            --><!--<ComboBox Width="200"
-                Margin="5 0 0 0"
-                VerticalAlignment="Center"
-                ItemsSource="{Binding Source={StaticResource DragDropKeyStatesEnumValues}}"
-                SelectedItem="{Binding ElementName=LeftListBoxOfDragDropKeyStatesSample, Path=(dd:DragDrop.DragDropCopyKeyState), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->        
-            
-            <!--<Rectangle x:Name="rect" Height="100" Canvas.Left="220" Stroke="Purple" StrokeThickness="2" Canvas.Top="95" Width="100">
-                <Rectangle.Fill>
-                    <SolidColorBrush Color="Blue" Opacity="0.4"/>
-                </Rectangle.Fill>
-            </Rectangle>-->
-
-            <!--<ListView x:Name="xxx" Canvas.Top="400">
-                <ListView.Resources>
-                    <Style TargetType="GridViewColumnHeader">
-                        <Setter Property="Visibility" Value="Collapsed" />
-                    </Style>
-                </ListView.Resources>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Relation}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Type}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>--><!--
-        </Canvas>--><!--
-    </Grid>-->
 </Window>
