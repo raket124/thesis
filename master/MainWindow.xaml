@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:master"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="800"
@@ -18,6 +19,7 @@
             </MenuItem>
             <MenuItem Header="Data model" Click="DataModelClick" />
             <MenuItem Header="Chain code" Click="ChainCodeClick" />
+            <MenuItem Header="Test window" Click="TestWindowClick" />
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -27,7 +29,6 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
-
             <TreeView Grid.Column="0">
                 <TreeViewItem Header="vehicleRules" IsExpanded="True">
                     <TreeViewItem Header="+ createVehicles" />

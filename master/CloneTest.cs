@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace master
 {
-    class CloneTest : Test, ICloneable
+    public class CloneTest : Test, ICloneable
     {
         public CloneTest()
         {

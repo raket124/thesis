@@ -20,13 +20,13 @@
 
         <controls:ZoomControl Grid.Row="0" x:Name="zoomctrl">
             <graphs:MyGraphArea x:Name="graphArea">
-                <graphs:MyGraphArea.Resources>
+                <!--<graphs:MyGraphArea.Resources>
                     <ResourceDictionary>
                         <ResourceDictionary.MergedDictionaries>
                             <ResourceDictionary Source="/Graphs/Template.xaml"/>
                         </ResourceDictionary.MergedDictionaries>
                     </ResourceDictionary>
-                </graphs:MyGraphArea.Resources>
+                </graphs:MyGraphArea.Resources>-->
             </graphs:MyGraphArea>
         </controls:ZoomControl>
 

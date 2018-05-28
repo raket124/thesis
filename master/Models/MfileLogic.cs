@@ -109,7 +109,7 @@ namespace master.Models
 
         private void GetReferenceTable<T>(Dictionary<Type, bool> addition, Dictionary<string, Tuple<Type, int>> output) where T : Mbase
         {
-            if (addition[typeof(T)])
+            if (!addition[typeof(T)])
                 return;
 
             var componentList = this.GetComponent<T>();

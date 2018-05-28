@@ -144,7 +144,7 @@ namespace master.Windows
             var activeReferences = this.CheckBoxReferences.IsChecked.GetValueOrDefault();
             var activeAbstractions = this.CheckBoxAbstractions.IsChecked.GetValueOrDefault();
             var components = new Dictionary<string, DataVertex>();
-            var references = doc.GetReferenceTable(activeComponents);
+            //var references = doc.GetReferenceTable(activeComponents);
 
             this.AddComponents<Masset>(activeComponents, components);
             this.AddComponents<Mconcept>(activeComponents, components);
@@ -193,9 +193,6 @@ namespace master.Windows
                         if (refs.TryGetValue(var.Type, out _))
                             this.graph.AddEdge(new DataEdge(refs[var.Type], refs[c.Name]));
             }
-
-
-
 
             //foreach (Masset a in doc.getComponent<Masset>())
             //{

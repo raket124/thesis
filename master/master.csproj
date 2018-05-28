@@ -124,20 +124,19 @@
     <Compile Include="Test.cs" />
     <Compile Include="Util\ListUtil.cs" />
     <Compile Include="Util\StringUtil.cs" />
-    <Compile Include="Windows\CodeView.xaml.cs">
-      <DependentUpon>CodeView.xaml</DependentUpon>
+    <Compile Include="Windows\CodeWindow.xaml.cs">
+      <DependentUpon>CodeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Controls\ContractListBox.cs" />
     <Compile Include="Windows\Controls\BlockListBox.cs" />
     <Compile Include="Windows\Controls\TransactionStackPanel.cs" />
     <Compile Include="Windows\Controls\VariableStackPanel.cs" />
-    <Compile Include="Windows\ObjectView.xaml.cs">
-      <DependentUpon>ObjectView.xaml</DependentUpon>
+    <Compile Include="Windows\GraphWindow.xaml.cs">
+      <DependentUpon>GraphWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Graphs\Template.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="Windows\TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -150,11 +149,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\CodeView.xaml">
+    <Page Include="Windows\CodeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ObjectView.xaml">
+    <Page Include="Windows\GraphWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

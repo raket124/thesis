@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace master
 {
-    class Test : INotifyPropertyChanged
+    public class Test : INotifyPropertyChanged
     {
         private double _bindableDoubleValue;
         private string _selectedSubItem;

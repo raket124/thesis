@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace master
 {
-    class SubTest : INotifyPropertyChanged
+    public class SubTest : INotifyPropertyChanged
     {
         private string _bindableValue;
         private bool _bindableOptionA;

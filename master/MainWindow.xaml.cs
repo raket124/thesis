@@ -32,6 +32,7 @@ namespace master
 
         private ObjectView objectView;
         private CodeView codeView;
+        private TestView testView;
         private List<object> contractList;
 
         public MainWindow()
@@ -105,6 +106,13 @@ namespace master
             this.codeView.Show();
         }
 
+        private void TestWindowClick(object sender, RoutedEventArgs e)
+        {
+            if (this.testView == null || !this.testView.IsLoaded)
+                this.testView = new TestView();
+            this.testView.Show();
+        }
+        
         private void FileSave(string fileName)
         {
 
