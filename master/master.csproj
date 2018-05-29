@@ -66,7 +66,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -91,7 +93,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Basis.cs" />
     <Compile Include="Models\Contract\Blocks\Structure\Bbase.cs" />
+    <Compile Include="Models\Contract\Ccontract.cs" />
+    <Compile Include="Models\Contract\Ccontracts.cs" />
+    <Compile Include="Models\Contract\Cfunction.cs" />
     <Compile Include="Models\Contract\Components\BlockAssign.cs" />
     <Compile Include="Models\Contract\Components\BlockAssignSimple.cs" />
     <Compile Include="Models\Contract\Components\BlockBase.cs" />
@@ -105,7 +111,13 @@
     <Compile Include="Models\Contract\Components\Structure\CconditionGroup.cs" />
     <Compile Include="Models\Contract\Components\Structure\CconditionSingle.cs" />
     <Compile Include="Models\Contract\Components\Structure\Cvariable.cs" />
-    <Compile Include="Temp\CloneTest.cs" />
+    <Compile Include="ViewModels\Contract\VMcontract.cs" />
+    <Compile Include="ViewModels\Contract\VMcontracts.cs" />
+    <Compile Include="ViewModels\Contract\VMfunction.cs" />
+    <Compile Include="Views\ContractTreeView.xaml.cs">
+      <DependentUpon>ContractTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ZTemp\CloneTest.cs" />
     <Compile Include="Graphs\DataEdge.cs" />
     <Compile Include="Graphs\DataVertex.cs" />
     <Compile Include="Graphs\MyGraph.cs" />
@@ -123,11 +135,9 @@
     <Compile Include="Models\Data\MfileData.cs" />
     <Compile Include="Models\Data\MfileLogic.cs" />
     <Compile Include="Models\Data\Mvariable.cs" />
-    <Compile Include="Temp\SimpleCommand.cs" />
-    <Compile Include="Temp\SubTest.cs" />
-    <Compile Include="Temp\Test.cs" />
-    <Compile Include="Util\ListUtil.cs" />
-    <Compile Include="Util\StringUtil.cs" />
+    <Compile Include="ZTemp\SimpleCommand.cs" />
+    <Compile Include="ZTemp\SubTest.cs" />
+    <Compile Include="ZTemp\Test.cs" />
     <Compile Include="Windows\CodeWindow.xaml.cs">
       <DependentUpon>CodeWindow.xaml</DependentUpon>
     </Compile>
@@ -156,6 +166,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ContractTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\CodeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

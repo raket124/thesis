@@ -7,6 +7,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:dd="urn:gong-wpf-dragdrop"
+        xmlns:views="clr-namespace:master.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="800"
         x:Name="root">
@@ -29,39 +30,7 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
-            <TreeView Grid.Column="0">
-                <TreeViewItem Header="vehicleRules" IsExpanded="True">
-                    <TreeViewItem Header="+ createVehicles" />
-                    <TreeViewItem Header="+ updateRegistrationCountry" />
-                    <TreeViewItem Header="- updateEcmrListInVin" />
-                    <TreeViewItem Header="- retrieveAndUpdateVin" />
-                </TreeViewItem>
-                <TreeViewItem Header="ecmrRules" IsExpanded="True">
-                    <TreeViewItem Header="+ createECMRs" />
-                    <TreeViewItem Header="+ updateEcmrStatusToLoaded" />
-                    <TreeViewItem Header="+ updateEcmrStatusToInTransit" />
-                    <TreeViewItem Header="+ updateEcmrStatusToConfirmedDelivered" />
-                    <TreeViewItem Header="+ updateECMRStatusToCancelled" />
-                    <TreeViewItem Header="+ updateExpectedPickupWindow" />
-                    <TreeViewItem Header="+ updateExpectedDeliveryWindow" />
-                </TreeViewItem>
-                <TreeViewItem Header="transportOrderRules" IsExpanded="True">
-                    <TreeViewItem Header="+ createTransportOrder" />
-                    <TreeViewItem Header="+ createTransportOrders" />
-                    <TreeViewItem Header="- updateTransportOrderToInProgress" />
-                    <TreeViewItem Header="- updateTransportOrderStatusToCompleted" />
-                    <TreeViewItem Header="- validateVinIds" />
-                    <TreeViewItem Header="+ updateTransportOrderPickupWindow" />
-                    <TreeViewItem Header="+ updateTransportOrderDeliveryWindow" />
-                    <TreeViewItem Header="+ updateTransportOrderStatusToCancelled" />
-                </TreeViewItem>
-                <TreeViewItem Header="orgRules" IsExpanded="True">
-                    <TreeViewItem Header="+ createLegalOwnerOrg" />
-                    <TreeViewItem Header="+ createCompoundOrg" />
-                    <TreeViewItem Header="+ createCarrierOrg" />
-                    <TreeViewItem Header="+ createRecipientOrg" />
-                </TreeViewItem>
-            </TreeView>
+            <views:ContractTreeView Grid.Column="0" />
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
             <Controls:ContractListBox Grid.Column="2"
                                       dd:DragDrop.IsDragSource="True"

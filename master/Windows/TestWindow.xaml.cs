@@ -33,26 +33,8 @@ namespace master.Windows
             //var temp = this.doc.GetReferenceTable();
 
 
-            Variable rootVariable = new Variable()
-            {
-                Name = "ECMR"
-            };
-            rootVariable.AddChild(new Variable()
-            {
-                Name = "ID",
-            });
-            rootVariable.AddChild(new Variable()
-            {
-                Name = "Org",
-            });
-            rootVariable.AddChild(new Variable()
-            {
-                Name = "Date",
-            });
-
-
-            _familyTree = new VariableTreeViewModel(rootVariable);
-            base.DataContext = _familyTree;
+            //_familyTree = new VariableTreeViewModel(rootVariable);
+            //base.DataContext = _familyTree;
         }
 
         private void Test1()

@@ -9,19 +9,18 @@ namespace master.Models
     partial class Mfile
     {
         public enum TYPES { Asset, Participant, Transaction, Event, Concept, Enum };
-        protected Dictionary<Type, TYPES> sorter;
+        protected readonly Dictionary<Type, TYPES> sorter = new Dictionary<Type, TYPES>()
+        {
+            { typeof(Dasset), TYPES.Asset },
+            { typeof(Dconcept), TYPES.Concept },
+            { typeof(Denum), TYPES.Enum },
+            { typeof(Devent), TYPES.Event },
+            { typeof(Dparticipant), TYPES.Participant },
+            { typeof(Dtransaction), TYPES.Transaction }
+        };
 
         public Mfile(string name) : base(name)
         {
-            this.sorter = new Dictionary<Type, TYPES>
-            {
-                { typeof(Dasset), TYPES.Asset },
-                { typeof(Dconcept), TYPES.Concept },
-                { typeof(Denum), TYPES.Enum },
-                { typeof(Devent), TYPES.Event },
-                { typeof(Dparticipant), TYPES.Participant },
-                { typeof(Dtransaction), TYPES.Transaction }
-            };
             this.assetComponents = new List<Dasset>();
             this.conceptComponents = new List<Dconcept>();
             this.enumComponents = new List<Denum>();
@@ -35,23 +34,17 @@ namespace master.Models
             switch (this.sorter[component.GetType()])
             {
                 case TYPES.Asset:
-                    this.assetComponents.Add(component as Dasset);
-                    break;
+                    this.assetComponents.Add(component as Dasset); return;
                 case TYPES.Concept:
-                    this.conceptComponents.Add(component as Dconcept);
-                    break;
+                    this.conceptComponents.Add(component as Dconcept); return;
                 case TYPES.Enum:
-                    this.enumComponents.Add(component as Denum);
-                    break;
+                    this.enumComponents.Add(component as Denum); return;
                 case TYPES.Event:
-                    this.eventComponents.Add(component as Devent);
-                    break;
+                    this.eventComponents.Add(component as Devent); return;
                 case TYPES.Participant:
-                    this.participantComponents.Add(component as Dparticipant);
-                    break;
+                    this.participantComponents.Add(component as Dparticipant); return;
                 case TYPES.Transaction:
-                    this.transactionComponents.Add(component as Dtransaction);
-                    break;
+                    this.transactionComponents.Add(component as Dtransaction); return;
                 default:
                     throw new Exception("Invalid class is provided");
             }
@@ -115,6 +108,11 @@ namespace master.Models
             var componentList = this.GetComponent<T>();
             for (int i = 0; i < componentList.Count; i++)
                 output.Add(componentList[i].Name, Tuple.Create<Type, int>(typeof(T), i));
+        }
+
+        public void Test()
+        {
+
         }
     }
 }
