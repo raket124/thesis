@@ -91,37 +91,41 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Blocks\BlockAssign.cs" />
-    <Compile Include="Blocks\BlockAssignSimple.cs" />
-    <Compile Include="Blocks\BlockBase.cs" />
-    <Compile Include="Blocks\BlockChainObject.cs" />
-    <Compile Include="Blocks\BlockContent.cs" />
-    <Compile Include="Blocks\BlockEmpty.cs" />
-    <Compile Include="Blocks\BlockIfElse.cs" />
-    <Compile Include="Blocks\CodeBlock.cs" />
-    <Compile Include="CloneTest.cs" />
-    <Compile Include="FileReaders\CTOreader.cs" />
-    <Compile Include="FileReaders\Rbase.cs" />
+    <Compile Include="Models\Contract\Blocks\Structure\Bbase.cs" />
+    <Compile Include="Models\Contract\Components\BlockAssign.cs" />
+    <Compile Include="Models\Contract\Components\BlockAssignSimple.cs" />
+    <Compile Include="Models\Contract\Components\BlockBase.cs" />
+    <Compile Include="Models\Contract\Components\BlockChainObject.cs" />
+    <Compile Include="Models\Contract\Components\BlockContent.cs" />
+    <Compile Include="Models\Contract\Components\BlockEmpty.cs" />
+    <Compile Include="Models\Contract\Blocks\Berror.cs" />
+    <Compile Include="Models\Contract\Components\BlockIfElse.cs" />
+    <Compile Include="Models\Contract\Components\CodeBlock.cs" />
+    <Compile Include="Models\Contract\Components\Structure\Ccondition.cs" />
+    <Compile Include="Models\Contract\Components\Structure\CconditionGroup.cs" />
+    <Compile Include="Models\Contract\Components\Structure\CconditionSingle.cs" />
+    <Compile Include="Models\Contract\Components\Structure\Cvariable.cs" />
+    <Compile Include="Temp\CloneTest.cs" />
     <Compile Include="Graphs\DataEdge.cs" />
     <Compile Include="Graphs\DataVertex.cs" />
     <Compile Include="Graphs\MyGraph.cs" />
     <Compile Include="Graphs\MyGraphArea.cs" />
     <Compile Include="Graphs\MyLogicCore.cs" />
-    <Compile Include="Models\Components\Structure\Midentity.cs" />
-    <Compile Include="Models\Components\Masset.cs" />
-    <Compile Include="Models\Components\Structure\Mbase.cs" />
-    <Compile Include="Models\Components\Mconcept.cs" />
-    <Compile Include="Models\Components\Menum.cs" />
-    <Compile Include="Models\Components\Mevent.cs" />
-    <Compile Include="Models\Components\Structure\Minheritance.cs" />
-    <Compile Include="Models\Components\Mparticipant.cs" />
-    <Compile Include="Models\Components\Mtransaction.cs" />
-    <Compile Include="Models\MfileData.cs" />
-    <Compile Include="Models\MfileLogic.cs" />
-    <Compile Include="Models\Mvariable.cs" />
-    <Compile Include="SimpleCommand.cs" />
-    <Compile Include="SubTest.cs" />
-    <Compile Include="Test.cs" />
+    <Compile Include="Models\Data\Components\Structure\Didentity.cs" />
+    <Compile Include="Models\Data\Components\Dasset.cs" />
+    <Compile Include="Models\Data\Components\Structure\Dbase.cs" />
+    <Compile Include="Models\Data\Components\Dconcept.cs" />
+    <Compile Include="Models\Data\Components\Denum.cs" />
+    <Compile Include="Models\Data\Components\Devent.cs" />
+    <Compile Include="Models\Data\Components\Structure\Dinheritance.cs" />
+    <Compile Include="Models\Data\Components\Dparticipant.cs" />
+    <Compile Include="Models\Data\Components\Dtransaction.cs" />
+    <Compile Include="Models\Data\MfileData.cs" />
+    <Compile Include="Models\Data\MfileLogic.cs" />
+    <Compile Include="Models\Data\Mvariable.cs" />
+    <Compile Include="Temp\SimpleCommand.cs" />
+    <Compile Include="Temp\SubTest.cs" />
+    <Compile Include="Temp\Test.cs" />
     <Compile Include="Util\ListUtil.cs" />
     <Compile Include="Util\StringUtil.cs" />
     <Compile Include="Windows\CodeWindow.xaml.cs">
@@ -137,6 +141,9 @@
     <Compile Include="Windows\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Variable.cs" />
+    <Compile Include="Windows\VariableTreeViewModel.cs" />
+    <Compile Include="Windows\VariableViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -180,7 +187,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ExampleFiles\sample.cto" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

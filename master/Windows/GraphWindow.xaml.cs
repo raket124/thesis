@@ -13,12 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using master.Models;
 using master.Graphs;
-using GraphX.Controls;
 using GraphX.PCL.Common.Enums;
-using GraphX.PCL.Logic.Algorithms.LayoutAlgorithms;
-using GraphX.PCL.Logic.Algorithms.OverlapRemoval;
-using master.Util;
-using GraphX.PCL.Logic.Algorithms.EdgeRouting;
 
 namespace master.Windows
 {
@@ -57,64 +52,12 @@ namespace master.Windows
             this.zoomctrl.ZoomToFill();
         }
 
-        private void HandleLayout(MyLogicCore core)
-        {
-            var late = (LayoutAlgorithmTypeEnum)this.ComboBoxLayout.SelectedItem;
-            if (late == LayoutAlgorithmTypeEnum.Sugiyama && this.graph.Edges.Count() == 0)
-            {
-                MessageBox.Show("The 'Sugiyama' algorithm requires atleast one connection.\nDefaulting to 'EfficientSugiyama'");
-                this.ComboBoxLayout.SelectedItem = LayoutAlgorithmTypeEnum.EfficientSugiyama;
-                return;
-            }
-            core.DefaultLayoutAlgorithm = late;
-
-            if (late == LayoutAlgorithmTypeEnum.EfficientSugiyama)
-            {
-                var prms = core.AlgorithmFactory.CreateLayoutParameters(LayoutAlgorithmTypeEnum.EfficientSugiyama) as EfficientSugiyamaLayoutParameters;
-                prms.EdgeRouting = SugiyamaEdgeRoutings.Orthogonal;
-                prms.LayerDistance = prms.VertexDistance = 100;
-                core.EdgeCurvingEnabled = false;
-                core.DefaultLayoutAlgorithmParams = prms;
-                this.ComboBoxEdgeRouting.SelectedItem = EdgeRoutingAlgorithmTypeEnum.None;
-            }
-            else
-                core.EdgeCurvingEnabled = true;
-                
-            if (late == LayoutAlgorithmTypeEnum.BoundedFR)
-                core.DefaultLayoutAlgorithmParams = core.AlgorithmFactory.CreateLayoutParameters(LayoutAlgorithmTypeEnum.BoundedFR);
-            if (late == LayoutAlgorithmTypeEnum.FR)
-                core.DefaultLayoutAlgorithmParams = core.AlgorithmFactory.CreateLayoutParameters(LayoutAlgorithmTypeEnum.FR);
-        }
-        private void HandleOverlapRemoval(MyLogicCore core)
-        {
-            core.DefaultOverlapRemovalAlgorithm = (OverlapRemovalAlgorithmTypeEnum)this.ComboBoxOverlapRemoval.SelectedItem;
-            if (core.DefaultOverlapRemovalAlgorithm == OverlapRemovalAlgorithmTypeEnum.FSA || core.DefaultOverlapRemovalAlgorithm == OverlapRemovalAlgorithmTypeEnum.OneWayFSA)
-            {
-                core.DefaultOverlapRemovalAlgorithmParams.HorizontalGap = 30;
-                core.DefaultOverlapRemovalAlgorithmParams.VerticalGap = 30;
-            }
-        }
-        private void HandleEdgeRouting(MyLogicCore core)
-        {
-            core.DefaultEdgeRoutingAlgorithm = (EdgeRoutingAlgorithmTypeEnum)this.ComboBoxEdgeRouting.SelectedItem;
-            if (core.DefaultEdgeRoutingAlgorithm == EdgeRoutingAlgorithmTypeEnum.Bundling)
-            {
-                BundleEdgeRoutingParameters prm = new BundleEdgeRoutingParameters();
-                core.DefaultEdgeRoutingAlgorithmParams = prm;
-                prm.Iterations = 200;
-                prm.SpringConstant = 5;
-                prm.Threshold = .1f;
-                core.EdgeCurvingEnabled = true;
-            }
-            else
-                core.EdgeCurvingEnabled = false;
-        }
         private MyLogicCore GetCore()
         {
             var LogicCore = new MyLogicCore();
-            this.HandleLayout(LogicCore);
-            this.HandleOverlapRemoval(LogicCore);
-            this.HandleEdgeRouting(LogicCore);
+            LogicCore.SetDefaultLayoutAlgorithm((LayoutAlgorithmTypeEnum)this.ComboBoxLayout.SelectedItem);
+            LogicCore.SetDefaultOverlapRemovalAlgorithm((OverlapRemovalAlgorithmTypeEnum)this.ComboBoxOverlapRemoval.SelectedItem);
+            LogicCore.SetDefaultEdgeRoutingAlgorithm((EdgeRoutingAlgorithmTypeEnum)this.ComboBoxEdgeRouting.SelectedItem);
             return LogicCore;
         }
 
@@ -128,12 +71,12 @@ namespace master.Windows
         {
             return new Dictionary<Type, bool>()
             {
-                {typeof(Masset), this.CheckBoxAssets.IsChecked.GetValueOrDefault() },
-                {typeof(Mconcept), this.CheckBoxConcepts.IsChecked.GetValueOrDefault() },
-                {typeof(Menum), this.CheckBoxEnums.IsChecked.GetValueOrDefault() },
-                {typeof(Mevent), this.CheckBoxEvents.IsChecked.GetValueOrDefault() },
-                {typeof(Mparticipant), this.CheckBoxParticipants.IsChecked.GetValueOrDefault() },
-                {typeof(Mtransaction), this.CheckBoxTransactions.IsChecked.GetValueOrDefault() }
+                {typeof(Dasset), this.CheckBoxAssets.IsChecked.GetValueOrDefault() },
+                {typeof(Dconcept), this.CheckBoxConcepts.IsChecked.GetValueOrDefault() },
+                {typeof(Denum), this.CheckBoxEnums.IsChecked.GetValueOrDefault() },
+                {typeof(Devent), this.CheckBoxEvents.IsChecked.GetValueOrDefault() },
+                {typeof(Dparticipant), this.CheckBoxParticipants.IsChecked.GetValueOrDefault() },
+                {typeof(Dtransaction), this.CheckBoxTransactions.IsChecked.GetValueOrDefault() }
             };
         }
 
@@ -146,38 +89,38 @@ namespace master.Windows
             var components = new Dictionary<string, DataVertex>();
             //var references = doc.GetReferenceTable(activeComponents);
 
-            this.AddComponents<Masset>(activeComponents, components);
-            this.AddComponents<Mconcept>(activeComponents, components);
+            this.AddComponents<Dasset>(activeComponents, components);
+            this.AddComponents<Dconcept>(activeComponents, components);
             //this.AddComponents<Menum>(activeComponents, components);
-            this.AddComponents<Mevent>(activeComponents, components);
-            this.AddComponents<Mparticipant>(activeComponents, components);
-            this.AddComponents<Mtransaction>(activeComponents, components);
+            this.AddComponents<Devent>(activeComponents, components);
+            this.AddComponents<Dparticipant>(activeComponents, components);
+            this.AddComponents<Dtransaction>(activeComponents, components);
 
             if (this.CheckBoxEnums.IsChecked == true)
-                foreach (Menum a in doc.GetComponent<Menum>())
+                foreach (Denum a in doc.GetComponent<Denum>())
                     components.Add(a.Name, View(a.Name, a.Options));
 
 
             foreach (var gb in components.Values)
                 this.graph.AddVertex(gb);
 
-            this.AddEdges<Masset>(activeComponents, activeReferences, activeAbstractions, components);
-            this.AddEdges<Mconcept>(activeComponents, activeReferences, activeAbstractions, components);
+            this.AddEdges<Dasset>(activeComponents, activeReferences, activeAbstractions, components);
+            this.AddEdges<Dconcept>(activeComponents, activeReferences, activeAbstractions, components);
             //this.AddEdges<Menum>(activeComponents, activeReferences, activeAbstractions, components);
-            this.AddEdges<Mevent>(activeComponents, activeReferences, activeAbstractions, components);
-            this.AddEdges<Mparticipant>(activeComponents, activeReferences, activeAbstractions, components);
-            this.AddEdges<Mtransaction>(activeComponents, activeReferences, activeAbstractions, components);
+            this.AddEdges<Devent>(activeComponents, activeReferences, activeAbstractions, components);
+            this.AddEdges<Dparticipant>(activeComponents, activeReferences, activeAbstractions, components);
+            this.AddEdges<Dtransaction>(activeComponents, activeReferences, activeAbstractions, components);
 
             graphArea.GenerateGraph(this.graph);
             zoomctrl.ZoomToFill();
         }
-        private void AddComponents<T>(Dictionary<Type, bool> active, Dictionary<string, DataVertex> output) where T : Minheritance
+        private void AddComponents<T>(Dictionary<Type, bool> active, Dictionary<string, DataVertex> output) where T : Dinheritance
         {
             if (active[typeof(T)])
                 foreach (T c in doc.GetComponent<T>())
                     output.Add(c.Name, View(c.Name, c.Components));
         }
-        private void AddEdges<T>(Dictionary<Type, bool> active, bool activeRefs, bool activeAbs, Dictionary<string, DataVertex> refs) where T : Minheritance
+        private void AddEdges<T>(Dictionary<Type, bool> active, bool activeRefs, bool activeAbs, Dictionary<string, DataVertex> refs) where T : Dinheritance
         {
             if (!active[typeof(T)] || (!activeRefs && !activeAbs))
                 return;

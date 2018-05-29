@@ -14,6 +14,12 @@ namespace master.Blocks
             get { return this.documentation; }
             set { this.documentation = value; }
         }
+
+
+
+
+
+
         protected List<string> lines;
 
         public BlockBase()

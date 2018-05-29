@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    class Mparticipant : Midentity
+    class Dparticipant : Didentity
     {
-        public Mparticipant(string name) : base(name)
+        public Dparticipant(string name) : base(name)
         {
 
         }

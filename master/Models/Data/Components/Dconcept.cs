@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    class Mtransaction : Minheritance
+    class Dconcept : Dinheritance
     {
-        public Mtransaction(string name) : base(name)
+        public Dconcept(string name) : base(name)
         {
 
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    class Menum : Mbase
+    class Denum : Dbase
     {
         [DataMember]
         protected List<string> options;
@@ -18,7 +18,7 @@ namespace master.Models
             get { return this.options; }
         }
 
-        public Menum(string name) : base(name)
+        public Denum(string name) : base(name)
         {
             this.options = new List<string>();
         }

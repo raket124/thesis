@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    abstract class Midentity : Minheritance
+    abstract class Didentity : Dinheritance
     {
         [DataMember]
         protected string identifier;
@@ -19,7 +19,7 @@ namespace master.Models
             set { this.identifier = value; }
         }
 
-        public Midentity(string name) : base(name)
+        public Didentity(string name) : base(name)
         {
             this.identifier = string.Empty;
         }

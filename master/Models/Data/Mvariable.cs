@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    class Mvariable : Mbase
+    class Mvariable : Dbase
     {
         public enum RELATION { variable, reference };
 

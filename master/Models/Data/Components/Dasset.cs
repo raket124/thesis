@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    class Masset : Midentity
+    class Dasset : Didentity
     {
-        public Masset(string name) : base(name)
+        public Dasset(string name) : base(name)
         {
 
         }

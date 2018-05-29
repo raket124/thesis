@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    partial class Mfile : Mbase
+    partial class Mfile : Dbase
     {
         [DataMember]
-        protected List<Masset> assetComponents;
+        protected List<Dasset> assetComponents;
         [DataMember]
-        protected List<Mconcept> conceptComponents;
+        protected List<Dconcept> conceptComponents;
         [DataMember]
-        protected List<Menum> enumComponents;
+        protected List<Denum> enumComponents;
         [DataMember]
-        protected List<Mevent> eventComponents;
+        protected List<Devent> eventComponents;
         [DataMember]
-        protected List<Mparticipant> participantComponents;
+        protected List<Dparticipant> participantComponents;
         [DataMember]
-        protected List<Mtransaction> transactionComponents;
+        protected List<Dtransaction> transactionComponents;
         [DataMember]
         protected string fileNamespace;
 
@@ -43,20 +43,20 @@ namespace master.Models
             Mfile.TransportOrder(doc);
             Mfile.ECMR(doc);
             Mfile.Entity(doc);
-            doc.AddComponent(new Masset("LegalOwnerOrg") { Parent = "Entity" });
-            doc.AddComponent(new Masset("CompoundOrg") { Parent = "Entity" });
-            doc.AddComponent(new Masset("CarrierOrg") { Parent = "Entity" });
-            doc.AddComponent(new Masset("RecipientOrg") { Parent = "Entity" });
+            doc.AddComponent(new Dasset("LegalOwnerOrg") { Parent = "Entity" });
+            doc.AddComponent(new Dasset("CompoundOrg") { Parent = "Entity" });
+            doc.AddComponent(new Dasset("CarrierOrg") { Parent = "Entity" });
+            doc.AddComponent(new Dasset("RecipientOrg") { Parent = "Entity" });
             Mfile.Vehicle(doc);
 
             //participants
             Mfile.User(doc);
-            doc.AddComponent(new Mparticipant("LegalOwnerAdmin") { Parent = "User" });
-            doc.AddComponent(new Mparticipant("CompoundAdmin") { Parent = "User" });
-            doc.AddComponent(new Mparticipant("CarrierAdmin") { Parent = "User" });
-            doc.AddComponent(new Mparticipant("CarrierMember") { Parent = "User" });
-            doc.AddComponent(new Mparticipant("RecipientAdmin") { Parent = "User" });
-            doc.AddComponent(new Mparticipant("RecipientMember") { Parent = "User" });
+            doc.AddComponent(new Dparticipant("LegalOwnerAdmin") { Parent = "User" });
+            doc.AddComponent(new Dparticipant("CompoundAdmin") { Parent = "User" });
+            doc.AddComponent(new Dparticipant("CarrierAdmin") { Parent = "User" });
+            doc.AddComponent(new Dparticipant("CarrierMember") { Parent = "User" });
+            doc.AddComponent(new Dparticipant("RecipientAdmin") { Parent = "User" });
+            doc.AddComponent(new Dparticipant("RecipientMember") { Parent = "User" });
 
             // concepts
             Mfile.Address(doc);
@@ -78,7 +78,7 @@ namespace master.Models
 
         private static void TransportOrder(Mfile doc)
         {
-            var output = new Masset("TransportOrder") { Identifier = "orderID" };
+            var output = new Dasset("TransportOrder") { Identifier = "orderID" };
             output.AddComponent(new Mvariable("String", "orderID", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("LegalOwnerOrg", "owner", Mvariable.RELATION.reference));
             output.AddComponent(new Mvariable("CarrierOrg", "carrier", Mvariable.RELATION.reference));
@@ -92,7 +92,7 @@ namespace master.Models
         }
         private static void ECMR(Mfile doc)
         {
-            var output = new Masset("ECMR") { Identifier = "ecmrID" };
+            var output = new Dasset("ECMR") { Identifier = "ecmrID" };
             output.AddComponent(new Mvariable("String", "ecmrID", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "agreementTerms", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "agreementTermsSec", Mvariable.RELATION.variable));
@@ -127,7 +127,7 @@ namespace master.Models
         }
         private static void Entity(Mfile doc)
         {
-            var output = new Masset("Entity") { Identifier = "entityID", Abstract = true };
+            var output = new Dasset("Entity") { Identifier = "entityID", Abstract = true };
             output.AddComponent(new Mvariable("String", "entityID", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "name", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("Address", "address", Mvariable.RELATION.variable));
@@ -135,7 +135,7 @@ namespace master.Models
         }
         private static void Vehicle(Mfile doc)
         {
-            var output = new Masset("Vehicle") { Identifier = "vin" };
+            var output = new Dasset("Vehicle") { Identifier = "vin" };
             output.AddComponent(new Mvariable("String", "vin", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "manufacturer", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "model", Mvariable.RELATION.variable));
@@ -149,7 +149,7 @@ namespace master.Models
 
         private static void User(Mfile doc)
         {
-            var output = new Mparticipant("User") { Identifier = "userID", Abstract = true };
+            var output = new Dparticipant("User") { Identifier = "userID", Abstract = true };
             output.AddComponent(new Mvariable("String", "userID", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "userName", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "firstName", Mvariable.RELATION.variable));
@@ -160,7 +160,7 @@ namespace master.Models
 
         private static void Address(Mfile doc)
         {
-            var output = new Mconcept("Address");
+            var output = new Dconcept("Address");
             output.AddComponent(new Mvariable("String", "name", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "street", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "houseNumber", Mvariable.RELATION.variable));
@@ -173,7 +173,7 @@ namespace master.Models
         }
         private static void Delivery(Mfile doc)
         {
-            var output = new Mconcept("Delivery");
+            var output = new Dconcept("Delivery");
             output.AddComponent(new Mvariable("Address", "address", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("DateWindow", "expectedWindow", Mvariable.RELATION.variable) { Optional = true });
             output.AddComponent(new Mvariable("DateTime", "actualDate", Mvariable.RELATION.variable) { Optional = true });
@@ -181,7 +181,7 @@ namespace master.Models
         }
         private static void Loading(Mfile doc)
         {
-            var output = new Mconcept("Loading");
+            var output = new Dconcept("Loading");
             output.AddComponent(new Mvariable("Address", "address", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("DateWindow", "expectedWindow", Mvariable.RELATION.variable) { Optional = true });
             output.AddComponent(new Mvariable("DateTime", "actualDate", Mvariable.RELATION.variable) { Optional = true });
@@ -189,14 +189,14 @@ namespace master.Models
         }
         private static void Creation(Mfile doc)
         {
-            var output = new Mconcept("Creation");
+            var output = new Dconcept("Creation");
             output.AddComponent(new Mvariable("Address", "address", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("DateTime", "date", Mvariable.RELATION.variable));
             doc.AddComponent(output);
         }
         private static void Cancellation(Mfile doc)
         {
-            var output = new Mconcept("Cancellation");
+            var output = new Dconcept("Cancellation");
             output.AddComponent(new Mvariable("Entity", "cancelledBy", Mvariable.RELATION.reference));
             output.AddComponent(new Mvariable("DateTime", "date", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("String", "reason", Mvariable.RELATION.variable));
@@ -204,7 +204,7 @@ namespace master.Models
         }
         private static void Good(Mfile doc)
         {
-            var output = new Mconcept("Good");
+            var output = new Dconcept("Good");
             output.AddComponent(new Mvariable("Vehicle", "vehicle", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("Remark", "carrierLoadingRemark", Mvariable.RELATION.variable) { Optional = true });
             output.AddComponent(new Mvariable("Remark", "compoundRemark", Mvariable.RELATION.variable) { Optional = true });
@@ -223,14 +223,14 @@ namespace master.Models
         }
         private static void Remark(Mfile doc)
         {
-            var output = new Mconcept("Remark");
+            var output = new Dconcept("Remark");
             output.AddComponent(new Mvariable("String", "comments", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("Boolean", "isDamaged", Mvariable.RELATION.variable) { Optional = true });
             doc.AddComponent(output);
         }
         private static void Signature(Mfile doc)
         {
-            var output = new Mconcept("Signature");
+            var output = new Dconcept("Signature");
             output.AddComponent(new Mvariable("User", "certificate", Mvariable.RELATION.reference));
             output.AddComponent(new Mvariable("Double", "latitude", Mvariable.RELATION.variable) { Optional = true });
             output.AddComponent(new Mvariable("Double", "longitude", Mvariable.RELATION.variable) { Optional = true });
@@ -241,7 +241,7 @@ namespace master.Models
         }
         private static void DateWindow(Mfile doc)
         {
-            var output = new Mconcept("DateWindow");
+            var output = new Dconcept("DateWindow");
             output.AddComponent(new Mvariable("DateTime", "startDate", Mvariable.RELATION.variable));
             output.AddComponent(new Mvariable("DateTime", "endDate", Mvariable.RELATION.variable));
             doc.AddComponent(output);
@@ -249,7 +249,7 @@ namespace master.Models
 
         private static void EcmrStatus(Mfile doc)
         {
-            var output = new Menum("EcmrStatus");
+            var output = new Denum("EcmrStatus");
             output.AddItem("CREATED");
             output.AddItem("LOADED");
             output.AddItem("IN_TRANSIT");
@@ -260,7 +260,7 @@ namespace master.Models
         }
         private static void OrderStatus(Mfile doc)
         {
-            var output = new Menum("OrderStatus");
+            var output = new Denum("OrderStatus");
             output.AddItem("OPEN");
             output.AddItem("IN_PROGRESS");
             output.AddItem("COMPLETED");

@@ -15,42 +15,42 @@ namespace master.Models
         {
             this.sorter = new Dictionary<Type, TYPES>
             {
-                { typeof(Masset), TYPES.Asset },
-                { typeof(Mconcept), TYPES.Concept },
-                { typeof(Menum), TYPES.Enum },
-                { typeof(Mevent), TYPES.Event },
-                { typeof(Mparticipant), TYPES.Participant },
-                { typeof(Mtransaction), TYPES.Transaction }
+                { typeof(Dasset), TYPES.Asset },
+                { typeof(Dconcept), TYPES.Concept },
+                { typeof(Denum), TYPES.Enum },
+                { typeof(Devent), TYPES.Event },
+                { typeof(Dparticipant), TYPES.Participant },
+                { typeof(Dtransaction), TYPES.Transaction }
             };
-            this.assetComponents = new List<Masset>();
-            this.conceptComponents = new List<Mconcept>();
-            this.enumComponents = new List<Menum>();
-            this.eventComponents = new List<Mevent>();
-            this.participantComponents = new List<Mparticipant>();
-            this.transactionComponents = new List<Mtransaction>();
+            this.assetComponents = new List<Dasset>();
+            this.conceptComponents = new List<Dconcept>();
+            this.enumComponents = new List<Denum>();
+            this.eventComponents = new List<Devent>();
+            this.participantComponents = new List<Dparticipant>();
+            this.transactionComponents = new List<Dtransaction>();
         }
 
-        public void AddComponent(Mbase component)
+        public void AddComponent(Dbase component)
         {
             switch (this.sorter[component.GetType()])
             {
                 case TYPES.Asset:
-                    this.assetComponents.Add(component as Masset);
+                    this.assetComponents.Add(component as Dasset);
                     break;
                 case TYPES.Concept:
-                    this.conceptComponents.Add(component as Mconcept);
+                    this.conceptComponents.Add(component as Dconcept);
                     break;
                 case TYPES.Enum:
-                    this.enumComponents.Add(component as Menum);
+                    this.enumComponents.Add(component as Denum);
                     break;
                 case TYPES.Event:
-                    this.eventComponents.Add(component as Mevent);
+                    this.eventComponents.Add(component as Devent);
                     break;
                 case TYPES.Participant:
-                    this.participantComponents.Add(component as Mparticipant);
+                    this.participantComponents.Add(component as Dparticipant);
                     break;
                 case TYPES.Transaction:
-                    this.transactionComponents.Add(component as Mtransaction);
+                    this.transactionComponents.Add(component as Dtransaction);
                     break;
                 default:
                     throw new Exception("Invalid class is provided");
@@ -81,33 +81,33 @@ namespace master.Models
         public Dictionary<string, Tuple<Type, int>> GetReferenceTable()
         {
             var output = new Dictionary<string, Tuple<Type, int>>();
-            this.GetReferenceTable<Masset>(output);
-            this.GetReferenceTable<Mconcept>(output);
-            this.GetReferenceTable<Menum>(output);
-            this.GetReferenceTable<Mevent>(output);
-            this.GetReferenceTable<Mparticipant>(output);
-            this.GetReferenceTable<Mtransaction>(output);
+            this.GetReferenceTable<Dasset>(output);
+            this.GetReferenceTable<Dconcept>(output);
+            this.GetReferenceTable<Denum>(output);
+            this.GetReferenceTable<Devent>(output);
+            this.GetReferenceTable<Dparticipant>(output);
+            this.GetReferenceTable<Dtransaction>(output);
             return output;
         }
 
         public Dictionary<string, Tuple<Type, int>> GetReferenceTable(Dictionary<Type, bool> activeComponents)
         {
             var output = new Dictionary<string, Tuple<Type, int>>();
-            this.GetReferenceTable<Masset>(activeComponents, output);
-            this.GetReferenceTable<Mconcept>(activeComponents, output);
-            this.GetReferenceTable<Menum>(activeComponents, output);
-            this.GetReferenceTable<Mevent>(activeComponents, output);
-            this.GetReferenceTable<Mparticipant>(activeComponents, output);
-            this.GetReferenceTable<Mtransaction>(activeComponents, output);
+            this.GetReferenceTable<Dasset>(activeComponents, output);
+            this.GetReferenceTable<Dconcept>(activeComponents, output);
+            this.GetReferenceTable<Denum>(activeComponents, output);
+            this.GetReferenceTable<Devent>(activeComponents, output);
+            this.GetReferenceTable<Dparticipant>(activeComponents, output);
+            this.GetReferenceTable<Dtransaction>(activeComponents, output);
             return output;
         }
 
-        private void GetReferenceTable<T>(Dictionary<string, Tuple<Type, int>> output) where T : Mbase
+        private void GetReferenceTable<T>(Dictionary<string, Tuple<Type, int>> output) where T : Dbase
         {
             this.GetReferenceTable<T>(new Dictionary<Type, bool>() { { typeof(T), true } }, output);
         }
 
-        private void GetReferenceTable<T>(Dictionary<Type, bool> addition, Dictionary<string, Tuple<Type, int>> output) where T : Mbase
+        private void GetReferenceTable<T>(Dictionary<Type, bool> addition, Dictionary<string, Tuple<Type, int>> output) where T : Dbase
         {
             if (!addition[typeof(T)])
                 return;

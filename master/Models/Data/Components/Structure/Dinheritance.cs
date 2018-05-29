@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    abstract class Minheritance : Mbase
+    abstract class Dinheritance : Dbase
     {
         [DataMember]
         protected string parent;
@@ -34,7 +34,7 @@ namespace master.Models
             get { return this.components; }
         }
 
-        public Minheritance(string name) : base(name)
+        public Dinheritance(string name) : base(name)
         {
             this.parent = string.Empty;
             this.isAbstract = false;

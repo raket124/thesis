@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 namespace master.Models
 {
     [DataContract]
-    abstract class Mbase
+    abstract class Dbase
     {
         [DataMember]
         protected string docs;
@@ -27,7 +27,7 @@ namespace master.Models
             set { this.name = value; }
         }
 
-        public Mbase(string name)
+        public Dbase(string name)
         {
             this.name = name;
             this.docs = string.Empty;
