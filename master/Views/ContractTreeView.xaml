@@ -7,58 +7,54 @@
              xmlns:vms="clr-namespace:master.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <TreeView ItemsSource="{Binding Contracts}">
-        <TreeView.Resources>
-            <HierarchicalDataTemplate DataType="{x:Type vms:VMcontract}" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Name}" />
-                    <TextBlock Text=" [" />
-                    <TextBlock Text="{Binding Functions.Count}" Foreground="Green" />
-                    <TextBlock Text="-" Foreground="Blue" />
-                    <TextBlock Text="{Binding Functions.Count}" Foreground="Orange" />
-                    <TextBlock Text="-" Foreground="Blue" />
-                    <TextBlock Text="{Binding Functions.Count}" Foreground="Red" />
-                    <TextBlock Text="]" />
-                </StackPanel>
-            </HierarchicalDataTemplate>
-        </TreeView.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-        <!--<HierarchicalDataTemplate DataType="{x:Type vms:VMfunction}">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Name}" />
-            </StackPanel>
-        </HierarchicalDataTemplate>-->
+        <TreeView ItemsSource="{Binding Contracts}" Grid.Row="0">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type vms:VMcontract}" ItemsSource="{Binding Functions}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="[" />
+                        <TextBlock Text="{Binding CountPublic}" Foreground="Green" />
+                        <TextBlock Text="-" Foreground="Blue" />
+                        <TextBlock Text="{Binding CountControlled}" Foreground="Orange" />
+                        <TextBlock Text="-" Foreground="Blue" />
+                        <TextBlock Text="{Binding CountPrivate}" Foreground="Red" />
+                        <TextBlock Text="] " />
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
 
-        <!--<TreeViewItem Header="vehicleRules" IsExpanded="True">
-            <TreeViewItem Header="+ createVehicles" />
-            <TreeViewItem Header="+ updateRegistrationCountry" />
-            <TreeViewItem Header="- updateEcmrListInVin" />
-            <TreeViewItem Header="- retrieveAndUpdateVin" />
-        </TreeViewItem>
-        <TreeViewItem Header="ecmrRules" IsExpanded="True">
-            <TreeViewItem Header="+ createECMRs" />
-            <TreeViewItem Header="+ updateEcmrStatusToLoaded" />
-            <TreeViewItem Header="+ updateEcmrStatusToInTransit" />
-            <TreeViewItem Header="+ updateEcmrStatusToConfirmedDelivered" />
-            <TreeViewItem Header="+ updateECMRStatusToCancelled" />
-            <TreeViewItem Header="+ updateExpectedPickupWindow" />
-            <TreeViewItem Header="+ updateExpectedDeliveryWindow" />
-        </TreeViewItem>
-        <TreeViewItem Header="transportOrderRules" IsExpanded="True">
-            <TreeViewItem Header="+ createTransportOrder" />
-            <TreeViewItem Header="+ createTransportOrders" />
-            <TreeViewItem Header="- updateTransportOrderToInProgress" />
-            <TreeViewItem Header="- updateTransportOrderStatusToCompleted" />
-            <TreeViewItem Header="- validateVinIds" />
-            <TreeViewItem Header="+ updateTransportOrderPickupWindow" />
-            <TreeViewItem Header="+ updateTransportOrderDeliveryWindow" />
-            <TreeViewItem Header="+ updateTransportOrderStatusToCancelled" />
-        </TreeViewItem>
-        <TreeViewItem Header="orgRules" IsExpanded="True">
-            <TreeViewItem Header="+ createLegalOwnerOrg" />
-            <TreeViewItem Header="+ createCompoundOrg" />
-            <TreeViewItem Header="+ createCarrierOrg" />
-            <TreeViewItem Header="+ createRecipientOrg" />
-        </TreeViewItem>-->
-    </TreeView>
+                <HierarchicalDataTemplate DataType="{x:Type vms:VMfunction}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image ToolTip="{Binding Name}">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Access}" Value="Public">
+                                            <Setter Property="Source" Value="Images\circle_green.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Access}" Value="Controlled">
+                                            <Setter Property="Source" Value="Images\circle_orange.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Access}" Value="Private">
+                                            <Setter Property="Source" Value="Images\circle_red.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+            <Button Content="Add group"/>
+            <Button Content="Add function" />
+        </StackPanel>
+    </Grid>
 </UserControl>

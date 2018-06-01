@@ -27,9 +27,9 @@ namespace master.Models
             set { this.name = value; }
         }
 
-        public Basis()
+        public Basis(string name)
         {
-            this.name = string.Empty;
+            this.name = name;
             this.docs = string.Empty;
         }
     }

@@ -7,7 +7,7 @@
         xmlns:graphs="clr-namespace:master.Graphs"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:controls="http://schemas.panthernet.ru/graphx/"
-        xmlns:master="clr-namespace:master" x:Class="master.Windows.ObjectView"
+        xmlns:master="clr-namespace:master" x:Class="master.Windows.GraphWindow"
         mc:Ignorable="d"
         x:Name="root"
         Title="Data model" Height="500" Width="800">

@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace master.Windows
+namespace master.Views
 {
     /// <summary>
-    /// Interaction logic for CodeView.xaml
+    /// Interaction logic for MenuView.xaml
     /// </summary>
-    public partial class CodeWindow : Window
+    public partial class MenuView : UserControl
     {
-        public CodeWindow()
+        public MenuView()
         {
             InitializeComponent();
         }

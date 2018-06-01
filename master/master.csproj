@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
     </Reference>
@@ -51,6 +54,12 @@
     </Reference>
     <Reference Include="MahApps.Metro.IconPacks.Material, Version=2.2.0.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.Material.2.2.0\lib\net45\MahApps.Metro.IconPacks.Material.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
       <HintPath>..\packages\QuickGraphPCL.3.6.61114.2\lib\net40-client\QuickGraph.dll</HintPath>
@@ -70,7 +79,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -93,7 +102,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Files\FileHandler.cs" />
     <Compile Include="Models\Basis.cs" />
+    <Compile Include="Models\Contract\Blocks\Bassign.cs" />
+    <Compile Include="Models\Contract\Blocks\BgetRegistry.cs" />
+    <Compile Include="Models\Contract\Blocks\BuseRegistry.cs" />
     <Compile Include="Models\Contract\Blocks\Structure\Bbase.cs" />
     <Compile Include="Models\Contract\Ccontract.cs" />
     <Compile Include="Models\Contract\Ccontracts.cs" />
@@ -111,12 +124,20 @@
     <Compile Include="Models\Contract\Components\Structure\CconditionGroup.cs" />
     <Compile Include="Models\Contract\Components\Structure\CconditionSingle.cs" />
     <Compile Include="Models\Contract\Components\Structure\Cvariable.cs" />
+    <Compile Include="Models\DataModel.cs" />
     <Compile Include="ViewModels\Contract\VMcontract.cs" />
     <Compile Include="ViewModels\Contract\VMcontracts.cs" />
     <Compile Include="ViewModels\Contract\VMfunction.cs" />
+    <Compile Include="ViewModels\VMdataModel.cs" />
+    <Compile Include="ViewModels\VMmain.cs" />
+    <Compile Include="ViewModels\VMmenu.cs" />
     <Compile Include="Views\ContractTreeView.xaml.cs">
       <DependentUpon>ContractTreeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WindowManager.cs" />
     <Compile Include="ZTemp\CloneTest.cs" />
     <Compile Include="Graphs\DataEdge.cs" />
     <Compile Include="Graphs\DataVertex.cs" />
@@ -141,19 +162,19 @@
     <Compile Include="Windows\CodeWindow.xaml.cs">
       <DependentUpon>CodeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Controls\ContractListBox.cs" />
-    <Compile Include="Windows\Controls\BlockListBox.cs" />
-    <Compile Include="Windows\Controls\TransactionStackPanel.cs" />
-    <Compile Include="Windows\Controls\VariableStackPanel.cs" />
+    <Compile Include="ZTemp\Controls\ContractListBox.cs" />
+    <Compile Include="ZTemp\Controls\BlockListBox.cs" />
+    <Compile Include="ZTemp\Controls\TransactionStackPanel.cs" />
+    <Compile Include="ZTemp\Controls\VariableStackPanel.cs" />
     <Compile Include="Windows\GraphWindow.xaml.cs">
       <DependentUpon>GraphWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Variable.cs" />
-    <Compile Include="Windows\VariableTreeViewModel.cs" />
-    <Compile Include="Windows\VariableViewModel.cs" />
+    <Compile Include="ZTemp\Temp\Variable.cs" />
+    <Compile Include="ZTemp\Temp\VariableTreeViewModel.cs" />
+    <Compile Include="ZTemp\Temp\VariableViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -167,6 +188,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ContractTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -210,6 +235,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Authorization\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\circle_green.png" />
+    <Resource Include="Views\Images\circle_orange.png" />
+    <Resource Include="Views\Images\circle_red.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

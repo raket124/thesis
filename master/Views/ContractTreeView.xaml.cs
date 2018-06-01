@@ -26,7 +26,9 @@ namespace master.Views
         {
             InitializeComponent();
 
-            base.DataContext = new VMcontracts(new Ccontracts());
+
+
+            base.DataContext = new VMcontracts(Ccontracts.KoopmanContract());
         }
     }
 }

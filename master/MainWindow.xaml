@@ -4,24 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:master"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:views="clr-namespace:master.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="800"
+        Title="MainWindow" Height="600" Width="1200"
         x:Name="root">
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="File">
-                <MenuItem Header="Open" Click="FileOpenClick" />
-                <MenuItem Header="Save" Click="FileSaveClick" />
-                <MenuItem Header="Save as" Click="FileSaveAsClick" />
-            </MenuItem>
-            <MenuItem Header="Data model" Click="DataModelClick" />
-            <MenuItem Header="Chain code" Click="ChainCodeClick" />
-            <MenuItem Header="Test window" Click="TestWindowClick" />
-        </Menu>
+        <views:MenuView x:Name="Menu" DockPanel.Dock="Top"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />

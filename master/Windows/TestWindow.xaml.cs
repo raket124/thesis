@@ -19,13 +19,13 @@ namespace master.Windows
     /// <summary>
     /// Interaction logic for TestView.xaml
     /// </summary>
-    public partial class TestView : Window
+    public partial class TestWindow : Window
     {
         private Mfile doc;
 
         readonly VariableTreeViewModel _familyTree;
 
-        public TestView()
+        public TestWindow()
         {
             InitializeComponent();
 

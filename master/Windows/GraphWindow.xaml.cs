@@ -17,12 +17,12 @@ using GraphX.PCL.Common.Enums;
 
 namespace master.Windows
 {
-    public partial class ObjectView : Window
+    public partial class GraphWindow : Window
     {
         private Mfile doc;
         private MyGraph graph;
 
-        public ObjectView()
+        public GraphWindow()
         {
             InitializeComponent();
             InitializeComboBoxes();

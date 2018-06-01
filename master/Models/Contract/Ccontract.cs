@@ -6,16 +6,23 @@ using System.Threading.Tasks;
 
 namespace master.Models
 {
-    class Ccontract
+    class Ccontract : Basis
     {
-        protected List<string> functions;
+        protected List<Cfunction> functions;
 
-        protected string name;
-
-        public string Name
+        public Ccontract(string name) : base(name)
         {
-            get { return this.name; }
-            set { this.name = value; }
+            this.functions = new List<Cfunction>();
+        }
+
+        public void AddFunction(Cfunction function)
+        {
+            this.functions.Add(function);
+        }
+
+        public IList<Cfunction> Functions
+        {
+            get { return this.functions; }
         }
     }
 }

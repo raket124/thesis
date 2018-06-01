@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,14 @@ namespace master.ViewModels
         public ReadOnlyCollection<VMcontract> Contracts
         {
             get { return this.contracts; }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

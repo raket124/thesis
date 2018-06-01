@@ -5,13 +5,10 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace master.Models
+namespace master.Models.Contract.Blocks
 {
     [DataContract]
-    class Berror : Bbase
+    class BuseRegistry : Bbase
     {
-        protected string functionName;
-        protected string message;
-        protected bool errorVariable;
     }
 }
