@@ -12,15 +12,39 @@ namespace master.Models
     class DataModel
     {
         [DataMember]
-        protected object contracts;
+        protected Ccontracts contracts;
         [DataMember]
-        protected object dataModel;
+        protected Dmodel model;
         [DataMember]
         protected object authorization;
 
         public DataModel()
         {
+            //this.contracts = new Ccontracts();
+            //this.dataModel = new Mfile();
+            this.SetupDemo(); //Debugging only
+        }
 
+        public void SetupDemo()
+        {
+            this.contracts = CcontractsDemo.KoopmanContract();
+            this.model = DmodelDemo.KoopmanCTO();
+            this.authorization = null;
+        }
+
+        public Ccontracts Contracts
+        {
+            get { return this.contracts; }
+        }
+
+        public Dmodel Model
+        {
+            get { return this.model; }
+        }
+
+        public object Authorization
+        {
+            get { return this.authorization; }
         }
     }
 }

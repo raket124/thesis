@@ -1,6 +1,4 @@
-﻿using master.Models;
-using master.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +16,11 @@ using System.Windows.Shapes;
 namespace master.Views
 {
     /// <summary>
-    /// Interaction logic for ContractTreeView.xaml
+    /// Interaction logic for BlockListBox.xaml
     /// </summary>
-    public partial class ContractTreeView : UserControl
+    public partial class BlockListBox : UserControl
     {
-        public ContractTreeView()
+        public BlockListBox()
         {
             InitializeComponent();
         }

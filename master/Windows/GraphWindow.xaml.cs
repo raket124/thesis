@@ -19,14 +19,14 @@ namespace master.Windows
 {
     public partial class GraphWindow : Window
     {
-        private Mfile doc;
+        private Dmodel doc;
         private MyGraph graph;
 
         public GraphWindow()
         {
             InitializeComponent();
             InitializeComboBoxes();
-            this.doc = Mfile.KoopmanCTO();
+            this.doc = DmodelDemo.KoopmanCTO();
             this.graph = new MyGraph();
             graphArea.LogicCore = this.GetCore();
 

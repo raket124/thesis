@@ -29,8 +29,7 @@ namespace master.Files
                 FileName = this.defaultFileName
             };
 
-            this.model = new DataModel();
-            this.currentFile = string.Empty;
+            this.New();
         }
 
         public void New()
@@ -42,8 +41,7 @@ namespace master.Files
         public void Demo()
         {
             this.currentFile = string.Empty;
-            //TODO create demo datamodel from code, instead of empty model
-            this.model = new DataModel();
+            this.model.SetupDemo();
         }
 
         public void Open()
@@ -64,11 +62,9 @@ namespace master.Files
         public void Save()
         {
             if (this.currentFile == string.Empty)
-            {
                 this.SaveAs();
-                return;
-            }
-            this.Save(this.currentFile);
+            else
+                this.Save(this.currentFile);
         }
 
         public void SaveAs()

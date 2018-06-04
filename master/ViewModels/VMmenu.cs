@@ -27,7 +27,6 @@ namespace master.ViewModels
         public ICommand GraphWindow { get; private set; }
         public ICommand TestWindow { get; private set; }
 
-
         public VMmenu(WindowManager wm, FileHandler fh)
         {
             this.windowManager = wm;

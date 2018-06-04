@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace master.Models
 {
-    partial class Mfile
+    [DataContract]
+    class Dmodel
     {
         public enum TYPES { Asset, Participant, Transaction, Event, Concept, Enum };
         protected readonly Dictionary<Type, TYPES> sorter = new Dictionary<Type, TYPES>()
@@ -19,7 +21,22 @@ namespace master.Models
             { typeof(Dtransaction), TYPES.Transaction }
         };
 
-        public Mfile(string name) : base(name)
+        [DataMember]
+        protected List<Dasset> assetComponents;
+        [DataMember]
+        protected List<Dconcept> conceptComponents;
+        [DataMember]
+        protected List<Denum> enumComponents;
+        [DataMember]
+        protected List<Devent> eventComponents;
+        [DataMember]
+        protected List<Dparticipant> participantComponents;
+        [DataMember]
+        protected List<Dtransaction> transactionComponents;
+        [DataMember]
+        protected string fileNamespace;
+
+        public Dmodel()
         {
             this.assetComponents = new List<Dasset>();
             this.conceptComponents = new List<Dconcept>();
@@ -27,6 +44,12 @@ namespace master.Models
             this.eventComponents = new List<Devent>();
             this.participantComponents = new List<Dparticipant>();
             this.transactionComponents = new List<Dtransaction>();
+        }
+
+        public string Namespace
+        {
+            get { return this.fileNamespace; }
+            set { this.fileNamespace = value; }
         }
 
         public void AddComponent(Dbase component)
@@ -108,11 +131,6 @@ namespace master.Models
             var componentList = this.GetComponent<T>();
             for (int i = 0; i < componentList.Count; i++)
                 output.Add(componentList[i].Name, Tuple.Create<Type, int>(typeof(T), i));
-        }
-
-        public void Test()
-        {
-
         }
     }
 }

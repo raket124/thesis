@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace master.Models.Contract.Blocks
+namespace master.Models
 {
     [DataContract]
     class BuseRegistry : Bbase

@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:master"
-        xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:views="clr-namespace:master.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1200"
@@ -19,20 +18,11 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
-            <views:ContractTreeView Grid.Column="0" />
+            <views:ContractTreeView Grid.Column="0" x:Name="contractTreeView"/>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <Controls:ContractListBox Grid.Column="2"
-                                      dd:DragDrop.IsDragSource="True"
-                                      dd:DragDrop.IsDropTarget="True"
-                                      dd:DragDrop.UseDefaultEffectDataTemplate="True"
-                                      ItemsSource="{Binding ClonableCollection1}" />
+            <views:ContractListBox Grid.Column="2" x:Name="contractListBox"/>
             <GridSplitter Grid.Column="3" Width="5" HorizontalAlignment="Stretch" />
-            <Controls:BlockListBox Grid.Column="4" 
-                                   dd:DragDrop.DragDropCopyKeyState="LeftMouseButton"
-                                   dd:DragDrop.IsDragSource="True"
-                                   dd:DragDrop.IsDropTarget="False"
-                                   dd:DragDrop.UseDefaultEffectDataTemplate="True"
-                                   ItemsSource="{Binding ClonableCollection2}" />
+            <views:BlockListBox Grid.Column="4" x:Name="blockListBox"/>
         </Grid>
     </DockPanel>
 </Window>

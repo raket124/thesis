@@ -21,7 +21,7 @@ namespace master.Windows
     /// </summary>
     public partial class TestWindow : Window
     {
-        private Mfile doc;
+        private Dmodel doc;
 
         readonly VariableTreeViewModel _familyTree;
 

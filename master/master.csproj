@@ -104,6 +104,7 @@
     </ApplicationDefinition>
     <Compile Include="Files\FileHandler.cs" />
     <Compile Include="Models\Basis.cs" />
+    <Compile Include="Models\Contract\CcontractsDemo.cs" />
     <Compile Include="Models\Contract\Blocks\Bassign.cs" />
     <Compile Include="Models\Contract\Blocks\BgetRegistry.cs" />
     <Compile Include="Models\Contract\Blocks\BuseRegistry.cs" />
@@ -128,9 +129,16 @@
     <Compile Include="ViewModels\Contract\VMcontract.cs" />
     <Compile Include="ViewModels\Contract\VMcontracts.cs" />
     <Compile Include="ViewModels\Contract\VMfunction.cs" />
+    <Compile Include="ViewModels\Data\VMmodel.cs" />
     <Compile Include="ViewModels\VMdataModel.cs" />
     <Compile Include="ViewModels\VMmain.cs" />
     <Compile Include="ViewModels\VMmenu.cs" />
+    <Compile Include="Views\BlockListBox.xaml.cs">
+      <DependentUpon>BlockListBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractListBox.xaml.cs">
+      <DependentUpon>ContractListBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ContractTreeView.xaml.cs">
       <DependentUpon>ContractTreeView.xaml</DependentUpon>
     </Compile>
@@ -153,8 +161,8 @@
     <Compile Include="Models\Data\Components\Structure\Dinheritance.cs" />
     <Compile Include="Models\Data\Components\Dparticipant.cs" />
     <Compile Include="Models\Data\Components\Dtransaction.cs" />
-    <Compile Include="Models\Data\MfileData.cs" />
-    <Compile Include="Models\Data\MfileLogic.cs" />
+    <Compile Include="Models\Data\DmodelDemo.cs" />
+    <Compile Include="Models\Data\Dmodel.cs" />
     <Compile Include="Models\Data\Mvariable.cs" />
     <Compile Include="ZTemp\SimpleCommand.cs" />
     <Compile Include="ZTemp\SubTest.cs" />
@@ -162,8 +170,6 @@
     <Compile Include="Windows\CodeWindow.xaml.cs">
       <DependentUpon>CodeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ZTemp\Controls\ContractListBox.cs" />
-    <Compile Include="ZTemp\Controls\BlockListBox.cs" />
     <Compile Include="ZTemp\Controls\TransactionStackPanel.cs" />
     <Compile Include="ZTemp\Controls\VariableStackPanel.cs" />
     <Compile Include="Windows\GraphWindow.xaml.cs">
@@ -187,6 +193,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\BlockListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ContractTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
