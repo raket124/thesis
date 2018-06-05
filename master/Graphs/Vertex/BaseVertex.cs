@@ -9,16 +9,23 @@ using System.Windows.Controls;
 
 namespace master.Graphs
 {
-    public class DataVertex : VertexBase
+    public class BaseVertex : VertexBase
     {
-        public string Name { get; set; }
-
-        public List<string> Vars { get; set; }
-
-        public DataVertex()
+        private Mvariable root;
+        
+        public BaseVertex()
         {
             this.Vars = new List<string>();
+            this.root = new Mvariable("A", "B", Mvariable.RELATION.reference);
         }
+
+        public string Name
+        {
+            get { return this.root.Name; }
+            set { this.root.Name = value; }
+        }
+
+        public List<string> Vars { get; set; }
 
         public override string ToString()
         {

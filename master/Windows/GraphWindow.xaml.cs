@@ -86,7 +86,7 @@ namespace master.Windows
             var activeComponents = this.GetActiveComponents();
             var activeReferences = this.CheckBoxReferences.IsChecked.GetValueOrDefault();
             var activeAbstractions = this.CheckBoxAbstractions.IsChecked.GetValueOrDefault();
-            var components = new Dictionary<string, DataVertex>();
+            var components = new Dictionary<string, BaseVertex>();
             //var references = doc.GetReferenceTable(activeComponents);
 
             this.AddComponents<Dasset>(activeComponents, components);
@@ -114,13 +114,13 @@ namespace master.Windows
             graphArea.GenerateGraph(this.graph);
             zoomctrl.ZoomToFill();
         }
-        private void AddComponents<T>(Dictionary<Type, bool> active, Dictionary<string, DataVertex> output) where T : Dinheritance
+        private void AddComponents<T>(Dictionary<Type, bool> active, Dictionary<string, BaseVertex> output) where T : Dinheritance
         {
             if (active[typeof(T)])
                 foreach (T c in doc.GetComponent<T>())
                     output.Add(c.Name, View(c.Name, c.Components));
         }
-        private void AddEdges<T>(Dictionary<Type, bool> active, bool activeRefs, bool activeAbs, Dictionary<string, DataVertex> refs) where T : Dinheritance
+        private void AddEdges<T>(Dictionary<Type, bool> active, bool activeRefs, bool activeAbs, Dictionary<string, BaseVertex> refs) where T : Dinheritance
         {
             if (!active[typeof(T)] || (!activeRefs && !activeAbs))
                 return;
@@ -129,7 +129,7 @@ namespace master.Windows
             {
                 if (activeAbs)
                     if (refs.TryGetValue(c.Parent, out _))
-                        this.graph.AddEdge(new DataEdge(refs[c.Parent], refs[c.Name]) { Text = string.Empty });
+                        this.graph.AddEdge(new DataEdge(refs[c.Parent], refs[c.Name]));
 
                 if (activeRefs)
                     foreach (Mvariable var in c.Components)
@@ -147,9 +147,9 @@ namespace master.Windows
             //}
         }
 
-        private DataVertex View(string name, List<Mvariable> vars)
+        private BaseVertex View(string name, List<Mvariable> vars)
         {
-            var output = new DataVertex() { Name = name };
+            var output = new BaseVertex() { Name = name };
             foreach (Mvariable item in vars)
             {
                 string temp = string.Empty;
@@ -161,9 +161,9 @@ namespace master.Windows
             return output;
         }
 
-        private DataVertex View(string name, List<string> vars)
+        private BaseVertex View(string name, List<string> vars)
         {
-            var output = new DataVertex() { Name = name };
+            var output = new BaseVertex() { Name = name };
             foreach (string item in vars)
             {
                 string temp = string.Empty;

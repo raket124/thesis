@@ -8,21 +8,9 @@
         mc:Ignorable="d"
         Title="TestView" Height="300" Width="300">
     <Grid>
-
-        <Expander Margin="5" Header="Error block - jasndj, kjandjsand, kjnkjj">
-            <!--<Expander.Resources>
-                <Style TargetType="HeaderedContentControl">
-                    <Setter Property="" Value="Blue" />
-                    <Setter Property="FontSize" Value="24" />
-                </Style>
-            </Expander.Resources>-->
-            <StackPanel>
-                <Button>Hello1</Button>
-                <Button>Hello2</Button>
-                <Button>Hello3</Button>
-                <Button>Hello4</Button>
-                <Button>Hello5</Button>
-            </StackPanel>
-        </Expander>
+        <StackPanel>
+            
+            
+        </StackPanel>
     </Grid>
 </Window>

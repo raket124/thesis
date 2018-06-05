@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TreeView ItemsSource="{Binding Contracts}" Grid.Row="0">
+        <TreeView Grid.Row="0" ItemsSource="{Binding Contracts}" >
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type vms:VMcontract}" ItemsSource="{Binding Functions}">
                     <StackPanel Orientation="Horizontal">
@@ -52,9 +52,11 @@
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
         </TreeView>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-            <Button Content="Add group"/>
-            <Button Content="Add function" />
-        </StackPanel>
+        <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gray" Background="White" Margin="0,2,0,0">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Button Content="Add group"/>
+                <Button Content="Add function" />
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

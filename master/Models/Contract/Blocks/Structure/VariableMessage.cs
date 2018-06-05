@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace master.Models
+namespace master.Models.Contract.Blocks.Structure
 {
-    [DataContract]
-    class Berror : Bbase
+    class VariableMessage
     {
-        [DataMember]
         protected string message;
+        protected List<string> parameters;
+
     }
 }

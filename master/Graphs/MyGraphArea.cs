@@ -3,7 +3,7 @@ using QuickGraph;
 
 namespace master.Graphs
 {
-    public class MyGraphArea : GraphArea<DataVertex, DataEdge, BidirectionalGraph<DataVertex, DataEdge>>
+    public class MyGraphArea : GraphArea<BaseVertex, DataEdge, BidirectionalGraph<BaseVertex, DataEdge>>
     {
         public MyGraphArea() : base()
         {

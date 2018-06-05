@@ -34,11 +34,11 @@
                 </Border>
             </DataTemplate>
             <DataTemplate DataType="{x:Type vms:Z}">
-                <Expander Header="{Binding Name}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Width="300" Height="100" TextWrapping="Wrap" AcceptsReturn="True"/>
-                    </StackPanel>
-                </Expander>
+                <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
+                    <Expander Header="{Binding Name}">
+                        <TextBox TextWrapping="Wrap" AcceptsReturn="True"/>
+                    </Expander>
+                </Border>
             </DataTemplate>
         </ListBox.Resources>
     </ListBox>

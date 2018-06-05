@@ -20,13 +20,14 @@
 
         <controls:ZoomControl Grid.Row="0" x:Name="zoomctrl">
             <graphs:MyGraphArea x:Name="graphArea">
-                <!--<graphs:MyGraphArea.Resources>
-                    <ResourceDictionary>
-                        <ResourceDictionary.MergedDictionaries>
-                            <ResourceDictionary Source="/Graphs/Template.xaml"/>
-                        </ResourceDictionary.MergedDictionaries>
-                    </ResourceDictionary>
-                </graphs:MyGraphArea.Resources>-->
+                <graphs:MyGraphArea.Resources>
+                    <DataTemplate DataType="{x:Type graphs:BaseVertex}">
+                        <ListBox>
+                            <TextBlock Text="Hello" />
+                            <TextBlock Text="{Binding Name}" />
+                        </ListBox>
+                    </DataTemplate>
+                </graphs:MyGraphArea.Resources>
             </graphs:MyGraphArea>
         </controls:ZoomControl>
 

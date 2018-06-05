@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    class Berror : Bbase
+    class Blog
     {
-        [DataMember]
-        protected string message;
     }
 }

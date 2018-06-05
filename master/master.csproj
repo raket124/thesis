@@ -104,6 +104,8 @@
     </ApplicationDefinition>
     <Compile Include="Files\FileHandler.cs" />
     <Compile Include="Models\Basis.cs" />
+    <Compile Include="Models\Contract\Blocks\Blog.cs" />
+    <Compile Include="Models\Contract\Blocks\Structure\VariableMessage.cs" />
     <Compile Include="Models\Contract\CcontractsDemo.cs" />
     <Compile Include="Models\Contract\Blocks\Bassign.cs" />
     <Compile Include="Models\Contract\Blocks\BgetRegistry.cs" />

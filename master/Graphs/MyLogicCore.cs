@@ -6,7 +6,7 @@ using QuickGraph;
 
 namespace master.Graphs
 {
-    public class MyLogicCore : GXLogicCore<DataVertex, DataEdge, BidirectionalGraph<DataVertex, DataEdge>>
+    public class MyLogicCore : GXLogicCore<BaseVertex, DataEdge, BidirectionalGraph<BaseVertex, DataEdge>>
     {
         public void SetDefaultLayoutAlgorithm(LayoutAlgorithmTypeEnum algorithm)
         {

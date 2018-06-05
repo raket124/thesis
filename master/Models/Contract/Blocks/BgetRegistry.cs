@@ -11,8 +11,12 @@ namespace master.Models
     class BgetRegistry : Bbase
     {
         public enum CATEGORY { Participant, Asset };
+
+        [DataMember]
         protected CATEGORY objectCategory;
+        [DataMember]
         protected string objectName;
+        [DataMember]
         protected string objectNameSpace;
     }
 }

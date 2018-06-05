@@ -10,7 +10,9 @@ namespace master.Models
     [DataContract]
     abstract class Bbase
     {
+        [DataMember]
         protected string documentation;
+
         public string Documentation
         {
             get { return this.documentation; }

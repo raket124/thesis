@@ -10,7 +10,7 @@
         x:Name="root">
     <DockPanel>
         <views:MenuView x:Name="Menu" DockPanel.Dock="Top"/>
-        <Grid>
+        <Grid Background="#FFF0F0F0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="5" />
@@ -18,11 +18,11 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
-            <views:ContractTreeView Grid.Column="0" x:Name="contractTreeView"/>
+            <views:ContractTreeView Grid.Column="0" x:Name="contractTreeView" Margin="5"/>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <views:ContractListBox Grid.Column="2" x:Name="contractListBox"/>
+            <views:ContractListBox Grid.Column="2" x:Name="contractListBox" Margin="5"/>
             <GridSplitter Grid.Column="3" Width="5" HorizontalAlignment="Stretch" />
-            <views:BlockListBox Grid.Column="4" x:Name="blockListBox"/>
+            <views:BlockListBox Grid.Column="4" x:Name="blockListBox" Margin="5"/>
         </Grid>
     </DockPanel>
 </Window>
