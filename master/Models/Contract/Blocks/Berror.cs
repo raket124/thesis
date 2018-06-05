@@ -10,8 +10,6 @@ namespace master.Models
     [DataContract]
     class Berror : Bbase
     {
-        protected string functionName;
         protected string message;
-        protected bool errorVariable;
     }
 }

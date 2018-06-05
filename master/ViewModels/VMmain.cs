@@ -1,5 +1,6 @@
 ﻿using master.Files;
 using master.Windows;
+using master.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,8 +19,8 @@ namespace master.ViewModels
         private VMdataModel model;
 
 
-        private ObservableCollection<X> list1;
-        private ObservableCollection<X> list2;
+        private ObservableCollection<VMBbase> list1;
+        private ObservableCollection<VMBbase> list2;
 
         public VMmain(MainWindow mainWindow)
         {
@@ -30,17 +31,12 @@ namespace master.ViewModels
             this.model = new VMdataModel(this.fileHandler.Model);
 
 
-            this.list1 = new ObservableCollection<X>();
-            this.list2 = new ObservableCollection<X>();
-
-
-            this.list1.Add(new X("A"));
-            this.list1.Add(new X("B"));
-            this.list1.Add(new X("C"));
-
-            this.list2.Add(new X("1"));
-            this.list2.Add(new X("2"));
-            this.list2.Add(new X("3"));
+            this.list1 = new ObservableCollection<VMBbase>();
+            this.list2 = new ObservableCollection<VMBbase>
+            {
+                new Y("Y"),
+                new Z("Z")
+            };
         }
 
         public VMmenu Menu
@@ -53,34 +49,14 @@ namespace master.ViewModels
             get { return this.model; }
         }
 
-        public ObservableCollection<X> List1
+        public ObservableCollection<VMBbase> List1
         {
             get { return this.list1; }
         }
 
-        public ObservableCollection<X> List2
+        public ObservableCollection<VMBbase> List2
         {
             get { return this.list2; }
-        }
-    }
-
-    class X : ICloneable
-    {
-        private string x;
-
-        public X(string input)
-        {
-            this.x = input;
-        }
-
-        public object Clone()
-        {
-            return new X(this.x);
-        }
-
-        public override string ToString()
-        {
-            return x;
         }
     }
 }

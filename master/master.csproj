@@ -126,6 +126,9 @@
     <Compile Include="Models\Contract\Components\Structure\CconditionSingle.cs" />
     <Compile Include="Models\Contract\Components\Structure\Cvariable.cs" />
     <Compile Include="Models\DataModel.cs" />
+    <Compile Include="ViewModels\Contract\Blocks\Structure\VMBbase.cs" />
+    <Compile Include="ViewModels\Contract\Blocks\Y.cs" />
+    <Compile Include="ViewModels\Contract\Blocks\Z.cs" />
     <Compile Include="ViewModels\Contract\VMcontract.cs" />
     <Compile Include="ViewModels\Contract\VMcontracts.cs" />
     <Compile Include="ViewModels\Contract\VMfunction.cs" />
@@ -164,7 +167,6 @@
     <Compile Include="Models\Data\DmodelDemo.cs" />
     <Compile Include="Models\Data\Dmodel.cs" />
     <Compile Include="Models\Data\Mvariable.cs" />
-    <Compile Include="ZTemp\SimpleCommand.cs" />
     <Compile Include="ZTemp\SubTest.cs" />
     <Compile Include="ZTemp\Test.cs" />
     <Compile Include="Windows\CodeWindow.xaml.cs">

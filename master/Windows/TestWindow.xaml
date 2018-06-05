@@ -8,36 +8,21 @@
         mc:Ignorable="d"
         Title="TestView" Height="300" Width="300">
     <Grid>
-        <TreeView ItemsSource="{Binding FirstIteration}">
-            <TreeView.ItemContainerStyle>
-                <Style TargetType="{x:Type TreeViewItem}">
-                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
-                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                    <Setter Property="FontWeight" Value="Normal" />
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="FontWeight" Value="Bold" />
-                        </Trigger>
-                    </Style.Triggers>
+
+        <Expander Margin="5" Header="Error block - jasndj, kjandjsand, kjnkjj">
+            <!--<Expander.Resources>
+                <Style TargetType="HeaderedContentControl">
+                    <Setter Property="" Value="Blue" />
+                    <Setter Property="FontSize" Value="24" />
                 </Style>
-            </TreeView.ItemContainerStyle>
-
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                    <TextBlock Text="{Binding Name}" />
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
-
-
-
-        <!--<ComboBox>
-            <ComboBoxItem Content="Hello1" />
-            <ComboBoxItem Content="Hello2" />
-            <ComboBoxItem Content="Hello3" />
-            <ComboBox.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red"/>
-            </ComboBox.Resources>
-        </ComboBox>-->
+            </Expander.Resources>-->
+            <StackPanel>
+                <Button>Hello1</Button>
+                <Button>Hello2</Button>
+                <Button>Hello3</Button>
+                <Button>Hello4</Button>
+                <Button>Hello5</Button>
+            </StackPanel>
+        </Expander>
     </Grid>
 </Window>

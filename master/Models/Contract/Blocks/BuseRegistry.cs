@@ -10,5 +10,9 @@ namespace master.Models
     [DataContract]
     class BuseRegistry : Bbase
     {
+        public enum ACTION { Add, Update, Remove };
+        protected ACTION action;
+        protected string objectVariable;
+        //TODO add error catching as variable
     }
 }

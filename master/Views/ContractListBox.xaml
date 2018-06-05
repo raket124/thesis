@@ -4,12 +4,42 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:master.Views"
+             xmlns:vms="clr-namespace:master.ViewModels"
              xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <ListBox dd:DragDrop.IsDragSource="True"
              dd:DragDrop.IsDropTarget="True"
              dd:DragDrop.UseDefaultEffectDataTemplate="True"
+             HorizontalContentAlignment="Stretch"
              ItemsSource="{Binding List1}">
+        <ListBox.Resources>
+            <DataTemplate DataType="{x:Type vms:Y}">
+                <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
+                    <Expander Header="{Binding Name}">
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox SelectedIndex="1">
+                                <ComboBoxItem>Variable 1</ComboBoxItem>
+                                <ComboBoxItem>Variable 2</ComboBoxItem>
+                                <ComboBoxItem>Variable 3</ComboBoxItem>
+                            </ComboBox>
+                            <TextBlock Text="="/>
+                            <ComboBox SelectedIndex="0">
+                                <ComboBoxItem>Item 1</ComboBoxItem>
+                                <ComboBoxItem>Item 2</ComboBoxItem>
+                                <ComboBoxItem>Item 3</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    </Expander>
+                </Border>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:Z}">
+                <Expander Header="{Binding Name}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="300" Height="100" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    </StackPanel>
+                </Expander>
+            </DataTemplate>
+        </ListBox.Resources>
     </ListBox>
 </UserControl>

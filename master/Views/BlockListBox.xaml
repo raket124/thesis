@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:master.Views"
+             xmlns:vms="clr-namespace:master.ViewModels"
              xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -11,16 +12,31 @@
              dd:DragDrop.IsDragSource="True"
              dd:DragDrop.IsDropTarget="False"
              dd:DragDrop.UseDefaultEffectDataTemplate="True"
+             HorizontalContentAlignment="Stretch"
              ItemsSource="{Binding List2}" >
 
-        <!--<ListBox.Resources>
-            <DataTemplate DataType="{x:Type local:BananaViewModel}">
-                <TextBlock Text="{Binding Name}" Foreground="Yellow"/>
+        <ListBox.Resources>
+            <DataTemplate DataType="{x:Type vms:Y}">
+                <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
+                    <StackPanel Margin="5">
+                        <TextBlock Text="{Binding Name}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Requirements: 2x variables"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type local:AppleViewModel}">
-                <TextBlock Text="{Binding Name}" Foreground="Red"/>
+            <DataTemplate DataType="{x:Type vms:Z}">
+                <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
+                    <StackPanel Margin="5">
+                        <TextBlock Text="{Binding Name}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Requirements: 1x text"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
             </DataTemplate>
-        </ListBox.Resources>-->
+        </ListBox.Resources>
 
     </ListBox>
 </UserControl>

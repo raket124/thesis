@@ -10,5 +10,9 @@ namespace master.Models
     [DataContract]
     class BgetRegistry : Bbase
     {
+        public enum CATEGORY { Participant, Asset };
+        protected CATEGORY objectCategory;
+        protected string objectName;
+        protected string objectNameSpace;
     }
 }

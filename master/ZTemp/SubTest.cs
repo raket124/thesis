@@ -18,7 +18,7 @@ namespace master
         public SubTest(string caption)
         {
             this.Caption = caption;
-            this.ButtonTestCommand = new SimpleCommand(o => { this.BindableValue = $"Button clicked at {DateTime.UtcNow.ToLocalTime()}"; });
+            //this.ButtonTestCommand = new SimpleCommand(o => { this.BindableValue = $"Button clicked at {DateTime.UtcNow.ToLocalTime()}"; });
         }
 
         public string Caption { get; set; }
