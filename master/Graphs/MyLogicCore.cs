@@ -2,12 +2,44 @@
 using GraphX.PCL.Logic.Algorithms.EdgeRouting;
 using GraphX.PCL.Logic.Algorithms.LayoutAlgorithms;
 using GraphX.PCL.Logic.Models;
+using Prism.Commands;
 using QuickGraph;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 
 namespace master.Graphs
 {
-    public class MyLogicCore : GXLogicCore<BaseVertex, DataEdge, BidirectionalGraph<BaseVertex, DataEdge>>
+    class MyLogicCore : GXLogicCore<BaseVertex, DataEdge, BidirectionalGraph<BaseVertex, DataEdge>>
     {
+        private MyGraphArea parent;
+
+        public MyLogicCore() : base()
+        {
+            this.parent = null;
+
+            this.CommandLayout = new DelegateCommand<object>((value) => this.SetDefaultLayoutAlgorithm((LayoutAlgorithmTypeEnum)value));
+            this.CommandOverlapRemoval = new DelegateCommand<object>((value) => this.SetDefaultOverlapRemovalAlgorithm((OverlapRemovalAlgorithmTypeEnum)value));
+            this.CommandEdgeRouting = new DelegateCommand<object>((value) => this.SetDefaultEdgeRoutingAlgorithm((EdgeRoutingAlgorithmTypeEnum)value));
+        }
+
+        public MyGraphArea Parent
+        {
+            get { return this.parent; }
+            set { this.parent = value; }
+        }
+
+        private void NotifyParent()
+        {
+            if (this.parent != null)
+                this.parent.GenerateGraph();
+        }
+
+        public ICommand CommandLayout { get; private set; }
+        public ICommand CommandOverlapRemoval { get; private set; }
+        public ICommand CommandEdgeRouting { get; private set; }
+
         public void SetDefaultLayoutAlgorithm(LayoutAlgorithmTypeEnum algorithm)
         {
             this.DefaultLayoutAlgorithm = algorithm;
@@ -26,6 +58,8 @@ namespace master.Graphs
                 this.DefaultLayoutAlgorithmParams = this.AlgorithmFactory.CreateLayoutParameters(LayoutAlgorithmTypeEnum.BoundedFR);
             if (this.DefaultLayoutAlgorithm == LayoutAlgorithmTypeEnum.FR)
                 this.DefaultLayoutAlgorithmParams = this.AlgorithmFactory.CreateLayoutParameters(LayoutAlgorithmTypeEnum.FR);
+
+            this.NotifyParent();
         }
 
         public void SetDefaultOverlapRemovalAlgorithm(OverlapRemovalAlgorithmTypeEnum algorithm)
@@ -36,6 +70,8 @@ namespace master.Graphs
                 this.DefaultOverlapRemovalAlgorithmParams.HorizontalGap = 30;
                 this.DefaultOverlapRemovalAlgorithmParams.VerticalGap = 30;
             }
+
+            this.NotifyParent();
         }
 
         public void SetDefaultEdgeRoutingAlgorithm(EdgeRoutingAlgorithmTypeEnum algorithm)
@@ -52,6 +88,28 @@ namespace master.Graphs
             }
             else
                 this.EdgeCurvingEnabled = false;
+
+            this.NotifyParent();
+        }
+
+        public IList<LayoutAlgorithmTypeEnum> LayoutAlgorithms
+        {
+            get { return this.EnumToList<LayoutAlgorithmTypeEnum>(); }
+        }
+
+        public IList<OverlapRemovalAlgorithmTypeEnum> OverlapRemovalAlgorithms
+        {
+            get { return this.EnumToList<OverlapRemovalAlgorithmTypeEnum>(); }
+        }
+
+        public IList<EdgeRoutingAlgorithmTypeEnum> EdgeRoutingAlgorithms
+        {
+            get { return this.EnumToList<EdgeRoutingAlgorithmTypeEnum>(); }
+        }
+
+        private IList<T> EnumToList<T>()
+        {
+            return Enum.GetValues(typeof(T)).Cast<T>().ToList();
         }
     }
 }

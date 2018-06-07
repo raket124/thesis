@@ -58,6 +58,12 @@ namespace master.Windows
         public void CloseMainWindow()
         {
             this.mainWindow.Close();
+            if (this.WindowExist(this.graphWindow))
+                this.graphWindow.Close();
+            if (this.WindowExist(this.codeWindow))
+                this.codeWindow.Close();
+            if (this.WindowExist(this.testWindow))
+                this.testWindow.Close();
         }
 
         private bool WindowExist(Window window)

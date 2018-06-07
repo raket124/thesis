@@ -9,27 +9,28 @@ using System.Windows.Controls;
 
 namespace master.Graphs
 {
-    public class BaseVertex : VertexBase
+    class BaseVertex : VertexBase
     {
-        private Mvariable root;
-        
-        public BaseVertex()
+        protected Dbase root;
+
+        public BaseVertex(Dbase root)
         {
-            this.Vars = new List<string>();
-            this.root = new Mvariable("A", "B", Mvariable.RELATION.reference);
+            this.root = root;
         }
 
         public string Name
         {
             get { return this.root.Name; }
-            set { this.root.Name = value; }
         }
 
-        public List<string> Vars { get; set; }
-
-        public override string ToString()
+        public string Docs
         {
-            return string.Format("[{0}]\n{1}", this.Name, string.Join("\n", this.Vars));
+            get { return this.root.Docs; }
+        }
+
+        public string ClassName
+        {
+            get { return this.root.ClassName; }
         }
     }
 }

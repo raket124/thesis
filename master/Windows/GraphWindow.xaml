@@ -8,6 +8,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:controls="http://schemas.panthernet.ru/graphx/"
         xmlns:master="clr-namespace:master" x:Class="master.Windows.GraphWindow"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         x:Name="root"
         Title="Data model" Height="500" Width="800">
@@ -21,12 +22,45 @@
         <controls:ZoomControl Grid.Row="0" x:Name="zoomctrl">
             <graphs:MyGraphArea x:Name="graphArea">
                 <graphs:MyGraphArea.Resources>
-                    <DataTemplate DataType="{x:Type graphs:BaseVertex}">
-                        <ListBox>
-                            <TextBlock Text="Hello" />
+                    
+                    <DataTemplate DataType="{x:Type graphs:EnumVertex}">
+                        <StackPanel>
                             <TextBlock Text="{Binding Name}" />
-                        </ListBox>
+                            <ItemsControl ItemsSource="{Binding Components}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
                     </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type graphs:InheritanceVertex}">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="[" />
+                                <TextBlock Text="{Binding ClassName}" />
+                                <TextBlock Text="] " />
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                            <ItemsControl ItemsSource="{Binding Components}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Relation}" />
+                                            <TextBlock Text=" " />
+                                            <TextBlock Text="{Binding Type}" />
+                                            <TextBlock Text="{Binding List}" />
+                                            <TextBlock Text=" " />
+                                            <TextBlock Text="{Binding Name}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                    
                 </graphs:MyGraphArea.Resources>
             </graphs:MyGraphArea>
         </controls:ZoomControl>
@@ -34,28 +68,54 @@
         <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type CheckBox}">
+                    <Setter Property="IsChecked" Value="True" />
+                    <Setter Property="CommandParameter" Value="{Binding IsChecked, RelativeSource={RelativeSource Self}}" />
+                </Style>
+            </StackPanel.Resources>
             <GroupBox Header="Information">
                 <StackPanel>
-                    <CheckBox x:Name="CheckBoxAssets" Content="Assets" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
-                    <CheckBox x:Name="CheckBoxConcepts" Content="Concepts" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
-                    <CheckBox x:Name="CheckBoxEnums" Content="Enums" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
-                    <CheckBox x:Name="CheckBoxEvents" Content="Events" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
-                    <CheckBox x:Name="CheckBoxParticipants" Content="Participants" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
-                    <CheckBox x:Name="CheckBoxTransactions" Content="Transactions" IsChecked="True" Checked="Information_Checked" Unchecked="Information_Checked"/>
+                    <CheckBox Content="Assets" Command="{Binding CommandAsset}"/>
+                    <CheckBox Content="Concepts" Command="{Binding CommandConcept}"/>
+                    <CheckBox Content="Enums" Command="{Binding CommandEnum}"/>
+                    <CheckBox Content="Events" Command="{Binding CommandEvent}"/>
+                    <CheckBox Content="Participants" Command="{Binding CommandParticipant}"/>
+                    <CheckBox Content="Transactions" Command="{Binding CommandTransaction}"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Relations">
                 <StackPanel>
-                    <CheckBox x:Name="CheckBoxReferences" Content="References" IsChecked="True"/>
-                    <CheckBox x:Name="CheckBoxAbstractions" Content="Abstraction" IsChecked="True"/>
+                    <CheckBox Content="References" Command="{Binding CommandReference}"/>
+                    <CheckBox Content="Abstraction" Command="{Binding CommandAbstraction}"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Graph" Width="125">
                 <StackPanel>
-                    <ComboBox x:Name="ComboBoxLayout" />
-                    <ComboBox x:Name="ComboBoxOverlapRemoval" />
-                    <ComboBox x:Name="ComboBoxEdgeRouting" />
-                    <ComboBox />
+                    <ComboBox x:Name="ComboBoxLayout" ItemsSource="{Binding LogicCore.LayoutAlgorithms}" SelectedIndex="7">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding LogicCore.CommandLayout}" 
+                                                       CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <ComboBox x:Name="ComboBoxOverlapRemoval" ItemsSource="{Binding LogicCore.OverlapRemovalAlgorithms}" SelectedIndex="0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding LogicCore.CommandOverlapRemoval}" 
+                                                       CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <ComboBox x:Name="ComboBoxEdgeRouting" ItemsSource="{Binding LogicCore.EdgeRoutingAlgorithms}" SelectedIndex="3">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding LogicCore.CommandEdgeRouting}" 
+                                                       CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Other group">

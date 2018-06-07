@@ -14,5 +14,10 @@ namespace master.Models
         {
 
         }
+
+        protected override string ObjectName()
+        {
+            return "Participant";
+        }
     }
 }

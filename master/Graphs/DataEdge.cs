@@ -1,16 +1,26 @@
 ﻿using GraphX.PCL.Common.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace master.Graphs
 {
-    public class DataEdge : EdgeBase<BaseVertex>
+    class DataEdge : EdgeBase<BaseVertex>
     {
-        public DataEdge(BaseVertex source, BaseVertex target, double weight = 1) : base(source, target, weight)
+        private Brush color;
+
+        public DataEdge(BaseVertex source, BaseVertex target) : base(source, target, 1)
         {
+            this.color = Brushes.Black;
+        }
+
+        public Brush Color
+        {
+            get { return this.color; }
+            set { this.color = value; }
         }
     }
 }

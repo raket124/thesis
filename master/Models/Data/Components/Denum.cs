@@ -27,5 +27,10 @@ namespace master.Models
         {
             this.options.Add(item);
         }
+
+        protected override string ObjectName()
+        {
+            return "Enum";
+        }
     }
 }

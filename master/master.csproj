@@ -103,6 +103,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Files\FileHandler.cs" />
+    <Compile Include="Graphs\Vertex\EnumVertex.cs" />
+    <Compile Include="Graphs\Vertex\IdentityVertex.cs" />
+    <Compile Include="Graphs\Vertex\InheritanceVertex.cs" />
     <Compile Include="Models\Basis.cs" />
     <Compile Include="Models\Contract\Blocks\Blog.cs" />
     <Compile Include="Models\Contract\Blocks\Structure\VariableMessage.cs" />
@@ -135,8 +138,10 @@
     <Compile Include="ViewModels\Contract\VMcontracts.cs" />
     <Compile Include="ViewModels\Contract\VMfunction.cs" />
     <Compile Include="ViewModels\Data\VMmodel.cs" />
+    <Compile Include="ViewModels\Data\VMvariable.cs" />
     <Compile Include="ViewModels\VMdataModel.cs" />
-    <Compile Include="ViewModels\VMmain.cs" />
+    <Compile Include="ViewModels\Windows\VMgraph.cs" />
+    <Compile Include="ViewModels\Windows\VMmain.cs" />
     <Compile Include="ViewModels\VMmenu.cs" />
     <Compile Include="Views\BlockListBox.xaml.cs">
       <DependentUpon>BlockListBox.xaml</DependentUpon>
@@ -153,7 +158,7 @@
     <Compile Include="Windows\WindowManager.cs" />
     <Compile Include="ZTemp\CloneTest.cs" />
     <Compile Include="Graphs\DataEdge.cs" />
-    <Compile Include="Graphs\DataVertex.cs" />
+    <Compile Include="Graphs\Vertex\BaseVertex.cs" />
     <Compile Include="Graphs\MyGraph.cs" />
     <Compile Include="Graphs\MyGraphArea.cs" />
     <Compile Include="Graphs\MyLogicCore.cs" />

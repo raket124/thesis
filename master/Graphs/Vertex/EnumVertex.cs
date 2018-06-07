@@ -7,18 +7,19 @@ using master.Models;
 
 namespace master.Graphs
 {
-    class IdentityVertex : InheritanceVertex
+    class EnumVertex : BaseVertex
     {
-        protected new Didentity root;
+        protected new Denum root;
 
-        public IdentityVertex(Didentity root) : base(root)
+        public EnumVertex(Denum root) : base(root)
         {
             this.root = root;
         }
 
-        public string Id
+        public IList<string> Components
         {
-            get { return this.root.Identifier; }
+            get { return new List<string>(this.root.Options.Select(c => string.Format("  o {0}", c))); }
         }
+
     }
 }
