@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -11,21 +13,21 @@ namespace master.Models
     class Ccontract : Basis
     {
         [DataMember]
-        protected List<Cfunction> functions;
+        protected ObservableCollection<Cfunction> functions;
 
         public Ccontract(string name) : base(name)
         {
-            this.functions = new List<Cfunction>();
+            this.functions = new ObservableCollection<Cfunction>();
         }
 
-        public void AddFunction(Cfunction function)
-        {
-            this.functions.Add(function);
-        }
-
-        public IList<Cfunction> Functions
+        public ObservableCollection<Cfunction> Functions
         {
             get { return this.functions; }
+            set
+            {
+                this.functions = value;
+                this.NotifyPropertyChanged();
+            }
         }
     }
 }

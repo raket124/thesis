@@ -12,9 +12,62 @@
              dd:DragDrop.IsDropTarget="True"
              dd:DragDrop.UseDefaultEffectDataTemplate="True"
              HorizontalContentAlignment="Stretch"
-             ItemsSource="{Binding List1}">
+             x:Name="listBox">
         <ListBox.Resources>
-            <DataTemplate DataType="{x:Type vms:Y}">
+
+            <Style x:Key="BaseBlock" TargetType="{x:Type ContentControl}">
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
+                                <!--<Border.Resources>
+
+                                    <DataTemplate DataType="{x:Type vms:VMfunction}">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock>Docs</TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+
+
+                                    <DataTemplate DataType="{x:Type vms:Y}">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+
+
+                                </Border.Resources>-->
+                                
+                                
+                                
+                                <Expander Header="{Binding Name}">
+                                    <TextBox Text="Hi"/>
+                                </Expander>
+                                
+                                
+                                
+                                
+                                
+                            </Border>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+            <!--<Style x:Key="CollapsableTextblock" TargetType="TextBlock">
+                <Style.Triggers>
+                    <Trigger Property="Text" Value="">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>-->
+
+
+
+
+            <!--<DataTemplate DataType="{x:Type vms:Y}">
                 <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
                     <Expander Header="{Binding Name}">
                         <StackPanel Orientation="Horizontal">
@@ -39,7 +92,79 @@
                         <TextBox TextWrapping="Wrap" AcceptsReturn="True"/>
                     </Expander>
                 </Border>
+            </DataTemplate>-->
+
+            <!--<DataTemplate DataType="{x:Type vms:VMcontract}">
+                <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+            </DataTemplate>-->
+
+            <!--<DataTemplate DataType="{x:Type vms:VMfunction}">
+                <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
+                    <ContentControl Content="{Binding}" Style="{StaticResource TypedValueHelper}"/>
+                </Border>
+            </DataTemplate>-->
+
+
+
+
+            <Style x:Key="FunctionOrBlock" TargetType="{x:Type ContentControl}">
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Expander Header="{Binding Name}" IsExpanded="True">
+                                <TextBlock Text="{Binding Docs}" />
+                            </Expander>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Docs}" Value="">
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <DataTemplate x:Key="A">
+                <ContentControl Content="{Binding}" Style="{StaticResource FunctionOrBlock}"/>
             </DataTemplate>
+
+
+            <!--<DataTemplate DataType="{x:Type vms:VMfunction}">
+                
+            --><!--<ContentControl Content="{Binding}" Style="{StaticResource BaseBlock}"/>--><!--
+            
+                <StackPanel>
+                    <TextBlock Text="{Binding Name}"/>
+                    <TextBlock>Docs</TextBlock>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:Y}">
+                
+            --><!--<ContentControl Content="{Binding}" Style="{StaticResource BaseBlock}"/>--><!--
+            
+                <StackPanel>
+                    <TextBlock Text="{Binding Name}"/>
+                </StackPanel>
+            </DataTemplate>-->
+
+
         </ListBox.Resources>
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <ContentControl Content="{Binding}" Style="{StaticResource BaseBlock}"/>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
     </ListBox>
 </UserControl>

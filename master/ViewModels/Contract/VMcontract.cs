@@ -1,7 +1,9 @@
 ﻿using master.Models;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -9,25 +11,47 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels
 {
-    class VMcontract
+    class VMcontract : MyBindableBase
     {
-        VMcontracts parent;
-        Ccontract root;
-        ReadOnlyCollection<VMfunction> functions;
+        private VMcontracts parent;
+        private Ccontract root;
+        public Ccontract Root
+        {
+            get { return this.root; }
+        }
+        private ObservableCollection<VMfunction> functions;
+        public ObservableCollection<VMfunction> Functions
+        {
+            get { return this.functions; }
+            set
+            {
+                this.functions = value;
+                this.NotifyPropertyChanged();
+            }
+        }
 
         public VMcontract(Ccontract root, VMcontracts parent)
         {
             this.root = root;
             this.parent = parent;
-            this.functions = new ReadOnlyCollection<VMfunction>((
-                             from functions
-                             in this.root.Functions
-                             select new VMfunction(functions, this)).ToList());
+            this.WrapFunctions();
+            this.Root.Functions.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
         }
 
-        public ReadOnlyCollection<VMfunction> Functions
+        private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            get { return this.functions; }
+            this.WrapFunctions();
+        }
+
+        private void WrapFunctions()
+        {
+            this.Functions = new ObservableCollection<VMfunction>((
+                             from functions in this.root.Functions
+                             select new VMfunction(functions, this)));
+
+            this.NotifyPropertyChanged("CountPublic");
+            this.NotifyPropertyChanged("CountControlled");
+            this.NotifyPropertyChanged("CountPrivate");
         }
 
         public int CountPublic
@@ -45,14 +69,6 @@ namespace master.ViewModels
         public string Name
         {
             get { return this.root.Name; }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

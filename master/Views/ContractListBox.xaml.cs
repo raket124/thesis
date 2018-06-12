@@ -24,5 +24,11 @@ namespace master.Views
         {
             InitializeComponent();
         }
+
+        public ListBox ListBox
+        {
+            get { return this.listBox; }
+            set { this.listBox = value; }
+        }
     }
 }

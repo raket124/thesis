@@ -10,22 +10,48 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels
 {
-    class VMfunction
+    class VMfunction : MyBindableBase
     {
-        protected VMcontract parent;
-        protected Cfunction root;
+        private VMcontract parent;
+        public VMcontract Parent
+        {
+            get { return this.parent; }
+        }
+        private Cfunction root;
+        public Cfunction Root
+        {
+            get { return this.root; }
+        }
+        private ObservableCollection<VMBbase> blocks;
+        public ObservableCollection<VMBbase> Blocks
+        {
+            get { return this.blocks; }
+            set
+            {
+                this.blocks = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
 
         public VMfunction(Cfunction root, VMcontract parent)
         {
             this.root = root;
             this.parent = parent;
+
+            this.Blocks = new ObservableCollection<VMBbase>(
+                          from block in this.root.Blocks
+                          select new Y(string.Empty));
         }
 
         public string Name
         {
             get { return this.root.Name; }
         }
-
+        public string Docs
+        {
+            get { return this.root.Docs; }
+        }
         public Cfunction.ACCESSIBILITY Access
         {
             get { return this.root.Access; }

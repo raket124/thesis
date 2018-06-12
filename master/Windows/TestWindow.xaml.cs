@@ -16,14 +16,10 @@ using System.Windows.Shapes;
 
 namespace master.Windows
 {
-    /// <summary>
-    /// Interaction logic for TestView.xaml
-    /// </summary>
     public partial class TestWindow : Window
     {
-        private Dmodel doc;
-
-        readonly VariableTreeViewModel _familyTree;
+        //private Dmodel doc;
+        //readonly VariableTreeViewModel _familyTree;
 
         public TestWindow()
         {

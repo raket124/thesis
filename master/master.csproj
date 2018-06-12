@@ -131,6 +131,7 @@
     <Compile Include="Models\Contract\Components\Structure\CconditionSingle.cs" />
     <Compile Include="Models\Contract\Components\Structure\Cvariable.cs" />
     <Compile Include="Models\DataModel.cs" />
+    <Compile Include="MyBindableBase.cs" />
     <Compile Include="ViewModels\Contract\Blocks\Structure\VMBbase.cs" />
     <Compile Include="ViewModels\Contract\Blocks\Y.cs" />
     <Compile Include="ViewModels\Contract\Blocks\Z.cs" />
@@ -140,7 +141,6 @@
     <Compile Include="ViewModels\Data\VMmodel.cs" />
     <Compile Include="ViewModels\Data\VMvariable.cs" />
     <Compile Include="ViewModels\VMdataModel.cs" />
-    <Compile Include="ViewModels\Windows\VMgraph.cs" />
     <Compile Include="ViewModels\Windows\VMmain.cs" />
     <Compile Include="ViewModels\VMmenu.cs" />
     <Compile Include="Views\BlockListBox.xaml.cs">
@@ -154,6 +154,9 @@
     </Compile>
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StringWindow.xaml.cs">
+      <DependentUpon>StringWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\WindowManager.cs" />
     <Compile Include="ZTemp\CloneTest.cs" />
@@ -226,6 +229,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\StringWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -262,9 +269,12 @@
     <Folder Include="Models\Authorization\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\circle_green.png" />
-    <Resource Include="Views\Images\circle_orange.png" />
-    <Resource Include="Views\Images\circle_red.png" />
+    <Resource Include="Images\circle_green.png" />
+    <Resource Include="Images\circle_orange.png" />
+    <Resource Include="Images\circle_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\question_mark.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

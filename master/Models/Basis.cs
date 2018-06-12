@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    class Basis
+    class Basis : MyBindableBase
     {
         [DataMember]
         protected string docs;
@@ -18,13 +19,21 @@ namespace master.Models
         public string Docs
         {
             get { return this.docs; }
-            set { this.docs = value; }
+            set
+            {
+                this.docs = value;
+                this.NotifyPropertyChanged();
+            }
         }
 
         public string Name
         {
             get { return this.name; }
-            set { this.name = value; }
+            set
+            {
+                this.name = value;
+                this.NotifyPropertyChanged();
+            }
         }
 
         public Basis(string name)

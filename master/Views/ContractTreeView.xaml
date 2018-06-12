@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:master.Views"
              xmlns:vms="clr-namespace:master.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -13,7 +14,20 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TreeView Grid.Row="0" ItemsSource="{Binding Contracts}" >
+        <TreeView x:Name="treeView" Grid.Row="0" ItemsSource="{Binding Contracts}" >
+            <TreeView.InputBindings>
+                <KeyBinding Command="{Binding CommandDelete}" 
+                            CommandParameter="{Binding ElementName=treeView, Path=SelectedItem}"
+                            Key="Delete"/>
+            </TreeView.InputBindings>
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedItemChanged">
+                    <i:InvokeCommandAction Command="{Binding CommandSelectionChanged}" 
+                                           CommandParameter="{Binding ElementName=treeView, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type vms:VMcontract}" ItemsSource="{Binding Functions}">
                     <StackPanel Orientation="Horizontal">
@@ -35,13 +49,13 @@
                                 <Style TargetType="{x:Type Image}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Access}" Value="Public">
-                                            <Setter Property="Source" Value="Images\circle_green.png"/>
+                                            <Setter Property="Source" Value="..\Images\circle_green.png"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding Access}" Value="Controlled">
-                                            <Setter Property="Source" Value="Images\circle_orange.png"/>
+                                            <Setter Property="Source" Value="..\Images\circle_orange.png"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding Access}" Value="Private">
-                                            <Setter Property="Source" Value="Images\circle_red.png"/>
+                                            <Setter Property="Source" Value="..\Images\circle_red.png"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -53,9 +67,13 @@
             </TreeView.Resources>
         </TreeView>
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gray" Background="White" Margin="0,2,0,0">
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Button Content="Add group"/>
-                <Button Content="Add function" />
+            <StackPanel Margin="5">
+                <Button Content="Add group" 
+                        Command="{Binding CommandAddGroup}" 
+                        CommandParameter="{Binding ElementName=treeView, Path=SelectedItem}"/>
+                <Button Content="Add contract" 
+                        Command="{Binding CommandAddContract}" 
+                        CommandParameter="{Binding ElementName=treeView, Path=SelectedItem}"/>
             </StackPanel>
         </Border>
     </Grid>

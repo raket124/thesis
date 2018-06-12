@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -8,24 +10,24 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    class Ccontracts
+    class Ccontracts : MyBindableBase
     {
         [DataMember]
-        protected List<Ccontract> contracts;
+        protected ObservableCollection<Ccontract> contracts;
+        public ObservableCollection<Ccontract> Contracts
+        {
+            get { return this.contracts; }
+            set
+            {
+
+                this.contracts = value;
+                this.NotifyPropertyChanged();
+            }
+        }
 
         public Ccontracts()
         {
-            this.contracts = new List<Ccontract>();
-        }
-
-        public void Add(Ccontract contract)
-        {
-            this.contracts.Add(contract);
-        }
-
-        public IList<Ccontract> Contracts
-        {
-            get { return this.contracts; }
+            this.contracts = new ObservableCollection<Ccontract>();
         }
     }
 }

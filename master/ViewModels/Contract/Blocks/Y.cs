@@ -21,11 +21,6 @@ namespace master.ViewModels
             return new Y(this.y);
         }
 
-        public override string ToString()
-        {
-            return this.y;
-        }
-
         protected override string BlockName()
         {
             return "Assign block";

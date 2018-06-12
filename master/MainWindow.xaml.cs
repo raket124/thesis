@@ -34,10 +34,15 @@ namespace master
             var main = new VMmain(this);
             this.DataContext = main;
             this.Menu.DataContext = main.Menu;
-            contractTreeView.DataContext = main.Model.Contracts;
+            this.contractTreeView.DataContext = main.Model.Contracts;
 
             //test.Content = new VariableConfigStackPanel();
             //test2.Content = new VariableConfigStackPanel();
+
+            main.Model.Contracts.CLB = this.contractListBox;
+
+            //this.contractTreeView.Clb
+
 
             //this.contractListBox.DataContext = main;
             //this.blockListBox.DataContext = main;
