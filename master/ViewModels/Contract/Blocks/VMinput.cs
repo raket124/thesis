@@ -60,7 +60,7 @@ namespace master.ViewModels
 
         public void Add()
         {
-
+            this.Root.Vars.Add(new Bvariable());
         }
 
         public override object Clone()

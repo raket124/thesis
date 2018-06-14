@@ -264,7 +264,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Authorization\" />
-    <Folder Include="Windows\IValueConverters\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Windows\Images\circle_green.png" />

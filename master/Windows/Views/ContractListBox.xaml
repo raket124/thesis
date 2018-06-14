@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:master.Windows.Views"
              xmlns:vms="clr-namespace:master.ViewModels"
              xmlns:dd="urn:gong-wpf-dragdrop"
@@ -82,9 +83,9 @@
                                                 <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
                                             </Button>
                                             <TextBlock Margin="0,0,10,0" Text="Type:"/>
-                                            <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Types}" SelectedIndex="0"/>
+                                            <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Types}" SelectedItem="{Binding Type}" IsEditable="False"/>
                                             <TextBlock Margin="0,0,10,0" Text="Object:"/>
-                                            <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding ObjectNames}" SelectedIndex="0"/>
+                                            <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding ObjectNames}" IsEnabled="{Binding IsObject}" IsEditable="False"/>
                                             <TextBlock Margin="0,0,10,0" Text="Alias:"/>
                                             <TextBox Margin="0,0,10,0" Width="100" Text="{Binding Alias}"/>
                                         </StackPanel>
