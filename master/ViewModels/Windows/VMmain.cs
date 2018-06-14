@@ -35,7 +35,15 @@ namespace master.ViewModels
             this.list2 = new ObservableCollection<VMBbase>
             {
                 new Y("Y"),
-                new Z("Z")
+                new VMinput(new Models.Binput(){
+                    Vars = new ObservableCollection<Models.Bvariable>()
+                    {
+                        new Models.Bvariable(),
+                        new Models.Bvariable(),
+                        new Models.Bvariable(),
+                        new Models.Bvariable(),
+                    }
+                })
             };
         }
 

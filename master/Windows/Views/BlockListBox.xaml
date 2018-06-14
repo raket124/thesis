@@ -26,7 +26,7 @@
                     </StackPanel>
                 </Border>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vms:Z}">
+            <DataTemplate DataType="{x:Type vms:VMinput}">
                 <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
                     <StackPanel Margin="5">
                         <TextBlock Text="{Binding Name}"/>

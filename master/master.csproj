@@ -107,7 +107,9 @@
     <Compile Include="Graphs\Vertex\IdentityVertex.cs" />
     <Compile Include="Graphs\Vertex\InheritanceVertex.cs" />
     <Compile Include="Models\Basis.cs" />
+    <Compile Include="Models\Contract\Blocks\Binput.cs" />
     <Compile Include="Models\Contract\Blocks\Blog.cs" />
+    <Compile Include="Models\Contract\Blocks\Structure\Bvariable.cs" />
     <Compile Include="Models\Contract\Blocks\Structure\VariableMessage.cs" />
     <Compile Include="Models\Contract\CcontractsDemo.cs" />
     <Compile Include="Models\Contract\Blocks\Bassign.cs" />
@@ -132,9 +134,11 @@
     <Compile Include="Models\Contract\Components\Structure\Cvariable.cs" />
     <Compile Include="Models\DataModel.cs" />
     <Compile Include="MyBindableBase.cs" />
+    <Compile Include="Utils\EnumUtil.cs" />
     <Compile Include="ViewModels\Contract\Blocks\Structure\VMBbase.cs" />
+    <Compile Include="ViewModels\Contract\Blocks\Structure\VMinputVariable.cs" />
     <Compile Include="ViewModels\Contract\Blocks\Y.cs" />
-    <Compile Include="ViewModels\Contract\Blocks\Z.cs" />
+    <Compile Include="ViewModels\Contract\Blocks\VMinput.cs" />
     <Compile Include="ViewModels\Contract\VMcontract.cs" />
     <Compile Include="ViewModels\Contract\VMcontracts.cs" />
     <Compile Include="ViewModels\Contract\VMfunction.cs" />
@@ -143,23 +147,22 @@
     <Compile Include="ViewModels\VMdataModel.cs" />
     <Compile Include="ViewModels\Windows\VMmain.cs" />
     <Compile Include="ViewModels\VMmenu.cs" />
-    <Compile Include="Views\BlockListBox.xaml.cs">
+    <Compile Include="Windows\Views\BlockListBox.xaml.cs">
       <DependentUpon>BlockListBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ContractListBox.xaml.cs">
+    <Compile Include="Windows\Views\ContractListBox.xaml.cs">
       <DependentUpon>ContractListBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ContractTreeView.xaml.cs">
+    <Compile Include="Windows\Views\ContractTreeView.xaml.cs">
       <DependentUpon>ContractTreeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuView.xaml.cs">
+    <Compile Include="Windows\Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\StringWindow.xaml.cs">
-      <DependentUpon>StringWindow.xaml</DependentUpon>
+    <Compile Include="Windows\GroupNameWindow.xaml.cs">
+      <DependentUpon>GroupNameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\WindowManager.cs" />
-    <Compile Include="ZTemp\CloneTest.cs" />
     <Compile Include="Graphs\DataEdge.cs" />
     <Compile Include="Graphs\Vertex\BaseVertex.cs" />
     <Compile Include="Graphs\MyGraph.cs" />
@@ -177,22 +180,16 @@
     <Compile Include="Models\Data\DmodelDemo.cs" />
     <Compile Include="Models\Data\Dmodel.cs" />
     <Compile Include="Models\Data\Mvariable.cs" />
-    <Compile Include="ZTemp\SubTest.cs" />
-    <Compile Include="ZTemp\Test.cs" />
     <Compile Include="Windows\CodeWindow.xaml.cs">
       <DependentUpon>CodeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ZTemp\Controls\TransactionStackPanel.cs" />
-    <Compile Include="ZTemp\Controls\VariableStackPanel.cs" />
+    <Compile Include="ZTemp\VariableStackPanel.cs" />
     <Compile Include="Windows\GraphWindow.xaml.cs">
       <DependentUpon>GraphWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ZTemp\Temp\Variable.cs" />
-    <Compile Include="ZTemp\Temp\VariableTreeViewModel.cs" />
-    <Compile Include="ZTemp\Temp\VariableViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -205,19 +202,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\BlockListBox.xaml">
+    <Page Include="Windows\Views\BlockListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ContractListBox.xaml">
+    <Page Include="Windows\Views\ContractListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ContractTreeView.xaml">
+    <Page Include="Windows\Views\ContractTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MenuView.xaml">
+    <Page Include="Windows\Views\MenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,7 +226,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\StringWindow.xaml">
+    <Page Include="Windows\GroupNameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -267,6 +264,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Authorization\" />
+    <Folder Include="Windows\IValueConverters\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\circle_green.png" />
@@ -275,6 +273,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\question_mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cross_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add_green.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -17,7 +17,7 @@
                     <TextBlock>*/</TextBlock>
                     <TextBlock></TextBlock>
                     <TextBlock>function createVehicles(tx) {</TextBlock>
-	                <TextBlock Margin="25,0,0,0">const reg = await getAssetRegistry('org.digitalcmr.CreateVehicles').catch(function (error) {</TextBlock>
+	                <TextBlock Margin="25,0,0,0">const reg = await getAssetRegistry('org.digitalcmr.Vehicles').catch(function (error) {</TextBlock>
 		            <TextBlock Margin="50,0,0,0">throw new Error('[CreateVehicles] An error occurred: ' + error);</TextBlock>
                     <TextBlock Margin="25,0,0,0">});</TextBlock>
                     <TextBlock Margin="25,0,0,0">await reg.addAll(tx.vehicles).catch(function (error) {</TextBlock>

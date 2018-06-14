@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace master.Windows
 {
-    public partial class StringWindow : Window
+    public partial class GroupNameWindow : Window
     {
         public DelegateCommand<object> CommandOk { get; private set; }
         public DelegateCommand CommandTextChanged { get; private set; }
@@ -33,9 +33,9 @@ namespace master.Windows
         }
         private List<string> existingNames;
 
-        public StringWindow(string question) : this(question, new List<string>()) { }
+        public GroupNameWindow(string question) : this(question, new List<string>()) { }
 
-        public StringWindow(string question, List<string> existingNames)
+        public GroupNameWindow(string question, List<string> existingNames)
         {
             InitializeComponent();
             this.DataContext = this;

@@ -2,6 +2,7 @@
 using GraphX.PCL.Logic.Algorithms.EdgeRouting;
 using GraphX.PCL.Logic.Algorithms.LayoutAlgorithms;
 using GraphX.PCL.Logic.Models;
+using master.Utils;
 using Prism.Commands;
 using QuickGraph;
 using System;
@@ -94,22 +95,17 @@ namespace master.Graphs
 
         public IList<LayoutAlgorithmTypeEnum> LayoutAlgorithms
         {
-            get { return this.EnumToList<LayoutAlgorithmTypeEnum>(); }
+            get { return EnumUtil.EnumToList<LayoutAlgorithmTypeEnum>(); }
         }
 
         public IList<OverlapRemovalAlgorithmTypeEnum> OverlapRemovalAlgorithms
         {
-            get { return this.EnumToList<OverlapRemovalAlgorithmTypeEnum>(); }
+            get { return EnumUtil.EnumToList<OverlapRemovalAlgorithmTypeEnum>(); }
         }
 
         public IList<EdgeRoutingAlgorithmTypeEnum> EdgeRoutingAlgorithms
         {
-            get { return this.EnumToList<EdgeRoutingAlgorithmTypeEnum>(); }
-        }
-
-        private IList<T> EnumToList<T>()
-        {
-            return Enum.GetValues(typeof(T)).Cast<T>().ToList();
+            get { return EnumUtil.EnumToList<EdgeRoutingAlgorithmTypeEnum>(); }
         }
     }
 }

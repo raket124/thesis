@@ -7,9 +7,14 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels
 {
-    abstract class VMBbase: ICloneable
+    abstract class VMBbase: MyBindableBase, ICloneable
     {
         protected Bbase root;
+        public Bbase Root
+        {
+            get { return this.root; }
+            set { this.root = value; }
+        }
 
         public VMBbase(Bbase root)
         {

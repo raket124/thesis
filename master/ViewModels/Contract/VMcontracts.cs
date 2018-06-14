@@ -66,18 +66,16 @@ namespace master.ViewModels
 
         private void AddGroup()
         {
-            var nameWindow = new StringWindow("Group name:", new List<string>());
+            var nameWindow = new GroupNameWindow("Group name:", new List<string>());
             if(nameWindow.ShowDialog() == true)
                 this.Root.Contracts.Add(new Ccontract(nameWindow.Answer));
         }
 
         private void AddContract(object input)
         {
-            var nameWindow = new StringWindow("Contract name:", new List<string>());
+            var nameWindow = new GroupNameWindow("Contract name:", new List<string>());
             if (nameWindow.ShowDialog() == true)
                 (input as VMcontract).Root.Functions.Add(new Cfunction(nameWindow.Answer, Cfunction.ACCESSIBILITY.Controlled));
-
-            //(input as VMcontract).AddFunction(new Cfunction(nameWindow.Answer, Cfunction.ACCESSIBILITY.Controlled));
         }
 
         private bool CanAddContract(object input)
