@@ -267,18 +267,18 @@
     <Folder Include="Windows\IValueConverters\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\circle_green.png" />
-    <Resource Include="Images\circle_orange.png" />
-    <Resource Include="Images\circle_red.png" />
+    <Resource Include="Windows\Images\circle_green.png" />
+    <Resource Include="Windows\Images\circle_orange.png" />
+    <Resource Include="Windows\Images\circle_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\question_mark.png" />
+    <Resource Include="Windows\Images\question_mark.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\cross_red.png" />
+    <Resource Include="Windows\Images\cross_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\add_green.png" />
+    <Resource Include="Windows\Images\add_green.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

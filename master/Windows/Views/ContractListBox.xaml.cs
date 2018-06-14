@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace master.Views
+namespace master.Windows.Views
 {
     /// <summary>
     /// Interaction logic for ContractListBox.xaml

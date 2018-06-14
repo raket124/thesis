@@ -1,5 +1,5 @@
 ﻿using master.Models;
-using master.Views;
+using master.Windows.Views;
 using master.Windows;
 using Prism.Commands;
 using Prism.Mvvm;
