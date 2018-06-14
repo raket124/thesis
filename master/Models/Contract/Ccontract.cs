@@ -14,12 +14,6 @@ namespace master.Models
     {
         [DataMember]
         protected ObservableCollection<Cfunction> functions;
-
-        public Ccontract(string name) : base(name)
-        {
-            this.functions = new ObservableCollection<Cfunction>();
-        }
-
         public ObservableCollection<Cfunction> Functions
         {
             get { return this.functions; }
@@ -29,5 +23,12 @@ namespace master.Models
                 this.NotifyPropertyChanged();
             }
         }
+
+        public Ccontract(string name) : base(name)
+        {
+            this.functions = new ObservableCollection<Cfunction>();
+        }
+
+
     }
 }

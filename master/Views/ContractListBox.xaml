@@ -8,6 +8,38 @@
              xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="MyBorder" TargetType="Border">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+
+        <Style x:Key="Function" TargetType="{x:Type ContentControl}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Expander Header="{Binding Name}">
+                            <TextBlock Text="{Binding Docs}" Margin="25,5,5,5"/>
+                        </Expander>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Docs}" Value="">
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" Margin="25,3,0,3"/>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
     <ListBox dd:DragDrop.IsDragSource="True"
              dd:DragDrop.IsDropTarget="True"
              dd:DragDrop.UseDefaultEffectDataTemplate="True"
@@ -15,11 +47,13 @@
              x:Name="listBox">
         <ListBox.Resources>
 
+            
+            
             <Style x:Key="BaseBlock" TargetType="{x:Type ContentControl}">
                 <Setter Property="ContentTemplate">
                     <Setter.Value>
                         <DataTemplate>
-                            <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
+                            <Border Style="{StaticResource MyBorder}">
                                 <!--<Border.Resources>
 
                                     <DataTemplate DataType="{x:Type vms:VMfunction}">
@@ -109,34 +143,20 @@
                 </Border>
             </DataTemplate>-->
 
+            <DataTemplate DataType="{x:Type vms:Y}">
+                <Border Style="{StaticResource MyBorder}">
+                    <Expander Header="{Binding Name}">
 
+                    </Expander>
+                </Border>
+            </DataTemplate>
 
-
-            <Style x:Key="FunctionOrBlock" TargetType="{x:Type ContentControl}">
-                <Setter Property="ContentTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <Expander Header="{Binding Name}" IsExpanded="True">
-                                <TextBlock Text="{Binding Docs}" />
-                            </Expander>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Docs}" Value="">
-                        <Setter Property="ContentTemplate">
-                            <Setter.Value>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-
-            <DataTemplate x:Key="A">
-                <ContentControl Content="{Binding}" Style="{StaticResource FunctionOrBlock}"/>
+            <DataTemplate DataType="{x:Type vms:VMfunction}">
+                <Border Style="{StaticResource MyBorder}">
+                    <Expander Header="{Binding Name}">
+                        <TextBlock Text="{Binding Docs}" Margin="25,5,5,5"/>
+                    </Expander>
+                </Border>
             </DataTemplate>
 
 
@@ -161,10 +181,10 @@
 
 
         </ListBox.Resources>
-        <ListBox.ItemTemplate>
+        <!--<ListBox.ItemTemplate>
             <DataTemplate>
                 <ContentControl Content="{Binding}" Style="{StaticResource BaseBlock}"/>
             </DataTemplate>
-        </ListBox.ItemTemplate>
+        </ListBox.ItemTemplate>-->
     </ListBox>
 </UserControl>

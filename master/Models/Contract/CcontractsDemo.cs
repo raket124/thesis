@@ -21,9 +21,9 @@ namespace master.Models
         {
             var output = new Ccontract("vehicleRules") { };
             var createVehicles = new Cfunction("createVehicles", Cfunction.ACCESSIBILITY.Public) { Docs = "Hello\nThis is a test\nLove T"};
-            createVehicles.Add(new Berror());
-            createVehicles.Add(new Bassign());
-            createVehicles.Add(new Berror());
+            createVehicles.Blocks.Add(new Berror());
+            createVehicles.Blocks.Add(new Bassign());
+            createVehicles.Blocks.Add(new Berror());
             output.Functions.Add(createVehicles);
             output.Functions.Add(new Cfunction("updateRegistrationCountry", Cfunction.ACCESSIBILITY.Public));
             output.Functions.Add(new Cfunction("updateEcmrListInVin", Cfunction.ACCESSIBILITY.Private));

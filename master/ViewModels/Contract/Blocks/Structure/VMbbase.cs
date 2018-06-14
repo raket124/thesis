@@ -18,7 +18,7 @@ namespace master.ViewModels
 
         public string Documentation
         {
-            get { return this.root.Documentation; }
+            get { return this.root.Docs; }
         }
 
         public string Name

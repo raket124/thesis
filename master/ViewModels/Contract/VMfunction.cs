@@ -16,6 +16,7 @@ namespace master.ViewModels
         public VMcontract Parent
         {
             get { return this.parent; }
+            set { this.parent = value; }
         }
         private Cfunction root;
         public Cfunction Root
@@ -50,7 +51,10 @@ namespace master.ViewModels
         }
         public string Docs
         {
-            get { return this.root.Docs; }
+            get
+            {
+                return this.root.Docs == string.Empty ? "No documentation is available." : this.root.Docs;
+            }
         }
         public Cfunction.ACCESSIBILITY Access
         {

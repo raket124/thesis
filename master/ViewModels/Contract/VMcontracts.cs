@@ -76,6 +76,8 @@ namespace master.ViewModels
             var nameWindow = new StringWindow("Contract name:", new List<string>());
             if (nameWindow.ShowDialog() == true)
                 (input as VMcontract).Root.Functions.Add(new Cfunction(nameWindow.Answer, Cfunction.ACCESSIBILITY.Controlled));
+
+            //(input as VMcontract).AddFunction(new Cfunction(nameWindow.Answer, Cfunction.ACCESSIBILITY.Controlled));
         }
 
         private bool CanAddContract(object input)
@@ -88,11 +90,11 @@ namespace master.ViewModels
             if (input.GetType() == typeof(VMfunction))
             {
                 var function = input as VMfunction;
-                function.Parent.Functions.Remove(function);
+                function.Parent.Root.Functions.Remove(function.Root);
             }
 
             if (input.GetType() == typeof(VMcontract))
-                this.root.Contracts.Remove((input as VMcontract).Root);
+                this.Root.Contracts.Remove((input as VMcontract).Root);
         }
 
         private bool CanRemove(object input)

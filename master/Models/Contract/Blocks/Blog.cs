@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models
 {
     [DataContract]
-    class Blog
+    class Blog : Bbase
     {
     }
 }

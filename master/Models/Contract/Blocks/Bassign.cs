@@ -10,7 +10,9 @@ namespace master.Models
     [DataContract]
     class Bassign : Bbase
     {
+        [DataMember]
         protected string variable;
+        [DataMember]
         protected string value;
     }
 }

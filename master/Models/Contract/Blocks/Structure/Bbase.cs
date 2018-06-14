@@ -11,12 +11,11 @@ namespace master.Models
     abstract class Bbase
     {
         [DataMember]
-        protected string documentation;
-
-        public string Documentation
+        protected string docs;
+        public string Docs
         {
-            get { return this.documentation; }
-            set { this.documentation = value; }
+            get { return this.docs; }
+            set { this.docs = value; }
         }
 
         //protected List<string> lines;
