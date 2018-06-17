@@ -1,4 +1,5 @@
 ﻿using master.Models;
+using master.ViewModels;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -8,16 +9,26 @@ namespace master.Files
 {
     class FileHandler
     {
+        //TODO replace parent and model code to a more solid solution
+
+        protected VMmain parent;
+
         protected readonly string defaultFileName = "bcd model";
         protected OpenFileDialog openFileDialog;
         protected SaveFileDialog saveFileDialog;
-        protected DataModel model;
+        public MasterModel Model
+        {
+            get { return this.parent.Model.Root; }
+            set { this.parent.Model = new VMmasterModel(value); }
+        }
         protected string currentFile;
 
-        protected readonly DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DataModel));
+        protected readonly DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(MasterModel));
 
-        public FileHandler()
+        public FileHandler(VMmain parent)
         {
+            this.parent = parent;
+
             this.openFileDialog = new OpenFileDialog()
             {
                 Filter = "Blockchain definition (*.bcd)|*.bcd"
@@ -35,13 +46,17 @@ namespace master.Files
         public void New()
         {
             this.currentFile = string.Empty;
-            this.model = new DataModel();
+            this.Model = new MasterModel();
         }
 
         public void Demo()
         {
             this.currentFile = string.Empty;
-            this.model.SetupDemo();
+
+            //TODO replace with more decent code
+            var temp = new MasterModel();
+            temp.SetupDemo();
+            this.Model = temp;
         }
 
         public void Open()
@@ -56,7 +71,7 @@ namespace master.Files
         private void Open(string file)
         {
             //TODO try catch invalid files
-            this.model = this.JsonToObject(File.ReadAllText(file));
+            this.Model = this.JsonToObject(File.ReadAllText(file));
         }
 
         public void Save()
@@ -78,15 +93,10 @@ namespace master.Files
 
         private void Save(string file)
         {
-            File.WriteAllText(file, this.ObjectToJson(this.model));
+            File.WriteAllText(file, this.ObjectToJson(this.Model));
         }
 
-        public DataModel Model
-        {
-            get { return this.model; }
-        }
-
-        private string ObjectToJson(DataModel input)
+        private string ObjectToJson(MasterModel input)
         {
             var memory = new MemoryStream();
             serializer.WriteObject(memory, input);
@@ -95,10 +105,10 @@ namespace master.Files
             return Encoding.UTF8.GetString(json, 0, json.Length);
         }
 
-        private DataModel JsonToObject(string input)
+        private MasterModel JsonToObject(string input)
         {
             var memory = new MemoryStream(Encoding.UTF8.GetBytes(input));
-            var output = serializer.ReadObject(memory) as DataModel;
+            var output = serializer.ReadObject(memory) as MasterModel;
             memory.Close();
             return output;
         }

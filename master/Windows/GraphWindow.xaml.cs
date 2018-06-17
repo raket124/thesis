@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using master.Models;
 using master.Graphs;
 using GraphX.PCL.Common.Enums;
+using master.Models.Data;
 
 namespace master.Windows
 {
@@ -23,7 +24,7 @@ namespace master.Windows
         {
             InitializeComponent();
             this.graphArea.ZoomControl = this.zoomctrl;
-            this.graphArea.Model = DmodelDemo.KoopmanCTO();
+            this.graphArea.Model = DataModelDemo.KoopmanCTO();
             this.DataContext = this.graphArea;
         }
     }

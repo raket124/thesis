@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using master.Models;
+using master.Models.Data.Component;
 
 namespace master.Graphs
 {
     class IdentityVertex : InheritanceVertex
     {
-        protected new Didentity root;
+        protected new Identity root;
 
-        public IdentityVertex(Didentity root) : base(root)
+        public IdentityVertex(Identity root) : base(root)
         {
             this.root = root;
         }

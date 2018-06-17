@@ -106,47 +106,47 @@
     <Compile Include="Graphs\Vertex\EnumVertex.cs" />
     <Compile Include="Graphs\Vertex\IdentityVertex.cs" />
     <Compile Include="Graphs\Vertex\InheritanceVertex.cs" />
-    <Compile Include="Models\Basis.cs" />
-    <Compile Include="Models\Contract\Blocks\Binput.cs" />
-    <Compile Include="Models\Contract\Blocks\Blog.cs" />
-    <Compile Include="Models\Contract\Blocks\Structure\Bvariable.cs" />
-    <Compile Include="Models\Contract\Blocks\Structure\VariableMessage.cs" />
-    <Compile Include="Models\Contract\CcontractsDemo.cs" />
-    <Compile Include="Models\Contract\Blocks\Bassign.cs" />
-    <Compile Include="Models\Contract\Blocks\BgetRegistry.cs" />
-    <Compile Include="Models\Contract\Blocks\BuseRegistry.cs" />
-    <Compile Include="Models\Contract\Blocks\Structure\Bbase.cs" />
-    <Compile Include="Models\Contract\Ccontract.cs" />
-    <Compile Include="Models\Contract\Ccontracts.cs" />
-    <Compile Include="Models\Contract\Cfunction.cs" />
-    <Compile Include="Models\Contract\Components\BlockAssign.cs" />
-    <Compile Include="Models\Contract\Components\BlockAssignSimple.cs" />
+    <Compile Include="Basis\ObjectBase.cs" />
+    <Compile Include="Models\Authorization\Base.cs" />
+    <Compile Include="Models\Contract\Block\Base.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyInput.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyLog.cs" />
+    <Compile Include="Models\Contract\Block\Conditioning\Condition.cs" />
+    <Compile Include="Models\Contract\Block\Conditioning\ConditionBase.cs" />
+    <Compile Include="Models\Contract\Block\Conditioning\ConditionGroup.cs" />
+    <Compile Include="Models\Contract\Block\Variable.cs" />
+    <Compile Include="Models\Contract\ContractCollectionDemo.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyAssign.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyGetRegistry.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyUseRegistry.cs" />
+    <Compile Include="Models\Contract\ContractModel.cs" />
+    <Compile Include="Models\Contract\ContractCollection.cs" />
+    <Compile Include="Models\Contract\Function.cs" />
     <Compile Include="Models\Contract\Components\BlockBase.cs" />
     <Compile Include="Models\Contract\Components\BlockChainObject.cs" />
-    <Compile Include="Models\Contract\Components\BlockContent.cs" />
-    <Compile Include="Models\Contract\Components\BlockEmpty.cs" />
-    <Compile Include="Models\Contract\Blocks\Berror.cs" />
-    <Compile Include="Models\Contract\Components\BlockIfElse.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyError.cs" />
     <Compile Include="Models\Contract\Components\CodeBlock.cs" />
-    <Compile Include="Models\Contract\Components\Structure\Ccondition.cs" />
-    <Compile Include="Models\Contract\Components\Structure\CconditionGroup.cs" />
-    <Compile Include="Models\Contract\Components\Structure\CconditionSingle.cs" />
-    <Compile Include="Models\Contract\Components\Structure\Cvariable.cs" />
-    <Compile Include="Models\DataModel.cs" />
-    <Compile Include="MyBindableBase.cs" />
+    <Compile Include="Models\Contract\Block\Conditioning\Old\Ccondition.cs" />
+    <Compile Include="Models\Contract\Block\Conditioning\Old\CconditionGroup.cs" />
+    <Compile Include="Models\Contract\Block\Conditioning\Old\CconditionSingle.cs" />
+    <Compile Include="Models\Contract\Block\Conditioning\Old\Cvariable.cs" />
+    <Compile Include="Models\Data\Component\Base.cs" />
+    <Compile Include="Models\MasterModel.cs" />
+    <Compile Include="Basis\MyBindableBase.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
-    <Compile Include="ViewModels\Contract\Blocks\Structure\VMBbase.cs" />
-    <Compile Include="ViewModels\Contract\Blocks\Structure\VMinputVariable.cs" />
-    <Compile Include="ViewModels\Contract\Blocks\Y.cs" />
-    <Compile Include="ViewModels\Contract\Blocks\VMinput.cs" />
-    <Compile Include="ViewModels\Contract\VMcontract.cs" />
-    <Compile Include="ViewModels\Contract\VMcontracts.cs" />
+    <Compile Include="ViewModels\Contract\Block\VMbase.cs" />
+    <Compile Include="ViewModels\Contract\Block\VMvariable.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMlog.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMassign.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMinput.cs" />
+    <Compile Include="ViewModels\Contract\VMcontractModel.cs" />
+    <Compile Include="ViewModels\Contract\VMcontractCollection.cs" />
     <Compile Include="ViewModels\Contract\VMfunction.cs" />
-    <Compile Include="ViewModels\Data\VMmodel.cs" />
+    <Compile Include="ViewModels\Data\VMdataModel.cs" />
     <Compile Include="ViewModels\Data\VMvariable.cs" />
-    <Compile Include="ViewModels\VMdataModel.cs" />
-    <Compile Include="ViewModels\Windows\VMmain.cs" />
-    <Compile Include="ViewModels\VMmenu.cs" />
+    <Compile Include="ViewModels\VMmasterModel.cs" />
+    <Compile Include="ViewModels\VMmain.cs" />
+    <Compile Include="ViewModels\Views\VMmenu.cs" />
     <Compile Include="Windows\Views\BlockListBox.xaml.cs">
       <DependentUpon>BlockListBox.xaml</DependentUpon>
     </Compile>
@@ -168,22 +168,21 @@
     <Compile Include="Graphs\MyGraph.cs" />
     <Compile Include="Graphs\MyGraphArea.cs" />
     <Compile Include="Graphs\MyLogicCore.cs" />
-    <Compile Include="Models\Data\Components\Structure\Didentity.cs" />
-    <Compile Include="Models\Data\Components\Dasset.cs" />
-    <Compile Include="Models\Data\Components\Structure\Dbase.cs" />
-    <Compile Include="Models\Data\Components\Dconcept.cs" />
-    <Compile Include="Models\Data\Components\Denum.cs" />
-    <Compile Include="Models\Data\Components\Devent.cs" />
-    <Compile Include="Models\Data\Components\Structure\Dinheritance.cs" />
-    <Compile Include="Models\Data\Components\Dparticipant.cs" />
-    <Compile Include="Models\Data\Components\Dtransaction.cs" />
-    <Compile Include="Models\Data\DmodelDemo.cs" />
-    <Compile Include="Models\Data\Dmodel.cs" />
-    <Compile Include="Models\Data\Mvariable.cs" />
+    <Compile Include="Models\Data\Component\Identity.cs" />
+    <Compile Include="Models\Data\Component\Components\MyAsset.cs" />
+    <Compile Include="Models\Data\Component\Components\MyConcept.cs" />
+    <Compile Include="Models\Data\Component\Components\MyEnum.cs" />
+    <Compile Include="Models\Data\Component\Components\MyEvent.cs" />
+    <Compile Include="Models\Data\Component\Inheritance.cs" />
+    <Compile Include="Models\Data\Component\Components\MyParticipant.cs" />
+    <Compile Include="Models\Data\Component\Components\MyTransaction.cs" />
+    <Compile Include="Models\Data\DataModelDemo.cs" />
+    <Compile Include="Models\Data\DataModel.cs" />
+    <Compile Include="Models\Data\Variable.cs" />
     <Compile Include="Windows\CodeWindow.xaml.cs">
       <DependentUpon>CodeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ZTemp\VariableStackPanel.cs" />
+    <Compile Include="VariableStackPanel.cs" />
     <Compile Include="Windows\GraphWindow.xaml.cs">
       <DependentUpon>GraphWindow.xaml</DependentUpon>
     </Compile>
@@ -263,7 +262,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Authorization\" />
+    <Folder Include="ViewModels\Authorization\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Windows\Images\circle_green.png" />

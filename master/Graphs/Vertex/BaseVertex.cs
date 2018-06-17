@@ -1,5 +1,6 @@
 ﻿using GraphX.PCL.Common.Models;
 using master.Models;
+using master.Models.Data.Component;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace master.Graphs
 {
     class BaseVertex : VertexBase
     {
-        protected Dbase root;
+        protected Base root;
 
-        public BaseVertex(Dbase root)
+        public BaseVertex(Base root)
         {
             this.root = root;
         }

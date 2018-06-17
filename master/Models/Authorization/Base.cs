@@ -1,11 +1,14 @@
-﻿using QuickGraph;
+﻿using master.Basis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace master.Graphs
+namespace master.Models.Authorization
 {
-    class MyGraph : BidirectionalGraph<BaseVertex, DataEdge> { }
+    abstract class Base : ObjectBase
+    {
+
+    }
 }

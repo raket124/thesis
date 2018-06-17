@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:master.Windows.Views"
-             xmlns:vms="clr-namespace:master.ViewModels"
+             xmlns:vm_contract="clr-namespace:master.ViewModels.Contract"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TreeView x:Name="treeView" Grid.Row="0" ItemsSource="{Binding Contracts}" >
+        <TreeView x:Name="treeView" Grid.Row="0" ItemsSource="{Binding Contracts}">
             <TreeView.InputBindings>
                 <KeyBinding Command="{Binding CommandDelete}" 
                             CommandParameter="{Binding ElementName=treeView, Path=SelectedItem}"
@@ -29,7 +29,7 @@
             </i:Interaction.Triggers>
 
             <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type vms:VMcontract}" ItemsSource="{Binding Functions}">
+                <HierarchicalDataTemplate DataType="{x:Type vm_contract:VMcontractModel}" ItemsSource="{Binding Functions}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="[" />
                         <TextBlock Text="{Binding CountPublic}" Foreground="Green" />
@@ -42,7 +42,7 @@
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
-                <HierarchicalDataTemplate DataType="{x:Type vms:VMfunction}">
+                <HierarchicalDataTemplate DataType="{x:Type vm_contract:VMfunction}">
                     <StackPanel Orientation="Horizontal">
                         <Image ToolTip="{Binding Name}">
                             <Image.Style>

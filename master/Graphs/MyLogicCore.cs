@@ -14,21 +14,21 @@ namespace master.Graphs
 {
     class MyLogicCore : GXLogicCore<BaseVertex, DataEdge, BidirectionalGraph<BaseVertex, DataEdge>>
     {
-        private MyGraphArea parent;
+        protected MyGraphArea parent;
 
-        public MyLogicCore() : base()
+        public ICommand CommandLayout { get; private set; }
+        public ICommand CommandOverlapRemoval { get; private set; }
+        public ICommand CommandEdgeRouting { get; private set; }
+
+        public MyLogicCore() : this(null) { }
+
+        public MyLogicCore(MyGraphArea parent) : base()
         {
-            this.parent = null;
+            this.parent = parent;
 
             this.CommandLayout = new DelegateCommand<object>((value) => this.SetDefaultLayoutAlgorithm((LayoutAlgorithmTypeEnum)value));
             this.CommandOverlapRemoval = new DelegateCommand<object>((value) => this.SetDefaultOverlapRemovalAlgorithm((OverlapRemovalAlgorithmTypeEnum)value));
             this.CommandEdgeRouting = new DelegateCommand<object>((value) => this.SetDefaultEdgeRoutingAlgorithm((EdgeRoutingAlgorithmTypeEnum)value));
-        }
-
-        public MyGraphArea Parent
-        {
-            get { return this.parent; }
-            set { this.parent = value; }
         }
 
         private void NotifyParent()
@@ -36,10 +36,6 @@ namespace master.Graphs
             if (this.parent != null)
                 this.parent.GenerateGraph();
         }
-
-        public ICommand CommandLayout { get; private set; }
-        public ICommand CommandOverlapRemoval { get; private set; }
-        public ICommand CommandEdgeRouting { get; private set; }
 
         public void SetDefaultLayoutAlgorithm(LayoutAlgorithmTypeEnum algorithm)
         {

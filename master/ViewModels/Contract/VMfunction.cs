@@ -1,4 +1,10 @@
-﻿using master.Models;
+﻿using master.Basis;
+using master.Models;
+using master.Models.Contract;
+using master.Models.Contract.Block;
+using master.Models.Contract.Block.Blocks;
+using master.ViewModels.Contract.Block;
+using master.ViewModels.Contract.Block.Blocks;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -8,23 +14,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace master.ViewModels
+namespace master.ViewModels.Contract
 {
     class VMfunction : MyBindableBase
     {
-        private VMcontract parent;
-        public VMcontract Parent
-        {
-            get { return this.parent; }
-            set { this.parent = value; }
-        }
-        private Cfunction root;
-        public Cfunction Root
+        private Function root;
+        public Function Root
         {
             get { return this.root; }
         }
-        private ObservableCollection<VMBbase> blocks;
-        public ObservableCollection<VMBbase> Blocks
+        private VMcontractModel parent;
+        public VMcontractModel Parent
+        {
+            get { return this.parent; }
+        }
+        private ObservableCollection<VMbase> blocks;
+        public ObservableCollection<VMbase> Blocks
         {
             get { return this.blocks; }
             set
@@ -34,15 +39,27 @@ namespace master.ViewModels
             }
         }
 
-
-        public VMfunction(Cfunction root, VMcontract parent)
+        public VMfunction(Function root, VMcontractModel parent)
         {
             this.root = root;
             this.parent = parent;
+            this.WrapBlocks();
+        }
 
-            this.Blocks = new ObservableCollection<VMBbase>(
-                          from block in this.root.Blocks
-                          select new Y(string.Empty));
+        private void WrapBlocks()
+        {
+            var output = new ObservableCollection<VMbase>();
+            foreach(Base block in this.root.Blocks)
+            {
+                if (block.GetType() == typeof(MyInput))
+                    output.Add(new VMinput(block as MyInput));
+                if (block.GetType() == typeof(MyLog))
+                    output.Add(new VMlog(block as MyLog));
+                if (block.GetType() == typeof(MyAssign))
+                    output.Add(new VMassign(block as MyAssign));
+                //Add new blocks here
+            }
+            this.Blocks = output;
         }
 
         public string Name
@@ -51,12 +68,9 @@ namespace master.ViewModels
         }
         public string Docs
         {
-            get
-            {
-                return this.root.Docs == string.Empty ? "No documentation is available." : this.root.Docs;
-            }
+            get { return this.root.Docs == string.Empty ? "No documentation is available." : this.root.Docs; }
         }
-        public Cfunction.ACCESSIBILITY Access
+        public Function.ACCESSIBILITY Access
         {
             get { return this.root.Access; }
         }

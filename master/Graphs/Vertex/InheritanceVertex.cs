@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using master.Models;
-using master.ViewModels;
+using master.ViewModels.Data;
+using master.Models.Data.Component;
 
 namespace master.Graphs
 {
     class InheritanceVertex : BaseVertex
     {
-        protected new Dinheritance root;
+        protected new Inheritance root;
 
-        public InheritanceVertex(Dinheritance root) : base(root)
+        public InheritanceVertex(Inheritance root) : base(root)
         {
             this.root = root;
         }
