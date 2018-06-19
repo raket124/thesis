@@ -15,14 +15,14 @@ namespace master.Models.Contract.Block.Blocks
         [DataMember]
         protected string value;
 
-        public MyAssign() : base()
+        public MyAssign(Function parent) : base(parent)
         {
 
         }
 
         public override object Clone()
         {
-            return new MyAssign()
+            return new MyAssign(this.parent)
             {
                 Name = this.Name,
                 Docs = this.Docs,

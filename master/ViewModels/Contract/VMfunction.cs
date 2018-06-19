@@ -1,4 +1,5 @@
-﻿using master.Basis;
+﻿using GongSolutions.Wpf.DragDrop;
+using master.Basis;
 using master.Models;
 using master.Models.Contract;
 using master.Models.Contract.Block;
@@ -9,14 +10,16 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace master.ViewModels.Contract
 {
-    class VMfunction : MyBindableBase
+    class VMfunction : MyBindableBase, IDropTarget
     {
         private Function root;
         public Function Root
@@ -43,6 +46,13 @@ namespace master.ViewModels.Contract
         {
             this.root = root;
             this.parent = parent;
+            this.WrapBlocks();
+
+            this.root.Blocks.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+        }
+
+        private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
             this.WrapBlocks();
         }
 
@@ -74,5 +84,28 @@ namespace master.ViewModels.Contract
         {
             get { return this.root.Access; }
         }
+        public bool IsFunction
+        {
+            get { return true; }
+        }
+
+        public override void DragOver(IDropInfo dropInfo)
+        {
+            if (dropInfo.TargetCollection != dropInfo.DragInfo.SourceCollection) //If copy
+            {
+                var source = dropInfo.Data as VMbase;
+                if (source == null)
+                    return;
+                if (source.GetType() == typeof(VMinput) && blocks.OfType<VMinput>().Any())
+                    return;
+            }
+            base.DragOver(dropInfo);
+        }
+
+        public override void Drop(IDropInfo dropInfo)
+        {
+            base.Drop(dropInfo);
+        }
+
     }
 }

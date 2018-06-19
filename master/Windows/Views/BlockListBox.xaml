@@ -14,7 +14,6 @@
              dd:DragDrop.UseDefaultEffectDataTemplate="True"
              HorizontalContentAlignment="Stretch"
              ItemsSource="{Binding List2}" >
-
         <ListBox.Resources>
             <DataTemplate DataType="{x:Type vm_blocks:VMassign}">
                 <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
@@ -47,6 +46,5 @@
                 </Border>
             </DataTemplate>
         </ListBox.Resources>
-
     </ListBox>
 </UserControl>

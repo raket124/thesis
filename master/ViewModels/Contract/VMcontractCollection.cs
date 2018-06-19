@@ -110,9 +110,10 @@ namespace master.ViewModels.Contract
             this.CommandAddContract.RaiseCanExecuteChanged();
 
             if (input.GetType() == typeof(VMfunction))
-                this.CLB.ListBox.ItemsSource = (input as VMfunction).Blocks;
+                this.CLB.ListBox.DataContext = input as VMfunction;
             if (input.GetType() == typeof(VMcontractModel))
-                this.CLB.ListBox.ItemsSource = (input as VMcontractModel).Functions;
+                this.CLB.ListBox.DataContext = input as VMcontractModel;
+
         }
     }
 }

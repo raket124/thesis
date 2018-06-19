@@ -1,6 +1,7 @@
 ﻿using master.Models.Contract.Block.Blocks;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +23,9 @@ namespace master.Models.Contract
         {
             var output = new ContractModel("vehicleRules") { };
             var createVehicles = new Function("createVehicles", Function.ACCESSIBILITY.Public) { Docs = "Create RecipientOrg transaction processor function." };
-            createVehicles.Blocks.Add(new MyInput());
-            createVehicles.Blocks.Add(new MyAssign());
-            createVehicles.Blocks.Add(new MyLog());
+            createVehicles.Blocks.Add(new MyInput(createVehicles));
+            createVehicles.Blocks.Add(new MyAssign(createVehicles));
+            createVehicles.Blocks.Add(new MyLog(createVehicles));
             output.Functions.Add(createVehicles);
             output.Functions.Add(new Function("updateRegistrationCountry", Function.ACCESSIBILITY.Public) { Docs = "Create UpdateRegistrationCountry transaction processor function." });
             output.Functions.Add(new Function("updateEcmrListInVin", Function.ACCESSIBILITY.Private));
@@ -58,12 +59,68 @@ namespace master.Models.Contract
         }
         private static void OrgRules(ContractCollection doc)
         {
-            var output = new ContractModel("orgRules") { };
-            output.Functions.Add(new Function("createLegalOwnerOrg", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("createCompoundOrg", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("createCarrierOrg", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("createRecipientOrg", Function.ACCESSIBILITY.Public));
-            doc.Contracts.Add(output);
+            var contract = new ContractModel("orgRules") { Docs = "Organization rules." };
+            doc.Contracts.Add(contract);
+
+            var createLegalOwnerOrg = new Function("createLegalOwnerOrg", Function.ACCESSIBILITY.Public) { Docs = "Create new LegalOwner object on the blockchain." };
+            createLegalOwnerOrg.Blocks.Add(new MyInput(createLegalOwnerOrg)
+            {
+                Vars = new ObservableCollection<Block.Variable>()
+                {
+                    new Block.Variable()
+                    {
+                        Type = Block.Variable.TYPES.Asset,
+                        ObjectName = "LegalOwnerOrg",
+                        Alias = "newLegalOwnerOrg",
+                    }
+                }
+            });
+            contract.Functions.Add(createLegalOwnerOrg);
+
+            var createCompoundOrg = new Function("createCompoundOrg", Function.ACCESSIBILITY.Public) { Docs = "Create new CompoundOrg object on the blockchain." };
+            createCompoundOrg.Blocks.Add(new MyInput(createCompoundOrg)
+            {
+                Vars = new ObservableCollection<Block.Variable>()
+                {
+                    new Block.Variable()
+                    {
+                        Type = Block.Variable.TYPES.Asset,
+                        ObjectName = "CompoundOrg",
+                        Alias = "newCompoundOrg",
+                    }
+                }
+            });
+            contract.Functions.Add(createCompoundOrg);
+
+            var createCarrierOrg = new Function("createCarrierOrg", Function.ACCESSIBILITY.Public) { Docs = "Create new CarrierOrg object on the blockchain" };
+            createCarrierOrg.Blocks.Add(new MyInput(createCarrierOrg)
+            {
+                Vars = new ObservableCollection<Block.Variable>()
+                {
+                    new Block.Variable()
+                    {
+                        Type = Block.Variable.TYPES.Asset,
+                        ObjectName = "CarrierOrg",
+                        Alias = "newCarrierOrg",
+                    }
+                }
+            });
+            contract.Functions.Add(createCarrierOrg);
+
+            var createRecipientOrg = new Function("createRecipientOrg", Function.ACCESSIBILITY.Public) { Docs = "Create new RecipientOrg object on the blockchain" };
+            createRecipientOrg.Blocks.Add(new MyInput(createRecipientOrg)
+            {
+                Vars = new ObservableCollection<Block.Variable>()
+                {
+                    new Block.Variable()
+                    {
+                        Type = Block.Variable.TYPES.Asset,
+                        ObjectName = "RecipientOrg",
+                        Alias = "newRecipientOrg",
+                    }
+                }
+            });
+            contract.Functions.Add(createRecipientOrg);
         }
     }
 }

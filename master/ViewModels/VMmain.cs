@@ -46,14 +46,14 @@ namespace master.ViewModels
 
             this.list2 = new ObservableCollection<VMbase>
             {
-                new VMassign(new MyAssign()),
-                new VMinput(new MyInput(){
+                new VMassign(new MyAssign(null)),
+                new VMinput(new MyInput(null){
                     Vars = new ObservableCollection<Variable>()
                     {
                         new Variable()
                     }
                 }),
-                new VMlog(new MyLog())
+                new VMlog(new MyLog(null))
             };
         }
 

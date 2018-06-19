@@ -11,7 +11,23 @@ namespace master.Models.Contract.Block
     [DataContract]
     abstract class Base : ObjectBase, ICloneable
     {
+        protected Function parent;
+        public Function Parent
+        {
+            get { return this.parent; }
+        }
+
+        public Base(Function parent) : base()
+        {
+            this.parent = parent;
+        }
+
         public abstract object Clone();
+
+        public virtual IList<Variable> Aliases
+        {
+            get { return new List<Variable>(); }
+        }
 
         //protected List<string> lines;
 

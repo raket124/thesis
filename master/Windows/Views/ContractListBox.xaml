@@ -46,9 +46,24 @@
     <ListBox dd:DragDrop.IsDragSource="True"
              dd:DragDrop.IsDropTarget="True"
              dd:DragDrop.UseDefaultEffectDataTemplate="True"
+             dd:DragDrop.DropHandler="{Binding}"
              HorizontalContentAlignment="Stretch"
              x:Name="listBox">
+        <ListBox.Style>
+            <Style TargetType="ListBox">
+                <Setter Property="ItemsSource" Value="{Binding Blocks}"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsContract}" Value="True">
+                        <Setter Property="ItemsSource" Value="{Binding Functions}"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding IsFunction}" Value="True">
+                        <Setter Property="ItemsSource" Value="{Binding Blocks}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ListBox.Style>
         <ListBox.Resources>
+
             <DataTemplate DataType="{x:Type vm_contract:VMfunction}">
                 <Border Style="{StaticResource MyBorder}">
                     <Expander Header="{Binding Name}">
@@ -105,6 +120,7 @@
                                             <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Types}" SelectedItem="{Binding Type}" IsEditable="False"/>
                                             <TextBlock Margin="0,0,10,0" Text="Object:"/>
                                             <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding ObjectNames}" IsEnabled="{Binding IsObject}" IsEditable="False"/>
+                                            <CheckBox Margin="0,0,10,0" IsChecked="{Binding List}" Content="List" FlowDirection="LeftToRight"/>
                                             <TextBlock Margin="0,0,10,0" Text="Alias:"/>
                                             <TextBox Margin="0,0,10,0" Width="100" Text="{Binding Alias}"/>
                                         </StackPanel>

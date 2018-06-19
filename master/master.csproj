@@ -102,6 +102,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Basis\DefaultDropHandler.cs" />
     <Compile Include="Files\FileHandler.cs" />
     <Compile Include="Graphs\Vertex\EnumVertex.cs" />
     <Compile Include="Graphs\Vertex\IdentityVertex.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Models\MasterModel.cs" />
     <Compile Include="Basis\MyBindableBase.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMregistry.cs" />
     <Compile Include="ViewModels\Contract\Block\VMbase.cs" />
     <Compile Include="ViewModels\Contract\Block\VMvariable.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMlog.cs" />

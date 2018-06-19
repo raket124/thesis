@@ -25,7 +25,5 @@ namespace master.Models.Contract
         {
             this.functions = new ObservableCollection<Function>();
         }
-
-
     }
 }

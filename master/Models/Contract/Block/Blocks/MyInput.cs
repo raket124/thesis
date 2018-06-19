@@ -19,14 +19,14 @@ namespace master.Models.Contract.Block.Blocks
             set { this.vars = value; }
         }
 
-        public MyInput() : base()
+        public MyInput(Function parent) : base(parent)
         {
             this.vars = new ObservableCollection<Variable>();
         }
 
         public override object Clone()
         {
-            return new MyInput()
+            return new MyInput(this.parent)
             {
                 Name = this.Name,
                 Docs = this.Docs,
@@ -34,6 +34,11 @@ namespace master.Models.Contract.Block.Blocks
                        from var in this.Vars
                        select var.Clone() as Variable)
             };
+        }
+
+        public override IList<Variable> Aliases
+        {
+            get { return this.Vars.ToList(); }
         }
     }
 }

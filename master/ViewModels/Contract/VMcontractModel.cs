@@ -41,7 +41,7 @@ namespace master.ViewModels.Contract
             this.root = root;
             this.parent = parent;
             this.WrapFunctions();
-            this.Root.Functions.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            this.root.Functions.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
         }
 
         private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -75,6 +75,10 @@ namespace master.ViewModels.Contract
         public int CountPrivate
         {
             get { return this.functions.Where(f => f.Access == Function.ACCESSIBILITY.Private).Count(); }
+        }
+        public bool IsContract
+        {
+            get { return true; }
         }
     }
 }

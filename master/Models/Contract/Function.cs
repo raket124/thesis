@@ -1,4 +1,5 @@
 ﻿using master.Basis;
+using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,9 @@ namespace master.Models.Contract
             this.blocks = new ObservableCollection<Block.Base>();
         }
 
-
+        public IList<Variable> Aliases
+        {
+            get { return this.blocks.SelectMany(x => x.Aliases).ToList(); }
+        }
     }
 }

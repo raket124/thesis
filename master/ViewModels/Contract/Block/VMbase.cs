@@ -10,6 +10,11 @@ namespace master.ViewModels.Contract.Block
 {
     abstract class VMbase: MyBindableBase, ICloneable
     {
+        protected VMfunction parent;
+        public VMfunction Parent
+        {
+            get { return this.parent; }
+        }
         protected ObjectBase root;
         public ObjectBase Root
         {
@@ -19,6 +24,7 @@ namespace master.ViewModels.Contract.Block
         public VMbase(ObjectBase root)
         {
             this.root = root;
+            this.parent = null;
         }
 
         public string Documentation

@@ -18,14 +18,14 @@ namespace master.Models.Contract.Block.Blocks
             set { this.text = value; }
         }
 
-        public MyLog() : base()
+        public MyLog(Function parent) : base(parent)
         {
             this.text = "The user object was updated with the following ID: #alias:persoon1";
         }
 
         public override object Clone()
         {
-            return new MyLog()
+            return new MyLog(this.parent)
             {
                 Name = this.Name,
                 Docs = this.Docs,

@@ -17,14 +17,14 @@ namespace master.Models.Contract.Block.Blocks
         [DataMember]
         protected string alias;
 
-        public MyUseRegistry() : base()
+        public MyUseRegistry(Function parent) : base(parent)
         {
 
         }
 
         public override object Clone()
         {
-            return new MyUseRegistry()
+            return new MyUseRegistry(this.parent)
             {
                 Name = this.Name,
                 Docs = this.Docs,

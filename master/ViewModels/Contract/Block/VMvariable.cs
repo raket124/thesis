@@ -15,8 +15,8 @@ namespace master.ViewModels.Contract.Block
 {
     class VMvariable : VMbase
     {
-        protected VMinput parent;
-        public VMinput Parent
+        protected new VMinput parent;
+        public new VMinput Parent
         {
             get { return this.parent; }
         }
@@ -28,7 +28,7 @@ namespace master.ViewModels.Contract.Block
 
         public DelegateCommand<object> CommandRemove { get; private set; }
 
-        ObservableCollection<string> temp;
+        ObservableCollection<string> availableTypes;
 
         public VMvariable(Variable root, VMinput parent) : base(root)
         {
@@ -37,7 +37,7 @@ namespace master.ViewModels.Contract.Block
 
             this.CommandRemove = new DelegateCommand<object>(this.Remove);
 
-            temp = new ObservableCollection<string>()
+            availableTypes = new ObservableCollection<string>()
             {
                 "LegalOwnerAdmin",
                 "CompoundAdmin"
@@ -66,9 +66,39 @@ namespace master.ViewModels.Contract.Block
             }
         }
 
-        public IList<Variable.TYPES> Types
+        public bool List
         {
-            get { return EnumUtil.EnumToList<Variable.TYPES>(); }
+            get { return this.root.List; }
+            set
+            {
+                this.root.List = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> ObjectNames
+        {
+            get { return this.IsObject ? this.availableTypes : new ObservableCollection<string>(); }
+            set
+            {
+                this.availableTypes = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public string Alias
+        {
+            get { return this.Root.Alias; }
+            set
+            {
+                this.Root.Alias = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        protected override string BlockName()
+        {
+            return "Function input";
         }
 
         public bool IsObject
@@ -95,29 +125,9 @@ namespace master.ViewModels.Contract.Block
             }
         }
 
-        public ObservableCollection<string> ObjectNames
+        public IList<Variable.TYPES> Types
         {
-            get { return this.IsObject ? this.temp : new ObservableCollection<string>(); }
-            set
-            {
-                this.temp = value;
-                this.NotifyPropertyChanged();
-            }
-        }
-
-        public string Alias
-        {
-            get { return this.Root.Alias; }
-            set
-            {
-                this.Root.Alias = value;
-                this.NotifyPropertyChanged();
-            }
-        }
-
-        protected override string BlockName()
-        {
-            return "Function input";
+            get { return EnumUtil.EnumToList<Variable.TYPES>(); }
         }
     }
 }

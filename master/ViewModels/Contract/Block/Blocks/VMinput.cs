@@ -47,9 +47,9 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         private void WrapVars()
         {
-            this.Vars = new ObservableCollection<VMvariable>((
+            this.Vars = new ObservableCollection<VMvariable>(
                         from var in this.root.Vars
-                        select new VMvariable(var, this)));
+                        select new VMvariable(var, this));
         }
 
 

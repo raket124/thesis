@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace master.Basis
 {
-    abstract class MyBindableBase : INotifyPropertyChanged
+    //DefaultDropHandler and MyBindableBase could/should be reversed
+    abstract class MyBindableBase : DefaultDropHandler, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block
 {
     [DataContract]
-    class Variable : Base
+    class Variable : ObjectBase, ICloneable
     {
         public enum TYPES { Asset, Concept, Enum, Participant, String, Double, Integer, Long, DateTime, Boolean }
 
@@ -34,15 +34,31 @@ namespace master.Models.Contract.Block
             get { return this.alias; }
             set { this.alias = value; }
         }
+        [DataMember]
+        protected bool isList;
+        public bool List
+        {
+            get { return this.isList; }
+            set { this.isList = value; }
+        }
+        [DataMember]
+        protected bool isRef;
+        public bool Ref
+        {
+            get { return this.isRef; }
+            set { this.isRef = value; }
+        }
 
         public Variable() : base()
         {
             this.type = TYPES.Asset;
             this.objectName = string.Empty;
             this.alias = string.Empty;
+            this.isList = false;
+            this.isRef = false;
         }
 
-        public override object Clone()
+        public object Clone()
         {
             return new Variable()
             {
@@ -50,7 +66,9 @@ namespace master.Models.Contract.Block
                 Docs = this.Docs,
                 Type = this.Type,
                 ObjectName = this.ObjectName,
-                Alias = this.Alias
+                Alias = this.Alias,
+                List = this.List,
+                Ref = this.Ref
             };
         }
     }
