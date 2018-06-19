@@ -1,4 +1,5 @@
-﻿using master.Models;
+﻿using master.Basis;
+using master.Models;
 using master.Models.Contract.Block;
 using master.Utils;
 using master.ViewModels.Contract.Block.Blocks;
@@ -13,15 +14,15 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Contract.Block
 {
-    class VMvariable : VMbase
+    class VMvariable : MyBindableBase
     {
-        protected new VMinput parent;
-        public new VMinput Parent
+        protected VMinput parent;
+        public VMinput Parent
         {
             get { return this.parent; }
         }
-        protected new Variable root;
-        public new Variable Root
+        protected Variable root;
+        public Variable Root
         {
             get { return this.root; }
         }
@@ -30,7 +31,7 @@ namespace master.ViewModels.Contract.Block
 
         ObservableCollection<string> availableTypes;
 
-        public VMvariable(Variable root, VMinput parent) : base(root)
+        public VMvariable(Variable root, VMinput parent)
         {
             this.root = root;
             this.parent = parent;
@@ -47,11 +48,6 @@ namespace master.ViewModels.Contract.Block
         public void Remove(object input)
         {
             this.parent.Root.Vars.Remove((input as VMvariable).Root);
-        }
-
-        public override object Clone()
-        {
-            throw new Exception("This item should not be cloned!");
         }
 
         public Variable.TYPES Type
@@ -94,11 +90,6 @@ namespace master.ViewModels.Contract.Block
                 this.Root.Alias = value;
                 this.NotifyPropertyChanged();
             }
-        }
-
-        protected override string BlockName()
-        {
-            return "Function input";
         }
 
         public bool IsObject

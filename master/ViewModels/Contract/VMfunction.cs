@@ -46,30 +46,37 @@ namespace master.ViewModels.Contract
         {
             this.root = root;
             this.parent = parent;
-            this.WrapBlocks();
+            this.WrapFromRoot();
 
-            this.root.Blocks.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            this.blocks.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
         }
 
         private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.WrapBlocks();
+            this.WrapToRoot();
         }
 
-        private void WrapBlocks()
+        private void WrapFromRoot()
         {
             var output = new ObservableCollection<VMbase>();
             foreach(Base block in this.root.Blocks)
             {
                 if (block.GetType() == typeof(MyInput))
-                    output.Add(new VMinput(block as MyInput));
+                    output.Add(new VMinput(block as MyInput) { Parent = this });
                 if (block.GetType() == typeof(MyLog))
-                    output.Add(new VMlog(block as MyLog));
+                    output.Add(new VMlog(block as MyLog) { Parent = this });
                 if (block.GetType() == typeof(MyAssign))
-                    output.Add(new VMassign(block as MyAssign));
+                    output.Add(new VMassign(block as MyAssign) { Parent = this });
                 //Add new blocks here
             }
             this.Blocks = output;
+        }
+
+        private void WrapToRoot()
+        {
+            this.root.Blocks = new ObservableCollection<Base>(
+                               from vm in this.blocks
+                               select vm.Root);
         }
 
         public string Name
@@ -104,6 +111,14 @@ namespace master.ViewModels.Contract
 
         public override void Drop(IDropInfo dropInfo)
         {
+            if (dropInfo.TargetCollection != dropInfo.DragInfo.SourceCollection) //If copy
+            {
+                var source = dropInfo.Data as VMbase;
+                var clone = source.Clone() as VMbase;
+
+                clone.Parent = this;
+                clone.Root.Parent = this.root;
+            }
             base.Drop(dropInfo);
         }
 

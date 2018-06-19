@@ -1,5 +1,6 @@
 ﻿using master.Basis;
 using master.Models;
+using master.Models.Contract.Block;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +15,15 @@ namespace master.ViewModels.Contract.Block
         public VMfunction Parent
         {
             get { return this.parent; }
+            set { this.parent = value; }
         }
-        protected ObjectBase root;
-        public ObjectBase Root
+        protected Base root;
+        public Base Root
         {
             get { return this.root; }
         }
 
-        public VMbase(ObjectBase root)
+        public VMbase(Base root)
         {
             this.root = root;
             this.parent = null;

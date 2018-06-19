@@ -15,6 +15,7 @@ namespace master.Models.Contract.Block
         public Function Parent
         {
             get { return this.parent; }
+            set { this.parent = value; }
         }
 
         public Base(Function parent) : base()
