@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:master.Windows.Views"
              xmlns:vm_contract="clr-namespace:master.ViewModels.Contract"
              xmlns:vm_blocks="clr-namespace:master.ViewModels.Contract.Block.Blocks"
+             xmlns:vm_condition="clr-namespace:master.ViewModels.Contract.Block.Conditioning"
              xmlns:vm_block="clr-namespace:master.ViewModels.Contract.Block"
              xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
@@ -92,6 +93,130 @@
                         <TextBox AcceptsReturn="True" Margin="5,5,5,5" Text="{Binding Text}">
                             
                         </TextBox>
+                    </Expander>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm_blocks:VMif}">
+                <Border Style="{StaticResource MyBorder}">
+                    <Expander Header="{Binding Name}" IsExpanded="True">
+                        <StackPanel Margin="5,5,5,5">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding CommandAdd}" Margin="0,0,5,0">
+                                    <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
+                                </Button>
+                                <TextBlock Text="Conditions:"/>
+                            </StackPanel>
+                            <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Conditions}">
+                                <ItemsControl.Resources>
+                                    <DataTemplate DataType="{x:Type vm_block:VMvariable}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="0,0,5,0">
+                                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                                            </Button>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="Alias 1"/>
+                                                <ComboBoxItem Content="Alias 2"/>
+                                                <ComboBoxItem Content="Alias 3"/>
+                                            </ComboBox>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="=="/>
+                                                <ComboBoxItem Content=">"/>
+                                                <ComboBoxItem Content=">="/>
+                                            </ComboBox>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="Alias 4"/>
+                                                <ComboBoxItem Content="Alias 5"/>
+                                                <ComboBoxItem Content="Alias 6"/>
+                                            </ComboBox>
+                                            <TextBox Text="Alias"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.Resources>
+                            </ItemsControl>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding CommandAdd}" Margin="0,0,5,0">
+                                    <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
+                                </Button>
+                                <TextBlock Text="Condition groups:"/>
+                            </StackPanel>
+                            <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Groups}">
+                                <ItemsControl.Resources>
+                                    <DataTemplate DataType="{x:Type vm_block:VMvariable}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="0,0,5,0">
+                                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                                            </Button>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="Alias 1"/>
+                                                <ComboBoxItem Content="Alias 2"/>
+                                                <ComboBoxItem Content="Alias 3"/>
+                                            </ComboBox>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="||"/>
+                                                <ComboBoxItem Content="&amp;&amp;"/>
+                                            </ComboBox>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="Alias 4"/>
+                                                <ComboBoxItem Content="Alias 5"/>
+                                                <ComboBoxItem Content="Alias 6"/>
+                                            </ComboBox>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="=="/>
+                                                <ComboBoxItem Content=">"/>
+                                                <ComboBoxItem Content=">="/>
+                                            </ComboBox>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="Alias 7"/>
+                                                <ComboBoxItem Content="Alias 8"/>
+                                                <ComboBoxItem Content="Alias 9"/>
+                                            </ComboBox>
+                                            <Button Command="{Binding CommandAdd}" Margin="0,0,5,0">
+                                                <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
+                                            </Button>
+                                            <TextBox Text="Alias"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.Resources>
+                            </ItemsControl>
+                            <TextBlock Text="Full condition:" Margin="26,0,0,0"/>
+                            <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Vars}">
+                                <ItemsControl.Resources>
+                                    <DataTemplate DataType="{x:Type vm_block:VMvariable}">
+                                        <StackPanel Orientation="Horizontal" Margin="26,0,0,0">
+                                            <ComboBox>
+                                                <ComboBoxItem Content="Alias 1"/>
+                                                <ComboBoxItem Content="Alias 2"/>
+                                                <ComboBoxItem Content="Alias 3"/>
+                                            </ComboBox>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="=="/>
+                                                <ComboBoxItem Content=">"/>
+                                                <ComboBoxItem Content=">="/>
+                                            </ComboBox>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="Alias 4"/>
+                                                <ComboBoxItem Content="Alias 5"/>
+                                                <ComboBoxItem Content="Alias 6"/>
+                                            </ComboBox>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="=="/>
+                                                <ComboBoxItem Content=">"/>
+                                                <ComboBoxItem Content=">="/>
+                                            </ComboBox>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="Alias 7"/>
+                                                <ComboBoxItem Content="Alias 8"/>
+                                                <ComboBoxItem Content="Alias 9"/>
+                                            </ComboBox>
+                                            <Button Command="{Binding CommandAdd}" Margin="0,0,5,0">
+                                                <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.Resources>
+                            </ItemsControl>
+                        </StackPanel>
                     </Expander>
                 </Border>
             </DataTemplate>

@@ -69,6 +69,8 @@ namespace master.ViewModels.Contract
                     output.Add(new VMlog(block as MyLog) { Parent = this });
                 if (block.GetType() == typeof(MyAssign))
                     output.Add(new VMassign(block as MyAssign) { Parent = this });
+                if (block.GetType() == typeof(MyIf))
+                    output.Add(new VMif(block as MyIf) { Parent = this });
                 //Add new blocks here
             }
             this.Blocks = output;

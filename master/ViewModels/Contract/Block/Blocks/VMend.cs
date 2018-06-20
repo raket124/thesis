@@ -6,22 +6,11 @@ using System.Threading.Tasks;
 using master.Models.Contract.Block;
 using System.Collections.ObjectModel;
 
-namespace master.ViewModels.Contract.Block.Conditioning
+namespace master.ViewModels.Contract.Block.Blocks
 {
-    class VMif : VMbase
+    class VMend : VMbase
     {
-        //private ObservableCollection<object> conditions;
-        //public ObservableCollection<object> Conditions
-        //{
-        //    get { return this.conditions; }
-        //    set
-        //    {
-        //        this.conditions = value;
-        //        this.NotifyPropertyChanged();
-        //    }
-        //}
-
-        public VMif(Base root) : base(root)
+        public VMend(Base root) : base(root)
         {
 
         }
@@ -33,12 +22,12 @@ namespace master.ViewModels.Contract.Block.Conditioning
 
         protected override string BlockName()
         {
-            return "If - block";
+            return "End - block";
         }
 
         protected override string Required()
         {
-            return string.Format(this.reqFormat, "1+ condition(s)");
+            return string.Format(this.reqFormat, "1 \"If block\"");
         }
 
         protected override string Optional()

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using master.Models.Contract.Block;
 using System.Collections.ObjectModel;
 
-namespace master.ViewModels.Contract.Block.Conditioning
+namespace master.ViewModels.Contract.Block.Blocks
 {
-    class VMelse : VMbase
+    class VMelseIf : VMbase
     {
-        public VMelse(Base root) : base(root)
+        public VMelseIf(Base root) : base(root)
         {
 
         }
@@ -22,7 +22,7 @@ namespace master.ViewModels.Contract.Block.Conditioning
 
         protected override string BlockName()
         {
-            return "Else - block";
+            return "Else if - block";
         }
 
         protected override string Required()

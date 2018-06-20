@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -11,16 +12,29 @@ namespace master.Models.Contract.Block.Conditioning
     class Condition
     {
         [DataMember]
-        protected ConditionGroup condition;
+        protected ObservableCollection<Condition> conditions;
+        public ObservableCollection<Condition> Conditions
+        {
+            get { return this.conditions; }
+        }
+        [DataMember]
+        protected ObservableCollection<ConditionGroup> groups;
+        public ObservableCollection<ConditionGroup> Groups
+        {
+            get { return this.groups; }
+        }
+        [DataMember]
+        protected ConditionGroup value;
         public ConditionGroup Value
         {
-            get { return this.condition; }
-            set { this.condition = value; }
+            get { return this.value; }
         }
 
         public Condition()
         {
-            this.condition = new ConditionGroup();
+            this.conditions = new ObservableCollection<Condition>();
+            this.groups = new ObservableCollection<ConditionGroup>();
+            this.value = new ConditionGroup();
         }
     }
 }

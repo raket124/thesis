@@ -110,6 +110,7 @@
     <Compile Include="Basis\ObjectBase.cs" />
     <Compile Include="Models\Authorization\Base.cs" />
     <Compile Include="Models\Contract\Block\Base.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyIf.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyInput.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyLog.cs" />
     <Compile Include="Models\Contract\Block\Conditioning\Condition.cs" />
@@ -137,11 +138,14 @@
     <Compile Include="Utils\EnumUtil.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMerror.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMuseRegistry.cs" />
-    <Compile Include="ViewModels\Contract\Block\Conditioning\VMend.cs" />
-    <Compile Include="ViewModels\Contract\Block\Conditioning\VMelse.cs" />
-    <Compile Include="ViewModels\Contract\Block\Conditioning\VMelseIf.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMend.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMelse.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMelseIf.cs" />
+    <Compile Include="ViewModels\Contract\Block\Conditioning\VMcondition.cs" />
+    <Compile Include="ViewModels\Contract\Block\Conditioning\VMconditionBase.cs" />
+    <Compile Include="ViewModels\Contract\Block\Conditioning\VMconditionGroup.cs" />
     <Compile Include="ViewModels\Contract\Block\VMbase.cs" />
-    <Compile Include="ViewModels\Contract\Block\Conditioning\VMif.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMif.cs" />
     <Compile Include="ViewModels\Contract\Block\VMvariable.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMlog.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMassign.cs" />
