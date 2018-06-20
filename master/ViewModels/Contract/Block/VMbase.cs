@@ -11,6 +11,9 @@ namespace master.ViewModels.Contract.Block
 {
     abstract class VMbase: MyBindableBase, ICloneable
     {
+        protected readonly string reqFormat = "Requirements: {0}";
+        protected readonly string optFormat = "Optional: {0}";
+
         protected VMfunction parent;
         public VMfunction Parent
         {
@@ -39,8 +42,22 @@ namespace master.ViewModels.Contract.Block
             get { return this.BlockName(); }
         }
 
+        public string RequiredParams
+        {
+            get { return this.Required(); }
+        }
+
+        public string OptionalParams
+        {
+            get { return this.Optional(); }
+        }
+
         public abstract object Clone();
 
         protected abstract string BlockName();
+
+        protected abstract string Required();
+
+        protected abstract string Optional();
     }
 }

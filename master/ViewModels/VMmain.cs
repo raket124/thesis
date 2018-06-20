@@ -13,6 +13,7 @@ using master.ViewModels.Views;
 using master.Basis;
 using master.ViewModels.Contract.Block;
 using master.ViewModels.Contract.Block.Blocks;
+using master.ViewModels.Contract.Block.Conditioning;
 
 namespace master.ViewModels
 {
@@ -53,7 +54,12 @@ namespace master.ViewModels
                         new Variable()
                     }
                 }),
-                new VMlog(new MyLog(null))
+                new VMlog(new MyLog(null)),
+                new VMif(null),
+                new VMelseIf(null),
+                new VMelse(null),
+                new VMend(null),
+                new VMuseRegistry(new MyUseRegistry(null))
             };
         }
 

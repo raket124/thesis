@@ -9,7 +9,10 @@
     <Menu>
         <MenuItem Header="File">
             <MenuItem Header="New" Command="{Binding FileNew}"/>
-            <MenuItem Header="Demo" Command="{Binding FileDemo}"/>
+            <MenuItem Header="Demo">
+                <MenuItem Header="Tutorial" />
+                <MenuItem Header="Koopman" Command="{Binding FileDemo}" />
+            </MenuItem>
             <Separator />
             <MenuItem Header="Open" Command="{Binding FileOpen}"/>
             <MenuItem Header="Save" Command="{Binding FileSave}" />

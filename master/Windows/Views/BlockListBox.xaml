@@ -4,10 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:master.Windows.Views"
-             xmlns:vm_blocks="clr-namespace:master.ViewModels.Contract.Block.Blocks"
+             xmlns:vm_block="clr-namespace:master.ViewModels.Contract.Block"
              xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="MyBorder" TargetType="Border">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+    </UserControl.Resources>
+
     <ListBox dd:DragDrop.DragDropCopyKeyState="LeftMouseButton"
              dd:DragDrop.IsDragSource="True"
              dd:DragDrop.IsDropTarget="False"
@@ -15,32 +24,23 @@
              HorizontalContentAlignment="Stretch"
              ItemsSource="{Binding List2}" >
         <ListBox.Resources>
-            <DataTemplate DataType="{x:Type vm_blocks:VMassign}">
-                <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
+            <DataTemplate DataType="{x:Type vm_block:VMbase}">
+                <Border Style="{StaticResource MyBorder}">
                     <StackPanel Margin="5">
                         <TextBlock Text="{Binding Name}"/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Requirements: 2x variables"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm_blocks:VMinput}">
-                <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
-                    <StackPanel Margin="5">
-                        <TextBlock Text="{Binding Name}"/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Requirements: 1x text"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm_blocks:VMlog}">
-                <Border Background="LightGray" BorderBrush="DarkGray" CornerRadius="4" BorderThickness="2">
-                    <StackPanel Margin="5">
-                        <TextBlock Text="{Binding Name}"/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Requirements: 1x text"/>
+                        <StackPanel>
+                            <TextBlock Text="{Binding RequiredParams}"/>
+                            <TextBlock Text="{Binding OptionalParams}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </Border>

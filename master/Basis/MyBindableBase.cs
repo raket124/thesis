@@ -18,5 +18,10 @@ namespace master.Basis
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public virtual void FullRefresh()
+        {
+            //Override with all PropertyChanged events
+        }
     }
 }

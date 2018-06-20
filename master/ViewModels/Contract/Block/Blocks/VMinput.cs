@@ -13,10 +13,9 @@ namespace master.ViewModels.Contract.Block.Blocks
 {
     class VMinput : VMbase
     {
-        protected new MyInput root;
         public new MyInput Root
         {
-            get { return this.root; }
+            get { return this.root as MyInput; }
         }
         private ObservableCollection<VMvariable> vars;
         public ObservableCollection<VMvariable> Vars
@@ -33,7 +32,6 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public VMinput(MyInput root) : base(root)
         {
-            this.root = root;
             this.WrapVars();
 
             this.CommandAdd = new DelegateCommand(this.Add);
@@ -48,7 +46,7 @@ namespace master.ViewModels.Contract.Block.Blocks
         private void WrapVars()
         {
             this.Vars = new ObservableCollection<VMvariable>(
-                        from var in this.root.Vars
+                        from var in this.Root.Vars
                         select new VMvariable(var, this));
         }
 
@@ -63,9 +61,10 @@ namespace master.ViewModels.Contract.Block.Blocks
             return new VMinput(this.root.Clone() as MyInput);
         }
 
-        protected override string BlockName()
-        {
-            return "Input block";
-        }
+        protected override string BlockName() { return "Input block"; }
+
+        protected override string Required() { return string.Format(this.reqFormat, "1+ variable(s)"); }
+
+        protected override string Optional() { return string.Empty; }
     }
 }

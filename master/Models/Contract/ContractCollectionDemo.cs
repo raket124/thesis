@@ -10,6 +10,53 @@ namespace master.Models.Contract
 {
     class ContractCollectionDemo
     {
+        public static ContractCollection TutorialContract()
+        {
+            var output = new ContractCollection();
+            ContractCollectionDemo.Animaltracking(output);
+            return output;
+        }
+
+        private static void Animaltracking(ContractCollection doc)
+        {
+            var output = new ContractModel("AnimalTrackingRules") { };
+
+            var onAnimalMovementDeparture = new Function("onAnimalMovementDeparture", Function.ACCESSIBILITY.Public);
+            onAnimalMovementDeparture.Blocks.Add(new MyInput(onAnimalMovementDeparture)
+            {
+                Vars = new ObservableCollection<Block.Variable>()
+                {
+                    new Block.Variable()
+                    {
+                        Ref = true,
+                        Type = Block.Variable.TYPES.Asset,
+                        ObjectName = "Field",
+                        Alias = "fromField",
+                    }
+                }
+            });
+            var onAnimalMovementArrival = new Function("onAnimalMovementArrival", Function.ACCESSIBILITY.Public);
+            onAnimalMovementArrival.Blocks.Add(new MyInput(onAnimalMovementArrival)
+            {
+                Vars = new ObservableCollection<Block.Variable>()
+                {
+                    new Block.Variable()
+                    {
+                        Ref = true,
+                        Type = Block.Variable.TYPES.Asset,
+                        ObjectName = "Field",
+                        Alias = "arrivalField",
+                    }
+                }
+            });
+
+
+
+            doc.Contracts.Add(output);
+        }
+
+
+
         public static ContractCollection KoopmanContract()
         {
             var output = new ContractCollection();
@@ -119,6 +166,10 @@ namespace master.Models.Contract
                         Alias = "newRecipientOrg",
                     }
                 }
+            });
+            createRecipientOrg.Blocks.Add(new MyAssign(createRecipientOrg)
+            {
+
             });
             contract.Functions.Add(createRecipientOrg);
         }

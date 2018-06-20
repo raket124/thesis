@@ -10,11 +10,14 @@ namespace master.ViewModels.Contract.Block.Blocks
 {
     class VMassign : VMbase
     {
-        protected new MyAssign root;
+        public new MyAssign Root
+        {
+            get { return this.root as MyAssign; }
+        }
 
         public VMassign(MyAssign root) : base(root)
         {
-            this.root = root;
+
         }
 
         public override object Clone()
@@ -22,9 +25,26 @@ namespace master.ViewModels.Contract.Block.Blocks
             return new VMassign(this.root.Clone() as MyAssign);
         }
 
-        protected override string BlockName()
+        protected override string BlockName() { return "Block chain block"; }
+
+        protected override string Required() { return string.Format(this.reqFormat, "2 variables"); }
+
+        protected override string Optional() { return string.Empty; }
+
+        public IList<string> Aliases
         {
-            return "Block chain block";
+            get
+            {
+                if (this.Parent != null)
+                    return this.Parent.GetAliases();
+                else
+                    return new List<string>();
+            }
+        }
+
+        public override void FullRefresh()
+        {
+            this.NotifyPropertyChanged("Aliases");
         }
     }
 }

@@ -113,7 +113,6 @@ namespace master.ViewModels.Contract
                 this.CLB.ListBox.DataContext = input as VMfunction;
             if (input.GetType() == typeof(VMcontractModel))
                 this.CLB.ListBox.DataContext = input as VMcontractModel;
-
         }
     }
 }

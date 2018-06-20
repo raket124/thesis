@@ -135,8 +135,13 @@
     <Compile Include="Models\MasterModel.cs" />
     <Compile Include="Basis\MyBindableBase.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
-    <Compile Include="ViewModels\Contract\Block\Blocks\VMregistry.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMerror.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMuseRegistry.cs" />
+    <Compile Include="ViewModels\Contract\Block\Conditioning\VMend.cs" />
+    <Compile Include="ViewModels\Contract\Block\Conditioning\VMelse.cs" />
+    <Compile Include="ViewModels\Contract\Block\Conditioning\VMelseIf.cs" />
     <Compile Include="ViewModels\Contract\Block\VMbase.cs" />
+    <Compile Include="ViewModels\Contract\Block\Conditioning\VMif.cs" />
     <Compile Include="ViewModels\Contract\Block\VMvariable.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMlog.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMassign.cs" />

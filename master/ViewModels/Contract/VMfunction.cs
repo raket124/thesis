@@ -46,17 +46,19 @@ namespace master.ViewModels.Contract
         {
             this.root = root;
             this.parent = parent;
-            this.WrapFromRoot();
+            this.WrapBlocks();
 
             this.blocks.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
         }
 
         private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.WrapToRoot();
+            this.root.Blocks = new ObservableCollection<Base>(
+                               from vm in this.blocks
+                               select vm.Root);
         }
 
-        private void WrapFromRoot()
+        private void WrapBlocks()
         {
             var output = new ObservableCollection<VMbase>();
             foreach(Base block in this.root.Blocks)
@@ -70,13 +72,6 @@ namespace master.ViewModels.Contract
                 //Add new blocks here
             }
             this.Blocks = output;
-        }
-
-        private void WrapToRoot()
-        {
-            this.root.Blocks = new ObservableCollection<Base>(
-                               from vm in this.blocks
-                               select vm.Root);
         }
 
         public string Name
@@ -96,6 +91,20 @@ namespace master.ViewModels.Contract
             get { return true; }
         }
 
+        public IList<string> GetAliases()
+        {
+            var input = this.root.Aliases;
+            var output = new List<string>();
+
+            foreach(var variable in input)
+            {
+                //Prune results based on parameters
+                output.Add(variable.Alias);
+            }
+            return output;
+        }
+
+
         public override void DragOver(IDropInfo dropInfo)
         {
             if (dropInfo.TargetCollection != dropInfo.DragInfo.SourceCollection) //If copy
@@ -106,6 +115,13 @@ namespace master.ViewModels.Contract
                 if (source.GetType() == typeof(VMinput) && blocks.OfType<VMinput>().Any())
                     return;
             }
+            //else // Not a copy
+            //{
+            //    var source = dropInfo.Data as VMbase;
+            //    if (source.GetType() == typeof(VMinput))
+            //        return;
+            //}
+
             base.DragOver(dropInfo);
         }
 
@@ -122,5 +138,11 @@ namespace master.ViewModels.Contract
             base.Drop(dropInfo);
         }
 
+        public override void FullRefresh()
+        {
+            this.NotifyPropertyChanged("Aliases");
+            foreach(VMbase block in this.blocks)
+                block.FullRefresh();
+        }
     }
 }

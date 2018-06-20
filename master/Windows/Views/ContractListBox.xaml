@@ -72,23 +72,15 @@
                 </Border>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vm_blocks:VMassign}">
+            <DataTemplate DataType="{x:Type vm_blocks:VMuseRegistry}">
                 <Border Style="{StaticResource MyBorder}">
                     <Expander Header="{Binding Name}" IsExpanded="True">
                         <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
                             <TextBlock Margin="0,0,10,0" Text="Alias:"/>
-                            <ComboBox Margin="0,0,10,0" Width="100">
-                                <ComboBoxItem>First</ComboBoxItem>
-                                <ComboBoxItem>Second</ComboBoxItem>
-                                <ComboBoxItem>Third</ComboBoxItem>
-                            </ComboBox>
+                            <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Aliases}"/>
                             <TextBlock Margin="0,0,10,0" Text="Action:"/>
-                            <ComboBox Margin="0,0,10,0" Width="100">
-                                <ComboBoxItem>Insert</ComboBoxItem>
-                                <ComboBoxItem>Update</ComboBoxItem>
-                                <ComboBoxItem>Remove</ComboBoxItem>
-                            </ComboBox>
-                            <CheckBox Margin="0,0,10,0" Content="Direct"/>
+                            <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Actions}" SelectedItem="{Binding Action}"/>
+                            <CheckBox Margin="0,0,10,0" Content="Direct" IsChecked="{Binding Delay}"/>
                         </StackPanel>
                     </Expander>
                 </Border>

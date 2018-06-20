@@ -10,15 +10,14 @@ namespace master.ViewModels.Contract.Block.Blocks
 {
     class VMlog : VMbase
     {
-        protected new MyLog root;
         public new MyLog Root
         {
-            get { return this.root; }
+            get { return this.root as MyLog; }
         }
 
         public VMlog(MyLog root) : base(root)
         {
-            this.root = root;
+
         }
 
         public override object Clone()
@@ -28,17 +27,23 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public string Text
         {
-            get { return this.root.Text; }
+            get { return this.Root.Text; }
             set
             {
-                this.root.Text = value;
+                this.Root.Text = value;
                 this.NotifyPropertyChanged();
             }
         }
 
-        protected override string BlockName()
+        protected override string BlockName() { return "Log block"; }
+
+        protected override string Required() { return string.Format(this.reqFormat, "1 text"); }
+
+        protected override string Optional() { return string.Format(this.optFormat, "x aliases"); }
+
+        public override void FullRefresh()
         {
-            return "Log block";
+            this.NotifyPropertyChanged("Text");
         }
     }
 }
