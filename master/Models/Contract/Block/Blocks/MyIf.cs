@@ -21,7 +21,7 @@ namespace master.Models.Contract.Block.Blocks
         public MyIf(Function parent) : base(parent)
         {
             this.condition = new Condition();
-            this.condition.Conditions.Add(new Condition());
+            this.condition.Conditions.Add(new ConditionBase());
             this.condition.Groups.Add(new ConditionGroup());
         }
 

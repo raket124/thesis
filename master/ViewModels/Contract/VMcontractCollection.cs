@@ -70,14 +70,16 @@ namespace master.ViewModels.Contract
 
         private void AddGroup()
         {
-            var nameWindow = new GroupNameWindow("Group name:", new List<string>());
+            new FunctionWindow().ShowDialog();
+
+            var nameWindow = new GroupNameWindow(new List<string>());
             if(nameWindow.ShowDialog() == true)
                 this.Root.Contracts.Add(new ContractModel(nameWindow.Answer));
         }
 
         private void AddContract(object input)
         {
-            var nameWindow = new GroupNameWindow("Contract name:", new List<string>());
+            var nameWindow = new GroupNameWindow(new List<string>());
             if (nameWindow.ShowDialog() == true)
                 (input as VMcontractModel).Root.Functions.Add(new Function(nameWindow.Answer, Function.ACCESSIBILITY.Controlled));
         }

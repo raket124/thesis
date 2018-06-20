@@ -18,9 +18,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Image Source="..\Images\question_mark.png" Width="32" Height="32" Grid.RowSpan="2" Margin="20,0" />
+        <Image Source="Images\question_mark.png" Width="32" Height="32" Grid.RowSpan="2" Margin="20,0" />
 
-        <Label Grid.Column="1" Content="{Binding Question}"/>
+        <Label Grid.Column="1" Content="Group name:"/>
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Answer}" x:Name="aaa">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged">
@@ -33,8 +33,5 @@
             <Button Width="60" Content="Ok" Margin="0,0,10,0" Command="{Binding CommandOk}"/>
             <Button Width="60" Content="Cancel" IsCancel="True" />
         </WrapPanel>
-
-
-
     </Grid>
 </Window>

@@ -30,6 +30,10 @@ namespace master.Models.Contract.Block.Conditioning
         {
             this.conditions = new ObservableCollection<ConditionBase>();
             this.connectors = new ObservableCollection<COMPARE>();
+
+            this.conditions.Add(new ConditionBase());
+            this.connectors.Add(COMPARE.and);
+            this.conditions.Add(new ConditionBase());
         }
 
         public void Add(ConditionBase condition, COMPARE? comparision = null)

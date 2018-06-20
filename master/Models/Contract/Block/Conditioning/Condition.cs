@@ -12,8 +12,8 @@ namespace master.Models.Contract.Block.Conditioning
     class Condition
     {
         [DataMember]
-        protected ObservableCollection<Condition> conditions;
-        public ObservableCollection<Condition> Conditions
+        protected ObservableCollection<ConditionBase> conditions;
+        public ObservableCollection<ConditionBase> Conditions
         {
             get { return this.conditions; }
         }
@@ -32,7 +32,7 @@ namespace master.Models.Contract.Block.Conditioning
 
         public Condition()
         {
-            this.conditions = new ObservableCollection<Condition>();
+            this.conditions = new ObservableCollection<ConditionBase>();
             this.groups = new ObservableCollection<ConditionGroup>();
             this.value = new ConditionGroup();
         }

@@ -102,14 +102,14 @@
                     <Expander Header="{Binding Name}" IsExpanded="True">
                         <StackPanel Margin="5,5,5,5">
                             <StackPanel Orientation="Horizontal">
-                                <Button Command="{Binding CommandAdd}" Margin="0,0,5,0">
+                                <Button Command="{Binding Condition.CommandAddCondition}" Margin="0,0,5,0">
                                     <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
                                 </Button>
                                 <TextBlock Text="Conditions:"/>
                             </StackPanel>
-                            <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Conditions}">
+                            <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Condition.Conditions}">
                                 <ItemsControl.Resources>
-                                    <DataTemplate DataType="{x:Type vm_block:VMvariable}">
+                                    <DataTemplate DataType="{x:Type vm_condition:VMconditionBase}">
                                         <StackPanel Orientation="Horizontal">
                                             <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="0,0,5,0">
                                                 <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
@@ -119,11 +119,7 @@
                                                 <ComboBoxItem Content="Alias 2"/>
                                                 <ComboBoxItem Content="Alias 3"/>
                                             </ComboBox>
-                                            <ComboBox>
-                                                <ComboBoxItem Content="=="/>
-                                                <ComboBoxItem Content=">"/>
-                                                <ComboBoxItem Content=">="/>
-                                            </ComboBox>
+                                            <ComboBox ItemsSource="{Binding Comparisons}"/>
                                             <ComboBox>
                                                 <ComboBoxItem Content="Alias 4"/>
                                                 <ComboBoxItem Content="Alias 5"/>
@@ -135,45 +131,59 @@
                                 </ItemsControl.Resources>
                             </ItemsControl>
                             <StackPanel Orientation="Horizontal">
-                                <Button Command="{Binding CommandAdd}" Margin="0,0,5,0">
+                                <Button Command="{Binding Condition.CommandAddGroup}" Margin="0,0,5,0">
                                     <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
                                 </Button>
                                 <TextBlock Text="Condition groups:"/>
                             </StackPanel>
-                            <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Groups}">
+                            <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Condition.Groups}">
                                 <ItemsControl.Resources>
-                                    <DataTemplate DataType="{x:Type vm_block:VMvariable}">
+                                    <DataTemplate DataType="{x:Type vm_condition:VMconditionGroup}">
                                         <StackPanel Orientation="Horizontal">
                                             <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="0,0,5,0">
                                                 <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
                                             </Button>
-                                            <ComboBox>
+
+
+                                            <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding ConditionSet}">
+                                                <ItemsControl.Resources>
+
+                                                    <DataTemplate DataType="{x:Type vm_condition:VMconditionBase}">
+                                                        <TextBlock Text="Hello2"/>
+                                                    </DataTemplate>
+
+                                                    <DataTemplate DataType="{x:Type vm_block:VMvariable}">
+                                                        <TextBlock Text="Hello"/>
+                                                    </DataTemplate>
+
+                                                </ItemsControl.Resources>
+                                            </ItemsControl>
+
+                                            <!--<ComboBox>
                                                 <ComboBoxItem Content="Alias 1"/>
                                                 <ComboBoxItem Content="Alias 2"/>
                                                 <ComboBoxItem Content="Alias 3"/>
                                             </ComboBox>
-                                            <ComboBox>
-                                                <ComboBoxItem Content="||"/>
-                                                <ComboBoxItem Content="&amp;&amp;"/>
-                                            </ComboBox>
+                                            <ComboBox ItemsSource="{Binding Comparisons}"/>
                                             <ComboBox>
                                                 <ComboBoxItem Content="Alias 4"/>
                                                 <ComboBoxItem Content="Alias 5"/>
                                                 <ComboBoxItem Content="Alias 6"/>
                                             </ComboBox>
-                                            <ComboBox>
-                                                <ComboBoxItem Content="=="/>
-                                                <ComboBoxItem Content=">"/>
-                                                <ComboBoxItem Content=">="/>
-                                            </ComboBox>
+                                            <ComboBox ItemsSource="{Binding Comparisons}"/>
                                             <ComboBox>
                                                 <ComboBoxItem Content="Alias 7"/>
                                                 <ComboBoxItem Content="Alias 8"/>
                                                 <ComboBoxItem Content="Alias 9"/>
-                                            </ComboBox>
+                                            </ComboBox>-->
+                                            
+                                            
+                                            
+                                            
                                             <Button Command="{Binding CommandAdd}" Margin="0,0,5,0">
                                                 <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
                                             </Button>
+                                            <CheckBox FlowDirection="LeftToRight" Content="Inverse"/>
                                             <TextBox Text="Alias"/>
                                         </StackPanel>
                                     </DataTemplate>

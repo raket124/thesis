@@ -20,11 +20,6 @@ namespace master.Windows
         public DelegateCommand<object> CommandOk { get; private set; }
         public DelegateCommand CommandTextChanged { get; private set; }
 
-        private string question;
-        public string Question
-        {
-            get { return this.question; }
-        }
         private string answer;
         public string Answer
         {
@@ -33,14 +28,13 @@ namespace master.Windows
         }
         private List<string> existingNames;
 
-        public GroupNameWindow(string question) : this(question, new List<string>()) { }
+        public GroupNameWindow() : this(new List<string>()) { }
 
-        public GroupNameWindow(string question, List<string> existingNames)
+        public GroupNameWindow(List<string> existingNames)
         {
             InitializeComponent();
             this.DataContext = this;
 
-            this.question = question;
             this.existingNames = existingNames;
             this.answer = string.Empty;
 

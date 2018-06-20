@@ -36,16 +36,7 @@ namespace master
             this.Menu.DataContext = main.Menu;
             this.contractTreeView.DataContext = main.Model.Contracts;
 
-            //test.Content = new VariableConfigStackPanel();
-            //test2.Content = new VariableConfigStackPanel();
-
             main.Model.Contracts.CLB = this.contractListBox;
-
-            //this.contractTreeView.Clb
-
-
-            //this.contractListBox.DataContext = main;
-            //this.blockListBox.DataContext = main;
         }
     }
 }
