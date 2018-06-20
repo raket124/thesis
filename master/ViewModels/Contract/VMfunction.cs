@@ -19,7 +19,7 @@ using System.Windows;
 
 namespace master.ViewModels.Contract
 {
-    class VMfunction : MyBindableBase, IDropTarget
+    public class VMfunction : MyBindableBase, IDropTarget
     {
         private Function root;
         public Function Root

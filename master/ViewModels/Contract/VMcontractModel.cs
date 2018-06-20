@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Contract
 {
-    class VMcontractModel : MyBindableBase
+    public class VMcontractModel : MyBindableBase
     {
         private VMcontractCollection parent;
         public VMcontractCollection Parent

@@ -7,7 +7,7 @@ using master.Models.Contract.Block;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
-    class VMerror : VMbase
+    public class VMerror : VMbase
     {
         public VMerror(Base root) : base(root)
         {

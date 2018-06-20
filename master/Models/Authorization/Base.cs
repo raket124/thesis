@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace master.Models.Authorization
 {
-    abstract class Base : ObjectBase
+    abstract public class Base : ObjectBase
     {
 
     }

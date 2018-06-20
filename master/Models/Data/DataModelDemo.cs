@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace master.Models.Data
 {
-    class DataModelDemo
+    public class DataModelDemo
     {
         public static DataModel KoopmanCTO()
         {

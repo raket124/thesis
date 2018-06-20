@@ -8,7 +8,7 @@ using master.Models.Data.Component;
 
 namespace master.Graphs
 {
-    class IdentityVertex : InheritanceVertex
+    public class IdentityVertex : InheritanceVertex
     {
         protected new Identity root;
 

@@ -18,7 +18,7 @@ using master.Models.Contract;
 
 namespace master.ViewModels.Contract
 {
-    class VMcontractCollection : MyBindableBase
+    public class VMcontractCollection : MyBindableBase
     {
         private ContractCollection root;
         public ContractCollection Root

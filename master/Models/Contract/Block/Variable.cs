@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block
 {
     [DataContract]
-    class Variable : ObjectBase, ICloneable
+    public class Variable : ObjectBase, ICloneable
     {
         public enum TYPES { Asset, Concept, Enum, Participant, String, Double, Integer, Long, DateTime, Boolean }
 

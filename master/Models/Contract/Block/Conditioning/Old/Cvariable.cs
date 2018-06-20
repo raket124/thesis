@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace master.Models.Contract.Block.Conditioning
 {
-    class Cvariable
+    public class Cvariable
     {
         protected string name;
         protected Cvariable child;

@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace master.Windows
 {
-    class WindowManager
+    public class WindowManager
     {
         private MainWindow mainWindow;
         private GraphWindow graphWindow;

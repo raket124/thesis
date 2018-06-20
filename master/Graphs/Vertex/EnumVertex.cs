@@ -8,7 +8,7 @@ using master.Models.Data.Component.Components;
 
 namespace master.Graphs
 {
-    class EnumVertex : BaseVertex
+    public class EnumVertex : BaseVertex
     {
         protected new MyEnum root;
 

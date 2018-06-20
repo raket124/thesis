@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace master.Models
 {
     [DataContract]
-    class MasterModel
+    public class MasterModel
     {
         [DataMember]
         protected ContractCollection contracts;

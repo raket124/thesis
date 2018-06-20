@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Data.Component
 {
     [DataContract]
-    abstract class Identity : Inheritance
+    abstract public class Identity : Inheritance
     {
         [DataMember]
         protected string identifier;

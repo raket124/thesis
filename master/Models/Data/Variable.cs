@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models.Data
 {
     [DataContract]
-    class Variable : ObjectBase
+    public class Variable : ObjectBase
     {
         public enum RELATION { variable, reference };
 

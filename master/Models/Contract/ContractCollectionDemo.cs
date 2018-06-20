@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace master.Models.Contract
 {
-    class ContractCollectionDemo
+    public class ContractCollectionDemo
     {
         public static ContractCollection TutorialContract()
         {

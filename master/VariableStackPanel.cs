@@ -8,7 +8,7 @@ using Xceed.Wpf.Toolkit;
 
 namespace master.Windows.Controls
 {
-    class VariableStackPanel : StackPanel
+    public class VariableStackPanel : StackPanel
     {
         enum Types { String, Integer, Double, Long, Date, Time, DateTime, Boolean, Enum };
         private Dictionary<string, Types> availableTypes;

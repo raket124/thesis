@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace master.Utils
 {
-    static class EnumUtil
+    static public class EnumUtil
     {
         public static IList<T> EnumToList<T>()
         {

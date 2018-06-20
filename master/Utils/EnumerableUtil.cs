@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace master.Utils
 {
-    static class EnumerableUtil
+    static public class EnumerableUtil
     {
         public static IEnumerable<object> Interleave<T, Y>(this IEnumerable<T> source1, IEnumerable<Y> source2)
         {

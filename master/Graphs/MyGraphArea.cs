@@ -13,7 +13,7 @@ using master.Models.Data.Component;
 
 namespace master.Graphs
 {
-    class MyGraphArea : GraphArea<BaseVertex, DataEdge, BidirectionalGraph<BaseVertex, DataEdge>>
+    public class MyGraphArea : GraphArea<BaseVertex, DataEdge, BidirectionalGraph<BaseVertex, DataEdge>>
     {
         protected MyGraph graph;
         protected ZoomControl zoomControl;

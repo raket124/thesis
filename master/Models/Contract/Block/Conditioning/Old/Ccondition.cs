@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace master.Models.Contract.Block.Conditioning
 {
-    class Ccondition
+    public class Ccondition
     {
         protected CconditionGroup condition;
 

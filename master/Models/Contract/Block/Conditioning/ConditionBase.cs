@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Conditioning
 {
     [DataContract]
-    class ConditionBase
+    public class ConditionBase
     {
         public enum COMPARE { equal, not_equal, greater, greater_or_equal, lesser, lesser_or_equal }
 

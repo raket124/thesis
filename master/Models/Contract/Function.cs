@@ -18,7 +18,7 @@ namespace master.Models.Contract
         KnownType(typeof(MyInput)), 
         KnownType(typeof(MyLog))
     ]
-    class Function : ObjectBase
+    public class Function : ObjectBase
     {
         public enum ACCESSIBILITY { Public, Private, Controlled }
 

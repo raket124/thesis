@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Contract.Block
 {
-    abstract class VMbase: MyBindableBase, ICloneable
+    abstract public class VMbase: MyBindableBase, ICloneable
     {
         protected readonly string reqFormat = "Requirements: {0}";
         protected readonly string optFormat = "Optional: {0}";

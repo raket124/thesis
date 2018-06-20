@@ -12,7 +12,7 @@ using System.Collections.Specialized;
 
 namespace master.ViewModels.Contract.Block.Conditioning
 {
-    class VMcondition : MyBindableBase, ICloneable
+    public class VMcondition : MyBindableBase, ICloneable
     {
         protected Condition root;
         public Condition Root

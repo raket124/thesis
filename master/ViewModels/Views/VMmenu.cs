@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace master.ViewModels.Views
 {
-    class VMmenu : MyBindableBase
+    public class VMmenu : MyBindableBase
     {
         private WindowManager windowManager;
         private FileHandler fileHandler;

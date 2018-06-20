@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Blocks
 {
     [DataContract]
-    class MyIf : Base
+    public class MyIf : Base
     {
         protected Condition condition;
         public Condition Condition

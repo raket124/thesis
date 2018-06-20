@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace master.Models.Contract.Block.Conditioning
 {
-    class CconditionGroup
+    public class CconditionGroup
     {
         public enum COMPARE { and, or }
         protected readonly Dictionary<COMPARE, string> COMPARE_DIC = new Dictionary<COMPARE, string>()

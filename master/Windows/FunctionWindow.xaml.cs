@@ -2,7 +2,9 @@
 using master.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,36 +21,81 @@ namespace master.Windows
     /// <summary>
     /// Interaction logic for FunctionWindow.xaml
     /// </summary>
-    public partial class FunctionWindow : Window
+    public partial class FunctionWindow : Window, INotifyPropertyChanged
     {
         private Function function;
         public Function Function
         {
             get { return this.function; }
         }
+        private List<string> participants;
+        public List<string> Participants
+        {
+            get { return this.participants; }
+            set { this.participants = value; }
+        }
+        private List<string> names;
 
-
-        public List<object> Items { get; set; }
-
-        public FunctionWindow()
+        public FunctionWindow(List<string> existingNames, List<string> existingParticipants)
         {
             InitializeComponent();
 
             this.function = new Function(string.Empty, Function.ACCESSIBILITY.Public);
+            this.participants = existingParticipants;
+            this.names = existingNames;
 
-
-            Items = new List<object>
-            {
-                "A",
-                "B",
-                "C"
-            };
             this.DataContext = this;
         }
 
-        public IList<Function.ACCESSIBILITY> Accessibility
+        public string FunctionName
+        {
+            get { return this.function.Name; }
+            set
+            {
+                this.function.Name = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public Function.ACCESSIBILITY Accessibility
+        {
+            get { return this.function.Access; }
+            set
+            {
+                this.function.Access = value;
+                this.NotifyPropertyChanged();
+                this.NotifyPropertyChanged("EnableUserSelect");
+            }
+        }
+
+        public IList<Function.ACCESSIBILITY> Accessibilities
         {
             get { return EnumUtil.EnumToList<Function.ACCESSIBILITY>(); }
         }
+
+        public bool EnableUserSelect
+        {
+            get
+            {
+                switch(this.function.Access)
+                {
+                    case Function.ACCESSIBILITY.Public:
+                    case Function.ACCESSIBILITY.Private:
+                        return false;
+                    case Function.ACCESSIBILITY.Controlled:
+                        return true;
+                    default:
+                        throw new Exception("This should not happen.");
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }

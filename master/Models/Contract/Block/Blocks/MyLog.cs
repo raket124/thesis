@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Blocks
 {
     [DataContract]
-    class MyLog : Base
+    public class MyLog : Base
     {
         [DataMember]
         protected string text;

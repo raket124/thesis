@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
-    class VMelse : VMbase
+    public class VMelse : VMbase
     {
         public VMelse(Base root) : base(root)
         {

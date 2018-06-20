@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
-    class VMend : VMbase
+    public class VMend : VMbase
     {
         public VMend(Base root) : base(root)
         {

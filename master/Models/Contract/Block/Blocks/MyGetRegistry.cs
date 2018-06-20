@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Blocks
 {
     [DataContract]
-    class MyGetRegistry : Base
+    public class MyGetRegistry : Base
     {
         public enum CATEGORY { Participant, Asset };
 

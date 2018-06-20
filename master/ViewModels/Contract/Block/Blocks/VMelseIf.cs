@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
-    class VMelseIf : VMbase
+    public class VMelseIf : VMbase
     {
         public VMelseIf(Base root) : base(root)
         {

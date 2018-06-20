@@ -9,7 +9,7 @@ using master.Utils;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
-    class VMuseRegistry : VMbase
+    public class VMuseRegistry : VMbase
     {
         public new MyUseRegistry Root
         {

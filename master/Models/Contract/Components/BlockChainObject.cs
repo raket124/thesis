@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace master.Blocks
 {
-    class BlockChainObject : BlockBase
+    public class BlockChainObject : BlockBase
     {
         public enum OPTION { Add, Update, Remove };
         public enum OBJECT_CATEGORY { Participant, Asset };

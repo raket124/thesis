@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace master.Models.Data
 {
     [DataContract]
-    class DataModel
+    public class DataModel
     {
         public enum TYPES { Asset, Participant, Transaction, Event, Concept, Enum };
         protected readonly Dictionary<Type, TYPES> sorter = new Dictionary<Type, TYPES>()
@@ -71,7 +71,7 @@ namespace master.Models.Data
                 case TYPES.Transaction:
                     this.transactionComponents.Add(component as MyTransaction); return;
                 default:
-                    throw new Exception("Invalid class is provided");
+                    throw new Exception("Invalid public class is provided");
             }
         }
 
@@ -92,7 +92,7 @@ namespace master.Models.Data
                 case TYPES.Transaction:
                     return transactionComponents as List<T>;
                 default:
-                    throw new Exception("Invalid class is provided");
+                    throw new Exception("Invalid public class is provided");
             }
         }
 

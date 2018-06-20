@@ -23,29 +23,33 @@
         <Image Source="Images\question_mark.png" Width="32" Height="32" Grid.RowSpan="2" Margin="20,0" />
 
         <Label Grid.Column="1" Content="Function name:"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Answer}" x:Name="aaa" />
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding FunctionName}" />
+        <ComboBox Grid.Column="1" Grid.Row="2" Margin="0,5" ItemsSource="{Binding Accessibilities}" SelectedItem="{Binding Accessibility}"/>
 
-
-        <!--<StackPanel Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Margin="5">
-            <RadioButton Content="Public"/>
-            <RadioButton Content="Controlled"/>
-            <RadioButton Content="Private"/>
-        </StackPanel>-->
-        <ComboBox Grid.Column="1" Grid.Row="2" Margin="0,5">
-            <ComboBoxItem Content="Public"/>
-            <ComboBoxItem Content="Controlled"/>
-            <ComboBoxItem Content="Private"/>
-        </ComboBox>
-        
         <ListBox VerticalAlignment="Stretch"
                  ItemsSource="{Binding Items}"
                  SelectionMode="Multiple"
                  Grid.Column="1" 
                  Grid.Row="3">
+            <ListBox.Style>
+                <Style TargetType="ListBox">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding EnableUserSelect}" Value="false">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Style>
+            
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
+
+
+
                     <Setter Property="OverridesDefaultStyle" Value="true" />
                     <Setter Property="SnapsToDevicePixels" Value="true" />
+                    
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
@@ -58,9 +62,7 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
-
-
-
+        
         <WrapPanel Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Margin="0,15,0,0">
             <Button Width="60" Content="Ok" Margin="0,0,10,0" Command="{Binding CommandOk}"/>
             <Button Width="60" Content="Cancel" IsCancel="True" />

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels
 {
-    class VMmasterModel : MyBindableBase
+    public class VMmasterModel : MyBindableBase
     {
         private MasterModel root;
         public MasterModel Root

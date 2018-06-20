@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace master.Blocks
 {
-    abstract class BlockBase
+    abstract public class BlockBase
     {
         protected string documentation;
         public string Documentation

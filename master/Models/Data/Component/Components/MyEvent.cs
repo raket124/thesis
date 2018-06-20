@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Data.Component.Components
 {
     [DataContract]
-    class MyEvent : Inheritance
+    public class MyEvent : Inheritance
     {
         public MyEvent(string name) : base(name) { }
 
