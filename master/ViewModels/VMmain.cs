@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
-using master.ViewModels.Views;
+using master.ViewModels.Windows.Views;
 using master.Basis;
 using master.ViewModels.Contract.Block;
 using master.ViewModels.Contract.Block.Blocks;

@@ -70,7 +70,7 @@ namespace master.ViewModels.Contract
 
         private void AddGroup()
         {
-            new FunctionWindow().ShowDialog();
+            new FunctionWindow(new List<string>(), new List<string>()).ShowDialog();
 
             var nameWindow = new GroupNameWindow(new List<string>());
             if(nameWindow.ShowDialog() == true)

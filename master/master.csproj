@@ -128,10 +128,6 @@
     <Compile Include="Models\Contract\Components\BlockChainObject.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyError.cs" />
     <Compile Include="Models\Contract\Components\CodeBlock.cs" />
-    <Compile Include="Models\Contract\Block\Conditioning\Old\Ccondition.cs" />
-    <Compile Include="Models\Contract\Block\Conditioning\Old\CconditionGroup.cs" />
-    <Compile Include="Models\Contract\Block\Conditioning\Old\CconditionSingle.cs" />
-    <Compile Include="Models\Contract\Block\Conditioning\Old\Cvariable.cs" />
     <Compile Include="Models\Data\Component\Base.cs" />
     <Compile Include="Models\MasterModel.cs" />
     <Compile Include="Basis\MyBindableBase.cs" />
@@ -158,7 +154,7 @@
     <Compile Include="ViewModels\Data\VMvariable.cs" />
     <Compile Include="ViewModels\VMmasterModel.cs" />
     <Compile Include="ViewModels\VMmain.cs" />
-    <Compile Include="ViewModels\Views\VMmenu.cs" />
+    <Compile Include="ViewModels\Windows\Views\VMmenu.cs" />
     <Compile Include="Windows\FunctionWindow.xaml.cs">
       <DependentUpon>FunctionWindow.xaml</DependentUpon>
     </Compile>

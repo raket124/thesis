@@ -14,8 +14,8 @@ namespace master.Models.Contract.Block.Conditioning
         public enum COMPARE { and, or }
 
         [DataMember]
-        protected ObservableCollection<ConditionBase> conditions;
-        public ObservableCollection<ConditionBase> Conditions
+        protected ObservableCollection<string> conditions;
+        public ObservableCollection<string> Conditions
         {
             get { return this.conditions; }
         }
@@ -28,17 +28,17 @@ namespace master.Models.Contract.Block.Conditioning
 
         public ConditionGroup()
         {
-            this.conditions = new ObservableCollection<ConditionBase>();
+            this.conditions = new ObservableCollection<string>();
             this.connectors = new ObservableCollection<COMPARE>();
 
-            this.conditions.Add(new ConditionBase());
+            this.conditions.Add("Alias 1");
             this.connectors.Add(COMPARE.and);
-            this.conditions.Add(new ConditionBase());
+            this.conditions.Add("Alias 2");
         }
 
         public void Add(ConditionBase condition, COMPARE? comparision = null)
         {
-            this.conditions.Add(condition);
+            this.conditions.Add("X");
             if (comparision.HasValue)
                 this.connectors.Add(comparision.Value);
         }

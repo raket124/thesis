@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace master.ViewModels.Views
+namespace master.ViewModels.Windows.Views
 {
     public class VMmenu : MyBindableBase
     {
