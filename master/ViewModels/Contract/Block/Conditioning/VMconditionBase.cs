@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Contract.Block.Conditioning
 {
-    public class VMconditionBase : MyBindableBase, ICloneable
+    class VMconditionBase : MyBindableBase, ICloneable
     {
         protected readonly Dictionary<ConditionBase.COMPARE, string> COMPARE_DIC = new Dictionary<ConditionBase.COMPARE, string>()
         {

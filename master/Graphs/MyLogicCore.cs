@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace master.Graphs
 {
-    public class MyLogicCore : GXLogicCore<BaseVertex, DataEdge, BidirectionalGraph<BaseVertex, DataEdge>>
+    class MyLogicCore : GXLogicCore<BaseVertex, DataEdge, BidirectionalGraph<BaseVertex, DataEdge>>
     {
         protected MyGraphArea parent;
 

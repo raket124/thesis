@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Conditioning
 {
     [DataContract]
-    public class ConditionGroup
+    class ConditionGroup
     {
         public enum COMPARE { and, or }
 

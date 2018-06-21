@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace master.Models.Contract
 {
-    public class ContractCollectionDemo
+    class ContractCollectionDemo
     {
         public static ContractCollection TutorialContract()
         {
@@ -86,7 +86,52 @@ namespace master.Models.Contract
             output.Functions.Add(new Function("updateEcmrStatusToLoaded", Function.ACCESSIBILITY.Public));
             output.Functions.Add(new Function("updateEcmrStatusToInTransit", Function.ACCESSIBILITY.Public));
             output.Functions.Add(new Function("updateEcmrStatusToConfirmedDelivered", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("updateECMRStatusToCancelled", Function.ACCESSIBILITY.Public));
+            var updateECMRStatusToCancelled = new Function("updateECMRStatusToCancelled", Function.ACCESSIBILITY.Public);
+            updateECMRStatusToCancelled.Blocks.Add(new MyInput(updateECMRStatusToCancelled)
+            {
+                Vars = new ObservableCollection<Block.Variable>()
+                {
+                    new Block.Variable()
+                    {
+                        Ref = true,
+                        ObjectName = "ECMR",
+                        Alias = "ecmr",
+                        Type = Block.Variable.TYPES.Asset
+                    },
+                    new Block.Variable()
+                    {
+                        ObjectName = "Cancellation",
+                        Alias = "cancellation",
+                        Type = Block.Variable.TYPES.Concept,
+                        
+                    }
+                }
+            });
+            updateECMRStatusToCancelled.Blocks.Add(new MyAssign(updateECMRStatusToCancelled)
+            {
+
+            });
+            updateECMRStatusToCancelled.Blocks.Add(new MyAssign(updateECMRStatusToCancelled)
+            {
+                //      new Cancellation
+            });
+            //updateECMRStatusToCancelled.Blocks.Add(new MyAssignRelation(updateECMRStatusToCancelled)
+            //{
+            //    //      new Entity
+            //});
+            updateECMRStatusToCancelled.Blocks.Add(new MyAssign(updateECMRStatusToCancelled)
+            {
+
+            });
+            updateECMRStatusToCancelled.Blocks.Add(new MyAssign(updateECMRStatusToCancelled)
+            {
+
+            });
+            updateECMRStatusToCancelled.Blocks.Add(new MyUseRegistry(updateECMRStatusToCancelled)
+            {
+                Action = MyUseRegistry.ACTION.Update,
+            });
+            output.Functions.Add(updateECMRStatusToCancelled);
             output.Functions.Add(new Function("updateExpectedPickupWindow", Function.ACCESSIBILITY.Public));
             output.Functions.Add(new Function("updateExpectedDeliveryWindow", Function.ACCESSIBILITY.Public));
             doc.Contracts.Add(output);
@@ -167,9 +212,9 @@ namespace master.Models.Contract
                     }
                 }
             });
-            createRecipientOrg.Blocks.Add(new MyAssign(createRecipientOrg)
+            createRecipientOrg.Blocks.Add(new MyUseRegistry(createRecipientOrg)
             {
-
+                Action = MyUseRegistry.ACTION.Insert,
             });
             contract.Functions.Add(createRecipientOrg);
         }

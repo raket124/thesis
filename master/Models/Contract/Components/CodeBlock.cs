@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace master.Blocks
 {
-    public class CodeBlock
+    class CodeBlock
     {
         //protected List<string> _documentation;
         //protected string _param;

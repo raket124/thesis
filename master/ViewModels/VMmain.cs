@@ -16,7 +16,7 @@ using master.ViewModels.Contract.Block.Blocks;
 
 namespace master.ViewModels
 {
-    public class VMmain : MyBindableBase
+    class VMmain : MyBindableBase
     {
         private FileHandler fileHandler;
         private WindowManager windowManager;

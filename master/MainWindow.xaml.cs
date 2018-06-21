@@ -18,7 +18,6 @@ using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
 using master.Windows;
 using Microsoft.Win32;
-using master.Windows.Controls;
 using master.Blocks;
 using master.Files;
 using master.ViewModels;

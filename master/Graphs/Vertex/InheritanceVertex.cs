@@ -9,7 +9,7 @@ using master.Models.Data.Component;
 
 namespace master.Graphs
 {
-    public class InheritanceVertex : BaseVertex
+    class InheritanceVertex : BaseVertex
     {
         protected new Inheritance root;
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
-    public class VMlog : VMbase
+    class VMlog : VMbase
     {
         public new MyLog Root
         {

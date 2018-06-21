@@ -41,7 +41,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="[" />
                                 <TextBlock Text="{Binding ClassName}" />
-                                <TextBlock Text="] " />
+                                <TextBlock Text="] - " />
                                 <TextBlock Text="{Binding Name}" />
                             </StackPanel>
                             <ItemsControl ItemsSource="{Binding Components}">

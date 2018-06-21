@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace master.Basis
 {
     //DefaultDropHandler and MyBindableBase could/should be reversed
-    abstract public class MyBindableBase : DefaultDropHandler, INotifyPropertyChanged
+    public abstract class MyBindableBase : DefaultDropHandler, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

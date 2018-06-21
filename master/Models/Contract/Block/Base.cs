@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block
 {
     [DataContract]
-    abstract public class Base : ObjectBase, ICloneable
+    public abstract class Base : ObjectBase, ICloneable
     {
         protected Function parent;
         public Function Parent

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Data.Component.Components
 {
     [DataContract]
-    public class MyParticipant : Identity
+    class MyParticipant : Identity
     {
         public MyParticipant(string name) : base(name) { }
 

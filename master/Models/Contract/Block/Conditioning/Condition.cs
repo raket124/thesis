@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Conditioning
 {
     [DataContract]
-    public class Condition
+    class Condition
     {
         [DataMember]
         protected ObservableCollection<ConditionBase> conditions;

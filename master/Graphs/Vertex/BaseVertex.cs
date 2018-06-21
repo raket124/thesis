@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace master.Graphs
 {
-    public class BaseVertex : VertexBase
+    class BaseVertex : VertexBase
     {
         protected Base root;
 

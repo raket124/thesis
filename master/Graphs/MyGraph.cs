@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace master.Graphs
 {
-    public class MyGraph : BidirectionalGraph<BaseVertex, DataEdge> { }
+    class MyGraph : BidirectionalGraph<BaseVertex, DataEdge> { }
 }

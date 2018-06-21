@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Data.Component.Components
 {
     [DataContract]
-    public class MyEnum : Base
+    class MyEnum : Base
     {
         [DataMember]
         protected List<string> options;

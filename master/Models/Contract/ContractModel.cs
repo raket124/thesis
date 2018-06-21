@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract
 {
     [DataContract]
-    public class ContractModel : ObjectBase
+    class ContractModel : ObjectBase
     {
         [DataMember]
         protected ObservableCollection<Function> functions;

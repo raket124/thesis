@@ -15,10 +15,11 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using master.Basis;
 using master.Models.Contract;
+using master.ViewModels.Windows;
 
 namespace master.ViewModels.Contract
 {
-    public class VMcontractCollection : MyBindableBase
+    class VMcontractCollection : MyBindableBase
     {
         private ContractCollection root;
         public ContractCollection Root
@@ -70,18 +71,40 @@ namespace master.ViewModels.Contract
 
         private void AddGroup()
         {
-            new FunctionWindow(new List<string>(), new List<string>()).ShowDialog();
+            var window = new NewGroupWindow();
+            var vmWindow = new VMnewGroup(window, 
+                                          new List<string>(
+                                          from contract in this.Root.Contracts
+                                          select contract.Name));
+            window.DataContext = vmWindow;
 
-            var nameWindow = new GroupNameWindow(new List<string>());
-            if(nameWindow.ShowDialog() == true)
-                this.Root.Contracts.Add(new ContractModel(nameWindow.Answer));
+            if (window.ShowDialog() == true)
+                this.Root.Contracts.Add(new ContractModel(vmWindow.Name));
+
+            //new NewFunctionWindow(new List<string>(), new List<string>()).ShowDialog();
         }
 
         private void AddContract(object input)
         {
-            var nameWindow = new GroupNameWindow(new List<string>());
-            if (nameWindow.ShowDialog() == true)
-                (input as VMcontractModel).Root.Functions.Add(new Function(nameWindow.Answer, Function.ACCESSIBILITY.Controlled));
+            var selectedContract = (input as VMcontractModel).Root;
+
+            var window = new NewFunctionWindow();
+            var vmWindow = new VMnewFunction(window, 
+                                             new List<string>(
+                                             from function in selectedContract.Functions
+                                             select function.Name),
+                                             new List<string>()
+                                             {
+                                                "Fill",
+                                                "This",
+                                                "List"
+                                             });
+            window.DataContext = vmWindow;
+
+            
+
+            if (window.ShowDialog() == true)
+                selectedContract.Functions.Add(vmWindow.Function);
         }
 
         private bool CanAddContract(object input)

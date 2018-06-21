@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Data
 {
-    public class VMdataModel : MyBindableBase
+    class VMdataModel : MyBindableBase
     {
         private DataModel root;
 

@@ -81,8 +81,101 @@
                             <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Aliases}"/>
                             <TextBlock Margin="0,0,10,0" Text="Action:"/>
                             <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Actions}" SelectedItem="{Binding Action}"/>
-                            <CheckBox Margin="0,0,10,0" Content="Direct" IsChecked="{Binding Delay}"/>
+                            <CheckBox Margin="0,0,10,0" Content=":Direct" IsChecked="{Binding Delay}" FlowDirection="RightToLeft"/>
                         </StackPanel>
+                    </Expander>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm_blocks:VMassign}">
+                <Border Style="{StaticResource MyBorder}">
+                    <Expander Header="{Binding Name}" IsExpanded="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="5,5,5,5">
+                                <TextBlock Margin="0,0,10,0" Text="Alias:"/>
+                                <ComboBox Margin="0,0,10,0" Width="100"/>
+                                <TextBlock Margin="0,0,10,0" Text="Property:"/>
+                                <ComboBox Margin="0,0,10,0" Width="100">
+                                    <ComboBoxItem Content="This"/>
+                                    <ComboBoxItem Content="Propery 1"/>
+                                    <ComboBoxItem Content="Propery 2"/>
+                                    <ComboBoxItem Content="Propery 3"/>
+                                </ComboBox>
+                                <TextBlock Margin="0,0,10,0" Text=" => "/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="5,5,5,5">
+                                <RadioButton GroupName="X"/>
+                                <TextBlock Margin="0,0,10,0" Text="Alias:"/>
+                                <ComboBox Margin="0,0,10,0" Width="100"/>
+                                <TextBlock Margin="0,0,10,0" Text="Property:"/>
+                                <ComboBox Margin="0,0,10,0" Width="100">
+                                    <ComboBoxItem Content="This"/>
+                                    <ComboBoxItem Content="Propery 1"/>
+                                    <ComboBoxItem Content="Propery 2"/>
+                                    <ComboBoxItem Content="Propery 3"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="5,5,5,5">
+                                <RadioButton GroupName="X"/>
+                                <TextBlock Margin="0,0,10,0" Text="Value:"/>
+                                <ComboBox Margin="0,0,10,0" Width="100">
+                                    <ComboBoxItem Content="Enum.X"/>
+                                    <ComboBoxItem Content="Enum.Y"/>
+                                    <ComboBoxItem Content="Enum.Z"/>
+                                </ComboBox>
+                            </StackPanel>
+
+                        </Grid>
+                        
+                        
+                        
+                        
+                        
+                        <!--<StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                            <TextBlock Margin="0,0,10,0" Text="Alias:"/>
+                            <ComboBox Margin="0,0,10,0" Width="100"/>
+                            <TextBlock Margin="0,0,10,0" Text="Property:"/>
+                            <ComboBox Margin="0,0,10,0" Width="100">
+                                <ComboBoxItem Content="This"/>
+                                <ComboBoxItem Content="Propery 1"/>
+                                <ComboBoxItem Content="Propery 2"/>
+                                <ComboBoxItem Content="Propery 3"/>
+                            </ComboBox>
+                            <TextBlock Margin="0,0,10,0" Text=" => "/>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <RadioButton/>
+                                    <TextBlock Margin="0,0,10,0" Text="Alias:"/>
+                                    <ComboBox Margin="0,0,10,0" Width="100"/>
+                                    <TextBlock Margin="0,0,10,0" Text="Property:"/>
+                                    <ComboBox Margin="0,0,10,0" Width="100">
+                                        <ComboBoxItem Content="This"/>
+                                        <ComboBoxItem Content="Propery 1"/>
+                                        <ComboBoxItem Content="Propery 2"/>
+                                        <ComboBoxItem Content="Propery 3"/>
+                                    </ComboBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <RadioButton/>
+                                    <TextBlock Margin="0,0,10,0" Text="Value: (enum example)"/>
+                                    <ComboBox Margin="0,0,10,0" Width="100">
+                                        <ComboBoxItem Content="Enum.X"/>
+                                        <ComboBoxItem Content="Enum.Y"/>
+                                        <ComboBoxItem Content="Enum.Z"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>-->
                     </Expander>
                 </Border>
             </DataTemplate>
@@ -158,32 +251,10 @@
 
                                                 </ItemsControl.Resources>
                                             </ItemsControl>
-
-                                            <!--<ComboBox>
-                                                <ComboBoxItem Content="Alias 1"/>
-                                                <ComboBoxItem Content="Alias 2"/>
-                                                <ComboBoxItem Content="Alias 3"/>
-                                            </ComboBox>
-                                            <ComboBox ItemsSource="{Binding Comparisons}"/>
-                                            <ComboBox>
-                                                <ComboBoxItem Content="Alias 4"/>
-                                                <ComboBoxItem Content="Alias 5"/>
-                                                <ComboBoxItem Content="Alias 6"/>
-                                            </ComboBox>
-                                            <ComboBox ItemsSource="{Binding Comparisons}"/>
-                                            <ComboBox>
-                                                <ComboBoxItem Content="Alias 7"/>
-                                                <ComboBoxItem Content="Alias 8"/>
-                                                <ComboBoxItem Content="Alias 9"/>
-                                            </ComboBox>-->
-                                            
-                                            
-                                            
-                                            
                                             <Button Command="{Binding CommandAdd}" Margin="0,0,5,0">
                                                 <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
                                             </Button>
-                                            <CheckBox FlowDirection="LeftToRight" Content="Inverse"/>
+                                            <CheckBox Content=":Inverse" FlowDirection="RightToLeft"/>
                                             <TextBox Text="Alias"/>
                                         </StackPanel>
                                     </DataTemplate>
@@ -247,7 +318,7 @@
                                             <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Types}" SelectedItem="{Binding Type}" IsEditable="False"/>
                                             <TextBlock Margin="0,0,10,0" Text="Object:"/>
                                             <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding ObjectNames}" IsEnabled="{Binding IsObject}" IsEditable="False"/>
-                                            <CheckBox Margin="0,0,10,0" IsChecked="{Binding List}" Content="List" FlowDirection="LeftToRight"/>
+                                            <CheckBox Margin="0,0,10,0" IsChecked="{Binding List}" Content=":List" FlowDirection="RightToLeft"/>
                                             <TextBlock Margin="0,0,10,0" Text="Alias:"/>
                                             <TextBox Margin="0,0,10,0" Width="100" Text="{Binding Alias}"/>
                                         </StackPanel>

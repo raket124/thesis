@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
-    public class VMinput : VMbase
+    class VMinput : VMbase
     {
         public new MyInput Root
         {

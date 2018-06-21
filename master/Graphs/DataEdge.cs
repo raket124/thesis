@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace master.Graphs
 {
-    public class DataEdge : EdgeBase<BaseVertex>
+    class DataEdge : EdgeBase<BaseVertex>
     {
         private Brush color;
 

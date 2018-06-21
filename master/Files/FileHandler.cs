@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace master.Files
 {
-    public class FileHandler
+    class FileHandler
     {
         //TODO replace parent and model code to a more solid solution
 

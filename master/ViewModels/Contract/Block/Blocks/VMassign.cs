@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
-    public class VMassign : VMbase
+    class VMassign : VMbase
     {
         public new MyAssign Root
         {

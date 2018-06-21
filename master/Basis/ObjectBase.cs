@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Basis
 {
     [DataContract]
-    abstract public class ObjectBase
+    public abstract class ObjectBase
     {
         [DataMember]
         protected string docs;

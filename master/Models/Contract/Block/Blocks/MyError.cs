@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Blocks
 {
     [DataContract]
-    public class MyError : Base
+    class MyError : Base
     {
         [DataMember]
         protected string message;

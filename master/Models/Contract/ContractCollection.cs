@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract
 {
     [DataContract]
-    public class ContractCollection
+    class ContractCollection
     {
         [DataMember]
         protected ObservableCollection<ContractModel> contracts;

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Contract.Block
 {
-    public class VMvariable : MyBindableBase
+    class VMvariable : MyBindableBase
     {
         protected VMinput parent;
         public VMinput Parent

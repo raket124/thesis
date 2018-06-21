@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Blocks
 {
     [DataContract]
-    public class MyInput : Base
+    class MyInput : Base
     {
         [DataMember]
         protected ObservableCollection<Variable> vars;

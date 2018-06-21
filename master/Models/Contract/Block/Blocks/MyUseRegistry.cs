@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Blocks
 {
     [DataContract]
-    public class MyUseRegistry : Base
+    class MyUseRegistry : Base
     {
         public enum ACTION { Insert, Update, Remove };
 

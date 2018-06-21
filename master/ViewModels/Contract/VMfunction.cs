@@ -19,7 +19,7 @@ using System.Windows;
 
 namespace master.ViewModels.Contract
 {
-    public class VMfunction : MyBindableBase, IDropTarget
+    class VMfunction : MyBindableBase, IDropTarget
     {
         private Function root;
         public Function Root
@@ -71,6 +71,8 @@ namespace master.ViewModels.Contract
                     output.Add(new VMassign(block as MyAssign) { Parent = this });
                 if (block.GetType() == typeof(MyIf))
                     output.Add(new VMif(block as MyIf) { Parent = this });
+                if (block.GetType() == typeof(MyUseRegistry))
+                    output.Add(new VMuseRegistry(block as MyUseRegistry) { Parent = this });
                 //Add new blocks here
             }
             this.Blocks = output;

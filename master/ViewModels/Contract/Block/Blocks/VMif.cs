@@ -12,7 +12,7 @@ using master.ViewModels.Contract.Block.Conditioning;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
-    public class VMif : VMbase
+    class VMif : VMbase
     {
         public new MyIf Root
         {

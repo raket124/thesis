@@ -9,46 +9,42 @@ using System.Threading.Tasks;
 namespace master.Models.Data
 {
     [DataContract]
-    public class Variable : ObjectBase
+    class Variable : ObjectBase
     {
         public enum RELATION { variable, reference };
 
         [DataMember]
         protected string type;
-        [DataMember]
-        protected RELATION relation;
-        [DataMember]
-        protected bool isList;
-        [DataMember]
-        protected bool isOptional;
-        [DataMember]
-        protected string defaultValue;
-        [DataMember]
-        protected string regex;
-
         public string Type
         {
             get { return this.type; }
             set { this.type = value; }
         }
-
+        [DataMember]
+        protected RELATION relation;
         public RELATION Relation
         {
             get { return this.relation; }
             set { this.relation = value; }
         }
-
+        [DataMember]
+        protected bool isList;
         public bool List
         {
             get { return this.isList; }
             set { this.isList = value; }
         }
-
+        [DataMember]
+        protected bool isOptional;
         public bool Optional
         {
             get { return this.isOptional; }
             set { this.isOptional = value; }
         }
+        [DataMember]
+        protected string defaultValue;
+        [DataMember]
+        protected string regex;
         
         public Variable(string type, string name, RELATION relation) : base()
         {
