@@ -89,6 +89,7 @@ namespace master.ViewModels.Contract.Block
             {
                 this.Root.Alias = value;
                 this.NotifyPropertyChanged();
+                this.Parent.Parent.FullRefresh();
             }
         }
 

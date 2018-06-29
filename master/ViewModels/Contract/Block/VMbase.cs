@@ -24,6 +24,7 @@ namespace master.ViewModels.Contract.Block
         public Base Root
         {
             get { return this.root; }
+            //set { this.root = value; }
         }
 
         public VMbase(Base root)
@@ -59,5 +60,10 @@ namespace master.ViewModels.Contract.Block
         protected abstract string Required();
 
         protected abstract string Optional();
+
+        public virtual IList<string> Aliases
+        {
+            get { return new List<string>(); }
+        }
     }
 }

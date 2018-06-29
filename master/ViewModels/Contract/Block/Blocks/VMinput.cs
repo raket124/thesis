@@ -54,11 +54,15 @@ namespace master.ViewModels.Contract.Block.Blocks
         public void Add()
         {
             this.Root.Vars.Add(new Models.Contract.Block.Variable());
+            this.Parent.FullRefresh();
         }
 
         public override object Clone()
         {
-            return new VMinput(this.root.Clone() as MyInput);
+            return new VMinput(this.root.Clone() as MyInput)
+            {
+                Parent = this.Parent
+            };
         }
 
         protected override string BlockName() { return "Input block"; }
@@ -66,5 +70,15 @@ namespace master.ViewModels.Contract.Block.Blocks
         protected override string Required() { return string.Format(this.reqFormat, "1+ variable(s)"); }
 
         protected override string Optional() { return string.Empty; }
+
+        public override IList<string> Aliases
+        {
+            get
+            {
+                return new List<string>(
+                       from vars in this.Vars
+                       select vars.Alias);
+            }
+        }
     }
 }

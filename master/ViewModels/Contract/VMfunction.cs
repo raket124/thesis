@@ -6,7 +6,6 @@ using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
 using master.ViewModels.Contract.Block;
 using master.ViewModels.Contract.Block.Blocks;
-using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,7 +18,7 @@ using System.Windows;
 
 namespace master.ViewModels.Contract
 {
-    class VMfunction : MyBindableBase, IDropTarget
+    class VMfunction : Basis.DefaultDropHandler, IDropTarget
     {
         private Function root;
         public Function Root
@@ -95,20 +94,6 @@ namespace master.ViewModels.Contract
             get { return true; }
         }
 
-        public IList<string> GetAliases()
-        {
-            var input = this.root.Aliases;
-            var output = new List<string>();
-
-            foreach(var variable in input)
-            {
-                //Prune results based on parameters
-                output.Add(variable.Alias);
-            }
-            return output;
-        }
-
-
         public override void DragOver(IDropInfo dropInfo)
         {
             if (dropInfo.TargetCollection != dropInfo.DragInfo.SourceCollection) //If copy
@@ -119,13 +104,6 @@ namespace master.ViewModels.Contract
                 if (source.GetType() == typeof(VMinput) && blocks.OfType<VMinput>().Any())
                     return;
             }
-            //else // Not a copy
-            //{
-            //    var source = dropInfo.Data as VMbase;
-            //    if (source.GetType() == typeof(VMinput))
-            //        return;
-            //}
-
             base.DragOver(dropInfo);
         }
 
@@ -134,19 +112,20 @@ namespace master.ViewModels.Contract
             if (dropInfo.TargetCollection != dropInfo.DragInfo.SourceCollection) //If copy
             {
                 var source = dropInfo.Data as VMbase;
-                var clone = source.Clone() as VMbase;
-
-                clone.Parent = this;
-                clone.Root.Parent = this.root;
+                source.Parent = this;
             }
             base.Drop(dropInfo);
         }
 
         public override void FullRefresh()
         {
-            this.NotifyPropertyChanged("Aliases");
             foreach(VMbase block in this.blocks)
                 block.FullRefresh();
+        }
+
+        public IList<string> Aliases
+        {
+            get { return this.blocks.SelectMany(x => x.Aliases).ToList(); }
         }
     }
 }

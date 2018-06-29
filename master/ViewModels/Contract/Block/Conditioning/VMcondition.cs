@@ -89,11 +89,17 @@ namespace master.ViewModels.Contract.Block.Conditioning
                           select new VMconditionGroup(groups, this));
         }
 
+        public void WrapValue()
+        {
+            //this.Value = new VMconditionGroup(null, this);
+            this.Value = null;
+        }
+
         public void Wrap()
         {
             this.WrapConditions();
             this.WrapGroups();
-            this.Value = new VMconditionGroup(null, null);
+            this.WrapValue();
         }
 
         public object Clone()

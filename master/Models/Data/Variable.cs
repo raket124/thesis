@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models.Data
 {
     [DataContract]
-    class Variable : ObjectBase
+    public class Variable : ObjectBase
     {
         public enum RELATION { variable, reference };
 
@@ -43,9 +43,19 @@ namespace master.Models.Data
         }
         [DataMember]
         protected string defaultValue;
+        public string Default
+        {
+            get { return this.defaultValue; }
+            set { this.defaultValue = value; }
+        }
         [DataMember]
         protected string regex;
-        
+        public string Regex
+        {
+            get { return this.regex; }
+            set { this.regex = value; }
+        }
+
         public Variable(string type, string name, RELATION relation) : base()
         {
             this.type = type;

@@ -80,8 +80,6 @@ namespace master.ViewModels.Contract
 
             if (window.ShowDialog() == true)
                 this.Root.Contracts.Add(new ContractModel(vmWindow.Name));
-
-            //new NewFunctionWindow(new List<string>(), new List<string>()).ShowDialog();
         }
 
         private void AddContract(object input)

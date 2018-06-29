@@ -22,7 +22,10 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public override object Clone()
         {
-            return new VMlog(this.root.Clone() as MyLog);
+            return new VMlog(this.root.Clone() as MyLog)
+            {
+                Parent = this.Parent
+            };
         }
 
         public string Text

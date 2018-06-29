@@ -1,9 +1,11 @@
 ﻿using master.Basis;
 using master.Models.Contract.Block.Conditioning;
 using master.Utils;
+using master.ViewModels.BaseTypes;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +14,6 @@ namespace master.ViewModels.Contract.Block.Conditioning
 {
     class VMconditionGroup : MyBindableBase, ICloneable
     {
-        protected readonly Dictionary<ConditionGroup.COMPARE, string> COMPARE_DIC = new Dictionary<ConditionGroup.COMPARE, string>()
-        {
-            { ConditionGroup.COMPARE.and, "&&" },
-            { ConditionGroup.COMPARE.or, "||" }
-        };
-
         protected ConditionGroup root;
         public ConditionGroup Root
         {
@@ -29,16 +25,8 @@ namespace master.ViewModels.Contract.Block.Conditioning
             get { return this.parent; }
         }
 
-        protected List<VMconditionBase> conditions;
-        public List<VMconditionBase> Conditions
-        {
-            get { return this.conditions; }
-            set
-            {
-                this.conditions = value;
-                this.NotifyPropertyChanged();
-            }
-        }
+        public List<VMstring> conditions;
+        public List<VMconditionGroupCompare> connectors;
 
         public DelegateCommand CommandAdd { get; private set; }
         public DelegateCommand CommandRemove { get; private set; }
@@ -49,15 +37,31 @@ namespace master.ViewModels.Contract.Block.Conditioning
             this.parent = parent;
             this.Wrap();
 
+            this.CommandAdd = new DelegateCommand(this.Add);
             this.CommandRemove = new DelegateCommand(() => this.Parent.Root.Groups.Remove(this.Root));
+
+            this.Root.Conditions.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CollectionChanged);
+            this.Root.Connectors.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CollectionChanged);
         }
 
-        private void Wrap()
+        private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.Conditions = new List<VMconditionBase>();
-            //this.Conditions = new List<VMconditionBase>(
-            //                  from condition in this.Root.Conditions
-            //                  select new VMconditionBase(condition, this));
+            this.Wrap();
+        }
+
+        public void Wrap()
+        {
+            this.conditions = new List<VMstring>(from condition in this.Root.Conditions
+                                                 select new VMstring(condition));
+            this.connectors = new List<VMconditionGroupCompare>(from compare in this.Root.Connectors
+                                                                select new VMconditionGroupCompare(compare));
+        }
+
+        public void Add()
+        {
+            this.Root.Conditions.Add(string.Empty);
+            this.Root.Connectors.Add(ConditionGroup.COMPARE.and);
+            this.NotifyPropertyChanged("ConditionSet");
         }
 
         public object Clone()
@@ -65,14 +69,19 @@ namespace master.ViewModels.Contract.Block.Conditioning
             throw new NotImplementedException();
         }
 
-        public IList<string> Comparisons
+        public string Alias
         {
-            get { return this.COMPARE_DIC.Values.ToList(); }
+            get { return this.Root.Alias; }
+            set
+            {
+                this.Root.Alias = value;
+                this.NotifyPropertyChanged();
+            }
         }
 
         public IList<object> ConditionSet
         {
-            get { return EnumerableUtil.Interleave(this.Conditions, this.Root.Connectors).ToList(); }
+            get { return EnumerableUtil.Interleave(this.conditions, this.connectors).ToList(); }
         }
     }
 }

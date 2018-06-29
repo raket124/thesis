@@ -11,12 +11,13 @@ using System.Threading.Tasks;
 
 namespace master.Models.Contract
 {
-    [DataContract]
+    [DataContract (IsReference = true)]
     [
         KnownType(typeof(MyError)), 
         KnownType(typeof(MyAssign)), 
         KnownType(typeof(MyInput)), 
-        KnownType(typeof(MyLog))
+        KnownType(typeof(MyLog)),
+        KnownType(typeof(MyUseRegistry)),
     ]
     public class Function : ObjectBase
     {

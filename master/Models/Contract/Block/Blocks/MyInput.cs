@@ -19,14 +19,14 @@ namespace master.Models.Contract.Block.Blocks
             set { this.vars = value; }
         }
 
-        public MyInput(Function parent) : base(parent)
+        public MyInput() : base()
         {
             this.vars = new ObservableCollection<Variable>();
         }
 
         public override object Clone()
         {
-            return new MyInput(this.parent)
+            return new MyInput()
             {
                 Name = this.Name,
                 Docs = this.Docs,

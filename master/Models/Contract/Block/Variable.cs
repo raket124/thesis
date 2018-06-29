@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block
 {
     [DataContract]
-    public class Variable : ObjectBase, ICloneable
+    public class Variable : Data.Variable, ICloneable
     {
         public enum TYPES { Asset, Concept, Enum, Participant, String, Double, Integer, Long, DateTime, Boolean }
 
         [DataMember]
-        protected TYPES type;
-        public TYPES Type
+        protected new TYPES type;
+        public new TYPES Type
         {
             get { return this.type; }
             set { this.type = value; }
@@ -34,28 +34,13 @@ namespace master.Models.Contract.Block
             get { return this.alias; }
             set { this.alias = value; }
         }
-        [DataMember]
-        protected bool isList;
-        public bool List
-        {
-            get { return this.isList; }
-            set { this.isList = value; }
-        }
-        [DataMember]
-        protected bool isRef;
-        public bool Ref
-        {
-            get { return this.isRef; }
-            set { this.isRef = value; }
-        }
 
-        public Variable() : base()
+        public Variable() : base(string.Empty, string.Empty, RELATION.variable)
         {
             this.type = TYPES.Asset;
             this.objectName = string.Empty;
             this.alias = string.Empty;
             this.isList = false;
-            this.isRef = false;
         }
 
         public object Clone()
@@ -65,10 +50,13 @@ namespace master.Models.Contract.Block
                 Name = this.Name,
                 Docs = this.Docs,
                 Type = this.Type,
+                Relation = this.Relation,
+                List = this.List,
+                Optional = this.Optional,
+                Default = this.Default,
+                Regex = this.Regex,
                 ObjectName = this.ObjectName,
                 Alias = this.Alias,
-                List = this.List,
-                Ref = this.Ref
             };
         }
     }

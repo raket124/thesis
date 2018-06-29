@@ -13,14 +13,14 @@ namespace master.Models.Contract.Block.Blocks
         [DataMember]
         protected string message;
 
-        public MyError(Function parent) : base(parent)
+        public MyError() : base()
         {
 
         }
 
         public override object Clone()
         {
-            return new MyError(this.parent)
+            return new MyError()
             {
                 Name = this.Name,
                 Docs = this.Docs,

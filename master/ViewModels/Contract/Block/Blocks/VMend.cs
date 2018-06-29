@@ -17,6 +17,7 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public override object Clone()
         {
+            //return new VMend(this.root);
             throw new NotImplementedException();
         }
 

@@ -32,9 +32,66 @@ namespace master.Models.Contract.Block.Conditioning
 
         public Condition()
         {
-            this.conditions = new ObservableCollection<ConditionBase>();
+            this.conditions = new ObservableCollection<ConditionBase>()
+            {
+                new ConditionBase()
+            };
             this.groups = new ObservableCollection<ConditionGroup>();
             this.value = new ConditionGroup();
+
+
+
+            //this.conditions.Add(new ConditionBase()
+            //{
+            //    Alias = "A",
+            //    Comparison = ConditionBase.COMPARE.equal,
+            //    LHS = "Variable 1",
+            //    RHS = "Variable 2"
+            //});
+
+            //this.conditions.Add(new ConditionBase()
+            //{
+            //    Alias = "B",
+            //    Comparison = ConditionBase.COMPARE.equal,
+            //    LHS = "Variable 3",
+            //    RHS = "Variable 4"
+            //});
+
+
+            //this.conditions.Add(new ConditionBase()
+            //{
+            //    Alias = "C",
+            //    Comparison = ConditionBase.COMPARE.equal,
+            //    LHS = "Variable 1",
+            //    RHS = "Variable 4"
+            //});
+
+            //this.groups.Add(new ConditionGroup()
+            //{
+            //    Alias = "1",
+            //    Conditions = new ObservableCollection<string>()
+            //    {
+            //        "A",
+            //        "B"
+            //    },
+            //    Connectors = new ObservableCollection<ConditionGroup.COMPARE>()
+            //    {
+            //        ConditionGroup.COMPARE.and
+            //    }
+            //});
+
+            //this.value = new ConditionGroup()
+            //{
+            //    Conditions = new ObservableCollection<string>()
+            //    {
+            //        "1",
+            //        "C"
+            //    },
+            //    Connectors = new ObservableCollection<ConditionGroup.COMPARE>()
+            //    {
+            //        ConditionGroup.COMPARE.or
+            //    }
+            //};
         }
     }
 }

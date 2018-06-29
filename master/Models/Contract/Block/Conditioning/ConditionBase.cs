@@ -13,8 +13,8 @@ namespace master.Models.Contract.Block.Conditioning
         public enum COMPARE { equal, not_equal, greater, greater_or_equal, lesser, lesser_or_equal }
 
         [DataMember]
-        protected object lhs;
-        public object LHS
+        protected string lhs;
+        public string LHS
         {
             get { return this.lhs; }
             set { this.lhs = value; }
@@ -27,18 +27,27 @@ namespace master.Models.Contract.Block.Conditioning
             set { this.comparison = value; }
         }
         [DataMember]
-        protected object rhs;
-        public object RHS
+        protected string rhs;
+        public string RHS
         {
             get { return this.rhs; }
             set { this.rhs = value; }
         }
+        [DataMember]
+        protected string alias;
+        public string Alias
+        {
+            get { return this.alias; }
+            set { this.alias = value; }
+        }
 
         public ConditionBase()
         {
-            this.lhs = null;
+            this.lhs = string.Empty;
             this.comparison = COMPARE.equal;
-            this.rhs = null;
+            this.rhs = string.Empty;
+
+            this.alias = string.Empty;
         }
     }
 }

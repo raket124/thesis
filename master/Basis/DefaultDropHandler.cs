@@ -14,7 +14,7 @@ namespace master.Basis
     /// <summary>
     /// A default insertion drop handler for the most common usages
     /// </summary>
-    public class DefaultDropHandler : IDropTarget
+    public class DefaultDropHandler : MyBindableBase, IDropTarget
     {
         /// <summary>
         /// Determines whether the data of the drag drop action should be copied otherwise moved.

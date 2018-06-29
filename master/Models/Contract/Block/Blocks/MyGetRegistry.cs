@@ -19,14 +19,14 @@ namespace master.Models.Contract.Block.Blocks
         [DataMember]
         protected string objectNameSpace;
 
-        public MyGetRegistry(Function parent) : base(parent)
+        public MyGetRegistry() : base()
         {
 
         }
 
         public override object Clone()
         {
-            return new MyAssign(this.parent)
+            return new MyAssign()
             {
                 Name = this.Name,
                 Docs = this.Docs,

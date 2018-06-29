@@ -1,6 +1,7 @@
 ﻿using master.Models;
 using master.ViewModels;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Windows.Forms;
@@ -23,7 +24,9 @@ namespace master.Files
         }
         protected string currentFile;
 
-        protected readonly DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(MasterModel));
+        //protected readonly DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(MasterModel));
+
+        protected readonly DataContractSerializer serializer = new DataContractSerializer(typeof(MasterModel));
 
         public FileHandler(VMmain parent)
         {

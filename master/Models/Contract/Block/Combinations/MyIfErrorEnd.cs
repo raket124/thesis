@@ -14,7 +14,7 @@ namespace master.Models.Contract.Block.Combinations
         protected MyIf ifBlock;
         protected MyError errorBlock;
 
-        public MyIfErrorEnd(Function parent) : base(parent)
+        public MyIfErrorEnd() : base()
         {
 
         }

@@ -134,6 +134,11 @@
     <Compile Include="Basis\MyBindableBase.cs" />
     <Compile Include="Utils\EnumerableUtil.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
+    <Compile Include="ViewModels\BaseTypes\VMconditionBaseCompare.cs" />
+    <Compile Include="ViewModels\BaseTypes\VMconditionGroupCompare.cs" />
+    <Compile Include="ViewModels\BaseTypes\VMenum.cs" />
+    <Compile Include="ViewModels\BaseTypes\VMstring.cs" />
+    <Compile Include="ViewModels\BaseTypes\VMtype.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMerror.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMuseRegistry.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMend.cs" />
@@ -227,6 +232,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Views\ContractTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Views\DictionaryContractListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,6 +1,7 @@
 ﻿using master.Basis;
 using master.Models.Contract.Block.Conditioning;
 using master.Utils;
+using master.ViewModels.BaseTypes;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace master.ViewModels.Contract.Block.Conditioning
         public VMcondition Parent
         {
             get { return this.parent; }
+            set { this.parent = value; }
         }
 
         public DelegateCommand CommandRemove { get; private set; }
@@ -45,7 +47,49 @@ namespace master.ViewModels.Contract.Block.Conditioning
 
         public object Clone()
         {
-            throw new NotImplementedException();
+            return new VMconditionBase(new ConditionBase(), null);
+        }
+
+        public string LHS
+        {
+            get { return this.Root.LHS; }
+            set
+            {
+                this.Root.LHS = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public string Comparison
+        {
+            get { return this.COMPARE_DIC[this.Root.Comparison]; }
+            set
+            {
+                this.Root.Comparison = (from entry in this.COMPARE_DIC
+                                        where entry.Value == value
+                                        select entry.Key).First();
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public string RHS
+        {
+            get { return this.Root.RHS; }
+            set
+            {
+                this.Root.RHS = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public string Alias
+        {
+            get { return this.Root.Alias; }
+            set
+            {
+                this.Root.Alias = value;
+                this.NotifyPropertyChanged();
+            }
         }
 
         public IList<string> Comparisons

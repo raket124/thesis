@@ -23,7 +23,10 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public override object Clone()
         {
-            return new VMuseRegistry(this.root.Clone() as MyUseRegistry);
+            return new VMuseRegistry(this.root.Clone() as MyUseRegistry)
+            {
+                Parent = this.Parent
+            };
         }
 
         protected override string BlockName() { return "Registry block"; }
@@ -55,6 +58,16 @@ namespace master.ViewModels.Contract.Block.Blocks
         public IList<MyUseRegistry.ACTION> Actions
         {
             get { return EnumUtil.EnumToList<MyUseRegistry.ACTION>(); }
+        }
+
+        public IList<string> AliasOptions
+        {
+            get { return this.Parent.Aliases; }
+        }
+
+        public override void FullRefresh()
+        {
+            this.NotifyPropertyChanged("AliasOptions");
         }
     }
 }

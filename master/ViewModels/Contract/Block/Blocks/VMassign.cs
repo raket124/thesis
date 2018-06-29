@@ -22,7 +22,10 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public override object Clone()
         {
-            return new VMassign(this.root.Clone() as MyAssign);
+            return new VMassign(this.root.Clone() as MyAssign)
+            {
+                Parent = this.Parent
+            };
         }
 
         protected override string BlockName() { return "Block chain block"; }
@@ -31,15 +34,9 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         protected override string Optional() { return string.Empty; }
 
-        public IList<string> Aliases
+        public IList<string> AliasOptions
         {
-            get
-            {
-                if (this.Parent != null)
-                    return this.Parent.GetAliases();
-                else
-                    return new List<string>();
-            }
+            get { return this.Parent.Aliases; }
         }
 
         public override void FullRefresh()

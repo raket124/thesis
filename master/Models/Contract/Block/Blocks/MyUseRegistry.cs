@@ -38,7 +38,7 @@ namespace master.Models.Contract.Block.Blocks
             set { this.preventDelay = value; }
         }
 
-        public MyUseRegistry(Function parent) : base(parent)
+        public MyUseRegistry() : base()
         {
             this.action = ACTION.Insert;
             this.variable = null;
@@ -47,7 +47,7 @@ namespace master.Models.Contract.Block.Blocks
 
         public override object Clone()
         {
-            return new MyUseRegistry(this.parent)
+            return new MyUseRegistry()
             {
                 Name = this.Name,
                 Docs = this.Docs,

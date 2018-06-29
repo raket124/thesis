@@ -36,7 +36,10 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public override object Clone()
         {
-            return new VMif(this.root.Clone() as MyIf);
+            return new VMif(this.root.Clone() as MyIf)
+            {
+                Parent = this.Parent
+            };
         }
 
         protected override string BlockName() { return "If - block"; }

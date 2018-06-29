@@ -18,7 +18,7 @@ namespace master.Models.Contract.Block.Blocks
             set { this.condition = value; }
         }
 
-        public MyIf(Function parent) : base(parent)
+        public MyIf() : base()
         {
             this.condition = new Condition();
             this.condition.Conditions.Add(new ConditionBase());
@@ -27,7 +27,7 @@ namespace master.Models.Contract.Block.Blocks
 
         public override object Clone()
         {
-            return new MyIf(this.parent)
+            return new MyIf()
             {
                 Name = this.Name,
                 Docs = this.Docs,
