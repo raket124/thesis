@@ -26,10 +26,9 @@ namespace master.Models.Contract
             {
                 Vars = new ObservableCollection<Block.Variable>()
                 {
-                    new Block.Variable()
+                    new Block.Variable(Block.Variable.TYPES.Asset)
                     {
                         Relation = Data.Variable.RELATION.reference,
-                        Type = Block.Variable.TYPES.Asset,
                         ObjectName = "Field",
                         Alias = "fromField",
                     }
@@ -40,10 +39,9 @@ namespace master.Models.Contract
             {
                 Vars = new ObservableCollection<Block.Variable>()
                 {
-                    new Block.Variable()
+                    new Block.Variable(Block.Variable.TYPES.Asset)
                     {
                         Relation = Data.Variable.RELATION.reference,
-                        Type = Block.Variable.TYPES.Asset,
                         ObjectName = "Field",
                         Alias = "arrivalField",
                     }
@@ -91,19 +89,16 @@ namespace master.Models.Contract
             {
                 Vars = new ObservableCollection<Block.Variable>()
                 {
-                    new Block.Variable()
+                    new Block.Variable(Block.Variable.TYPES.Asset)
                     {
                         Relation = Data.Variable.RELATION.reference,
                         ObjectName = "ECMR",
-                        Alias = "ecmr",
-                        Type = Block.Variable.TYPES.Asset
+                        Alias = "ecmr"
                     },
-                    new Block.Variable()
+                    new Block.Variable(Block.Variable.TYPES.Concept)
                     {
                         ObjectName = "Cancellation",
-                        Alias = "cancellation",
-                        Type = Block.Variable.TYPES.Concept,
-                        
+                        Alias = "cancellation"
                     }
                 }
             });
@@ -165,9 +160,8 @@ namespace master.Models.Contract
                             {
                                 Vars = new ObservableCollection<Block.Variable>()
                                 {
-                                    new Block.Variable()
+                                    new Block.Variable(Block.Variable.TYPES.Asset)
                                     {
-                                        Type = Block.Variable.TYPES.Asset,
                                         ObjectName = "LegalOwnerOrg",
                                         Alias = "newLegalOwnerOrg",
                                     }
@@ -188,9 +182,8 @@ namespace master.Models.Contract
                             {
                                 Vars = new ObservableCollection<Block.Variable>()
                                 {
-                                    new Block.Variable()
+                                    new Block.Variable(Block.Variable.TYPES.Asset)
                                     {
-                                        Type = Block.Variable.TYPES.Asset,
                                         ObjectName = "CompoundOrg",
                                         Alias = "newCompoundOrg",
                                     }
@@ -211,9 +204,8 @@ namespace master.Models.Contract
                             {
                                 Vars = new ObservableCollection<Block.Variable>()
                                 {
-                                    new Block.Variable()
+                                    new Block.Variable(Block.Variable.TYPES.Asset)
                                     {
-                                        Type = Block.Variable.TYPES.Asset,
                                         ObjectName = "CarrierOrg",
                                         Alias = "newCarrierOrg",
                                     }
@@ -234,9 +226,8 @@ namespace master.Models.Contract
                             {
                                 Vars = new ObservableCollection<Block.Variable>()
                                 {
-                                    new Block.Variable()
+                                    new Block.Variable(Block.Variable.TYPES.Asset)
                                     {
-                                        Type = Block.Variable.TYPES.Asset,
                                         ObjectName = "RecipientOrg",
                                         Alias = "newRecipientOrg",
                                     }

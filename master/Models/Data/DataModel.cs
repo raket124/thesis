@@ -94,41 +94,5 @@ namespace master.Models.Data
                     throw new Exception("Invalid class is provided");
             }
         }
-
-        public Dictionary<Type, List<string>> GetObjectList()
-        {
-            var output = new Dictionary<Type, List<string>>();
-            this.GetObjectList<MyAsset>(output);
-            this.GetObjectList<MyConcept>(output);
-            this.GetObjectList<MyEnum>(output);
-            this.GetObjectList<MyEvent>(output);
-            this.GetObjectList<MyParticipant>(output);
-            this.GetObjectList<MyTransaction>(output);
-
-            output.Add(typeof(string), new List<string>());
-            return output;
-        }
-
-        //public Dictionary<string, Tuple<Type, int>> GetReferenceTable(Dictionary<Type, bool> activeComponents)
-        //{
-        //    var output = new Dictionary<string, Tuple<Type, int>>();
-        //    this.GetReferenceTable<MyAsset>(activeComponents, output);
-        //    this.GetReferenceTable<MyConcept>(activeComponents, output);
-        //    this.GetReferenceTable<MyEnum>(activeComponents, output);
-        //    this.GetReferenceTable<MyEvent>(activeComponents, output);
-        //    this.GetReferenceTable<MyParticipant>(activeComponents, output);
-        //    this.GetReferenceTable<MyTransaction>(activeComponents, output);
-        //    return output;
-        //}
-
-        //private void GetReferenceTable<T>(Dictionary<string, Tuple<Type, int>> output) where T : Base
-        //{
-        //    this.GetReferenceTable<T>(new Dictionary<Type, bool>() { { typeof(T), true } }, output);
-        //}
-
-        private void GetObjectList<T>(Dictionary<Type, List<string>> output) where T : Base
-        {
-            output.Add(typeof(T), (from component in this.GetComponent<T>() select component.Name).ToList());
-        }
     }
 }

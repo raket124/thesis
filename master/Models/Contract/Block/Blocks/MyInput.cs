@@ -35,10 +35,5 @@ namespace master.Models.Contract.Block.Blocks
                        select var.Clone() as Variable)
             };
         }
-
-        public override IList<Variable> Aliases
-        {
-            get { return this.Vars.ToList(); }
-        }
     }
 }

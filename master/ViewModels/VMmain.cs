@@ -50,7 +50,7 @@ namespace master.ViewModels
                 new VMinput(new MyInput(){
                     Vars = new ObservableCollection<Variable>()
                     {
-                        new Variable()
+                        new Variable(Variable.TYPES.String)
                     }
                 }),
                 new VMlog(new MyLog()),

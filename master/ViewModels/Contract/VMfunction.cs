@@ -123,9 +123,26 @@ namespace master.ViewModels.Contract
                 block.FullRefresh();
         }
 
-        public IList<string> Aliases
+        public Dictionary<Type, Dictionary<string, List<string>>> Variables
         {
-            get { return this.blocks.SelectMany(x => x.Aliases).ToList(); }
+            get
+            {
+                var dict = this.Parent.Parent.Parent.Model.GetTypeList();
+                var output = new Dictionary<Type, Dictionary<string, List<string>>>();
+
+                foreach (var dic in dict)
+                {
+                    output.Add(dic.Key, new Dictionary<string, List<string>>());
+                    foreach (var name in dic.Value)
+                        output[dic.Key].Add(name, new List<string>());
+                }
+
+                foreach (var block in this.blocks)
+                    foreach (var alias in block.Aliases)
+                        foreach(var instance in alias.Value)
+                            output[alias.Key][instance.Key].AddRange(instance.Value);
+                return output;
+            }
         }
     }
 }

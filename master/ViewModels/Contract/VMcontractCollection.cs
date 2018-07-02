@@ -26,6 +26,12 @@ namespace master.ViewModels.Contract
         {
             get { return this.root; }
         }
+        private VMmasterModel parent;
+        public VMmasterModel Parent
+        {
+            get { return this.parent; }
+        }
+
         private ObservableCollection<VMcontractModel> contracts;
         public ObservableCollection<VMcontractModel> Contracts
         {
@@ -44,9 +50,10 @@ namespace master.ViewModels.Contract
         public DelegateCommand<object> CommandAddContract { get; private set; }
         public DelegateCommand<object> CommandSelectionChanged { get; private set; }
 
-        public VMcontractCollection(ContractCollection root)
+        public VMcontractCollection(ContractCollection root, VMmasterModel parent)
         {
             this.root = root;
+            this.parent = parent;
             this.WrapContracts();
 
             this.CommandDelete = new DelegateCommand<object>(this.Remove, this.CanRemove);
@@ -133,7 +140,14 @@ namespace master.ViewModels.Contract
             this.CommandAddContract.RaiseCanExecuteChanged();
 
             if (input.GetType() == typeof(VMfunction))
-                this.CLB.ListBox.DataContext = input as VMfunction;
+            {
+                var x = input as VMfunction;
+                var y = x.Variables;
+                this.CLB.ListBox.DataContext = x;
+
+                //this.CLB.ListBox.DataContext = input as VMfunction;
+            }
+
             if (input.GetType() == typeof(VMcontractModel))
                 this.CLB.ListBox.DataContext = input as VMcontractModel;
         }

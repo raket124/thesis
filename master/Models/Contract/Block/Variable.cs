@@ -1,4 +1,5 @@
 ﻿using master.Basis;
+using master.Models.Data.Component.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,19 @@ namespace master.Models.Contract.Block
     public class Variable : Data.Variable, ICloneable
     {
         public enum TYPES { Asset, Concept, Enum, Participant, String, Double, Integer, Long, DateTime, Boolean }
+        public static readonly Dictionary<TYPES, Tuple<Type, bool>> TYPES_DICT = new Dictionary<TYPES, Tuple<Type, bool>>()
+        {
+            { TYPES.Asset, Tuple.Create<Type, bool>(typeof(MyAsset), true) },
+            { TYPES.Concept, Tuple.Create<Type, bool>(typeof(MyConcept), true) },
+            { TYPES.Enum, Tuple.Create<Type, bool>(typeof(MyEnum), true) },
+            { TYPES.Participant, Tuple.Create<Type, bool>(typeof(MyParticipant), true) },
+            { TYPES.String, Tuple.Create<Type, bool>(typeof(string), false) },
+            { TYPES.Double, Tuple.Create<Type, bool>(typeof(double), false) },
+            { TYPES.Integer, Tuple.Create<Type, bool>(typeof(int), false) },
+            { TYPES.Long, Tuple.Create<Type, bool>(typeof(long), false) },
+            { TYPES.DateTime, Tuple.Create<Type, bool>(typeof(DateTime), false) },
+            { TYPES.Boolean, Tuple.Create<Type, bool>(typeof(bool), false) }
+        };
 
         [DataMember]
         protected new TYPES type;
@@ -35,17 +49,17 @@ namespace master.Models.Contract.Block
             set { this.alias = value; }
         }
 
-        public Variable() : base(string.Empty, string.Empty, RELATION.variable)
+        public Variable(TYPES type) : base(string.Empty, string.Empty, RELATION.variable)
         {
-            this.type = TYPES.Asset;
-            this.objectName = string.Empty;
+            this.type = type;
+            this.objectName = "Listing";
             this.alias = string.Empty;
             this.isList = false;
         }
 
         public object Clone()
         {
-            return new Variable()
+            return new Variable(this.Type)
             {
                 Name = this.Name,
                 Docs = this.Docs,

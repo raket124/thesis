@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using master.Basis;
 using master.Models.Contract.Block.Blocks;
 using master.Utils;
+using master.Models.Data.Component.Components;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
@@ -62,7 +63,16 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public IList<string> AliasOptions
         {
-            get { return this.Parent.Aliases; }
+            get
+            {
+                var participants = this.Parent.Variables[typeof(MyParticipant)];
+                var assets = this.Parent.Variables[typeof(MyAsset)];
+
+                var output = new List<string>();
+                output.AddRange(participants.SelectMany(x => x.Value));
+                output.AddRange(assets.SelectMany(x => x.Value));
+                return output;
+            }
         }
 
         public override void FullRefresh()

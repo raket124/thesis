@@ -43,10 +43,5 @@ namespace master.Models.Contract
             this.access = access;
             this.blocks = new ObservableCollection<Block.Base>();
         }
-
-        public IList<Variable> Aliases
-        {
-            get { return this.blocks.SelectMany(x => x.Aliases).ToList(); }
-        }
     }
 }

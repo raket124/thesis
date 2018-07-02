@@ -34,10 +34,10 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         protected override string Optional() { return string.Empty; }
 
-        public IList<string> AliasOptions
-        {
-            get { return this.Parent.Aliases; }
-        }
+        //public IList<string> AliasOptions
+        //{
+        //    get { return this.Parent.Aliases; }
+        //}
 
         public override void FullRefresh()
         {

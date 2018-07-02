@@ -97,23 +97,25 @@ namespace master.ViewModels.Contract.Block
         {
             get
             {
-                switch (this.Type)
-                {
-                    case Variable.TYPES.Asset:
-                    case Variable.TYPES.Concept:
-                    case Variable.TYPES.Enum:
-                    case Variable.TYPES.Participant:
-                        return true;
-                    case Variable.TYPES.String:
-                    case Variable.TYPES.Double:
-                    case Variable.TYPES.Integer:
-                    case Variable.TYPES.Long:
-                    case Variable.TYPES.DateTime:
-                    case Variable.TYPES.Boolean:
-                        return false;
-                    default:
-                        return false;
-                }
+                return Variable.TYPES_DICT[this.Type].Item2;
+
+                //switch (this.Type)
+                //{
+                //    case Variable.TYPES.Asset:
+                //    case Variable.TYPES.Concept:
+                //    case Variable.TYPES.Enum:
+                //    case Variable.TYPES.Participant:
+                //        return true;
+                //    case Variable.TYPES.String:
+                //    case Variable.TYPES.Double:
+                //    case Variable.TYPES.Integer:
+                //    case Variable.TYPES.Long:
+                //    case Variable.TYPES.DateTime:
+                //    case Variable.TYPES.Boolean:
+                //        return false;
+                //    default:
+                //        return false;
+                //}
             }
         }
 

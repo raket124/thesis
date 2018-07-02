@@ -37,8 +37,6 @@ namespace master.Models
             //this.contracts = new Ccontracts();
             //this.dataModel = new Mfile();
             this.SetupDemo(); //Debugging only
-
-            this.model.GetObjectList();
         }
 
         public void SetupDemo()

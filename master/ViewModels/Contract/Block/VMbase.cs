@@ -61,9 +61,9 @@ namespace master.ViewModels.Contract.Block
 
         protected abstract string Optional();
 
-        public virtual IList<string> Aliases
+        public virtual Dictionary<Type, Dictionary<string, List<string>>> Aliases
         {
-            get { return new List<string>(); }
+            get { return new Dictionary<Type, Dictionary<string, List<string>>>(); }
         }
     }
 }

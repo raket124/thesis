@@ -37,8 +37,8 @@ namespace master.ViewModels
         public VMmasterModel(MasterModel root)
         {
             this.root = root;
-            this.contracts = new VMcontractCollection(this.root.Contracts);
-            this.model = new VMdataModel(this.root.Model);
+            this.model = new VMdataModel(this.root.Model); //Instantiate model first!
+            this.contracts = new VMcontractCollection(this.root.Contracts, this);
             this.authorization = null;
         }
     }

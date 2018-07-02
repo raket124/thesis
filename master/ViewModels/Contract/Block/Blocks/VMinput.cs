@@ -1,7 +1,9 @@
 ﻿using master.Models;
+using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
 using Prism.Commands;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -17,8 +19,8 @@ namespace master.ViewModels.Contract.Block.Blocks
         {
             get { return this.root as MyInput; }
         }
-        private ObservableCollection<VMvariable> vars;
-        public ObservableCollection<VMvariable> Vars
+        private List<VMvariable> vars;
+        public List<VMvariable> Vars
         {
             get { return this.vars; }
             set
@@ -45,7 +47,7 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         private void WrapVars()
         {
-            this.Vars = new ObservableCollection<VMvariable>(
+            this.Vars = new List<VMvariable>(
                         from var in this.Root.Vars
                         select new VMvariable(var, this));
         }
@@ -53,7 +55,7 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public void Add()
         {
-            this.Root.Vars.Add(new Models.Contract.Block.Variable());
+            this.Root.Vars.Add(new Models.Contract.Block.Variable(Models.Contract.Block.Variable.TYPES.String));
             this.Parent.FullRefresh();
         }
 
@@ -71,13 +73,37 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         protected override string Optional() { return string.Empty; }
 
-        public override IList<string> Aliases
+        public override Dictionary<Type, Dictionary<string, List<string>>> Aliases
         {
             get
             {
-                return new List<string>(
-                       from vars in this.Vars
-                       select vars.Alias);
+                var output = new Dictionary<Type, Dictionary<string, List<string>>>();
+                foreach (VMvariable var in this.vars)
+                {
+                    var type = Variable.TYPES_DICT[var.Type].Item1;
+                    var name = var.Root.ObjectName;
+                    var alias = var.Alias;
+
+                    if (output.ContainsKey(type))
+                    {
+                        if(output[type].ContainsKey(name))
+                        {
+                            output[type][name].Add(alias);
+                        }
+                        else
+                        {
+                            output[type].Add(name, new List<string>());
+                            output[type][name].Add(alias);
+                        }
+                    }
+                    else
+                    {
+                        output.Add(type, new Dictionary<string, List<string>>());
+                        output[type].Add(name, new List<string>());
+                        output[type][name].Add(alias);
+                    }
+                }
+                return output;
             }
         }
     }
