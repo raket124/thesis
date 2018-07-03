@@ -57,8 +57,9 @@ namespace master.ViewModels
                 new VMif(new MyIf()),
                 new VMelseIf(null),
                 new VMelse(null),
-                new VMend(null),
-                new VMuseRegistry(new MyUseRegistry())
+                new VMend(new MyEnd()),
+                new VMuseRegistry(new MyUseRegistry()),
+                new VMsimpleIf(new MySimpleIf())
             };
         }
 

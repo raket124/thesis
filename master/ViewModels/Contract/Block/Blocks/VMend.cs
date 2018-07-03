@@ -5,20 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using master.Models.Contract.Block;
 using System.Collections.ObjectModel;
+using master.Models.Contract.Block.Blocks;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
     class VMend : VMbase
     {
-        public VMend(Base root) : base(root)
+        public new MyEnd Root
+        {
+            get { return this.root as MyEnd; }
+        }
+
+        public VMend(MyEnd root) : base(root)
         {
 
         }
 
         public override object Clone()
         {
-            //return new VMend(this.root);
-            throw new NotImplementedException();
+            return new VMend(this.root.Clone() as MyEnd)
+            {
+                Parent = this.Parent
+            };
         }
 
         protected override string BlockName()

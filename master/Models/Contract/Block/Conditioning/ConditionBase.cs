@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Conditioning
 {
     [DataContract]
-    class ConditionBase
+    class ConditionBase : ICloneable
     {
         public enum COMPARE { equal, not_equal, greater, greater_or_equal, lesser, lesser_or_equal }
 
@@ -48,6 +48,17 @@ namespace master.Models.Contract.Block.Conditioning
             this.rhs = string.Empty;
 
             this.alias = string.Empty;
+        }
+
+        public object Clone()
+        {
+            return new ConditionBase()
+            {
+                LHS = this.LHS,
+                Comparison = this.Comparison,
+                RHS = this.RHS,
+                Alias = this.Alias
+            };
         }
     }
 }

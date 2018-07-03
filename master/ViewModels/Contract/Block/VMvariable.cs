@@ -29,20 +29,12 @@ namespace master.ViewModels.Contract.Block
 
         public DelegateCommand<object> CommandRemove { get; private set; }
 
-        ObservableCollection<string> availableTypes;
-
         public VMvariable(Variable root, VMinput parent)
         {
             this.root = root;
             this.parent = parent;
 
             this.CommandRemove = new DelegateCommand<object>(this.Remove);
-
-            availableTypes = new ObservableCollection<string>()
-            {
-                "LegalOwnerAdmin",
-                "CompoundAdmin"
-            };
         }
 
         public void Remove(object input)
@@ -55,10 +47,26 @@ namespace master.ViewModels.Contract.Block
             get { return this.root.Type; }
             set
             {
+                var old_dic = this.Parent.Parent.Variables;
                 this.root.Type = value;
+
+                if (this.IsObject)
+                {
+                    this.Root.ObjectName = old_dic[Variable.TYPES_DICT[value].Item1].Keys.First();
+                }
+                else
+                {
+                    this.Root.ObjectName = "Listing";
+                }
+
+
+                
                 this.NotifyPropertyChanged();
                 this.NotifyPropertyChanged("ObjectNames");
                 this.NotifyPropertyChanged("IsObject");
+
+
+                this.Parent.Parent.FullRefresh();
             }
         }
 
@@ -67,18 +75,29 @@ namespace master.ViewModels.Contract.Block
             get { return this.root.List; }
             set
             {
-                this.root.List = value;
+                this.Root.List = value;
                 this.NotifyPropertyChanged();
             }
         }
 
-        public ObservableCollection<string> ObjectNames
+        public string ObjectName
         {
-            get { return this.IsObject ? this.availableTypes : new ObservableCollection<string>(); }
+            get { return this.root.ObjectName; }
             set
             {
-                this.availableTypes = value;
+                this.Root.ObjectName = value;
                 this.NotifyPropertyChanged();
+            }
+        }
+
+        public List<string> ObjectNames
+        {
+            get
+            {
+                var type = Variable.TYPES_DICT[this.root.Type].Item1;
+                return this.IsObject ? 
+                       this.Parent.Parent.Variables[type].Keys.ToList() : 
+                       new List<string>();
             }
         }
 
@@ -95,28 +114,7 @@ namespace master.ViewModels.Contract.Block
 
         public bool IsObject
         {
-            get
-            {
-                return Variable.TYPES_DICT[this.Type].Item2;
-
-                //switch (this.Type)
-                //{
-                //    case Variable.TYPES.Asset:
-                //    case Variable.TYPES.Concept:
-                //    case Variable.TYPES.Enum:
-                //    case Variable.TYPES.Participant:
-                //        return true;
-                //    case Variable.TYPES.String:
-                //    case Variable.TYPES.Double:
-                //    case Variable.TYPES.Integer:
-                //    case Variable.TYPES.Long:
-                //    case Variable.TYPES.DateTime:
-                //    case Variable.TYPES.Boolean:
-                //        return false;
-                //    default:
-                //        return false;
-                //}
-            }
+            get { return Variable.TYPES_DICT[this.Type].Item2; }
         }
 
         public IList<Variable.TYPES> Types

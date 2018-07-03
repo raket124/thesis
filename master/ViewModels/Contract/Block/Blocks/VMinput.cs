@@ -55,7 +55,7 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public void Add()
         {
-            this.Root.Vars.Add(new Models.Contract.Block.Variable(Models.Contract.Block.Variable.TYPES.String));
+            this.Root.Vars.Add(new Variable(Variable.TYPES.String));
             this.Parent.FullRefresh();
         }
 

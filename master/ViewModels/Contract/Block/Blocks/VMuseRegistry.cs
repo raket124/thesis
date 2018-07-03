@@ -61,6 +61,16 @@ namespace master.ViewModels.Contract.Block.Blocks
             get { return EnumUtil.EnumToList<MyUseRegistry.ACTION>(); }
         }
 
+        public string Alias
+        {
+            get { return this.Root.Alias; }
+            set
+            {
+                this.Root.Alias = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
         public IList<string> AliasOptions
         {
             get

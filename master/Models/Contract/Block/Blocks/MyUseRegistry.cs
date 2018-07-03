@@ -20,15 +20,11 @@ namespace master.Models.Contract.Block.Blocks
             set { this.action = value; }
         }
         [DataMember]
-        protected Variable variable;
-        public Variable Variable
+        protected string alias;
+        public string Alias
         {
-            get { return this.variable; }
-            set
-            {
-                if(value == null || (value.Type == Variable.TYPES.Asset || value.Type == Variable.TYPES.Participant))
-                    this.variable = value;
-            }
+            get { return this.alias; }
+            set { this.alias = value; }
         }
         [DataMember]
         protected bool preventDelay;
@@ -41,7 +37,7 @@ namespace master.Models.Contract.Block.Blocks
         public MyUseRegistry() : base()
         {
             this.action = ACTION.Insert;
-            this.variable = null;
+            this.alias = string.Empty;
             this.preventDelay = false;
         }
 
@@ -52,7 +48,7 @@ namespace master.Models.Contract.Block.Blocks
                 Name = this.Name,
                 Docs = this.Docs,
                 Action = this.Action,
-                Variable = this.Variable
+                Alias = this.Alias
             };
         }
     }

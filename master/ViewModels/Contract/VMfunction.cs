@@ -72,6 +72,8 @@ namespace master.ViewModels.Contract
                     output.Add(new VMif(block as MyIf) { Parent = this });
                 if (block.GetType() == typeof(MyUseRegistry))
                     output.Add(new VMuseRegistry(block as MyUseRegistry) { Parent = this });
+                if (block.GetType() == typeof(MyEnd))
+                    output.Add(new VMend(block as MyEnd) { Parent = this });
                 //Add new blocks here
             }
             this.Blocks = output;
@@ -141,6 +143,20 @@ namespace master.ViewModels.Contract
                     foreach (var alias in block.Aliases)
                         foreach(var instance in alias.Value)
                             output[alias.Key][instance.Key].AddRange(instance.Value);
+
+                //foreach (var types in output)
+                //{
+                //    Console.WriteLine(types.Key);
+                //    foreach (var objects in types.Value)
+                //    {
+                //        Console.WriteLine("\t" + objects.Key);
+                //        foreach (var alias in objects.Value)
+                //        {
+                //            Console.WriteLine("\t\t" + alias);
+                //        }
+                //    }
+                //}
+                //Console.WriteLine("");
                 return output;
             }
         }

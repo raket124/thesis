@@ -42,16 +42,24 @@ namespace master.ViewModels.Data
             var output = new Dictionary<Type, List<string>>();
             this.GetObjectList<MyAsset>(output);
             this.GetObjectList<MyConcept>(output);
-            this.GetObjectList<MyEnum>(output);
+            this.GetObjectListEnum(output);
             this.GetObjectList<MyEvent>(output);
             this.GetObjectList<MyParticipant>(output);
             this.GetObjectList<MyTransaction>(output);
             return output;
         }
 
-        private void GetObjectList<T>(Dictionary<Type, List<string>> output) where T : Base
+        private void GetObjectListEnum(Dictionary<Type, List<string>> output)
         {
-            output.Add(typeof(T), (from component in this.root.GetComponent<T>() select component.Name).ToList());
+            output.Add(typeof(MyEnum), (from component in this.root.GetComponent<MyEnum>()
+                                        select component.Name).ToList());
+        }
+
+        private void GetObjectList<T>(Dictionary<Type, List<string>> output) where T : Inheritance
+        {
+            output.Add(typeof(T), (from component in this.root.GetComponent<T>()
+                                   where !component.Abstract
+                                   select component.Name).ToList());
         }
     }
 }

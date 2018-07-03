@@ -25,7 +25,7 @@
             <Expander Header="{Binding Name}" IsExpanded="True">
                 <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
                     <TextBlock Margin="0,0,10,0" Text="Alias:"/>
-                    <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding AliasOptions}"/>
+                    <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding AliasOptions}" SelectedItem="{Binding Alias}"/>
                     <TextBlock Margin="0,0,10,0" Text="Action:"/>
                     <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Actions}" SelectedItem="{Binding Action}"/>
                     <CheckBox Margin="0,0,10,0" Content=":Direct" IsChecked="{Binding Delay}" FlowDirection="RightToLeft"/>
@@ -37,13 +37,10 @@
     <DataTemplate DataType="{x:Type vm_blocks:VMlog}">
         <Border Style="{StaticResource MyBorder}">
             <Expander Header="{Binding Name}" IsExpanded="True">
-                <TextBox AcceptsReturn="True" Margin="5,5,5,5" Text="{Binding Text}">
-
-                </TextBox>
+                <TextBox AcceptsReturn="True" Margin="5,5,5,5" Text="{Binding Text}"/>
             </Expander>
         </Border>
     </DataTemplate>
-
 
     <DataTemplate DataType="{x:Type vm_blocks:VMinput}">
         <Border Style="{StaticResource MyBorder}">
@@ -59,9 +56,9 @@
                                     </Button>
                                     <TextBlock Margin="0,0,10,0" Text="Type:"/>
                                     <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Types}" SelectedItem="{Binding Type}" IsEditable="False"/>
-                                    <TextBlock Margin="0,0,10,0" Text="Object:"/>
-                                    <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding ObjectNames}" IsEnabled="{Binding IsObject}" IsEditable="False"/>
                                     <CheckBox Margin="0,0,10,0" IsChecked="{Binding List}" Content=":List" FlowDirection="RightToLeft"/>
+                                    <TextBlock Margin="0,0,10,0" Text="Object:" IsEnabled="{Binding IsObject}"/>
+                                    <ComboBox Margin="0,0,10,0" Width="100" SelectedItem="{Binding ObjectName}" ItemsSource="{Binding ObjectNames}" IsEnabled="{Binding IsObject}" IsEditable="False"/>
                                     <TextBlock Margin="0,0,10,0" Text="Alias:"/>
                                     <TextBox Margin="0,0,10,0" Width="100" Text="{Binding Alias}"/>
                                 </StackPanel>
@@ -76,4 +73,24 @@
         </Border>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm_blocks:VMsimpleIf}">
+        <Border Style="{StaticResource MyBorder}">
+            <Expander Header="{Binding Name}" IsExpanded="True">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Width="100" Text="{Binding Condition.LHS}"/>
+                    <ComboBox  Width="100" SelectedItem="{Binding Condition.Comparison}" ItemsSource="{Binding Condition.Comparisons}"/>
+                    <TextBox Width="100" Text="{Binding Condition.RHS}"/>
+                    <CheckBox Content="Inverse:"/>
+                </StackPanel>
+            </Expander>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm_blocks:VMend}">
+        <Border Style="{StaticResource MyBorder}">
+            <TextBlock Text="{Binding Name}" Margin="25,0,0,0"/>
+        </Border>
+    </DataTemplate>
+    
+    
 </ResourceDictionary>

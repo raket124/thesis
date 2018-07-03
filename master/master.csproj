@@ -110,10 +110,12 @@
     <Compile Include="Basis\ObjectBase.cs" />
     <Compile Include="Models\Authorization\Base.cs" />
     <Compile Include="Models\Contract\Block\Base.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyEnd.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyIf.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyInput.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyLog.cs" />
-    <Compile Include="Models\Contract\Block\Combinations\MyIfErrorEnd.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MySimpleIf.cs" />
+    <Compile Include="Models\Contract\Block\Combinations\MySimpleIfError.cs" />
     <Compile Include="Models\Contract\Block\Conditioning\Condition.cs" />
     <Compile Include="Models\Contract\Block\Conditioning\ConditionBase.cs" />
     <Compile Include="Models\Contract\Block\Conditioning\ConditionGroup.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="ViewModels\BaseTypes\VMstring.cs" />
     <Compile Include="ViewModels\BaseTypes\VMtype.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMerror.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMsimpleIf.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMuseRegistry.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMend.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMelse.cs" />

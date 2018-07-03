@@ -170,6 +170,7 @@ namespace master.Models.Contract
                             new MyUseRegistry()
                             {
                                 Action = MyUseRegistry.ACTION.Insert,
+                                Alias = "newLegalOwnerOrg"
                             }
                         }
                     },
@@ -192,6 +193,7 @@ namespace master.Models.Contract
                             new MyUseRegistry()
                             {
                                 Action = MyUseRegistry.ACTION.Insert,
+                                Alias = "newCompoundOrg"
                             }
                         }
                     },
@@ -214,6 +216,7 @@ namespace master.Models.Contract
                             new MyUseRegistry()
                             {
                                 Action = MyUseRegistry.ACTION.Insert,
+                                Alias = "newCarrierOrg"
                             }
                         }
                     },
@@ -236,6 +239,7 @@ namespace master.Models.Contract
                             new MyUseRegistry()
                             {
                                 Action = MyUseRegistry.ACTION.Insert,
+                                Alias = "newRecipientOrg"
                             }
                         }
                     }
