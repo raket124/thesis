@@ -52,11 +52,11 @@ namespace master.ViewModels.Contract.Block
 
                 if (this.IsObject)
                 {
-                    this.Root.ObjectName = old_dic[Variable.TYPES_DICT[value].Item1].Keys.First();
+                    this.ObjectName = old_dic[Variable.TYPES_DICT[value].Item1].Keys.First();
                 }
                 else
                 {
-                    this.Root.ObjectName = "Listing";
+                    this.ObjectName = "Listing";
                 }
 
 

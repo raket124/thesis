@@ -47,7 +47,7 @@
             <Expander Header="{Binding Name}" IsExpanded="True">
                 <StackPanel>
                     <ItemsControl HorizontalContentAlignment="Stretch"
-                                          ItemsSource="{Binding Vars}">
+                                  ItemsSource="{Binding Vars}">
                         <ItemsControl.Resources>
                             <DataTemplate DataType="{x:Type vm_block:VMvariable}">
                                 <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
@@ -55,10 +55,10 @@
                                         <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
                                     </Button>
                                     <TextBlock Margin="0,0,10,0" Text="Type:"/>
-                                    <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Types}" SelectedItem="{Binding Type}" IsEditable="False"/>
+                                    <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Types}" SelectedItem="{Binding Type}"/>
                                     <CheckBox Margin="0,0,10,0" IsChecked="{Binding List}" Content=":List" FlowDirection="RightToLeft"/>
                                     <TextBlock Margin="0,0,10,0" Text="Object:" IsEnabled="{Binding IsObject}"/>
-                                    <ComboBox Margin="0,0,10,0" Width="100" SelectedItem="{Binding ObjectName}" ItemsSource="{Binding ObjectNames}" IsEnabled="{Binding IsObject}" IsEditable="False"/>
+                                    <ComboBox Margin="0,0,10,0" Width="100" SelectedItem="{Binding ObjectName}" ItemsSource="{Binding ObjectNames}" IsEnabled="{Binding IsObject}"/>
                                     <TextBlock Margin="0,0,10,0" Text="Alias:"/>
                                     <TextBox Margin="0,0,10,0" Width="100" Text="{Binding Alias}"/>
                                 </StackPanel>

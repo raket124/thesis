@@ -1,10 +1,6 @@
-﻿using master.Models.Contract;
-using master.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,9 +14,12 @@ using System.Windows.Shapes;
 
 namespace master.Windows
 {
-    public partial class NewFunctionWindow : Window
+    /// <summary>
+    /// Interaction logic for SelectVariableWIndow.xaml
+    /// </summary>
+    public partial class SelectVariableWIndow : Window
     {
-        public NewFunctionWindow()
+        public SelectVariableWIndow()
         {
             InitializeComponent();
         }

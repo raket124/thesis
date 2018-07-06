@@ -1,4 +1,5 @@
-﻿using System;
+﻿using master.ViewModels.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,8 @@ namespace master.Windows
             else
             {
                 this.codeWindow = new CodeWindow();
+                var VMwindow = new VMcode(this.codeWindow);
+                this.codeWindow.DataContext = VMwindow;
                 this.codeWindow.Show();
             }
         }

@@ -180,9 +180,6 @@ namespace master.Basis
                 var targetList = dropInfo.TargetCollection.TryGetList();
                 return targetList != null;
             }
-            //      else if (dropInfo.DragInfo.SourceCollection is ItemCollection) {
-            //        return false;
-            //      }
             else if (dropInfo.TargetCollection == null)
             {
                 return false;

@@ -26,7 +26,8 @@
                     <DataTemplate DataType="{x:Type graphs:EnumVertex}">
                         <StackPanel>
                             <TextBlock Text="{Binding Name}" />
-                            <ItemsControl ItemsSource="{Binding Components}">
+                            <ItemsControl
+                                ItemsSource="{Binding Components}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding}" />

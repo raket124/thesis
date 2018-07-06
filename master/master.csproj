@@ -103,6 +103,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Basis\DefaultDropHandler.cs" />
+    <Compile Include="Basis\MyRootedBindableBase.cs" />
     <Compile Include="Files\FileHandler.cs" />
     <Compile Include="Graphs\Vertex\EnumVertex.cs" />
     <Compile Include="Graphs\Vertex\IdentityVertex.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Basis\ObjectBase.cs" />
     <Compile Include="Models\Authorization\Base.cs" />
     <Compile Include="Models\Contract\Block\Base.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyCode.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyEnd.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyIf.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyInput.cs" />
@@ -134,6 +136,10 @@
     <Compile Include="Models\Data\Component\Base.cs" />
     <Compile Include="Models\MasterModel.cs" />
     <Compile Include="Basis\MyBindableBase.cs" />
+    <Compile Include="Models\Variables\ObjectGroup.cs" />
+    <Compile Include="Models\Variables\ObjectValue.cs" />
+    <Compile Include="Models\Variables\VariableGroup.cs" />
+    <Compile Include="Models\Variables\VariableListing.cs" />
     <Compile Include="Utils\EnumerableUtil.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
     <Compile Include="ViewModels\BaseTypes\VMconditionBaseCompare.cs" />
@@ -161,13 +167,24 @@
     <Compile Include="ViewModels\Contract\VMfunction.cs" />
     <Compile Include="ViewModels\Data\VMdataModel.cs" />
     <Compile Include="ViewModels\Data\VMvariable.cs" />
+    <Compile Include="ViewModels\Variables\VMobjectValueAlias.cs" />
+    <Compile Include="ViewModels\Variables\VMvariableGroupAlias.cs" />
+    <Compile Include="ViewModels\Variables\VMobjectGroup.cs" />
+    <Compile Include="ViewModels\Variables\VMobjectValue.cs" />
+    <Compile Include="ViewModels\Variables\VMvariableGroup.cs" />
+    <Compile Include="ViewModels\Variables\VMvariableListing.cs" />
     <Compile Include="ViewModels\VMmasterModel.cs" />
     <Compile Include="ViewModels\VMmain.cs" />
     <Compile Include="ViewModels\Windows\Views\VMmenu.cs" />
+    <Compile Include="ViewModels\Windows\VMcode.cs" />
     <Compile Include="ViewModels\Windows\VMnewFunction.cs" />
     <Compile Include="ViewModels\Windows\VMnewGroup.cs" />
+    <Compile Include="ViewModels\Windows\VMselectVariable.cs" />
     <Compile Include="Windows\NewFunctionWindow.xaml.cs">
       <DependentUpon>NewFunctionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SelectVariableWIndow.xaml.cs">
+      <DependentUpon>SelectVariableWIndow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Views\BlockListBox.xaml.cs">
       <DependentUpon>BlockListBox.xaml</DependentUpon>
@@ -223,6 +240,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\NewFunctionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SelectVariableWIndow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -307,6 +328,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Windows\Images\add_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Windows\Images\check_green.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
