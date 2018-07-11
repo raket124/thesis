@@ -3,6 +3,7 @@ using master.Models;
 using master.Models.Data;
 using master.Models.Data.Component;
 using master.Models.Data.Component.Components;
+using master.Models.Variables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,26 @@ namespace master.ViewModels.Data
             this.GetObjectList<MyTransaction>(output);
             return output;
         }
+
+        public List<ObjectValue> GetObjectList<T>() where T : Inheritance
+        {
+            return new List<ObjectValue>(from c in this.root.GetComponent<T>()
+                                         select new ObjectValue()
+                                         {
+                                             Name = c.Name,
+                                             Properties = new List<Variable>(c.Components)
+                                         });
+        }
+
+        public List<ObjectValue> GetObjectListEnum()
+        {
+            return new List<ObjectValue>(from c in this.root.GetComponent<MyEnum>()
+                                         select new ObjectValue()
+                                         {
+                                             Name = c.Name
+                                         });
+        }
+
 
         private void GetObjectListEnum(Dictionary<Type, List<string>> output)
         {

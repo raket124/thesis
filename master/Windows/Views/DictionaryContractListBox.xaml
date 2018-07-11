@@ -77,10 +77,10 @@
         <Border Style="{StaticResource MyBorder}">
             <Expander Header="{Binding Name}" IsExpanded="True">
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Width="100" Text="{Binding Condition.LHS}"/>
-                    <ComboBox  Width="100" SelectedItem="{Binding Condition.Comparison}" ItemsSource="{Binding Condition.Comparisons}"/>
-                    <TextBox Width="100" Text="{Binding Condition.RHS}"/>
-                    <CheckBox Content="Inverse:"/>
+                    <Button Width="100" Margin="0,0,10,0" Content="{Binding Condition.LHS}" Command="{Binding CommandSetLHS}"/>
+                    <ComboBox  Width="100" Margin="0,0,10,0" SelectedItem="{Binding Condition.Comparison}" ItemsSource="{Binding Condition.Comparisons}"/>
+                    <Button Width="100" Margin="0,0,10,0" Content="{Binding Condition.RHS}" Command="{Binding CommandSetRHS}"/>
+                    <CheckBox Margin="0,0,10,0" Content="Inverse:"/>
                 </StackPanel>
             </Expander>
         </Border>

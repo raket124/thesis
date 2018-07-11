@@ -38,7 +38,7 @@ namespace master.ViewModels
         public VMmain(MainWindow mainWindow)
         {
             this.fileHandler = new FileHandler(this);
-            this.windowManager = new WindowManager(mainWindow);
+            this.windowManager = new WindowManager(this.fileHandler.Model, mainWindow);
 
             this.menu = new VMmenu(windowManager, fileHandler);
             this.model = new VMmasterModel(this.fileHandler.Model);
@@ -55,11 +55,11 @@ namespace master.ViewModels
                 }),
                 new VMlog(new MyLog()),
                 new VMif(new MyIf()),
+                new VMsimpleIf(new MySimpleIf()),
                 //new VMelseIf(null),
                 //new VMelse(null),
                 new VMend(new MyEnd()),
                 new VMuseRegistry(new MyUseRegistry()),
-                new VMsimpleIf(new MySimpleIf())
             };
         }
 

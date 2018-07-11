@@ -66,87 +66,145 @@ namespace master.Models.Contract
         }
         private static void VehicleRules(ContractCollection doc)
         {
-            var output = new ContractModel("vehicleRules") { };
-            var createVehicles = new Function("createVehicles", Function.ACCESSIBILITY.Public) { Docs = "Create RecipientOrg transaction processor function." };
-            createVehicles.Blocks.Add(new MyInput());
-            createVehicles.Blocks.Add(new MyAssign());
-            createVehicles.Blocks.Add(new MyLog());
-            output.Functions.Add(createVehicles);
-            output.Functions.Add(new Function("updateRegistrationCountry", Function.ACCESSIBILITY.Public) { Docs = "Create UpdateRegistrationCountry transaction processor function." });
-            output.Functions.Add(new Function("updateEcmrListInVin", Function.ACCESSIBILITY.Private));
-            output.Functions.Add(new Function("retrieveAndUpdateVin", Function.ACCESSIBILITY.Private));
-            doc.Contracts.Add(output);
+            doc.Contracts.Add(new ContractModel("vehicleRules")
+            {
+                Docs = "Vehicle rules.",
+                Functions = new ObservableCollection<Function>()
+                {
+                    new Function("createVehicles", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "Create RecipientOrg transaction processor function."
+                    },
+                    new Function("updateRegistrationCountry", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "Create UpdateRegistrationCountry transaction processor function."
+                    },
+                    new Function("updateEcmrListInVin", Function.ACCESSIBILITY.Private),
+                    new Function("retrieveAndUpdateVin", Function.ACCESSIBILITY.Private)
+                }
+            });
         }
         private static void EcmrRules(ContractCollection doc)
         {
-            var output = new ContractModel("ecmrRules") { };
-            output.Functions.Add(new Function("createECMRs", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("updateEcmrStatusToLoaded", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("updateEcmrStatusToInTransit", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("updateEcmrStatusToConfirmedDelivered", Function.ACCESSIBILITY.Public));
-            var updateECMRStatusToCancelled = new Function("updateECMRStatusToCancelled", Function.ACCESSIBILITY.Public);
-            updateECMRStatusToCancelled.Blocks.Add(new MyInput()
+            doc.Contracts.Add(new ContractModel("ecmrRules")
             {
-                Vars = new ObservableCollection<Block.Variable>()
+                Docs = "ECMR rules",
+                Functions = new ObservableCollection<Function>()
                 {
-                    new Block.Variable(Block.Variable.TYPES.Asset)
+                    new Function("createECMRs", Function.ACCESSIBILITY.Public)
                     {
-                        Relation = Data.Variable.RELATION.reference,
-                        ObjectName = "ECMR",
-                        Alias = "ecmr"
+                        Docs = "Create ECMRs transaction processor function."
                     },
-                    new Block.Variable(Block.Variable.TYPES.Concept)
+                    new Function("updateEcmrStatusToLoaded", Function.ACCESSIBILITY.Public)
                     {
-                        ObjectName = "Cancellation",
-                        Alias = "cancellation"
+                        Docs = "UpdateEcmrStatusToLoaded transaction processor function."
+                    },
+                    new Function("updateEcmrStatusToInTransit", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "UpdateEcmrStatusToInTransit transaction processor function."
+                    },
+                    new Function("updateEcmrStatusToConfirmedDelivered", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "UpdateEcmrStatusToDelivered transaction processor function."
+                    },
+                    new Function("updateECMRStatusToCancelled", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "UpdateECMRStatusToCancelled transaction processor function.",
+                        Blocks = new ObservableCollection<Block.Base>()
+                        {
+                            new MyInput()
+                            {
+                                Vars = new ObservableCollection<Block.Variable>()
+                                {
+                                    new Block.Variable(Block.Variable.TYPES.Asset)
+                                    {
+                                        Relation = Data.Variable.RELATION.reference,
+                                        ObjectName = "ECMR",
+                                        Alias = "ecmr"
+                                    },
+                                    new Block.Variable(Block.Variable.TYPES.Concept)
+                                    {
+                                        ObjectName = "Cancellation",
+                                        Alias = "cancellation"
+                                    }
+                                }
+                            },
+                            new MyAssign()
+                            {
+
+                            },
+                            new MyAssign()
+                            {
+
+                            },
+                            new MyAssign()
+                            {
+
+                            },
+                            new MyAssign()
+                            {
+
+                            },
+                            new MyUseRegistry()
+                            {
+                                Action = MyUseRegistry.ACTION.Update,
+                            }
+                        }
+                    },
+                    new Function("updateExpectedPickupWindow", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "UpdateExpectedPickupWindow transaction processor function."
+                    },
+                    new Function("updateExpectedDeliveryWindow", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "UpdateExpectedDeliveryWindow transaction processor function."
                     }
                 }
             });
-            updateECMRStatusToCancelled.Blocks.Add(new MyAssign()
-            {
-
-            });
-            updateECMRStatusToCancelled.Blocks.Add(new MyAssign()
-            {
-                //      new Cancellation
-            });
-            //updateECMRStatusToCancelled.Blocks.Add(new MyAssignRelation(updateECMRStatusToCancelled)
-            //{
-            //    //      new Entity
-            //});
-            updateECMRStatusToCancelled.Blocks.Add(new MyAssign()
-            {
-
-            });
-            updateECMRStatusToCancelled.Blocks.Add(new MyAssign()
-            {
-
-            });
-            updateECMRStatusToCancelled.Blocks.Add(new MyUseRegistry()
-            {
-                Action = MyUseRegistry.ACTION.Update,
-            });
-            output.Functions.Add(updateECMRStatusToCancelled);
-            output.Functions.Add(new Function("updateExpectedPickupWindow", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("updateExpectedDeliveryWindow", Function.ACCESSIBILITY.Public));
-            doc.Contracts.Add(output);
         }
+
         private static void TransportOrderRules(ContractCollection doc)
         {
-            var output = new ContractModel("transportOrderRules") { };
-            output.Functions.Add(new Function("createTransportOrder", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("createTransportOrders", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("updateTransportOrderToInProgress", Function.ACCESSIBILITY.Private));
-            output.Functions.Add(new Function("updateTransportOrderStatusToCompleted", Function.ACCESSIBILITY.Private));
-            output.Functions.Add(new Function("validateVinIds", Function.ACCESSIBILITY.Private));
-            output.Functions.Add(new Function("updateTransportOrderPickupWindow", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("updateTransportOrderDeliveryWindow", Function.ACCESSIBILITY.Public));
-            output.Functions.Add(new Function("updateTransportOrderStatusToCancelled", Function.ACCESSIBILITY.Public));
-            doc.Contracts.Add(output);
+            doc.Contracts.Add(new ContractModel("transportOrderRules")
+            {
+                Docs = "Transport order rules",
+                Functions = new ObservableCollection<Function>()
+                {
+                    new Function("createTransportOrder", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "Create transport order transaction processor function."
+                    },
+                    new Function("createTransportOrders", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "Create transport orders transaction processor function."
+                    },
+                    new Function("updateTransportOrderToInProgress", Function.ACCESSIBILITY.Private)
+                    {
+                    },
+                    new Function("updateTransportOrderStatusToCompleted", Function.ACCESSIBILITY.Private)
+                    {
+                    },
+                    new Function("validateVinIds", Function.ACCESSIBILITY.Private)
+                    {
+                    },
+                    new Function("updateTransportOrderPickupWindow", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "Update Pickup transport order transaction processor function."
+                    },
+                    new Function("updateTransportOrderDeliveryWindow", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "Update DeliveryWindow transport order transaction processor function."
+                    },
+                    new Function("updateTransportOrderStatusToCancelled", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "UpdateTransportOrderStatusToCancelled transaction processor function."
+                    }
+                }
+            });
         }
         private static void OrgRules(ContractCollection doc)
         {
-            var contract = new ContractModel("orgRules")
+            doc.Contracts.Add(new ContractModel("orgRules")
             {
                 Docs = "Organization rules.",
                 Functions = new ObservableCollection<Function>()
@@ -244,8 +302,7 @@ namespace master.Models.Contract
                         }
                     }
                 }
-            };
-            doc.Contracts.Add(contract);
+            });
         }
     }
 }

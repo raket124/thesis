@@ -16,6 +16,7 @@ using System.Windows.Input;
 using master.Basis;
 using master.Models.Contract;
 using master.ViewModels.Windows;
+using System.Windows;
 
 namespace master.ViewModels.Contract
 {
@@ -78,20 +79,15 @@ namespace master.ViewModels.Contract
 
         private void AddGroup()
         {
-            var window = new SelectVariableWIndow();
-            var vmWindow = new VMselectVariable(window);
+            var window = new NewGroupWindow();
+            var vmWindow = new VMnewGroup(window,
+                                          new List<string>(
+                                          from contract in this.Root.Contracts
+                                          select contract.Name));
             window.DataContext = vmWindow;
-            window.ShowDialog();
 
-            //var window = new NewGroupWindow();
-            //var vmWindow = new VMnewGroup(window, 
-            //                              new List<string>(
-            //                              from contract in this.Root.Contracts
-            //                              select contract.Name));
-            //window.DataContext = vmWindow;
-
-            //if (window.ShowDialog() == true)
-            //    this.Root.Contracts.Add(new ContractModel(vmWindow.Name));
+            if (window.ShowDialog() == true)
+                this.Root.Contracts.Add(new ContractModel(vmWindow.Name));
         }
 
         private void AddContract(object input)

@@ -1,4 +1,6 @@
-﻿using master.ViewModels.Windows;
+﻿using master.Models;
+using master.ViewModels;
+using master.ViewModels.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +12,16 @@ namespace master.Windows
 {
     class WindowManager
     {
+        private MasterModel root;
         private MainWindow mainWindow;
         private GraphWindow graphWindow;
         private CodeWindow codeWindow;
         private TestWindow testWindow;
 
-        public WindowManager(MainWindow main)
+        public WindowManager(MasterModel root, MainWindow mainWindow)
         {
-            this.mainWindow = main;
+            this.root = root;
+            this.mainWindow = mainWindow;
             this.graphWindow = null;
             this.codeWindow = null;
             this.testWindow = null;
@@ -41,7 +45,7 @@ namespace master.Windows
             else
             {
                 this.codeWindow = new CodeWindow();
-                var VMwindow = new VMcode(this.codeWindow);
+                var VMwindow = new VMcode(this.codeWindow, this.root.Contracts);
                 this.codeWindow.DataContext = VMwindow;
                 this.codeWindow.Show();
             }

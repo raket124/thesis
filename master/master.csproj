@@ -104,6 +104,8 @@
     </ApplicationDefinition>
     <Compile Include="Basis\DefaultDropHandler.cs" />
     <Compile Include="Basis\MyRootedBindableBase.cs" />
+    <Compile Include="CodeGenerator\DocConverter.cs" />
+    <Compile Include="CodeGenerator\FunctionConverter.cs" />
     <Compile Include="Files\FileHandler.cs" />
     <Compile Include="Graphs\Vertex\EnumVertex.cs" />
     <Compile Include="Graphs\Vertex\IdentityVertex.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Basis\ObjectBase.cs" />
     <Compile Include="Models\Authorization\Base.cs" />
     <Compile Include="Models\Contract\Block\Base.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\Custom\MyTotalEcmrs.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyCode.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyEnd.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyIf.cs" />

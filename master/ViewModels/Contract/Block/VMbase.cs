@@ -1,6 +1,8 @@
 ﻿using master.Basis;
 using master.Models;
 using master.Models.Contract.Block;
+using master.ViewModels.Windows;
+using master.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,6 @@ namespace master.ViewModels.Contract.Block
         public Base Root
         {
             get { return this.root; }
-            //set { this.root = value; }
         }
 
         public VMbase(Base root)
@@ -65,5 +66,16 @@ namespace master.ViewModels.Contract.Block
         {
             get { return new Dictionary<Type, Dictionary<string, List<string>>>(); }
         }
+
+        protected string SelectVar()
+        {
+            var window = new SelectVariableWIndow();
+            var vmWindow = new VMselectVariable(window, this.Parent.Parent.Parent.Parent.Model.Root);
+            window.DataContext = vmWindow;
+            if (window.ShowDialog() == true)
+                return vmWindow.Variable;
+            return string.Empty;
+        }
+
     }
 }

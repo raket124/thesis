@@ -13,7 +13,7 @@ namespace master.Models.Data
     class DataModel
     {
         public enum TYPES { Asset, Participant, Transaction, Event, Concept, Enum };
-        protected readonly Dictionary<Type, TYPES> sorter = new Dictionary<Type, TYPES>()
+        public readonly Dictionary<Type, TYPES> TYPES_DIC = new Dictionary<Type, TYPES>()
         {
             { typeof(MyAsset), TYPES.Asset },
             { typeof(MyConcept), TYPES.Concept },
@@ -55,7 +55,7 @@ namespace master.Models.Data
 
         public void AddComponent(Base component)
         {
-            switch (this.sorter[component.GetType()])
+            switch (this.TYPES_DIC[component.GetType()])
             {
                 case TYPES.Asset:
                     this.assetComponents.Add(component as MyAsset); return;
@@ -76,7 +76,7 @@ namespace master.Models.Data
 
         public List<T> GetComponent<T>()
         {
-            switch (this.sorter[typeof(T)])
+            switch (this.TYPES_DIC[typeof(T)])
             {
                 case TYPES.Asset:
                     return this.assetComponents as List<T>;

@@ -1,4 +1,6 @@
 ﻿using master.Basis;
+using master.CodeGenerator;
+using master.Models.Contract;
 using master.Windows;
 using Prism.Commands;
 using System;
@@ -32,27 +34,13 @@ namespace master.ViewModels.Windows
 
         public DelegateCommand<object> CommandSelectionChanged { get; private set; }
 
-        public VMcode(CodeWindow parent) : base()
+        public VMcode(CodeWindow parent, ContractCollection collection) : base()
         {
             this.parent = parent;
-            this.selected = "XXX";
-
-            code = new Dictionary<string, Dictionary<string, string>>
-            {
-                { "XXX", new Dictionary<string, string>()
-                    {
-                        { "ecmr1", "code5" },
-                        { "ecmr2", "code6" },
-                        { "ecmr3", "code7" },
-                        { "ecmr4", "code8" },
-                    }
-                },
-                { "YYY", new Dictionary<string, string>()
-                    {
-                        { "ecmr16", "code50" }
-                    }
-                }
-            };
+            this.selected = collection.Contracts[0].Name;
+            this.code = new Dictionary<string, Dictionary<string, string>>();
+            foreach (ContractModel cm in collection.Contracts)
+                this.code.Add(cm.Name, cm.Functions.ToDictionary(f => f.Name, f => FunctionConverter.Convert(f)));
 
             this.CommandSelectionChanged = new DelegateCommand<object>(this.Select);
         }

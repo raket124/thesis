@@ -35,7 +35,7 @@ namespace master
             this.Menu.DataContext = main.Menu;
             this.contractTreeView.DataContext = main.Model.Contracts;
 
-            main.Model.Contracts.CLB = this.contractListBox;
+            main.Model.Contracts.CLB = this.contractListBox; //Ugly fix
         }
     }
 }

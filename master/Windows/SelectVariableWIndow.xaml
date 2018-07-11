@@ -80,7 +80,7 @@
                 <DataTemplate>
                     <Border Style="{StaticResource MyBorder}" Margin="5">
                         <StackPanel Margin="5">
-                            <Label Content="{Binding}"/>
+                            <Label Content="{Binding Item1}"/>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
@@ -92,7 +92,7 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
 
-        <Button Grid.Column="3" Margin="5">
+        <Button Grid.Column="3" Margin="5" Command="{Binding CommandConfirm}">
             <Image Source="Images\check_green.png"/>
         </Button>
 
@@ -107,7 +107,17 @@
                                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-        </ListBox>
 
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Item1}"/>
+                        <TextBlock Text=" ("/>
+                        <TextBlock Text="{Binding Item2}"/>
+                        <TextBlock Text=")"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
