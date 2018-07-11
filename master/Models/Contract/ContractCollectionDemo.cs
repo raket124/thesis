@@ -47,13 +47,8 @@ namespace master.Models.Contract
                     }
                 }
             });
-
-
-
             doc.Contracts.Add(output);
         }
-
-
 
         public static ContractCollection KoopmanContract()
         {

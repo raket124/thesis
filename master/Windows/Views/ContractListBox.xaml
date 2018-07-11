@@ -44,58 +44,15 @@
             <DataTemplate DataType="{x:Type vm_blocks:VMassign}">
                 <Border Style="{StaticResource MyBorder}">
                     <Expander Header="{Binding Name}" IsExpanded="True">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="5,5,5,5">
-                                <TextBlock Margin="0,0,10,0" Text="Alias:"/>
-                                <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding AliasOptions}"/>
-                                <TextBlock Margin="0,0,10,0" Text="Property:"/>
-                                <ComboBox Margin="0,0,10,0" Width="100">
-                                    <ComboBoxItem Content="This"/>
-                                    <ComboBoxItem Content="Propery 1"/>
-                                    <ComboBoxItem Content="Propery 2"/>
-                                    <ComboBoxItem Content="Propery 3"/>
-                                </ComboBox>
-                                <TextBlock Margin="0,0,10,0" Text=" => "/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="5,5,5,5">
-                                <RadioButton GroupName="X"/>
-                                <TextBlock Margin="0,0,10,0" Text="Alias:"/>
-                                <ComboBox Margin="0,0,10,0" Width="100"/>
-                                <TextBlock Margin="0,0,10,0" Text="Property:"/>
-                                <ComboBox Margin="0,0,10,0" Width="100">
-                                    <ComboBoxItem Content="This"/>
-                                    <ComboBoxItem Content="Propery 1"/>
-                                    <ComboBoxItem Content="Propery 2"/>
-                                    <ComboBoxItem Content="Propery 3"/>
-                                </ComboBox>
-                            </StackPanel>
-                            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="5,5,5,5">
-                                <RadioButton GroupName="X"/>
-                                <TextBlock Margin="0,0,10,0" Text="Value:"/>
-                                <ComboBox Margin="0,0,10,0" Width="100">
-                                    <ComboBoxItem Content="Enum.X"/>
-                                    <ComboBoxItem Content="Enum.Y"/>
-                                    <ComboBoxItem Content="Enum.Z"/>
-                                </ComboBox>
-                            </StackPanel>
-
-                        </Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Width="100" Margin="0,0,10,0" Content="{Binding Variable}" Command="{Binding CommandSetVariable}"/>
+                            <TextBlock Margin="0,0,10,0" Text="="/>
+                            <Button Width="100" Margin="0,0,10,0" Content="{Binding Value}" Command="{Binding CommandSetValue}"/>
+                        </StackPanel>
                     </Expander>
                 </Border>
             </DataTemplate>
-
-
-
+            
             <DataTemplate DataType="{x:Type vm_blocks:VMif}">
                 <Border Style="{StaticResource MyBorder}">
                     <Expander Header="{Binding Name}" IsExpanded="True">

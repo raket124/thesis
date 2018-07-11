@@ -13,6 +13,8 @@ using master.ViewModels.Windows.Views;
 using master.Basis;
 using master.ViewModels.Contract.Block;
 using master.ViewModels.Contract.Block.Blocks;
+using master.ViewModels.Contract.Block.Blocks.Custom;
+using master.Models.Contract.Block.Blocks.Custom;
 
 namespace master.ViewModels
 {
@@ -58,6 +60,7 @@ namespace master.ViewModels
                 new VMsimpleIf(new MySimpleIf()),
                 //new VMelseIf(null),
                 //new VMelse(null),
+                new VMtotalEcmrs(new MyTotalEcmrs()),
                 new VMend(new MyEnd()),
                 new VMuseRegistry(new MyUseRegistry()),
             };

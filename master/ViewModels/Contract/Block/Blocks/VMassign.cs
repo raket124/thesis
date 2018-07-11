@@ -1,5 +1,6 @@
 ﻿using master.Models;
 using master.Models.Contract.Block.Blocks;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,13 @@ namespace master.ViewModels.Contract.Block.Blocks
             get { return this.root as MyAssign; }
         }
 
+        public DelegateCommand CommandSetVariable { get; private set; }
+        public DelegateCommand CommandSetValue { get; private set; }
+
         public VMassign(MyAssign root) : base(root)
         {
-
+            this.CommandSetVariable = new DelegateCommand(this.SetVariable);
+            this.CommandSetValue = new DelegateCommand(this.SetValue);
         }
 
         public override object Clone()
@@ -34,14 +39,44 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         protected override string Optional() { return string.Empty; }
 
+        public string Variable
+        {
+            get { return this.Root.Variable; }
+            set
+            {
+                this.Root.Variable = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public string Value
+        {
+            get { return this.Root.Value; }
+            set
+            {
+                this.Root.Value = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public void SetVariable()
+        {
+            this.Variable = this.SelectVar();
+        }
+
+        public void SetValue()
+        {
+            this.Value = this.SelectVar();
+        }
+
         //public IList<string> AliasOptions
         //{
         //    get { return this.Parent.Aliases; }
         //}
 
-        public override void FullRefresh()
-        {
-            this.NotifyPropertyChanged("Aliases");
-        }
+        //public override void FullRefresh()
+        //{
+        //    this.NotifyPropertyChanged("Aliases");
+        //}
     }
 }

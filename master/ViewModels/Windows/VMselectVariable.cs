@@ -102,16 +102,6 @@ namespace master.ViewModels.Windows
                     new VariableGroup() { Type = typeof(long) },
                     new VariableGroup() { Type = typeof(DateTime) },
                     new VariableGroup() { Type = typeof(bool) },
-                    //new VariableGroup()
-                    //{
-                    //    Type = typeof(Int16),
-                    //    Aliases = new List<string>()
-                    //    {
-                    //        "ID",
-                    //        "Number",
-                    //        "PI"
-                    //    }
-                    //}
                 },
                 ObjectTypes = objectGroup
             });
@@ -138,6 +128,17 @@ namespace master.ViewModels.Windows
                 var value = input as VMobjectValueAlias;
                 this.propertyList.Add(Tuple.Create(value.Root, value.Parent.Name));
                 this.PopulatePropertyList();
+            }
+
+            if (input.GetType() == typeof(VMvariableGroup))
+            {
+                var value = input as VMvariableGroup;
+                this.propertyList.Add(Tuple.Create(value.Type, value.Type));
+            }
+            if (input.GetType() == typeof(VMobjectValue))
+            {
+                var value = input as VMobjectValue;
+                this.propertyList.Add(Tuple.Create(value.Name, value.Name));
             }
 
             this.CommandRemoveProperty.RaiseCanExecuteChanged();

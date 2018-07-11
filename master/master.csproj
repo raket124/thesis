@@ -150,6 +150,7 @@
     <Compile Include="ViewModels\BaseTypes\VMenum.cs" />
     <Compile Include="ViewModels\BaseTypes\VMstring.cs" />
     <Compile Include="ViewModels\BaseTypes\VMtype.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\Custom\VMtotalEcmrs.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMerror.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMsimpleIf.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMuseRegistry.cs" />

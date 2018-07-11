@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:master.Windows.Views"
                     xmlns:vm_contract="clr-namespace:master.ViewModels.Contract"
                     xmlns:vm_blocks="clr-namespace:master.ViewModels.Contract.Block.Blocks"
+                    xmlns:vm_custom="clr-namespace:master.ViewModels.Contract.Block.Blocks.Custom"
                     xmlns:vm_block="clr-namespace:master.ViewModels.Contract.Block">
 
     <Style x:Key="MyBorder" TargetType="Border">
@@ -91,6 +92,16 @@
             <TextBlock Text="{Binding Name}" Margin="25,0,0,0"/>
         </Border>
     </DataTemplate>
-    
-    
+
+    <DataTemplate DataType="{x:Type vm_custom:VMtotalEcmrs}">
+        <Border Style="{StaticResource MyBorder}">
+            <Expander Header="{Binding Name}" IsExpanded="True">
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="100" Margin="0,0,10,0" Content="{Binding Input}" Command="{Binding CommandSetInput}"/>
+                </StackPanel>
+            </Expander>
+        </Border>
+    </DataTemplate>
+
+
 </ResourceDictionary>
