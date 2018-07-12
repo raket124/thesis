@@ -64,9 +64,23 @@ namespace master.ViewModels.Contract.Block.Conditioning
             this.NotifyPropertyChanged("ConditionSet");
         }
 
+        public void Remove()
+        {
+            this.Root.Conditions.RemoveAt(this.Root.Conditions.Count - 1);
+            this.Root.Connectors.RemoveAt(this.Root.Connectors.Count - 1);
+            this.NotifyPropertyChanged("ConditionSet");
+        }
+
+        public bool CanRemove()
+        {
+            return this.Root.Connectors.Count > 1;
+        }
+
         public object Clone()
         {
-            throw new NotImplementedException();
+            return new VMconditionGroup(this.Root.Clone() as ConditionGroup, this.Parent);
+            //TODO set parent for other vms
+
         }
 
         public string Alias
@@ -76,6 +90,7 @@ namespace master.ViewModels.Contract.Block.Conditioning
             {
                 this.Root.Alias = value;
                 this.NotifyPropertyChanged();
+                this.Parent.RenewAliasList();
             }
         }
 

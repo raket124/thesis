@@ -1,6 +1,7 @@
 ﻿using master.Basis;
 using master.Models;
 using master.Models.Contract.Block;
+using master.Models.Data;
 using master.ViewModels.Windows;
 using master.Windows;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Contract.Block
 {
-    abstract class VMbase: MyBindableBase, ICloneable
+    abstract class VMbase : MyBindableBase, ICloneable
     {
         protected readonly string reqFormat = "Requirements: {0}";
         protected readonly string optFormat = "Optional: {0}";
@@ -67,7 +68,7 @@ namespace master.ViewModels.Contract.Block
             get { return new Dictionary<Type, Dictionary<string, List<string>>>(); }
         }
 
-        protected string SelectVar()
+        public string SelectVar()
         {
             var window = new SelectVariableWIndow();
             var vmWindow = new VMselectVariable(window, this.Parent.Parent.Parent.Parent.Model.Root);
@@ -77,5 +78,14 @@ namespace master.ViewModels.Contract.Block
             return string.Empty;
         }
 
+        //public static string SelectVar(DataModel model)
+        //{
+        //    var window = new SelectVariableWIndow();
+        //    var vmWindow = new VMselectVariable(window, model);
+        //    window.DataContext = vmWindow;
+        //    if (window.ShowDialog() == true)
+        //        return vmWindow.Variable;
+        //    return string.Empty;
+        //}
     }
 }

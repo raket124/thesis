@@ -31,7 +31,7 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public VMif(MyIf root) : base(root)
         {
-            this.Condition = new VMcondition(this.Root.Condition);
+            this.Condition = new VMcondition(this.Root.Condition, this);
         }
 
         public override object Clone()

@@ -11,11 +11,17 @@ namespace master.Models.Contract.Block.Blocks
     class MyError : Base
     {
         [DataMember]
-        protected string message;
+        protected string text;
+        public string Text
+        {
+            get { return this.text; }
+            set { this.text = value; }
+        }
+
 
         public MyError() : base()
         {
-
+            this.text = string.Empty;
         }
 
         public override object Clone()
@@ -24,7 +30,7 @@ namespace master.Models.Contract.Block.Blocks
             {
                 Name = this.Name,
                 Docs = this.Docs,
-                //TODO other vars
+                Text = this.Text
             };
         }
     }

@@ -126,23 +126,33 @@ namespace master.Models.Contract
                             },
                             new MyAssign()
                             {
-
+                                Variable = "ecmr.status",
+                                Value = "EcmrStatus.Cancelled"
                             },
                             new MyAssign()
                             {
-
+                                Variable = "ecmr.cancellation",
+                                Value = "new Cancellation"
                             },
                             new MyAssign()
                             {
-
+                                Variable = "ecmr.cancellation.cancelledBy",
+                                Value = "CurrentParticipant"
                             },
                             new MyAssign()
                             {
-
+                                Variable = "ecmr.cancellation.date",
+                                Value = "cancellation.date"
+                            },
+                            new MyAssign()
+                            {
+                                Variable = "ecmr.cancellation.reason",
+                                Value = "cancellation.reason"
                             },
                             new MyUseRegistry()
                             {
                                 Action = MyUseRegistry.ACTION.Update,
+                                Alias = "ecmr"
                             }
                         }
                     },
@@ -167,11 +177,52 @@ namespace master.Models.Contract
                 {
                     new Function("createTransportOrder", Function.ACCESSIBILITY.Public)
                     {
-                        Docs = "Create transport order transaction processor function."
+                        Docs = "Create transport order transaction processor function.",
+                        Blocks = new ObservableCollection<Block.Base>()
+                        {
+                            new MyInput()
+                            {
+                                Vars = new ObservableCollection<Block.Variable>()
+                                {
+                                    new Block.Variable(Block.Variable.TYPES.Asset)
+                                    {
+                                        Relation = Data.Variable.RELATION.variable,
+                                        ObjectName = "TransportOrder",
+                                        Alias = "transportOrder"
+                                    }
+                                }
+                            },
+                            new MyUseRegistry()
+                            {
+                                Action = MyUseRegistry.ACTION.Insert,
+                                Alias = "transportOrder"
+                            }
+                        }
                     },
                     new Function("createTransportOrders", Function.ACCESSIBILITY.Public)
                     {
-                        Docs = "Create transport orders transaction processor function."
+                        Docs = "Create transport orders transaction processor function.",
+                        Blocks = new ObservableCollection<Block.Base>()
+                        {
+                            new MyInput()
+                            {
+                                Vars = new ObservableCollection<Block.Variable>()
+                                {
+                                    new Block.Variable(Block.Variable.TYPES.Asset)
+                                    {
+                                        Relation = Data.Variable.RELATION.variable,
+                                        ObjectName = "TransportOrder",
+                                        Alias = "transportOrders",
+                                        List = true
+                                    }
+                                }
+                            },
+                            new MyUseRegistry()
+                            {
+                                Action = MyUseRegistry.ACTION.Insert,
+                                Alias = "transportOrders"
+                            }
+                        }
                     },
                     new Function("updateTransportOrderToInProgress", Function.ACCESSIBILITY.Private)
                     {

@@ -56,12 +56,14 @@ namespace master.ViewModels
                     }
                 }),
                 new VMlog(new MyLog()),
+                new VMerror(new MyError()),
                 new VMif(new MyIf()),
                 new VMsimpleIf(new MySimpleIf()),
                 //new VMelseIf(null),
-                //new VMelse(null),
-                new VMtotalEcmrs(new MyTotalEcmrs()),
+                new VMelse(new MyElse()),
                 new VMend(new MyEnd()),
+                new VMtotalEcmrs(new MyTotalEcmrs()),
+                
                 new VMuseRegistry(new MyUseRegistry()),
             };
         }

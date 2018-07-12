@@ -5,19 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using master.Models.Contract.Block;
 using System.Collections.ObjectModel;
+using master.Models.Contract.Block.Blocks;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
     class VMelse : VMbase
     {
-        public VMelse(Base root) : base(root)
+        public new MyElse Root
+        {
+            get { return this.root as MyElse; }
+        }
+
+        public VMelse(MyElse root) : base(root)
         {
 
         }
 
         public override object Clone()
         {
-            throw new NotImplementedException();
+            return new VMelse(this.root.Clone() as MyElse)
+            {
+                Parent = this.Parent
+            };
         }
 
         protected override string BlockName()

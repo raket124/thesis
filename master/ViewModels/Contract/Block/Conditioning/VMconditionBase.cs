@@ -13,7 +13,7 @@ namespace master.ViewModels.Contract.Block.Conditioning
 {
     class VMconditionBase : MyBindableBase, ICloneable
     {
-        protected readonly Dictionary<ConditionBase.COMPARE, string> COMPARE_DIC = new Dictionary<ConditionBase.COMPARE, string>()
+        public readonly Dictionary<ConditionBase.COMPARE, string> COMPARE_DIC = new Dictionary<ConditionBase.COMPARE, string>()
         {
             { ConditionBase.COMPARE.equal, "==" },
             { ConditionBase.COMPARE.not_equal, "!=" },
@@ -36,6 +36,8 @@ namespace master.ViewModels.Contract.Block.Conditioning
         }
 
         public DelegateCommand CommandRemove { get; private set; }
+        public DelegateCommand CommandSetLHS { get; private set; }
+        public DelegateCommand CommandSetRHS { get; private set; }
 
         public VMconditionBase(ConditionBase root, VMcondition parent)
         {
@@ -43,11 +45,13 @@ namespace master.ViewModels.Contract.Block.Conditioning
             this.parent = parent;
 
             this.CommandRemove = new DelegateCommand(() => this.Parent.Root.Conditions.Remove(this.Root));
+            this.CommandSetLHS = new DelegateCommand(() => this.LHS = this.Parent.Parent.SelectVar());
+            this.CommandSetRHS = new DelegateCommand(() => this.RHS = this.Parent.Parent.SelectVar());
         }
 
         public object Clone()
         {
-            return new VMconditionBase(new ConditionBase(), null);
+            return new VMconditionBase(this.Root.Clone() as ConditionBase, this.Parent);
         }
 
         public string LHS
@@ -82,6 +86,16 @@ namespace master.ViewModels.Contract.Block.Conditioning
             }
         }
 
+        public bool Invert
+        {
+            get { return this.Root.Invert; }
+            set
+            {
+                this.Root.Invert = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
         public string Alias
         {
             get { return this.Root.Alias; }
@@ -89,6 +103,7 @@ namespace master.ViewModels.Contract.Block.Conditioning
             {
                 this.Root.Alias = value;
                 this.NotifyPropertyChanged();
+                //this.Parent.RenewAliasList();
             }
         }
 

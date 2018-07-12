@@ -13,11 +13,17 @@ namespace master.Models.Contract
 {
     [DataContract (IsReference = true)]
     [
-        KnownType(typeof(MyError)), 
         KnownType(typeof(MyAssign)), 
-        KnownType(typeof(MyInput)), 
+        KnownType(typeof(MyCode)), 
+        KnownType(typeof(MyElse)), 
+        KnownType(typeof(MyEnd)),
+        KnownType(typeof(MyError)),
+        KnownType(typeof(MyGetRegistry)),
+        KnownType(typeof(MyIf)),
+        KnownType(typeof(MyInput)),
         KnownType(typeof(MyLog)),
-        KnownType(typeof(MyUseRegistry)),
+        KnownType(typeof(MySimpleIf)),
+        KnownType(typeof(MyUseRegistry))
     ]
     public class Function : ObjectBase
     {

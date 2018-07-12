@@ -121,5 +121,16 @@ namespace master.ViewModels.Contract.Block
         {
             get { return EnumUtil.EnumToList<Variable.TYPES>(); }
         }
+
+
+        public bool Ref
+        {
+            get { return this.Root.Relation == Models.Data.Variable.RELATION.reference; }
+            set
+            {
+                this.Root.Relation = value ? Models.Data.Variable.RELATION.reference : Models.Data.Variable.RELATION.variable;
+                this.NotifyPropertyChanged();
+            }
+        }
     }
 }

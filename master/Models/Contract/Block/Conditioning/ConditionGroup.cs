@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Conditioning
 {
     [DataContract]
-    class ConditionGroup
+    class ConditionGroup : ICloneable
     {
         public enum COMPARE { and, or }
 
@@ -47,6 +47,17 @@ namespace master.Models.Contract.Block.Conditioning
                 COMPARE.and
             };
             this.alias = string.Empty;
+        }
+
+        public object Clone()
+        {
+            return new ConditionGroup()
+            {
+                Conditions = new ObservableCollection<string>(this.Conditions),
+                Connectors = new ObservableCollection<COMPARE>(this.Connectors),
+                Alias = this.Alias
+
+            };
         }
     }
 }

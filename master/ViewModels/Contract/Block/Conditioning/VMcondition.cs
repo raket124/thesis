@@ -9,6 +9,7 @@ using master.Models.Contract.Block.Conditioning;
 using System.Collections.ObjectModel;
 using Prism.Commands;
 using System.Collections.Specialized;
+using master.Models.Data;
 
 namespace master.ViewModels.Contract.Block.Conditioning
 {
@@ -18,6 +19,12 @@ namespace master.ViewModels.Contract.Block.Conditioning
         public Condition Root
         {
             get { return this.root; }
+        }
+        protected VMbase parent;
+        public VMbase Parent
+        {
+            get { return this.parent; }
+            set { this.parent = value; }
         }
         protected ObservableCollection<VMconditionBase> conditions;
         public ObservableCollection<VMconditionBase> Conditions
@@ -53,13 +60,19 @@ namespace master.ViewModels.Contract.Block.Conditioning
         public DelegateCommand CommandAddCondition { get; private set; }
         public DelegateCommand CommandAddGroup { get; private set; }
 
-        public VMcondition(Condition root)
+        public DelegateCommand CommandAddOption { get; private set; }
+        public DelegateCommand CommandRemoveOption { get; private set; }
+
+        public VMcondition(Condition root, VMbase parent)
         {
             this.root = root;
+            this.parent = parent;
             this.Wrap();
 
             this.CommandAddCondition = new DelegateCommand(() => this.Root.Conditions.Add(new ConditionBase()));
             this.CommandAddGroup = new DelegateCommand(() => this.Root.Groups.Add(new ConditionGroup()));
+            this.CommandAddOption = new DelegateCommand(() => this.ValueAdd());
+            this.CommandRemoveOption = new DelegateCommand(this.ValueRemove, this.Value.CanRemove);
 
             this.Root.Conditions.CollectionChanged += new NotifyCollectionChangedEventHandler(ConditionsChanged);
             this.Root.Groups.CollectionChanged += new NotifyCollectionChangedEventHandler(GroupsChanged);
@@ -81,20 +94,16 @@ namespace master.ViewModels.Contract.Block.Conditioning
                               from conditions in this.Root.Conditions
                               select new VMconditionBase(conditions, this));
         }
-
         public void WrapGroups()
         {
             this.Groups = new ObservableCollection<VMconditionGroup>(
                           from groups in this.Root.Groups
                           select new VMconditionGroup(groups, this));
         }
-
         public void WrapValue()
         {
-            //this.Value = new VMconditionGroup(null, this);
-            this.Value = null;
+            this.Value = new VMconditionGroup(this.Root.Value, this);
         }
-
         public void Wrap()
         {
             this.WrapConditions();
@@ -102,9 +111,43 @@ namespace master.ViewModels.Contract.Block.Conditioning
             this.WrapValue();
         }
 
+        protected void ValueAdd()
+        {
+            this.Value.Add();
+            this.CommandRemoveOption.RaiseCanExecuteChanged();
+        }
+
+        protected void ValueRemove()
+        {
+            this.Value.Remove();
+            this.CommandRemoveOption.RaiseCanExecuteChanged();
+        }
+
+        public ObservableCollection<string> AliasList
+        {
+            get
+            {
+                var conditionAliases = this.conditions.Select(c => c.Alias);
+                var groupAliases = this.groups.Select(g => g.Alias);
+
+                var output = new ObservableCollection<string>();
+                output.AddRange(conditionAliases);
+                output.AddRange(groupAliases);
+                return output;
+            }
+        }
+
         public object Clone()
         {
-            throw new NotImplementedException();
+            return new VMcondition(this.Root, this.Parent)
+            {
+                //TODO complete this
+            };
+        }
+
+        public void RenewAliasList()
+        {
+            this.NotifyPropertyChanged("AliasList");
         }
     }
 }

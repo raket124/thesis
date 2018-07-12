@@ -115,6 +115,7 @@
     <Compile Include="Models\Contract\Block\Base.cs" />
     <Compile Include="Models\Contract\Block\Blocks\Custom\MyTotalEcmrs.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyCode.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyElse.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyEnd.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyIf.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyInput.cs" />

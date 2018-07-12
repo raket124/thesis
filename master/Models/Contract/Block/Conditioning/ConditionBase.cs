@@ -40,14 +40,21 @@ namespace master.Models.Contract.Block.Conditioning
             get { return this.alias; }
             set { this.alias = value; }
         }
+        [DataMember]
+        protected bool invert;
+        public bool Invert
+        {
+            get { return this.invert; }
+            set { this.invert = value; }
+        }
 
         public ConditionBase()
         {
             this.lhs = string.Empty;
             this.comparison = COMPARE.equal;
             this.rhs = string.Empty;
-
             this.alias = string.Empty;
+            this.invert = false;
         }
 
         public object Clone()
@@ -57,7 +64,8 @@ namespace master.Models.Contract.Block.Conditioning
                 LHS = this.LHS,
                 Comparison = this.Comparison,
                 RHS = this.RHS,
-                Alias = this.Alias
+                Alias = this.Alias,
+                Invert = this.Invert
             };
         }
     }

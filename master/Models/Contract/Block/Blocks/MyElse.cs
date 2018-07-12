@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Blocks
 {
     [DataContract]
-    class MyEnd : Base
+    class MyElse : Base
     {
-        public MyEnd() : base()
+        public MyElse() : base()
         {
 
         }
 
         public override object Clone()
         {
-            return new MyEnd();
+            return new MyElse();
         }
     }
 }
