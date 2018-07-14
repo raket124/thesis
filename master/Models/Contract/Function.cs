@@ -1,6 +1,7 @@
 ﻿using master.Basis;
 using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
+using master.Models.Variables;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace master.Models.Contract
 {
-    [DataContract (IsReference = true)]
+    [DataContract]
     [
         KnownType(typeof(MyAssign)), 
         KnownType(typeof(MyCode)), 
@@ -48,6 +49,16 @@ namespace master.Models.Contract
         {
             this.access = access;
             this.blocks = new ObservableCollection<Block.Base>();
+        }
+
+        public VariableList List
+        {
+            get
+            {
+                var output = new VariableList();
+
+                return output;
+            }
         }
     }
 }

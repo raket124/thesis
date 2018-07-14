@@ -19,7 +19,7 @@ namespace master.ViewModels.Contract.Block.Blocks
         public DelegateCommand CommandSetVariable { get; private set; }
         public DelegateCommand CommandSetValue { get; private set; }
 
-        public VMassign(MyAssign root) : base(root)
+        public VMassign(MyAssign root, VMfunction parent) : base(root, parent)
         {
             this.CommandSetVariable = new DelegateCommand(this.SetVariable);
             this.CommandSetValue = new DelegateCommand(this.SetValue);
@@ -27,46 +27,41 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public override object Clone()
         {
-            return new VMassign(this.root.Clone() as MyAssign)
-            {
-                Parent = this.Parent
-            };
+            return new VMassign(this.Root.Clone() as MyAssign, this.Parent);
         }
 
         protected override string BlockName() { return "Block chain block"; }
-
         protected override string Required() { return string.Format(this.reqFormat, "2 variables"); }
-
         protected override string Optional() { return string.Empty; }
 
-        public string Variable
-        {
-            get { return this.Root.Variable; }
-            set
-            {
-                this.Root.Variable = value;
-                this.NotifyPropertyChanged();
-            }
-        }
+        //public string Variable
+        //{
+        //    get { return this.Root.Variable; }
+        //    set
+        //    {
+        //        this.Root.Variable = value;
+        //        this.NotifyPropertyChanged();
+        //    }
+        //}
 
-        public string Value
-        {
-            get { return this.Root.Value; }
-            set
-            {
-                this.Root.Value = value;
-                this.NotifyPropertyChanged();
-            }
-        }
+        //public string Value
+        //{
+        //    get { return this.Root.Value; }
+        //    set
+        //    {
+        //        this.Root.Value = value;
+        //        this.NotifyPropertyChanged();
+        //    }
+        //}
 
         public void SetVariable()
         {
-            this.Variable = this.SelectVar();
+            //this.Variable = this.SelectVar();
         }
 
         public void SetValue()
         {
-            this.Value = this.SelectVar();
+            //this.Value = this.SelectVar();
         }
 
         //public IList<string> AliasOptions
@@ -74,9 +69,9 @@ namespace master.ViewModels.Contract.Block.Blocks
         //    get { return this.Parent.Aliases; }
         //}
 
-        //public override void FullRefresh()
-        //{
-        //    this.NotifyPropertyChanged("Aliases");
-        //}
+        public override void FullRefresh()
+        {
+            //this.NotifyPropertyChanged("Aliases");
+        }
     }
 }

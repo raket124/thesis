@@ -12,24 +12,24 @@ namespace master.Models.Contract.Block
     [DataContract]
     public class Variable : Data.Variable, ICloneable
     {
-        public enum TYPES { Asset, Concept, Enum, Participant, String, Double, Integer, Long, DateTime, Boolean }
-        public static readonly Dictionary<TYPES, Tuple<Type, bool>> TYPES_DICT = new Dictionary<TYPES, Tuple<Type, bool>>()
-        {
-            { TYPES.Asset, Tuple.Create<Type, bool>(typeof(MyAsset), true) },
-            { TYPES.Concept, Tuple.Create<Type, bool>(typeof(MyConcept), true) },
-            { TYPES.Enum, Tuple.Create<Type, bool>(typeof(MyEnum), true) },
-            { TYPES.Participant, Tuple.Create<Type, bool>(typeof(MyParticipant), true) },
-            { TYPES.String, Tuple.Create<Type, bool>(typeof(string), false) },
-            { TYPES.Double, Tuple.Create<Type, bool>(typeof(double), false) },
-            { TYPES.Integer, Tuple.Create<Type, bool>(typeof(int), false) },
-            { TYPES.Long, Tuple.Create<Type, bool>(typeof(long), false) },
-            { TYPES.DateTime, Tuple.Create<Type, bool>(typeof(DateTime), false) },
-            { TYPES.Boolean, Tuple.Create<Type, bool>(typeof(bool), false) }
-        };
+        //public enum TYPES { Asset, Concept, Enum, Participant, String, Double, Integer, Long, DateTime, Boolean }
+        //public static readonly Dictionary<TYPES, Tuple<Type, bool>> TYPES_DICT = new Dictionary<TYPES, Tuple<Type, bool>>()
+        //{
+        //    { TYPES.Asset, Tuple.Create<Type, bool>(typeof(MyAsset), true) },
+        //    { TYPES.Concept, Tuple.Create<Type, bool>(typeof(MyConcept), true) },
+        //    { TYPES.Enum, Tuple.Create<Type, bool>(typeof(MyEnum), true) },
+        //    { TYPES.Participant, Tuple.Create<Type, bool>(typeof(MyParticipant), true) },
+        //    { TYPES.String, Tuple.Create<Type, bool>(typeof(string), false) },
+        //    { TYPES.Double, Tuple.Create<Type, bool>(typeof(double), false) },
+        //    { TYPES.Integer, Tuple.Create<Type, bool>(typeof(int), false) },
+        //    { TYPES.Long, Tuple.Create<Type, bool>(typeof(long), false) },
+        //    { TYPES.DateTime, Tuple.Create<Type, bool>(typeof(DateTime), false) },
+        //    { TYPES.Boolean, Tuple.Create<Type, bool>(typeof(bool), false) }
+        //};
 
         [DataMember]
-        protected new TYPES type;
-        public new TYPES Type
+        protected new Type type;
+        public new Type Type
         {
             get { return this.type; }
             set { this.type = value; }
@@ -49,10 +49,10 @@ namespace master.Models.Contract.Block
             set { this.alias = value; }
         }
 
-        public Variable(TYPES type) : base(string.Empty, string.Empty, RELATION.variable)
+        public Variable(Type type) : base(string.Empty, string.Empty, RELATION.variable)
         {
             this.type = type;
-            this.objectName = "Listing";
+            this.objectName = string.Empty;
             this.alias = string.Empty;
             this.isList = false;
         }

@@ -143,7 +143,7 @@ namespace master.ViewModels.Contract
             if (input.GetType() == typeof(VMfunction))
             {
                 var x = input as VMfunction;
-                var y = x.Variables;
+                //var y = x.Variables;
                 this.CLB.ListBox.DataContext = x;
 
                 //this.CLB.ListBox.DataContext = input as VMfunction;

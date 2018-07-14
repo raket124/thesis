@@ -37,7 +37,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type vm_variables:VMvariableGroup}" 
+                <!--<HierarchicalDataTemplate DataType="{x:Type vm_variables:VMvariableGroup}" 
                                           ItemsSource="{Binding Aliases}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="[" />
@@ -69,7 +69,7 @@
                 </HierarchicalDataTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type vm_variables:VMobjectValueAlias}">
                     <TextBlock Text="{Binding Root}" />
-                </HierarchicalDataTemplate>
+                </HierarchicalDataTemplate>-->
             </TreeView.Resources>
         </TreeView>
         

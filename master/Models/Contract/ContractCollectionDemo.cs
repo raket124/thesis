@@ -1,4 +1,5 @@
 ﻿using master.Models.Contract.Block.Blocks;
+using master.Models.Data.Component.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +27,7 @@ namespace master.Models.Contract
             {
                 Vars = new ObservableCollection<Block.Variable>()
                 {
-                    new Block.Variable(Block.Variable.TYPES.Asset)
+                    new Block.Variable(typeof(MyAsset))
                     {
                         Relation = Data.Variable.RELATION.reference,
                         ObjectName = "Field",
@@ -39,7 +40,7 @@ namespace master.Models.Contract
             {
                 Vars = new ObservableCollection<Block.Variable>()
                 {
-                    new Block.Variable(Block.Variable.TYPES.Asset)
+                    new Block.Variable(typeof(MyAsset))
                     {
                         Relation = Data.Variable.RELATION.reference,
                         ObjectName = "Field",
@@ -111,13 +112,13 @@ namespace master.Models.Contract
                             {
                                 Vars = new ObservableCollection<Block.Variable>()
                                 {
-                                    new Block.Variable(Block.Variable.TYPES.Asset)
+                                    new Block.Variable(typeof(MyAsset))
                                     {
                                         Relation = Data.Variable.RELATION.reference,
                                         ObjectName = "ECMR",
                                         Alias = "ecmr"
                                     },
-                                    new Block.Variable(Block.Variable.TYPES.Concept)
+                                    new Block.Variable(typeof(MyConcept))
                                     {
                                         ObjectName = "Cancellation",
                                         Alias = "cancellation"
@@ -184,7 +185,7 @@ namespace master.Models.Contract
                             {
                                 Vars = new ObservableCollection<Block.Variable>()
                                 {
-                                    new Block.Variable(Block.Variable.TYPES.Asset)
+                                    new Block.Variable(typeof(MyAsset))
                                     {
                                         Relation = Data.Variable.RELATION.variable,
                                         ObjectName = "TransportOrder",
@@ -208,7 +209,7 @@ namespace master.Models.Contract
                             {
                                 Vars = new ObservableCollection<Block.Variable>()
                                 {
-                                    new Block.Variable(Block.Variable.TYPES.Asset)
+                                    new Block.Variable(typeof(MyAsset))
                                     {
                                         Relation = Data.Variable.RELATION.variable,
                                         ObjectName = "TransportOrder",
@@ -264,7 +265,7 @@ namespace master.Models.Contract
                             {
                                 Vars = new ObservableCollection<Block.Variable>()
                                 {
-                                    new Block.Variable(Block.Variable.TYPES.Asset)
+                                    new Block.Variable(typeof(MyAsset))
                                     {
                                         ObjectName = "LegalOwnerOrg",
                                         Alias = "newLegalOwnerOrg",
@@ -287,7 +288,7 @@ namespace master.Models.Contract
                             {
                                 Vars = new ObservableCollection<Block.Variable>()
                                 {
-                                    new Block.Variable(Block.Variable.TYPES.Asset)
+                                    new Block.Variable(typeof(MyAsset))
                                     {
                                         ObjectName = "CompoundOrg",
                                         Alias = "newCompoundOrg",
@@ -310,7 +311,7 @@ namespace master.Models.Contract
                             {
                                 Vars = new ObservableCollection<Block.Variable>()
                                 {
-                                    new Block.Variable(Block.Variable.TYPES.Asset)
+                                    new Block.Variable(typeof(MyAsset))
                                     {
                                         ObjectName = "CarrierOrg",
                                         Alias = "newCarrierOrg",
@@ -333,7 +334,7 @@ namespace master.Models.Contract
                             {
                                 Vars = new ObservableCollection<Block.Variable>()
                                 {
-                                    new Block.Variable(Block.Variable.TYPES.Asset)
+                                    new Block.Variable(typeof(MyAsset))
                                     {
                                         ObjectName = "RecipientOrg",
                                         Alias = "newRecipientOrg",

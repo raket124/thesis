@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace master.Models.Variables
 {
-    class ObjectGroup
+    public class ObjectGroup
     {
         protected Type type;
         public Type Type
@@ -14,17 +14,18 @@ namespace master.Models.Variables
             get { return this.type; }
             set { this.type = value; }
         }
-        protected List<ObjectValue> objects;
-        public List<ObjectValue> Objects
+
+        protected List<Objects> objects;
+        public List<Objects> Objects
         {
             get { return this.objects; }
             set { this.objects = value; }
         }
 
-        public ObjectGroup()
+        public ObjectGroup(Type type)
         {
-            this.type = null;
-            this.objects = new List<ObjectValue>();
+            this.type = type;
+            this.objects = new List<Objects>();
         }
     }
 }

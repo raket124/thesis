@@ -62,40 +62,28 @@ namespace master.ViewModels.Contract
             var output = new ObservableCollection<VMbase>();
             foreach(Base block in this.root.Blocks)
             {
-                //KnownType(typeof(MyAssign)), 
-                //KnownType(typeof(MyCode)), 
-                //KnownType(typeof(MyElse)), 
-                //KnownType(typeof(MyEnd)),
-                //KnownType(typeof(MyError)),
-                //KnownType(typeof(MyGetRegistry)),
-                //KnownType(typeof(MyIf)),
-                //KnownType(typeof(MyInput)),
-                //KnownType(typeof(MyLog)),
-                //KnownType(typeof(MySimpleIf)),
-                //KnownType(typeof(MyUseRegistry))
-
                 if (block.GetType() == typeof(MyAssign))
-                    output.Add(new VMassign(block as MyAssign) { Parent = this });
+                    output.Add(new VMassign(block as MyAssign, this));
                 //if (block.GetType() == typeof(MyCode))
-                //    output.Add(new VMcode(block as MyCode) { Parent = this });
+                //    output.Add(new VMcode(block as MyCode, this));
                 if (block.GetType() == typeof(MyElse))
-                    output.Add(new VMelse(block as MyElse) { Parent = this });
+                    output.Add(new VMelse(block as MyElse, this));
                 if (block.GetType() == typeof(MyEnd))
-                    output.Add(new VMend(block as MyEnd) { Parent = this });
+                    output.Add(new VMend(block as MyEnd, this));
                 if (block.GetType() == typeof(MyError))
-                    output.Add(new VMerror(block as MyError) { Parent = this });
+                    output.Add(new VMerror(block as MyError, this));
                 //if (block.GetType() == typeof(MyGetRegistry))
-                //    output.Add(new VM(block as MyGetRegistry) { Parent = this });
+                //    output.Add(new VM(block as MyGetRegistry, this));
                 if (block.GetType() == typeof(MyIf))
-                    output.Add(new VMif(block as MyIf) { Parent = this });
+                    output.Add(new VMif(block as MyIf, this));
                 if (block.GetType() == typeof(MyInput))
-                    output.Add(new VMinput(block as MyInput) { Parent = this });
+                    output.Add(new VMinput(block as MyInput, this));
                 if (block.GetType() == typeof(MyLog))
-                    output.Add(new VMlog(block as MyLog) { Parent = this });
+                    output.Add(new VMlog(block as MyLog, this));
                 if (block.GetType() == typeof(MySimpleIf))
-                    output.Add(new VMsimpleIf(block as MySimpleIf) { Parent = this });
+                    output.Add(new VMsimpleIf(block as MySimpleIf, this));
                 if (block.GetType() == typeof(MyUseRegistry))
-                    output.Add(new VMuseRegistry(block as MyUseRegistry) { Parent = this });
+                    output.Add(new VMuseRegistry(block as MyUseRegistry, this));
                 //Add new blocks here
             }
             this.Blocks = output;
@@ -147,26 +135,26 @@ namespace master.ViewModels.Contract
                 block.FullRefresh();
         }
 
-        public Dictionary<Type, Dictionary<string, List<string>>> Variables
-        {
-            get
-            {
-                var dict = this.Parent.Parent.Parent.Model.GetTypeList();
-                var output = new Dictionary<Type, Dictionary<string, List<string>>>();
+        //public Dictionary<Type, Dictionary<string, List<string>>> Variables
+        //{
+        //    get
+        //    {
+        //        var dict = this.Parent.Parent.Parent.Model.GetTypeList();
+        //        var output = new Dictionary<Type, Dictionary<string, List<string>>>();
 
-                foreach (var dic in dict)
-                {
-                    output.Add(dic.Key, new Dictionary<string, List<string>>());
-                    foreach (var name in dic.Value)
-                        output[dic.Key].Add(name, new List<string>());
-                }
+        //        foreach (var dic in dict)
+        //        {
+        //            output.Add(dic.Key, new Dictionary<string, List<string>>());
+        //            foreach (var name in dic.Value)
+        //                output[dic.Key].Add(name, new List<string>());
+        //        }
 
-                foreach (var block in this.blocks)
-                    foreach (var alias in block.Aliases)
-                        foreach(var instance in alias.Value)
-                            output[alias.Key][instance.Key].AddRange(instance.Value);
-                return output;
-            }
-        }
+        //        foreach (var block in this.blocks)
+        //            foreach (var alias in block.Aliases)
+        //                foreach(var instance in alias.Value)
+        //                    output[alias.Key][instance.Key].AddRange(instance.Value);
+        //        return output;
+        //    }
+        //}
     }
 }

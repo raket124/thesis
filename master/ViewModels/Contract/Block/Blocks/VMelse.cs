@@ -16,32 +16,18 @@ namespace master.ViewModels.Contract.Block.Blocks
             get { return this.root as MyElse; }
         }
 
-        public VMelse(MyElse root) : base(root)
+        public VMelse(MyElse root, VMfunction parent) : base(root, parent)
         {
 
         }
 
         public override object Clone()
         {
-            return new VMelse(this.root.Clone() as MyElse)
-            {
-                Parent = this.Parent
-            };
+            return new VMelse(this.Root.Clone() as MyElse, this.Parent);
         }
 
-        protected override string BlockName()
-        {
-            return "Else - block";
-        }
-
-        protected override string Required()
-        {
-            return string.Format(this.reqFormat, "1 \"If block\"");
-        }
-
-        protected override string Optional()
-        {
-            return string.Empty;
-        }
+        protected override string BlockName() { return "Else - block"; }
+        protected override string Required() { return string.Format(this.reqFormat, "1 \"If block\""); }
+        protected override string Optional() { return string.Empty; }
     }
 }

@@ -19,8 +19,8 @@ namespace master.ViewModels.Contract.Block.Blocks
         {
             get { return this.root as MyInput; }
         }
-        private List<VMvariable> vars;
-        public List<VMvariable> Vars
+        private List<VMinputVariable> vars;
+        public List<VMinputVariable> Vars
         {
             get { return this.vars; }
             set
@@ -32,7 +32,7 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public DelegateCommand CommandAdd { get; private set; }
 
-        public VMinput(MyInput root) : base(root)
+        public VMinput(MyInput root, VMfunction parent) : base(root, parent)
         {
             this.WrapVars();
 
@@ -47,64 +47,60 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         private void WrapVars()
         {
-            this.Vars = new List<VMvariable>(
+            this.Vars = new List<VMinputVariable>(
                         from var in this.Root.Vars
-                        select new VMvariable(var, this));
-        }
-
-
-        public void Add()
-        {
-            this.Root.Vars.Add(new Variable(Variable.TYPES.String));
-            this.Parent.FullRefresh();
+                        select new VMinputVariable(var, this));
         }
 
         public override object Clone()
         {
-            return new VMinput(this.root.Clone() as MyInput)
-            {
-                Parent = this.Parent
-            };
+            return new VMinput(this.Root.Clone() as MyInput, this.Parent);
         }
 
         protected override string BlockName() { return "Input block"; }
-
         protected override string Required() { return string.Format(this.reqFormat, "1+ variable(s)"); }
-
         protected override string Optional() { return string.Empty; }
 
-        public override Dictionary<Type, Dictionary<string, List<string>>> Aliases
-        {
-            get
-            {
-                var output = new Dictionary<Type, Dictionary<string, List<string>>>();
-                foreach (VMvariable var in this.vars)
-                {
-                    var type = Variable.TYPES_DICT[var.Type].Item1;
-                    var name = var.Root.ObjectName;
-                    var alias = var.Alias;
 
-                    if (output.ContainsKey(type))
-                    {
-                        if(output[type].ContainsKey(name))
-                        {
-                            output[type][name].Add(alias);
-                        }
-                        else
-                        {
-                            output[type].Add(name, new List<string>());
-                            output[type][name].Add(alias);
-                        }
-                    }
-                    else
-                    {
-                        output.Add(type, new Dictionary<string, List<string>>());
-                        output[type].Add(name, new List<string>());
-                        output[type][name].Add(alias);
-                    }
-                }
-                return output;
-            }
+        public void Add()
+        {
+            this.Root.Vars.Add(new Variable(typeof(string)));
+            //this.Parent.FullRefresh();
         }
+
+
+        //public override Dictionary<Type, Dictionary<string, List<string>>> Aliases
+        //{
+        //    get
+        //    {
+        //        var output = new Dictionary<Type, Dictionary<string, List<string>>>();
+        //        foreach (VMvariable var in this.vars)
+        //        {
+        //            var type = Variable.TYPES_DICT[var.Type].Item1;
+        //            var name = var.Root.ObjectName;
+        //            var alias = var.Alias;
+        //
+        //            if (output.ContainsKey(type))
+        //            {
+        //                if(output[type].ContainsKey(name))
+        //                {
+        //                    output[type][name].Add(alias);
+        //                }
+        //                else
+        //                {
+        //                    output[type].Add(name, new List<string>());
+        //                    output[type][name].Add(alias);
+        //                }
+        //            }
+        //            else
+        //            {
+        //                output.Add(type, new Dictionary<string, List<string>>());
+        //                output[type].Add(name, new List<string>());
+        //                output[type][name].Add(alias);
+        //            }
+        //        }
+        //        return output;
+        //    }
+        //}
     }
 }

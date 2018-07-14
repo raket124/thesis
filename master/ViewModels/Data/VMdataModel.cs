@@ -50,24 +50,24 @@ namespace master.ViewModels.Data
             return output;
         }
 
-        public List<ObjectValue> GetObjectList<T>() where T : Inheritance
-        {
-            return new List<ObjectValue>(from c in this.root.GetComponent<T>()
-                                         select new ObjectValue()
-                                         {
-                                             Name = c.Name,
-                                             Properties = new List<Variable>(c.Components)
-                                         });
-        }
+        //public List<ObjectValue> GetObjectList<T>() where T : Inheritance
+        //{
+        //    return new List<ObjectValue>(from c in this.root.GetComponent<T>()
+        //                                 select new ObjectValue()
+        //                                 {
+        //                                     Name = c.Name,
+        //                                     Properties = new List<Variable>(c.Components)
+        //                                 });
+        //}
 
-        public List<ObjectValue> GetObjectListEnum()
-        {
-            return new List<ObjectValue>(from c in this.root.GetComponent<MyEnum>()
-                                         select new ObjectValue()
-                                         {
-                                             Name = c.Name
-                                         });
-        }
+        //public List<ObjectValue> GetObjectListEnum()
+        //{
+        //    return new List<ObjectValue>(from c in this.root.GetComponent<MyEnum>()
+        //                                 select new ObjectValue()
+        //                                 {
+        //                                     Name = c.Name
+        //                                 });
+        //}
 
 
         private void GetObjectListEnum(Dictionary<Type, List<string>> output)

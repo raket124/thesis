@@ -8,35 +8,39 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Variables
 {
-    class VMobjectGroup : MyRootedBindableBase
+    class VMobjectGroup : MyRootedParentalBindableBase
     {
         public new ObjectGroup Root
         {
             get { return this.root as ObjectGroup; }
         }
-
-        protected VMvariableListing parent;
-        public VMvariableListing Parent
+        public new VMvariableList Parent
         {
-            get { return this.parent; }
+            get { return this.parent as VMvariableList; }
         }
+
+        public VMobjectGroup(ObjectGroup root, VMvariableList parent) : base(root, parent)
+        {
+
+        }
+
         public string Type
         {
             get { return this.Root.Type.Name; }
         }
-        public IList<VMobjectValue> Objects
+
+        public IList<VMobjects> Objects
         {
-            get { return (from o in this.Root.Objects select new VMobjectValue(o, this)).ToList(); }
+            get
+            {
+                return (from o in this.Root.Objects
+                        select new VMobjects(o, this)).ToList();
+            }
         }
 
-        public VMobjectGroup(ObjectGroup root, VMvariableListing parent) : base(root)
+        public int CountTotal
         {
-            this.parent = parent;
-        }
-
-        public int AliasTotal
-        {
-            get { return this.Root.Objects.Sum(x => x.Aliases.Count); }
+            get { return this.Root.Objects.Sum(x => x.Variables.Count); }
         }
     }
 }

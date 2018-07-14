@@ -9,35 +9,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using master.Models.Contract.Block.Blocks;
 
 namespace master.ViewModels.Contract.Block
 {
-    abstract class VMbase : MyBindableBase, ICloneable
+    abstract class VMbase : MyRootedParentalBindableBase, ICloneable
     {
         protected readonly string reqFormat = "Requirements: {0}";
         protected readonly string optFormat = "Optional: {0}";
 
-        protected VMfunction parent;
-        public VMfunction Parent
+        public new Base Root
         {
-            get { return this.parent; }
+            get { return this.root as Base; }
+        }
+        public new VMfunction Parent
+        {
+            get { return this.parent as VMfunction; }
             set { this.parent = value; }
         }
-        protected Base root;
-        public Base Root
-        {
-            get { return this.root; }
-        }
 
-        public VMbase(Base root)
+        public VMbase(Base root, VMfunction parent) : base(root, parent)
         {
-            this.root = root;
-            this.parent = null;
         }
 
         public string Documentation
         {
-            get { return this.root.Docs; }
+            get { return this.Root.Docs; }
         }
 
         public string Name
@@ -63,25 +60,15 @@ namespace master.ViewModels.Contract.Block
 
         protected abstract string Optional();
 
-        public virtual Dictionary<Type, Dictionary<string, List<string>>> Aliases
-        {
-            get { return new Dictionary<Type, Dictionary<string, List<string>>>(); }
-        }
+        //public virtual Dictionary<Type, Dictionary<string, List<string>>> Aliases
+        //{
+        //    get { return new Dictionary<Type, Dictionary<string, List<string>>>(); }
+        //}
 
-        public string SelectVar()
-        {
-            var window = new SelectVariableWIndow();
-            var vmWindow = new VMselectVariable(window, this.Parent.Parent.Parent.Parent.Model.Root);
-            window.DataContext = vmWindow;
-            if (window.ShowDialog() == true)
-                return vmWindow.Variable;
-            return string.Empty;
-        }
-
-        //public static string SelectVar(DataModel model)
+        //public string SelectVar()
         //{
         //    var window = new SelectVariableWIndow();
-        //    var vmWindow = new VMselectVariable(window, model);
+        //    var vmWindow = new VMselectVariable(window, this.Parent.Parent.Parent.Parent.Model.Root);
         //    window.DataContext = vmWindow;
         //    if (window.ShowDialog() == true)
         //        return vmWindow.Variable;

@@ -48,23 +48,22 @@ namespace master.ViewModels
 
             this.list2 = new ObservableCollection<VMbase>
             {
-                new VMassign(new MyAssign()),
+                new VMassign(new MyAssign(), null),
                 new VMinput(new MyInput(){
                     Vars = new ObservableCollection<Variable>()
                     {
-                        new Variable(Variable.TYPES.String)
+                        new Variable(typeof(String))
                     }
-                }),
-                new VMlog(new MyLog()),
-                new VMerror(new MyError()),
-                new VMif(new MyIf()),
-                new VMsimpleIf(new MySimpleIf()),
+                }, null),
+                new VMlog(new MyLog(), null),
+                new VMerror(new MyError(), null),
+                new VMif(new MyIf(), null),
+                new VMsimpleIf(new MySimpleIf(), null),
                 //new VMelseIf(null),
-                new VMelse(new MyElse()),
-                new VMend(new MyEnd()),
-                new VMtotalEcmrs(new MyTotalEcmrs()),
-                
-                new VMuseRegistry(new MyUseRegistry()),
+                new VMelse(new MyElse(), null),
+                new VMend(new MyEnd(), null),
+                new VMtotalEcmrs(new MyTotalEcmrs(), null),               
+                new VMuseRegistry(new MyUseRegistry(), null),
             };
         }
 

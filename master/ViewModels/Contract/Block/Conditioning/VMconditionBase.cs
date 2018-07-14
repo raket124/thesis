@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Contract.Block.Conditioning
 {
-    class VMconditionBase : MyBindableBase, ICloneable
+    class VMconditionBase : MyRootedParentalBindableBase, ICloneable
     {
         public readonly Dictionary<ConditionBase.COMPARE, string> COMPARE_DIC = new Dictionary<ConditionBase.COMPARE, string>()
         {
@@ -23,30 +23,27 @@ namespace master.ViewModels.Contract.Block.Conditioning
             { ConditionBase.COMPARE.lesser_or_equal, "<=" }
         };
 
-        protected ConditionBase root;
-        public ConditionBase Root
+        public new ConditionBase Root
         {
-            get { return this.root; }
+            get { return this.root as ConditionBase; }
         }
-        protected VMcondition parent;
-        public VMcondition Parent
+        public new VMcondition Parent
         {
-            get { return this.parent; }
-            set { this.parent = value; }
+            get { return this.parent as VMcondition; }
         }
 
         public DelegateCommand CommandRemove { get; private set; }
         public DelegateCommand CommandSetLHS { get; private set; }
         public DelegateCommand CommandSetRHS { get; private set; }
 
-        public VMconditionBase(ConditionBase root, VMcondition parent)
+        public VMconditionBase(ConditionBase root, VMcondition parent) : base(root, parent)
         {
             this.root = root;
             this.parent = parent;
 
             this.CommandRemove = new DelegateCommand(() => this.Parent.Root.Conditions.Remove(this.Root));
-            this.CommandSetLHS = new DelegateCommand(() => this.LHS = this.Parent.Parent.SelectVar());
-            this.CommandSetRHS = new DelegateCommand(() => this.RHS = this.Parent.Parent.SelectVar());
+            //this.CommandSetLHS = new DelegateCommand(() => this.LHS = this.Parent.Parent.SelectVar());
+            //this.CommandSetRHS = new DelegateCommand(() => this.RHS = this.Parent.Parent.SelectVar());
         }
 
         public object Clone()
@@ -54,15 +51,15 @@ namespace master.ViewModels.Contract.Block.Conditioning
             return new VMconditionBase(this.Root.Clone() as ConditionBase, this.Parent);
         }
 
-        public string LHS
-        {
-            get { return this.Root.LHS; }
-            set
-            {
-                this.Root.LHS = value;
-                this.NotifyPropertyChanged();
-            }
-        }
+        //public string LHS
+        //{
+        //    get { return this.Root.LHS; }
+        //    set
+        //    {
+        //        this.Root.LHS = value;
+        //        this.NotifyPropertyChanged();
+        //    }
+        //}
 
         public string Comparison
         {
@@ -76,15 +73,15 @@ namespace master.ViewModels.Contract.Block.Conditioning
             }
         }
 
-        public string RHS
-        {
-            get { return this.Root.RHS; }
-            set
-            {
-                this.Root.RHS = value;
-                this.NotifyPropertyChanged();
-            }
-        }
+        //public string RHS
+        //{
+        //    get { return this.Root.RHS; }
+        //    set
+        //    {
+        //        this.Root.RHS = value;
+        //        this.NotifyPropertyChanged();
+        //    }
+        //}
 
         public bool Invert
         {
@@ -96,16 +93,16 @@ namespace master.ViewModels.Contract.Block.Conditioning
             }
         }
 
-        public string Alias
-        {
-            get { return this.Root.Alias; }
-            set
-            {
-                this.Root.Alias = value;
-                this.NotifyPropertyChanged();
-                //this.Parent.RenewAliasList();
-            }
-        }
+        //public string Alias
+        //{
+        //    get { return this.Root.Alias; }
+        //    set
+        //    {
+        //        this.Root.Alias = value;
+        //        this.NotifyPropertyChanged();
+        //        //this.Parent.RenewAliasList();
+        //    }
+        //}
 
         public IList<string> Comparisons
         {

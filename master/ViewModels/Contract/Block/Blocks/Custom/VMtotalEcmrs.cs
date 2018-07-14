@@ -18,38 +18,33 @@ namespace master.ViewModels.Contract.Block.Blocks.Custom
 
         public DelegateCommand CommandSetInput { get; private set; }
 
-        public VMtotalEcmrs(MyTotalEcmrs root) : base(root)
+        public VMtotalEcmrs(MyTotalEcmrs root, VMfunction parent) : base(root, parent)
         {
             this.CommandSetInput = new DelegateCommand(this.SetInput);
         }
 
         public override object Clone()
         {
-            return new VMtotalEcmrs(this.Root.Clone() as MyTotalEcmrs)
-            {
-                Parent = this.Parent
-            };
+            return new VMtotalEcmrs(this.Root.Clone() as MyTotalEcmrs, this.Parent);
         }
 
         protected override string BlockName() { return "Total ecmrs - block"; }
-
         protected override string Optional() { return string.Empty; }
-
         protected override string Required() { return string.Format(this.reqFormat, "1 List of ecmrs"); }
 
-        public string Input
-        {
-            get { return this.Root.Input; }
-            set
-            {
-                this.Root.Input = value;
-                this.NotifyPropertyChanged();
-            }
-        }
+        //public string Input
+        //{
+        //    get { return this.Root.Input; }
+        //    set
+        //    {
+        //        this.Root.Input = value;
+        //        this.NotifyPropertyChanged();
+        //    }
+        //}
 
         public void SetInput()
         {
-            this.Input = this.SelectVar();
+            //this.Input = this.SelectVar();
         }
     }
 }

@@ -17,23 +17,18 @@ namespace master.ViewModels.Contract.Block.Blocks
             get { return this.root as MyUseRegistry; }
         }
 
-        public VMuseRegistry(MyUseRegistry root) : base(root)
+        public VMuseRegistry(MyUseRegistry root, VMfunction parent) : base(root, parent)
         {
 
         }
 
         public override object Clone()
         {
-            return new VMuseRegistry(this.root.Clone() as MyUseRegistry)
-            {
-                Parent = this.Parent
-            };
+            return new VMuseRegistry(this.Root.Clone() as MyUseRegistry, this.Parent);
         }
 
         protected override string BlockName() { return "Registry block"; }
-
         protected override string Required() { return string.Format(this.reqFormat, "1 variable, 1 action"); }
-
         protected override string Optional() { return string.Format(this.optFormat, "1 boolean"); }
 
         public MyUseRegistry.ACTION Action
@@ -61,33 +56,34 @@ namespace master.ViewModels.Contract.Block.Blocks
             get { return EnumUtil.EnumToList<MyUseRegistry.ACTION>(); }
         }
 
-        public string Alias
-        {
-            get { return this.Root.Alias; }
-            set
-            {
-                this.Root.Alias = value;
-                this.NotifyPropertyChanged();
-            }
-        }
+        //public string Alias
+        //{
+        //    get { return this.Root.Alias; }
+        //    set
+        //    {
+        //        this.Root.Alias = value;
+        //        this.NotifyPropertyChanged();
+        //    }
+        //}
 
-        public IList<string> AliasOptions
-        {
-            get
-            {
-                var participants = this.Parent.Variables[typeof(MyParticipant)];
-                var assets = this.Parent.Variables[typeof(MyAsset)];
+        //public IList<string> AliasOptions
+        //{
+        //    get
+        //    {
+        //        var participants = this.Parent.Variables[typeof(MyParticipant)];
+        //        var assets = this.Parent.Variables[typeof(MyAsset)];
 
-                var output = new List<string>();
-                output.AddRange(participants.SelectMany(x => x.Value));
-                output.AddRange(assets.SelectMany(x => x.Value));
-                return output;
-            }
-        }
+        //        var output = new List<string>();
+        //        output.AddRange(participants.SelectMany(x => x.Value));
+        //        output.AddRange(assets.SelectMany(x => x.Value));
+        //        return output;
+        //    }
+        //}
 
         public override void FullRefresh()
         {
-            this.NotifyPropertyChanged("AliasOptions");
+            this.NotifyPropertyChanged("Action");
+            this.NotifyPropertyChanged("Delay");
         }
     }
 }

@@ -8,34 +8,35 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Variables
 {
-    class VMvariableGroup : MyRootedBindableBase
+    class VMvariableGroup : MyRootedParentalBindableBase
     {
         public new VariableGroup Root
         {
             get { return this.root as VariableGroup; }
         }
-
-        protected VMvariableListing parent;
-        public VMvariableListing Parent
+        public new VMvariableList Parent
         {
-            get { return this.parent; }
+            get { return this.parent as VMvariableList; }
         }
+
+        public VMvariableGroup(VariableGroup root, VMvariableList parent) : base(root, parent)
+        {
+
+        }
+
         public string Type
         {
             get { return this.Root.Type.Name; }
         }
-        public IList<VMvariableGroupAlias> Aliases
-        {
-            get
-            {
-                return (from a in this.Root.Aliases
-                        select new VMvariableGroupAlias(a, this)).ToList();
-            }
-        }
 
-        public VMvariableGroup(VariableGroup root, VMvariableListing parent) : base(root)
-        {
-            this.parent = parent;
-        }
+        //public IList<VMvariableGroupAlias> Aliases
+        //{
+        //    get
+        //    {
+        //        return (from a in this.Root.Aliases
+        //                select new VMvariableGroupAlias(a, this)).ToList();
+        //    }
+        //}
+
     }
 }

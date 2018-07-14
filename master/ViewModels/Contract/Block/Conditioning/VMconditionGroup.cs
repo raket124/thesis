@@ -12,17 +12,15 @@ using System.Threading.Tasks;
 
 namespace master.ViewModels.Contract.Block.Conditioning
 {
-    class VMconditionGroup : MyBindableBase, ICloneable
+    class VMconditionGroup : MyRootedParentalBindableBase, ICloneable
     {
-        protected ConditionGroup root;
-        public ConditionGroup Root
+        public new ConditionGroup Root
         {
-            get { return this.root; }
+            get { return this.root as ConditionGroup; }
         }
-        protected VMcondition parent;
-        public VMcondition Parent
+        public new VMcondition Parent
         {
-            get { return this.parent; }
+            get { return this.parent as VMcondition; }
         }
 
         public List<VMstring> conditions;
@@ -31,10 +29,8 @@ namespace master.ViewModels.Contract.Block.Conditioning
         public DelegateCommand CommandAdd { get; private set; }
         public DelegateCommand CommandRemove { get; private set; }
 
-        public VMconditionGroup(ConditionGroup root, VMcondition parent)
+        public VMconditionGroup(ConditionGroup root, VMcondition parent) : base(root, parent)
         {
-            this.root = root;
-            this.parent = parent;
             this.Wrap();
 
             this.CommandAdd = new DelegateCommand(this.Add);

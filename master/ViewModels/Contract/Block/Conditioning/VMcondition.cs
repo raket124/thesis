@@ -13,19 +13,17 @@ using master.Models.Data;
 
 namespace master.ViewModels.Contract.Block.Conditioning
 {
-    class VMcondition : MyBindableBase, ICloneable
+    class VMcondition : MyRootedParentalBindableBase, ICloneable
     {
-        protected Condition root;
-        public Condition Root
+        public new Condition Root
         {
-            get { return this.root; }
+            get { return this.root as Condition; }
         }
-        protected VMbase parent;
-        public VMbase Parent
+        public new VMbase Parent
         {
-            get { return this.parent; }
-            set { this.parent = value; }
+            get { return this.parent as VMbase; }
         }
+
         protected ObservableCollection<VMconditionBase> conditions;
         public ObservableCollection<VMconditionBase> Conditions
         {
@@ -63,10 +61,8 @@ namespace master.ViewModels.Contract.Block.Conditioning
         public DelegateCommand CommandAddOption { get; private set; }
         public DelegateCommand CommandRemoveOption { get; private set; }
 
-        public VMcondition(Condition root, VMbase parent)
+        public VMcondition(Condition root, VMbase parent) : base(root, parent)
         {
-            this.root = root;
-            this.parent = parent;
             this.Wrap();
 
             this.CommandAddCondition = new DelegateCommand(() => this.Root.Conditions.Add(new ConditionBase()));
@@ -123,19 +119,19 @@ namespace master.ViewModels.Contract.Block.Conditioning
             this.CommandRemoveOption.RaiseCanExecuteChanged();
         }
 
-        public ObservableCollection<string> AliasList
-        {
-            get
-            {
-                var conditionAliases = this.conditions.Select(c => c.Alias);
-                var groupAliases = this.groups.Select(g => g.Alias);
+        //public ObservableCollection<string> AliasList
+        //{
+        //    get
+        //    {
+        //        var conditionAliases = this.conditions.Select(c => c.Alias);
+        //        var groupAliases = this.groups.Select(g => g.Alias);
 
-                var output = new ObservableCollection<string>();
-                output.AddRange(conditionAliases);
-                output.AddRange(groupAliases);
-                return output;
-            }
-        }
+        //        var output = new ObservableCollection<string>();
+        //        output.AddRange(conditionAliases);
+        //        output.AddRange(groupAliases);
+        //        return output;
+        //    }
+        //}
 
         public object Clone()
         {
@@ -147,7 +143,7 @@ namespace master.ViewModels.Contract.Block.Conditioning
 
         public void RenewAliasList()
         {
-            this.NotifyPropertyChanged("AliasList");
+            //this.NotifyPropertyChanged("AliasList");
         }
     }
 }

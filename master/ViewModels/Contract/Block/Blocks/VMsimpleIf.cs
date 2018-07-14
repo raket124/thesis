@@ -30,35 +30,30 @@ namespace master.ViewModels.Contract.Block.Blocks
         public DelegateCommand CommandSetLHS { get; private set; }
         public DelegateCommand CommandSetRHS { get; private set; }
 
-        public VMsimpleIf(MySimpleIf root) : base(root)
+        public VMsimpleIf(MySimpleIf root, VMfunction parent) : base(root, parent)
         {
             this.condition = new VMconditionBase(root.Condition, null);
-            this.CommandSetLHS = new DelegateCommand(this.SetLHS);
-            this.CommandSetRHS = new DelegateCommand(this.SetRHS);
-        }
-
-        protected void SetLHS()
-        {
-            this.condition.LHS = this.SelectVar();
-        }
-
-        protected void SetRHS()
-        {
-            this.condition.RHS = this.SelectVar();
+            //this.CommandSetLHS = new DelegateCommand(this.SetLHS);
+            //this.CommandSetRHS = new DelegateCommand(this.SetRHS);
         }
 
         public override object Clone()
         {
-            return new VMsimpleIf(this.root.Clone() as MySimpleIf)
-            {
-                Parent = this.Parent
-            };
+            return new VMsimpleIf(this.Root.Clone() as MySimpleIf, this.Parent);
         }
 
         protected override string BlockName() { return "Simple if block"; }
-
         protected override string Required() { return string.Format(this.reqFormat, "2 variables, 1 comparison"); }
-
         protected override string Optional() { return string.Empty; }
+
+        //protected void SetLHS()
+        //{
+        //    this.condition.LHS = this.SelectVar();
+        //}
+
+        //protected void SetRHS()
+        //{
+        //    this.condition.RHS = this.SelectVar();
+        //}
     }
 }

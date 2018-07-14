@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace master.Models.Variables
 {
-    public class VariableGroup
+    public class Objects
     {
-        protected Type type;
-        public Type Type
+        protected string name;
+        public string Name
         {
-            get { return this.type; }
-            set { this.type = value; }
+            get { return this.name; }
+            set { this.name = value; }
         }
 
         protected List<Variable> variables;
@@ -23,10 +23,10 @@ namespace master.Models.Variables
             set { this.variables = value; }
         }
 
-        public VariableGroup(Type type)
+        public Objects(string name)
         {
-            this.type = type;
-            this.variables = new List<Variable>();
+            this.name = name;
+            this.Variables = new List<Variable>();
         }
     }
 }
