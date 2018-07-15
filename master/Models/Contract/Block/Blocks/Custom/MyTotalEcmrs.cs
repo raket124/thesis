@@ -17,10 +17,18 @@ namespace master.Models.Contract.Block.Blocks.Custom
             get { return this.input; }
             set { this.input = value; }
         }
+        [DataMember]
+        protected string alias;
+        public string Alias
+        {
+            get { return this.alias; }
+            set { this.alias = value; }
+        }
 
         public MyTotalEcmrs() : base()
         {
             this.input = string.Empty;
+            this.alias = string.Empty;
         }
 
         public override object Clone()
@@ -29,7 +37,8 @@ namespace master.Models.Contract.Block.Blocks.Custom
             {
                 Name = this.Name,
                 Docs = this.Docs,
-                Input = this.Input
+                Input = this.Input,
+                Alias = this.Alias
             };
         }
     }

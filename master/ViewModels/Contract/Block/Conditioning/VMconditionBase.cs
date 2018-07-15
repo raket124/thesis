@@ -51,15 +51,15 @@ namespace master.ViewModels.Contract.Block.Conditioning
             return new VMconditionBase(this.Root.Clone() as ConditionBase, this.Parent);
         }
 
-        //public string LHS
-        //{
-        //    get { return this.Root.LHS; }
-        //    set
-        //    {
-        //        this.Root.LHS = value;
-        //        this.NotifyPropertyChanged();
-        //    }
-        //}
+        public string LHS
+        {
+            get { return this.Root.LHS; }
+            set
+            {
+                this.Root.LHS = value;
+                this.NotifyPropertyChanged();
+            }
+        }
 
         public string Comparison
         {
@@ -73,15 +73,15 @@ namespace master.ViewModels.Contract.Block.Conditioning
             }
         }
 
-        //public string RHS
-        //{
-        //    get { return this.Root.RHS; }
-        //    set
-        //    {
-        //        this.Root.RHS = value;
-        //        this.NotifyPropertyChanged();
-        //    }
-        //}
+        public string RHS
+        {
+            get { return this.Root.RHS; }
+            set
+            {
+                this.Root.RHS = value;
+                this.NotifyPropertyChanged();
+            }
+        }
 
         public bool Invert
         {
@@ -93,16 +93,15 @@ namespace master.ViewModels.Contract.Block.Conditioning
             }
         }
 
-        //public string Alias
-        //{
-        //    get { return this.Root.Alias; }
-        //    set
-        //    {
-        //        this.Root.Alias = value;
-        //        this.NotifyPropertyChanged();
-        //        //this.Parent.RenewAliasList();
-        //    }
-        //}
+        public string Alias
+        {
+            get { return this.Root.Alias; }
+            set
+            {
+                this.Root.Alias = value;
+                this.NotifyPropertyChanged();
+            }
+        }
 
         public IList<string> Comparisons
         {

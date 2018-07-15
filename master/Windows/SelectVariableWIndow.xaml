@@ -153,9 +153,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding ObjectName}"/>
+                        <TextBlock Text="{Binding Root.Name}"/>
                         <TextBlock Text=" ("/>
-                        <TextBlock Text="{Binding Alias}"/>
+                        <TextBlock Text="{Binding ObjectName}"/>
                         <TextBlock Text=")"/>
                     </StackPanel>
                 </DataTemplate>

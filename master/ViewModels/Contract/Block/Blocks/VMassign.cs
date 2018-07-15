@@ -1,5 +1,6 @@
 ﻿using master.Models;
 using master.Models.Contract.Block.Blocks;
+using master.Models.Data.Component.Components;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,8 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public VMassign(MyAssign root, VMfunction parent) : base(root, parent)
         {
-            this.CommandSetVariable = new DelegateCommand(this.SetVariable);
-            this.CommandSetValue = new DelegateCommand(this.SetValue);
+            this.CommandSetVariable = new DelegateCommand(() => this.Variable = this.Parent.SelectVar());
+            this.CommandSetValue = new DelegateCommand(() => this.Value = this.Parent.SelectVar());
         }
 
         public override object Clone()
@@ -34,44 +35,24 @@ namespace master.ViewModels.Contract.Block.Blocks
         protected override string Required() { return string.Format(this.reqFormat, "2 variables"); }
         protected override string Optional() { return string.Empty; }
 
-        //public string Variable
-        //{
-        //    get { return this.Root.Variable; }
-        //    set
-        //    {
-        //        this.Root.Variable = value;
-        //        this.NotifyPropertyChanged();
-        //    }
-        //}
-
-        //public string Value
-        //{
-        //    get { return this.Root.Value; }
-        //    set
-        //    {
-        //        this.Root.Value = value;
-        //        this.NotifyPropertyChanged();
-        //    }
-        //}
-
-        public void SetVariable()
+        public string Variable
         {
-            //this.Variable = this.SelectVar();
+            get { return this.Root.Variable; }
+            set
+            {
+                this.Root.Variable = value;
+                this.NotifyPropertyChanged();
+            }
         }
 
-        public void SetValue()
+        public string Value
         {
-            //this.Value = this.SelectVar();
-        }
-
-        //public IList<string> AliasOptions
-        //{
-        //    get { return this.Parent.Aliases; }
-        //}
-
-        public override void FullRefresh()
-        {
-            //this.NotifyPropertyChanged("Aliases");
+            get { return this.Root.Value; }
+            set
+            {
+                this.Root.Value = value;
+                this.NotifyPropertyChanged();
+            }
         }
     }
 }

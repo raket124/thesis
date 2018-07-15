@@ -1,4 +1,5 @@
 ﻿using master.Models.Contract.Block.Blocks;
+using master.Models.Contract.Block.Blocks.Custom;
 using master.Models.Data.Component.Components;
 using System;
 using System.Collections.Generic;
@@ -89,7 +90,53 @@ namespace master.Models.Contract
                 {
                     new Function("createECMRs", Function.ACCESSIBILITY.Public)
                     {
-                        Docs = "Create ECMRs transaction processor function."
+                        Docs = "Create ECMRs transaction processor function.",
+                        Blocks = new ObservableCollection<Block.Base>()
+                        {
+                            new MyInput()
+                            {
+                                Vars = new ObservableCollection<Block.Variable>()
+                                {
+                                    new Block.Variable(typeof(MyAsset))
+                                    {
+                                        Relation = Data.Variable.RELATION.reference,
+                                        ObjectName = "TransportOrder",
+                                        Alias = "transportOrder",
+                                    },
+                                    new Block.Variable(typeof(MyAsset))
+                                    {
+                                        Relation = Data.Variable.RELATION.variable,
+                                        ObjectName = "ECMR",
+                                        Alias = "ecmrs",
+                                        List = true
+                                    }
+                                }
+                            },
+                            new MyTotalEcmrs()
+                            {
+                                Input = "ecmrs",
+                                Alias = "totalEcmrsGoods"
+                            },
+                            new MySimpleIf()
+                            {
+                                Condition = new Block.Conditioning.ConditionBase()
+                                {
+                                    LHS = "transportOrder.goods.length",
+                                    Comparison = Block.Conditioning.ConditionBase.COMPARE.lesser,
+                                    RHS = "totalEcmrsGoods"
+                                }
+                            },
+                            new MyError()
+                            {
+                                Text = "The total amount of goods of the ECMRs exceeds the total listed in the TransportOrder"
+                            },
+                            new MyEnd(),
+                            new MyRegistry()
+                            {
+                                Action = MyRegistry.ACTION.Insert,
+                                Alias = "ecmrs"
+                            }
+                        }
                     },
                     new Function("updateEcmrStatusToLoaded", Function.ACCESSIBILITY.Public)
                     {
@@ -254,35 +301,35 @@ namespace master.Models.Contract
                                     new Block.Variable(typeof(MyAsset))
                                     {
                                         ObjectName = "TransportOrder",
-                                        Alias = "TransportOrder",
+                                        Alias = "Alias_TransportOrder",
                                     },
                                     new Block.Variable(typeof(MyAsset))
                                     {
                                         ObjectName = "ECMR",
-                                        Alias = "ECMR",
+                                        Alias = "Alias_ECMR",
                                     },
                                     new Block.Variable(typeof(MyAsset))
                                     {
                                         ObjectName = "LegalOwnerOrg",
-                                        Alias = "LegalOwnerOrg",
+                                        Alias = "Alias_LegalOwnerOrg",
                                     },
                                     new Block.Variable(typeof(MyParticipant))
                                     {
                                         ObjectName = "LegalOwnerAdmin",
-                                        Alias = "LegalOwnerAdmin",
+                                        Alias = "Alias_LegalOwnerAdmin",
                                     },
                                     new Block.Variable(typeof(MyConcept))
                                     {
                                         ObjectName = "Address",
-                                        Alias = "Address",
+                                        Alias = "Alias_Address",
                                     },
                                     new Block.Variable(typeof(string))
                                     {
-                                        Alias = "Name",
+                                        Alias = "Alias_Name",
                                     },
                                     new Block.Variable(typeof(int))
                                     {
-                                        Alias = "Money",
+                                        Alias = "Alias_Money",
                                     }
                                 }
                             },

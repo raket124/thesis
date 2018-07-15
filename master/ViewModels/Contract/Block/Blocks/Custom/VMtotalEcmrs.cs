@@ -20,7 +20,7 @@ namespace master.ViewModels.Contract.Block.Blocks.Custom
 
         public VMtotalEcmrs(MyTotalEcmrs root, VMfunction parent) : base(root, parent)
         {
-            this.CommandSetInput = new DelegateCommand(this.SetInput);
+            this.CommandSetInput = new DelegateCommand(() => this.Input = this.Parent.SelectVar());
         }
 
         public override object Clone()
@@ -32,19 +32,35 @@ namespace master.ViewModels.Contract.Block.Blocks.Custom
         protected override string Optional() { return string.Empty; }
         protected override string Required() { return string.Format(this.reqFormat, "1 List of ecmrs"); }
 
-        //public string Input
-        //{
-        //    get { return this.Root.Input; }
-        //    set
-        //    {
-        //        this.Root.Input = value;
-        //        this.NotifyPropertyChanged();
-        //    }
-        //}
-
-        public void SetInput()
+        public string Input
         {
-            //this.Input = this.SelectVar();
+            get { return this.Root.Input; }
+            set
+            {
+                this.Root.Input = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public string Alias
+        {
+            get { return this.Root.Alias; }
+            set
+            {
+                this.Root.Alias = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        protected override List<VMvariable> GetVariables()
+        {
+            return new List<VMvariable>()
+            {
+                new VMvariable(new Variable(typeof(int))
+                {
+                    Alias = this.Alias,
+                })
+            };
         }
     }
 }

@@ -65,7 +65,7 @@ namespace master.ViewModels.Contract.Block.Blocks
         public void Add()
         {
             this.Root.Vars.Add(new Variable(typeof(string)));
-            //this.Parent.FullRefresh();
+            this.Parent.FullRefresh();
         }
 
         protected override List<VMvariable> GetVariables()

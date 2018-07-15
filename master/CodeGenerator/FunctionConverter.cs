@@ -73,7 +73,7 @@ namespace master.CodeGenerator
         private static string Convert(MyTotalEcmrs input, ref int i)
         {
             return string.Join("\n", new List<string> {
-                string.Format("{0}var totalEcmrs = tx.{1}", FunctionConverter.Indent(i), input.Input),
+                string.Format("{0}var {1} = tx.{2}", FunctionConverter.Indent(i), input.Alias, input.Input),
                 string.Format("{0}.map(function (ecmr) {{", FunctionConverter.Indent(i + 1)),
                 string.Format("{0}return ecmr.goods.length;", FunctionConverter.Indent(i + 2)),
                 string.Format("{0}}}).reduce(function (prev, curr) {{", FunctionConverter.Indent(i + 1)),

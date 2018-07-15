@@ -40,16 +40,16 @@ namespace master.Models.Contract.Block
         public void AddLast(Variable input)
         {
             var current = this;
-            while (current != null)
+            while (current.Child != null)
                 current = current.Child;
-            current = new VariableLink(input);
+            current.Child = new VariableLink(input);
         }
 
         public void RemoveLast()
         {
             var previous = this;
             var current = this.Child;
-            while (current != null)
+            while (current.Child != null)
             {
                 previous = current;
                 current = current.Child;
@@ -62,18 +62,15 @@ namespace master.Models.Contract.Block
             get { return this.child != null; }
         }
 
+        public int Count
+        {
+            get { return 1 + (this.child == null ? 0 : this.child.Count); }
+        }
+
         public void Clear()
         {
             this.value = null;
             this.child = null;
-        }
-
-        public int Count
-        {
-            get
-            {
-                return 1 + (this.child == null ? 0 : this.child.Count);
-            }
         }
 
         public IList<Variable> Listing
@@ -87,7 +84,6 @@ namespace master.Models.Contract.Block
                     output.Add(current.Value);
                     current = current.Child;
                 }
-
                 return output;
             }
         }

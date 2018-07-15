@@ -90,17 +90,14 @@ namespace master.ViewModels.Windows
         private void RemoveProperty()
         {
             this.Output.RemoveLast();
-
-            //this.propertyList.RemoveAt(this.propertyList.Count - 1);
-            //this.PopulatePropertyList();
-            //this.CommandRemoveProperty.RaiseCanExecuteChanged();
-            //this.CommandConfirm.RaiseCanExecuteChanged();
+            this.PopulatePropertyList();
+            this.CommandRemoveProperty.RaiseCanExecuteChanged();
+            this.CommandConfirm.RaiseCanExecuteChanged();
         }
 
         private bool CanRemoveProperty()
         {
-            //return this.propertyList.Count > 1;
-            return true;
+            return this.Output.CanRemoveLast;
         }
 
         private void Confirm()
@@ -111,8 +108,7 @@ namespace master.ViewModels.Windows
 
         private bool CanConfirm()
         {
-            //return this.propertyList.Count > 0;
-            return true;
+            return this.Output.Value != null;
         }
 
         private void PopulatePropertyList()
@@ -127,10 +123,17 @@ namespace master.ViewModels.Windows
                 current = this.Output.Listing.Last();
 
 
-            if (current.ObjectName == string.Empty)
+            if (current.ObjectName == typeof(int).Name ||
+                current.ObjectName == typeof(long).Name ||
+                current.ObjectName == typeof(double).Name ||
+                current.ObjectName == typeof(bool).Name ||
+                current.ObjectName == typeof(string).Name ||
+                current.ObjectName == typeof(DateTime).Name ||
+                current.ObjectName == string.Empty)
                 this.PopulatePropertyListVariables(current);
             else
                 this.PopulatePropertyListObjects(current);
+  
         }
 
         private void PopulatePropertyListObjects(Contract.Block.VMvariable input)

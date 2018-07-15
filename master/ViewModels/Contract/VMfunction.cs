@@ -4,9 +4,11 @@ using master.Models;
 using master.Models.Contract;
 using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
+using master.Models.Contract.Block.Blocks.Custom;
 using master.Models.Variables;
 using master.ViewModels.Contract.Block;
 using master.ViewModels.Contract.Block.Blocks;
+using master.ViewModels.Contract.Block.Blocks.Custom;
 using master.ViewModels.Variables;
 using master.ViewModels.Windows;
 using master.Windows;
@@ -66,16 +68,12 @@ namespace master.ViewModels.Contract
             {
                 if (block.GetType() == typeof(MyAssign))
                     output.Add(new VMassign(block as MyAssign, this));
-                //if (block.GetType() == typeof(MyCode))
-                //    output.Add(new VMcode(block as MyCode, this));
                 if (block.GetType() == typeof(MyElse))
                     output.Add(new VMelse(block as MyElse, this));
                 if (block.GetType() == typeof(MyEnd))
                     output.Add(new VMend(block as MyEnd, this));
                 if (block.GetType() == typeof(MyError))
                     output.Add(new VMerror(block as MyError, this));
-                //if (block.GetType() == typeof(MyGetRegistry))
-                //    output.Add(new VM(block as MyGetRegistry, this));
                 if (block.GetType() == typeof(MyIf))
                     output.Add(new VMif(block as MyIf, this));
                 if (block.GetType() == typeof(MyInput))
@@ -86,6 +84,9 @@ namespace master.ViewModels.Contract
                     output.Add(new VMsimpleIf(block as MySimpleIf, this));
                 if (block.GetType() == typeof(MyRegistry))
                     output.Add(new VMuseRegistry(block as MyRegistry, this));
+
+                if (block.GetType() == typeof(MyTotalEcmrs))
+                    output.Add(new VMtotalEcmrs(block as MyTotalEcmrs, this));
                 //Add new blocks here
             }
             this.Blocks = output;
@@ -137,13 +138,21 @@ namespace master.ViewModels.Contract
                 block.FullRefresh();
         }
 
-        public VMvariableList VariableList
+        public VMvariableList BasicVariableList
         {
             get
             {
                 var root = new VariableList();
                 root.ReadDataModel(this.Parent.Parent.Parent.Model.Root);
-                var output = new VMvariableList(root);
+                return new VMvariableList(root);
+            }
+        }
+
+        public VMvariableList VariableList
+        {
+            get
+            {
+                var output = this.BasicVariableList;
                 foreach (var item in this.Blocks)
                     output.AddVars(item.Variables);
                 return output;
@@ -156,9 +165,8 @@ namespace master.ViewModels.Contract
             var vmWindow = new VMselectVariable(window, this.VariableList, this.Parent.Parent.Parent.Model);
             window.DataContext = vmWindow;
 
-            window.ShowDialog();
-            //if (window.ShowDialog() == true)
-            //    return vmWindow.Variable;
+            if (window.ShowDialog() == true)
+                return vmWindow.Output.Output;
             return string.Empty;
         }
     }

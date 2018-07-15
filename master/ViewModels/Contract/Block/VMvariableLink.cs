@@ -67,5 +67,18 @@ namespace master.ViewModels.Contract.Block
                                             select new VMvariable(l));
             }
         }
+
+        public string Output
+        {
+            get
+            {
+                var list = new List<string>()
+                {
+                    this.Root.Value.Alias
+                };
+                list.AddRange(this.Listing.Select(l => l.ObjectName));
+                return string.Join(".", list);
+            }
+        }
     }
 }

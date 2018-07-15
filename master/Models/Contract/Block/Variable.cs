@@ -45,8 +45,8 @@ namespace master.Models.Contract.Block
         public Variable(Data.Variable var, Type type) : base(var.Type, var.Name, var.Relation)
         {
             this.type = type;
-            this.objectName = var.Name;
-            this.alias = var.Type;
+            this.objectName = var.Type;
+            this.alias = string.Empty;
             this.isList = false;
         }
 

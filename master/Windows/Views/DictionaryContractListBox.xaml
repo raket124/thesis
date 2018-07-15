@@ -79,7 +79,7 @@
                                     <CheckBox Margin="0,0,10,0" IsChecked="{Binding List}" Content=":List" FlowDirection="RightToLeft"/>
                                     <CheckBox Margin="0,0,10,0" IsChecked="{Binding Ref}" Content=":Ref" FlowDirection="RightToLeft"/>
                                     <TextBlock Margin="0,0,10,0" Text="Object:" IsEnabled="{Binding IsObject}"/>
-                                    <ComboBox Margin="0,0,10,0" Width="100" SelectedItem="{Binding ObjectName}" ItemsSource="{Binding ObjectNames}" IsEnabled="{Binding IsObject}"/>
+                                    <ComboBox Margin="0,0,10,0" Width="100" SelectedItem="{Binding ObjectName}" ItemsSource="{Binding TypeOptions}" IsEnabled="{Binding IsObject}"/>
                                     <TextBlock Margin="0,0,10,0" Text="Alias:"/>
                                     <TextBox Margin="0,0,10,0" Width="100" Text="{Binding Alias}"/>
                                 </StackPanel>
@@ -98,10 +98,10 @@
         <Border Style="{StaticResource MyBorder}">
             <Expander Header="{Binding Name}" IsExpanded="True">
                 <StackPanel Orientation="Horizontal">
-                    <Button Width="100" Margin="0,0,10,0" Content="{Binding Condition.LHS}" Command="{Binding CommandSetLHS}"/>
-                    <ComboBox  Width="100" Margin="0,0,10,0" SelectedItem="{Binding Condition.Comparison}" ItemsSource="{Binding Condition.Comparisons}"/>
-                    <Button Width="100" Margin="0,0,10,0" Content="{Binding Condition.RHS}" Command="{Binding CommandSetRHS}"/>
-                    <CheckBox Margin="0,0,10,0" Content="Inverse:" IsChecked="{Binding Condition.Invert}"/>
+                    <Button MinWidth="100" Margin="0,0,10,0" Content="{Binding Condition.LHS}" Command="{Binding CommandSetLHS}"/>
+                    <ComboBox  MinWidth="100" Margin="0,0,10,0" SelectedItem="{Binding Condition.Comparison}" ItemsSource="{Binding Condition.Comparisons}"/>
+                    <Button MinWidth="100" Margin="0,0,10,0" Content="{Binding Condition.RHS}" Command="{Binding CommandSetRHS}"/>
+                    <CheckBox MinWidth="0,0,10,0" Content="Inverse:" IsChecked="{Binding Condition.Invert}"/>
                 </StackPanel>
             </Expander>
         </Border>
@@ -124,6 +124,7 @@
             <Expander Header="{Binding Name}" IsExpanded="True">
                 <StackPanel Orientation="Horizontal">
                     <Button MinWidth="100" Margin="0,0,10,0" Content="{Binding Input}" Command="{Binding CommandSetInput}"/>
+                    <TextBox MinWidth="100" Margin="0,0,10,0" Text="{Binding Alias}"/>
                 </StackPanel>
             </Expander>
         </Border>

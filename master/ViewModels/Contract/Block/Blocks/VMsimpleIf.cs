@@ -33,8 +33,8 @@ namespace master.ViewModels.Contract.Block.Blocks
         public VMsimpleIf(MySimpleIf root, VMfunction parent) : base(root, parent)
         {
             this.condition = new VMconditionBase(root.Condition, null);
-            this.CommandSetLHS = new DelegateCommand(this.SetLHS);
-            //this.CommandSetRHS = new DelegateCommand(this.SetRHS);
+            this.CommandSetLHS = new DelegateCommand(() => this.Condition.LHS = this.Parent.SelectVar());
+            this.CommandSetRHS = new DelegateCommand(() => this.Condition.RHS = this.Parent.SelectVar());
         }
 
         public override object Clone()
@@ -45,16 +45,5 @@ namespace master.ViewModels.Contract.Block.Blocks
         protected override string BlockName() { return "Simple if block"; }
         protected override string Required() { return string.Format(this.reqFormat, "2 variables, 1 comparison"); }
         protected override string Optional() { return string.Empty; }
-
-        protected void SetLHS()
-        {
-            //this.condition.LHS = this.SelectVar();
-            this.Parent.SelectVar();
-        }
-
-        //protected void SetRHS()
-        //{
-        //    this.condition.RHS = this.SelectVar();
-        //}
     }
 }
