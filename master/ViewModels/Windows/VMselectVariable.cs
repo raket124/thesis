@@ -67,19 +67,10 @@ namespace master.ViewModels.Windows
         {
             this.Output.Clear();
             if (input.GetType() == typeof(Contract.Block.VMvariable))
+            {
                 this.Output.Value = input as Contract.Block.VMvariable;
-            this.PopulatePropertyList();
-
-            //if (input.GetType() == typeof(VMvariableGroup))
-            //{
-            //    var value = input as VMvariableGroup;
-            //    this.propertyList.Add(Tuple.Create(value.Type, value.Type));
-            //}
-            //if (input.GetType() == typeof(VMobjectValue))
-            //{
-            //    var value = input as VMobjectValue;
-            //    this.propertyList.Add(Tuple.Create(value.Name, value.Name));
-            //}
+                this.PopulatePropertyList();
+            }
 
             this.CommandRemoveProperty.RaiseCanExecuteChanged();
             this.CommandConfirm.RaiseCanExecuteChanged();
@@ -145,14 +136,12 @@ namespace master.ViewModels.Windows
         private void PopulatePropertyListObjects(Contract.Block.VMvariable input)
         {
             var varList = this.Model.GetComponents();
-           var group = varList.Where(vl => vl.Name == input.ObjectName).First();
+            var group = varList.Where(vl => vl.Name == input.ObjectName).First();
             if (group.GetType() == typeof(MyEnum))
                 return;
 
-            var components = (group as Identity).Components;
-
             var variables = new List<Contract.Block.VMvariable>();
-            foreach(var x in components)
+            foreach(var x in (group as Inheritance).Components)
                 variables.Add(new Contract.Block.VMvariable(new Models.Contract.Block.Variable(x, group.GetType())));
 
             this.Properties.AddRange(variables);

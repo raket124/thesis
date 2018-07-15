@@ -15,9 +15,9 @@ namespace master.Models.Contract.Block
 
         public abstract object Clone();
 
-        public virtual IList<Variable> Aliases
-        {
-            get { return new List<Variable>(); }
-        }
+        //public virtual IList<Variable> Aliases
+        //{
+        //    get { return new List<Variable>(); }
+        //}
     }
 }

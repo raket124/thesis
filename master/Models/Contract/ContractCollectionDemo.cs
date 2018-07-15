@@ -263,18 +263,26 @@ namespace master.Models.Contract
                                     },
                                     new Block.Variable(typeof(MyAsset))
                                     {
-                                        ObjectName = "Entity",
-                                        Alias = "Entity",
+                                        ObjectName = "LegalOwnerOrg",
+                                        Alias = "LegalOwnerOrg",
                                     },
-                                    new Block.Variable(typeof(MyAsset))
+                                    new Block.Variable(typeof(MyParticipant))
                                     {
-                                        ObjectName = "User",
-                                        Alias = "User",
+                                        ObjectName = "LegalOwnerAdmin",
+                                        Alias = "LegalOwnerAdmin",
                                     },
-                                    new Block.Variable(typeof(MyAsset))
+                                    new Block.Variable(typeof(MyConcept))
                                     {
                                         ObjectName = "Address",
                                         Alias = "Address",
+                                    },
+                                    new Block.Variable(typeof(string))
+                                    {
+                                        Alias = "Name",
+                                    },
+                                    new Block.Variable(typeof(int))
+                                    {
+                                        Alias = "Money",
                                     }
                                 }
                             },

@@ -1,5 +1,6 @@
 ﻿using master.Basis;
 using master.Models.Variables;
+using master.ViewModels.Contract.Block;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,24 @@ namespace master.ViewModels.Variables
                 output.AddRange(this.ObjectGroups);
                 return output;
             }
+        }
+
+        public void AddVars(List<VMvariable> input)
+        {
+            foreach (var variable in input)
+            {
+                if(variable.ObjectName == string.Empty)
+                    this.Root.VariableGroups.Where(vg => vg.Type == variable.Type).First().Variables.Add(variable.Root);
+                else
+                {
+                    var group = this.Root.ObjectGroups.Where(og => og.Type == variable.Type).First();
+                    var category = group.Objects.Where(o => o.Name == variable.ObjectName).First();
+                    category.Variables.Add(variable.Root);
+                }
+            }
+            this.NotifyPropertyChanged("VariableGroups");
+            this.NotifyPropertyChanged("ObjectGroups");
+            this.NotifyPropertyChanged("Groups");
         }
     }
 }

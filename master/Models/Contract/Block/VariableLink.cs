@@ -39,10 +39,10 @@ namespace master.Models.Contract.Block
 
         public void AddLast(Variable input)
         {
-            var current = this.Child;
+            var current = this;
             while (current != null)
                 current = current.Child;
-            current.Child = new VariableLink(input);
+            current = new VariableLink(input);
         }
 
         public void RemoveLast()

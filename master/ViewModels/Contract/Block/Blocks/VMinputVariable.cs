@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using master.Models.Contract.Block;
 using Prism.Commands;
+using master.Models.Data.Component.Components;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
@@ -28,6 +29,28 @@ namespace master.ViewModels.Contract.Block.Blocks
         public void Remove(object input)
         {
             this.Parent.Root.Vars.Remove((input as VMvariable).Root);
+        }
+
+        public IList<Type> Types
+        {
+            get
+            {
+                return new List<Type>()
+                {
+                    typeof(int),
+                    typeof(long),
+                    typeof(double),
+                    typeof(bool),
+                    typeof(string),
+                    typeof(DateTime),
+                    typeof(MyAsset),
+                    typeof(MyConcept),
+                    typeof(MyEnum),
+                    typeof(MyEvent),
+                    typeof(MyParticipant),
+                    typeof(MyTransaction)
+                };
+            }
         }
     }
 }

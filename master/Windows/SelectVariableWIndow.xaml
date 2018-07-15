@@ -155,7 +155,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding ObjectName}"/>
                         <TextBlock Text=" ("/>
-                        <TextBlock Text="{Binding Type}"/>
+                        <TextBlock Text="{Binding Alias}"/>
                         <TextBlock Text=")"/>
                     </StackPanel>
                 </DataTemplate>

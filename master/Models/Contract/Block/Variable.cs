@@ -46,7 +46,7 @@ namespace master.Models.Contract.Block
         {
             this.type = type;
             this.objectName = var.Name;
-            this.alias = string.Empty;
+            this.alias = var.Type;
             this.isList = false;
         }
 

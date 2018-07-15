@@ -68,39 +68,9 @@ namespace master.ViewModels.Contract.Block.Blocks
             //this.Parent.FullRefresh();
         }
 
-
-        //public override Dictionary<Type, Dictionary<string, List<string>>> Aliases
-        //{
-        //    get
-        //    {
-        //        var output = new Dictionary<Type, Dictionary<string, List<string>>>();
-        //        foreach (VMvariable var in this.vars)
-        //        {
-        //            var type = Variable.TYPES_DICT[var.Type].Item1;
-        //            var name = var.Root.ObjectName;
-        //            var alias = var.Alias;
-        //
-        //            if (output.ContainsKey(type))
-        //            {
-        //                if(output[type].ContainsKey(name))
-        //                {
-        //                    output[type][name].Add(alias);
-        //                }
-        //                else
-        //                {
-        //                    output[type].Add(name, new List<string>());
-        //                    output[type][name].Add(alias);
-        //                }
-        //            }
-        //            else
-        //            {
-        //                output.Add(type, new Dictionary<string, List<string>>());
-        //                output[type].Add(name, new List<string>());
-        //                output[type][name].Add(alias);
-        //            }
-        //        }
-        //        return output;
-        //    }
-        //}
+        protected override List<VMvariable> GetVariables()
+        {
+            return new List<VMvariable>(this.Vars);
+        }
     }
 }

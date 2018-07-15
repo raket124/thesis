@@ -61,9 +61,14 @@ namespace master.ViewModels.Contract.Block
 
         protected abstract string Optional();
 
-        public virtual void GetVariables(VMvariableList list)
+        protected virtual List<VMvariable> GetVariables()
         {
+            return new List<VMvariable>();
+        }
 
+        public List<VMvariable> Variables
+        {
+            get { return this.GetVariables(); }
         }
     }
 }

@@ -34,15 +34,8 @@ namespace master.ViewModels.Variables
         {
             get
             {
-                //return (from a in this.Root.Aliases
-                //        select new VMvariableGroupAlias(a, this)).ToList();
-                return new List<VMvariable>()
-                {
-                    new VMvariable(new Models.Contract.Block.Variable(typeof(string))
-                    {
-                        Alias = "A"
-                    })
-                };
+                return (from v in this.Root.Variables
+                        select new VMvariable(v)).ToList();
             }
         }
 

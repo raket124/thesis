@@ -143,7 +143,10 @@ namespace master.ViewModels.Contract
             {
                 var root = new VariableList();
                 root.ReadDataModel(this.Parent.Parent.Parent.Model.Root);
-                return new VMvariableList(root);
+                var output = new VMvariableList(root);
+                foreach (var item in this.Blocks)
+                    output.AddVars(item.Variables);
+                return output;
             }
         }
 
