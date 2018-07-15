@@ -37,15 +37,8 @@ namespace master.Models.Contract.Block.Conditioning
 
         public ConditionGroup()
         {
-            this.conditions = new ObservableCollection<string>()
-            {
-                string.Empty,
-                string.Empty
-            };
-            this.connectors = new ObservableCollection<COMPARE>()
-            {
-                COMPARE.and
-            };
+            this.conditions = new ObservableCollection<string>();
+            this.connectors = new ObservableCollection<COMPARE>();
             this.alias = string.Empty;
         }
 
@@ -56,7 +49,6 @@ namespace master.Models.Contract.Block.Conditioning
                 Conditions = new ObservableCollection<string>(this.Conditions),
                 Connectors = new ObservableCollection<COMPARE>(this.Connectors),
                 Alias = this.Alias
-
             };
         }
     }

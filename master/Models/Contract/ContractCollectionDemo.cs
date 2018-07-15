@@ -127,32 +127,32 @@ namespace master.Models.Contract
                             },
                             new MyAssign()
                             {
-                                Variable = "ecmr.status",
-                                Value = "EcmrStatus.Cancelled"
+                                //Variable = "ecmr.status",
+                                //Value = "EcmrStatus.Cancelled"
                             },
                             new MyAssign()
                             {
-                                Variable = "ecmr.cancellation",
-                                Value = "new Cancellation"
+                                //Variable = "ecmr.cancellation",
+                                //Value = "new Cancellation"
                             },
                             new MyAssign()
                             {
-                                Variable = "ecmr.cancellation.cancelledBy",
-                                Value = "CurrentParticipant"
+                                //Variable = "ecmr.cancellation.cancelledBy",
+                                //Value = "CurrentParticipant"
                             },
                             new MyAssign()
                             {
-                                Variable = "ecmr.cancellation.date",
-                                Value = "cancellation.date"
+                                //Variable = "ecmr.cancellation.date",
+                                //Value = "cancellation.date"
                             },
                             new MyAssign()
                             {
-                                Variable = "ecmr.cancellation.reason",
-                                Value = "cancellation.reason"
+                                //Variable = "ecmr.cancellation.reason",
+                                //Value = "cancellation.reason"
                             },
-                            new MyUseRegistry()
+                            new MyRegistry()
                             {
-                                Action = MyUseRegistry.ACTION.Update,
+                                Action = MyRegistry.ACTION.Update,
                                 Alias = "ecmr"
                             }
                         }
@@ -193,9 +193,9 @@ namespace master.Models.Contract
                                     }
                                 }
                             },
-                            new MyUseRegistry()
+                            new MyRegistry()
                             {
-                                Action = MyUseRegistry.ACTION.Insert,
+                                Action = MyRegistry.ACTION.Insert,
                                 Alias = "transportOrder"
                             }
                         }
@@ -218,9 +218,9 @@ namespace master.Models.Contract
                                     }
                                 }
                             },
-                            new MyUseRegistry()
+                            new MyRegistry()
                             {
-                                Action = MyUseRegistry.ACTION.Insert,
+                                Action = MyRegistry.ACTION.Insert,
                                 Alias = "transportOrders"
                             }
                         }
@@ -244,7 +244,42 @@ namespace master.Models.Contract
                     },
                     new Function("updateTransportOrderStatusToCancelled", Function.ACCESSIBILITY.Public)
                     {
-                        Docs = "UpdateTransportOrderStatusToCancelled transaction processor function."
+                        Docs = "UpdateTransportOrderStatusToCancelled transaction processor function.",
+                        Blocks = new ObservableCollection<Block.Base>()
+                        {
+                            new MyInput()
+                            {
+                                Vars = new ObservableCollection<Block.Variable>()
+                                {
+                                    new Block.Variable(typeof(MyAsset))
+                                    {
+                                        ObjectName = "TransportOrder",
+                                        Alias = "TransportOrder",
+                                    },
+                                    new Block.Variable(typeof(MyAsset))
+                                    {
+                                        ObjectName = "ECMR",
+                                        Alias = "ECMR",
+                                    },
+                                    new Block.Variable(typeof(MyAsset))
+                                    {
+                                        ObjectName = "Entity",
+                                        Alias = "Entity",
+                                    },
+                                    new Block.Variable(typeof(MyAsset))
+                                    {
+                                        ObjectName = "User",
+                                        Alias = "User",
+                                    },
+                                    new Block.Variable(typeof(MyAsset))
+                                    {
+                                        ObjectName = "Address",
+                                        Alias = "Address",
+                                    }
+                                }
+                            },
+                            new MySimpleIf()
+                        }
                     }
                 }
             });
@@ -272,9 +307,9 @@ namespace master.Models.Contract
                                     }
                                 }
                             },
-                            new MyUseRegistry()
+                            new MyRegistry()
                             {
-                                Action = MyUseRegistry.ACTION.Insert,
+                                Action = MyRegistry.ACTION.Insert,
                                 Alias = "newLegalOwnerOrg"
                             }
                         }
@@ -295,9 +330,9 @@ namespace master.Models.Contract
                                     }
                                 }
                             },
-                            new MyUseRegistry()
+                            new MyRegistry()
                             {
-                                Action = MyUseRegistry.ACTION.Insert,
+                                Action = MyRegistry.ACTION.Insert,
                                 Alias = "newCompoundOrg"
                             }
                         }
@@ -318,9 +353,9 @@ namespace master.Models.Contract
                                     }
                                 }
                             },
-                            new MyUseRegistry()
+                            new MyRegistry()
                             {
-                                Action = MyUseRegistry.ACTION.Insert,
+                                Action = MyRegistry.ACTION.Insert,
                                 Alias = "newCarrierOrg"
                             }
                         }
@@ -341,9 +376,9 @@ namespace master.Models.Contract
                                     }
                                 }
                             },
-                            new MyUseRegistry()
+                            new MyRegistry()
                             {
-                                Action = MyUseRegistry.ACTION.Insert,
+                                Action = MyRegistry.ACTION.Insert,
                                 Alias = "newRecipientOrg"
                             }
                         }

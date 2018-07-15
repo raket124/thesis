@@ -12,26 +12,26 @@ namespace master.ViewModels.Contract.Block.Blocks
 {
     class VMuseRegistry : VMbase
     {
-        public new MyUseRegistry Root
+        public new MyRegistry Root
         {
-            get { return this.root as MyUseRegistry; }
+            get { return this.root as MyRegistry; }
         }
 
-        public VMuseRegistry(MyUseRegistry root, VMfunction parent) : base(root, parent)
+        public VMuseRegistry(MyRegistry root, VMfunction parent) : base(root, parent)
         {
 
         }
 
         public override object Clone()
         {
-            return new VMuseRegistry(this.Root.Clone() as MyUseRegistry, this.Parent);
+            return new VMuseRegistry(this.Root.Clone() as MyRegistry, this.Parent);
         }
 
         protected override string BlockName() { return "Registry block"; }
         protected override string Required() { return string.Format(this.reqFormat, "1 variable, 1 action"); }
         protected override string Optional() { return string.Format(this.optFormat, "1 boolean"); }
 
-        public MyUseRegistry.ACTION Action
+        public MyRegistry.ACTION Action
         {
             get { return this.Root.Action; }
             set
@@ -51,9 +51,9 @@ namespace master.ViewModels.Contract.Block.Blocks
             }
         }
 
-        public IList<MyUseRegistry.ACTION> Actions
+        public IList<MyRegistry.ACTION> Actions
         {
-            get { return EnumUtil.EnumToList<MyUseRegistry.ACTION>(); }
+            get { return EnumUtil.EnumToList<MyRegistry.ACTION>(); }
         }
 
         //public string Alias

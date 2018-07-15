@@ -35,10 +35,7 @@ namespace master.Models.Contract.Block.Conditioning
 
         public Condition()
         {
-            this.conditions = new ObservableCollection<ConditionBase>()
-            {
-                new ConditionBase()
-            };
+            this.conditions = new ObservableCollection<ConditionBase>();
             this.groups = new ObservableCollection<ConditionGroup>();
             this.value = new ConditionGroup();
         }

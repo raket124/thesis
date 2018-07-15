@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace master.Models.Data
 {
     [DataContract]
-    class DataModel
+    public class DataModel
     {
         public enum TYPES { Asset, Participant, Transaction, Event, Concept, Enum };
         public readonly Dictionary<Type, TYPES> TYPES_DIC = new Dictionary<Type, TYPES>()

@@ -33,7 +33,7 @@ namespace master.ViewModels.Contract.Block.Blocks
         public VMsimpleIf(MySimpleIf root, VMfunction parent) : base(root, parent)
         {
             this.condition = new VMconditionBase(root.Condition, null);
-            //this.CommandSetLHS = new DelegateCommand(this.SetLHS);
+            this.CommandSetLHS = new DelegateCommand(this.SetLHS);
             //this.CommandSetRHS = new DelegateCommand(this.SetRHS);
         }
 
@@ -46,10 +46,11 @@ namespace master.ViewModels.Contract.Block.Blocks
         protected override string Required() { return string.Format(this.reqFormat, "2 variables, 1 comparison"); }
         protected override string Optional() { return string.Empty; }
 
-        //protected void SetLHS()
-        //{
-        //    this.condition.LHS = this.SelectVar();
-        //}
+        protected void SetLHS()
+        {
+            //this.condition.LHS = this.SelectVar();
+            this.Parent.SelectVar();
+        }
 
         //protected void SetRHS()
         //{

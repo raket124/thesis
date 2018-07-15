@@ -25,12 +25,30 @@ namespace master.ViewModels.Variables
             
         }
 
+        public string Name
+        {
+            get { return this.Root.Name; }
+            set
+            {
+                this.Root.Name = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
         public IList<VMvariable> Variables
         {
             get
             {
-                return (from v in this.Root.Variables
-                        select new VMvariable(v)).ToList();
+                return new List<VMvariable>()
+                {
+                    new VMvariable(new Models.Contract.Block.Variable(this.Parent.Type)
+                    {
+                        Alias = "A",
+                        ObjectName = this.Root.Name
+                    })
+                };
+                //return (from v in this.Root.Variables
+                //        select new VMvariable(v)).ToList();
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿<Window x:Class="master.Windows.SelectVariableWIndow"
+﻿<Window x:Class="master.Windows.SelectVariableWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:master.Windows"
         xmlns:vm_variables="clr-namespace:master.ViewModels.Variables"
+        xmlns:vm_block="clr-namespace:master.ViewModels.Contract.Block"
         mc:Ignorable="d"
         Title="SelectVariableWIndow" Height="400" Width="800">
     <Window.Resources>
@@ -29,7 +30,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TreeView Grid.RowSpan="2" ItemsSource="{Binding Vars.Types}" Margin="5,5,5,5">
+        <TreeView Grid.RowSpan="2" ItemsSource="{Binding List.Groups}" Margin="5,5,5,5">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
                     <i:InvokeCommandAction Command="{Binding CommandTreeSelectionChanged}" 
@@ -37,60 +38,101 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <TreeView.Resources>
-                <!--<HierarchicalDataTemplate DataType="{x:Type vm_variables:VMvariableGroup}" 
-                                          ItemsSource="{Binding Aliases}">
+                <HierarchicalDataTemplate DataType="{x:Type vm_variables:VMvariableGroup}" 
+                                          ItemsSource="{Binding Variables}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="[" />
-                        <TextBlock Text="{Binding Aliases.Count}" />
+                        <TextBlock Text="{Binding Variables.Count}" />
                         <TextBlock Text="] " />
-                        <TextBlock Text="{Binding Type}" />
+                        <TextBlock Text="{Binding Type.Name}" />
                     </StackPanel>
                 </HierarchicalDataTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type vm_variables:VMobjectGroup}"
                                           ItemsSource="{Binding Objects}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="[" />
-                        <TextBlock Text="{Binding AliasTotal}" />
+                        <TextBlock Text="{Binding CountTotal}" />
                         <TextBlock Text="] " />
-                        <TextBlock Text="{Binding Type}" />
+                        <TextBlock Text="{Binding Type.Name}" />
                     </StackPanel>
                 </HierarchicalDataTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type vm_variables:VMobjectValue}"
-                                          ItemsSource="{Binding Aliases}">
+                <HierarchicalDataTemplate DataType="{x:Type vm_variables:VMobjects}"
+                                          ItemsSource="{Binding Variables}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="[" />
-                        <TextBlock Text="{Binding Aliases.Count}" />
+                        <TextBlock Text="{Binding Variables.Count}" />
                         <TextBlock Text="] " />
                         <TextBlock Text="{Binding Name}" />
                     </StackPanel>
                 </HierarchicalDataTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type vm_variables:VMvariableGroupAlias}">
-                    <TextBlock Text="{Binding Root}" />
+                <HierarchicalDataTemplate DataType="{x:Type vm_block:VMvariable}">
+                    <TextBlock Text="{Binding Alias}" />
                 </HierarchicalDataTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type vm_variables:VMobjectValueAlias}">
-                    <TextBlock Text="{Binding Root}" />
-                </HierarchicalDataTemplate>-->
             </TreeView.Resources>
         </TreeView>
         
         <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="5" HorizontalAlignment="Stretch" />
 
-        <ItemsControl Grid.Column="2" ItemsSource="{Binding PropertyList}" Margin="5,5,5,5">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border Style="{StaticResource MyBorder}" Margin="5">
-                        <StackPanel Margin="5">
-                            <Label Content="{Binding Item1}"/>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <StackPanel Grid.Column="2" Orientation="Horizontal">
+            <Border Style="{StaticResource MyBorder}" Margin="5">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Text" Value="{Binding Output.Value.Alias}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Output.Value.Alias}" Value="">
+                                        <Setter Property="Text" Value="Nothing selected"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text=" ("/>
+                    <TextBlock>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Text" Value="{Binding Output.Value.Type.Name}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Output.Value.Alias}" Value="">
+                                        <Setter Property="Text" Value="null"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text=")"/>
+                </StackPanel>
+            </Border>
+
+            <ItemsControl ItemsSource="{Binding Output.Listing}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource MyBorder}" Margin="5">
+                            <StackPanel Margin="5" Orientation="Horizontal">
+                                <TextBlock>
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="{Binding ObjectName}"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ObjectName}" Value="">
+                                                    <Setter Property="Text" Value="{Binding Type.Name}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
 
         <Button Grid.Column="3" Margin="5" Command="{Binding CommandConfirm}">
             <Image Source="Images\check_green.png"/>
@@ -100,7 +142,7 @@
             <Image Source="Images\cross_red.png"/>
         </Button>
 
-        <ListBox Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" ItemsSource="{Binding PropertyOptions}" Margin="5,0,5,5">
+        <ListBox Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" ItemsSource="{Binding Properties}" Margin="5,0,5,5">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding CommandListSelectionChanged}"  
@@ -111,9 +153,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Item1}"/>
+                        <TextBlock Text="{Binding ObjectName}"/>
                         <TextBlock Text=" ("/>
-                        <TextBlock Text="{Binding Item2}"/>
+                        <TextBlock Text="{Binding Type}"/>
                         <TextBlock Text=")"/>
                     </StackPanel>
                 </DataTemplate>

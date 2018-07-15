@@ -115,7 +115,6 @@
     <Compile Include="Models\Authorization\Base.cs" />
     <Compile Include="Models\Contract\Block\Base.cs" />
     <Compile Include="Models\Contract\Block\Blocks\Custom\MyTotalEcmrs.cs" />
-    <Compile Include="Models\Contract\Block\Blocks\MyCode.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyElse.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyEnd.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyIf.cs" />
@@ -130,8 +129,7 @@
     <Compile Include="Models\Contract\Block\VariableLink.cs" />
     <Compile Include="Models\Contract\ContractCollectionDemo.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyAssign.cs" />
-    <Compile Include="Models\Contract\Block\Blocks\MyGetRegistry.cs" />
-    <Compile Include="Models\Contract\Block\Blocks\MyUseRegistry.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyRegistry.cs" />
     <Compile Include="Models\Contract\ContractModel.cs" />
     <Compile Include="Models\Contract\ContractCollection.cs" />
     <Compile Include="Models\Contract\Function.cs" />
@@ -170,6 +168,7 @@
     <Compile Include="ViewModels\Contract\Block\Blocks\VMlog.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMassign.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMinput.cs" />
+    <Compile Include="ViewModels\Contract\Block\VMvariableLink.cs" />
     <Compile Include="ViewModels\Contract\VMcontractModel.cs" />
     <Compile Include="ViewModels\Contract\VMcontractCollection.cs" />
     <Compile Include="ViewModels\Contract\VMfunction.cs" />

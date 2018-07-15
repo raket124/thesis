@@ -1,4 +1,6 @@
-﻿using master.Models.Data.Component.Components;
+﻿using master.Models.Data;
+using master.Models.Data.Component;
+using master.Models.Data.Component.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +44,23 @@ namespace master.Models.Variables
                 new ObjectGroup(typeof(MyParticipant)),
                 new ObjectGroup(typeof(MyTransaction))
             };
+        }
+
+        public void ReadDataModel(DataModel model)
+        {
+            this.ReadDataModel<MyAsset>(model);
+            this.ReadDataModel<MyConcept>(model);
+            this.ReadDataModel<MyEnum>(model);
+            this.ReadDataModel<MyEvent>(model);
+            this.ReadDataModel<MyParticipant>(model);
+            this.ReadDataModel<MyTransaction>(model);
+        }
+
+        private void ReadDataModel<T>(DataModel model) where T : Base
+        {
+            var group = this.objectGroups.Where(o => o.Type == typeof(T)).First();
+            foreach (var component in model.GetComponent<T>())
+                group.Objects.Add(new Objects(component.Name));
         }
     }
 }

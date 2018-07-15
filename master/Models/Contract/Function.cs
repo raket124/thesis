@@ -15,16 +15,14 @@ namespace master.Models.Contract
     [DataContract]
     [
         KnownType(typeof(MyAssign)), 
-        KnownType(typeof(MyCode)), 
         KnownType(typeof(MyElse)), 
         KnownType(typeof(MyEnd)),
         KnownType(typeof(MyError)),
-        KnownType(typeof(MyGetRegistry)),
         KnownType(typeof(MyIf)),
         KnownType(typeof(MyInput)),
         KnownType(typeof(MyLog)),
         KnownType(typeof(MySimpleIf)),
-        KnownType(typeof(MyUseRegistry))
+        KnownType(typeof(MyRegistry))
     ]
     public class Function : ObjectBase
     {
@@ -49,16 +47,6 @@ namespace master.Models.Contract
         {
             this.access = access;
             this.blocks = new ObservableCollection<Block.Base>();
-        }
-
-        public VariableList List
-        {
-            get
-            {
-                var output = new VariableList();
-
-                return output;
-            }
         }
     }
 }

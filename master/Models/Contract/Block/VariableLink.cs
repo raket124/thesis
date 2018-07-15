@@ -21,10 +21,7 @@ namespace master.Models.Contract.Block
             set { this.child = value; }
         }
 
-        public VariableLink(Variable value) : this(value, null)
-        {
-
-        }
+        public VariableLink(Variable value) : this(value, null) { }
 
         public VariableLink(Variable value, VariableLink child)
         {
@@ -40,28 +37,58 @@ namespace master.Models.Contract.Block
             };
         }
 
-        public void AddLast(Variable value)
+        public void AddLast(Variable input)
         {
-
+            var current = this.Child;
+            while (current != null)
+                current = current.Child;
+            current.Child = new VariableLink(input);
         }
 
         public void RemoveLast()
         {
-            var current = this;
-
-
+            var previous = this;
+            var current = this.Child;
+            while (current != null)
+            {
+                previous = current;
+                current = current.Child;
+            }
+            previous.Child = null;
         }
 
         public bool CanRemoveLast
         {
-            get { return true; }
+            get { return this.child != null; }
+        }
+
+        public void Clear()
+        {
+            this.value = null;
+            this.child = null;
         }
 
         public int Count
         {
             get
             {
-                return 0;
+                return 1 + (this.child == null ? 0 : this.child.Count);
+            }
+        }
+
+        public IList<Variable> Listing
+        {
+            get
+            {
+                var output = new List<Variable>();
+                var current = this.Child;
+                while (current != null)
+                {
+                    output.Add(current.Value);
+                    current = current.Child;
+                }
+
+                return output;
             }
         }
     }

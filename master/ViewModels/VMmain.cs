@@ -63,7 +63,7 @@ namespace master.ViewModels
                 new VMelse(new MyElse(), null),
                 new VMend(new MyEnd(), null),
                 new VMtotalEcmrs(new MyTotalEcmrs(), null),               
-                new VMuseRegistry(new MyUseRegistry(), null),
+                new VMuseRegistry(new MyRegistry(), null),
             };
         }
 

@@ -20,7 +20,7 @@ namespace master.ViewModels.Variables
 
         }
 
-        protected IList<VMvariableGroup> VariableGroups
+        public IList<VMvariableGroup> VariableGroups
         {
             get
             {
@@ -29,7 +29,7 @@ namespace master.ViewModels.Variables
             }
         }
 
-        protected IList<VMobjectGroup> ObjectGroups
+        public IList<VMobjectGroup> ObjectGroups
         {
             get
             {

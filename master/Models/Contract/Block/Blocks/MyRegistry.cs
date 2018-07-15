@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block.Blocks
 {
     [DataContract]
-    class MyUseRegistry : Base
+    class MyRegistry : Base
     {
         public enum ACTION { Insert, Update, Remove };
 
@@ -34,7 +34,7 @@ namespace master.Models.Contract.Block.Blocks
             set { this.preventDelay = value; }
         }
 
-        public MyUseRegistry() : base()
+        public MyRegistry() : base()
         {
             this.action = ACTION.Insert;
             this.alias = string.Empty;
@@ -43,7 +43,7 @@ namespace master.Models.Contract.Block.Blocks
 
         public override object Clone()
         {
-            return new MyUseRegistry()
+            return new MyRegistry()
             {
                 Name = this.Name,
                 Docs = this.Docs,

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using master.Models.Contract.Block.Blocks;
+using master.ViewModels.Variables;
 
 namespace master.ViewModels.Contract.Block
 {
@@ -60,19 +61,9 @@ namespace master.ViewModels.Contract.Block
 
         protected abstract string Optional();
 
-        //public virtual Dictionary<Type, Dictionary<string, List<string>>> Aliases
-        //{
-        //    get { return new Dictionary<Type, Dictionary<string, List<string>>>(); }
-        //}
+        public virtual void GetVariables(VMvariableList list)
+        {
 
-        //public string SelectVar()
-        //{
-        //    var window = new SelectVariableWIndow();
-        //    var vmWindow = new VMselectVariable(window, this.Parent.Parent.Parent.Parent.Model.Root);
-        //    window.DataContext = vmWindow;
-        //    if (window.ShowDialog() == true)
-        //        return vmWindow.Variable;
-        //    return string.Empty;
-        //}
+        }
     }
 }

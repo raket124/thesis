@@ -34,8 +34,8 @@ namespace master.CodeGenerator
         {
             if (b.GetType() == typeof(MyInput))
                 return FunctionConverter.Convert(b as MyInput, f, ref i);
-            if (b.GetType() == typeof(MyUseRegistry))
-                return FunctionConverter.Convert(b as MyUseRegistry, f, ref i);
+            if (b.GetType() == typeof(MyRegistry))
+                return FunctionConverter.Convert(b as MyRegistry, f, ref i);
             if (b.GetType() == typeof(MyTotalEcmrs))
                 return FunctionConverter.Convert(b as MyTotalEcmrs, ref i);
             if (b.GetType() == typeof(MySimpleIf))
@@ -57,7 +57,7 @@ namespace master.CodeGenerator
             return DocConverter.Convert(f);
         }
 
-        private static string Convert(MyUseRegistry input, Function f, ref int i)
+        private static string Convert(MyRegistry input, Function f, ref int i)
         {
             return string.Join("\n", new List<string> {
                 string.Format("{0}const reg = await get{1}Registry(namespace.{2}).catch(function (error) {{", FunctionConverter.Indent(i), "Asset", input.Alias),

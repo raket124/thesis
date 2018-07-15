@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace master.Models.Data.Component
 {
     [DataContract]
-    abstract class Base : ObjectBase
+    public abstract class Base : ObjectBase
     {
         public Base(string name) : base(name) { }
 

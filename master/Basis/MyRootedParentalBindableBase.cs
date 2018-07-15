@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace master.Basis
 {
-    class MyRootedParentalBindableBase : MyRootedBindableBase
+    public class MyRootedParentalBindableBase : MyRootedBindableBase
     {
         protected object parent;
         public object Parent

@@ -12,21 +12,6 @@ namespace master.Models.Contract.Block
     [DataContract]
     public class Variable : Data.Variable, ICloneable
     {
-        //public enum TYPES { Asset, Concept, Enum, Participant, String, Double, Integer, Long, DateTime, Boolean }
-        //public static readonly Dictionary<TYPES, Tuple<Type, bool>> TYPES_DICT = new Dictionary<TYPES, Tuple<Type, bool>>()
-        //{
-        //    { TYPES.Asset, Tuple.Create<Type, bool>(typeof(MyAsset), true) },
-        //    { TYPES.Concept, Tuple.Create<Type, bool>(typeof(MyConcept), true) },
-        //    { TYPES.Enum, Tuple.Create<Type, bool>(typeof(MyEnum), true) },
-        //    { TYPES.Participant, Tuple.Create<Type, bool>(typeof(MyParticipant), true) },
-        //    { TYPES.String, Tuple.Create<Type, bool>(typeof(string), false) },
-        //    { TYPES.Double, Tuple.Create<Type, bool>(typeof(double), false) },
-        //    { TYPES.Integer, Tuple.Create<Type, bool>(typeof(int), false) },
-        //    { TYPES.Long, Tuple.Create<Type, bool>(typeof(long), false) },
-        //    { TYPES.DateTime, Tuple.Create<Type, bool>(typeof(DateTime), false) },
-        //    { TYPES.Boolean, Tuple.Create<Type, bool>(typeof(bool), false) }
-        //};
-
         [DataMember]
         protected new Type type;
         public new Type Type
@@ -53,6 +38,14 @@ namespace master.Models.Contract.Block
         {
             this.type = type;
             this.objectName = string.Empty;
+            this.alias = string.Empty;
+            this.isList = false;
+        }
+
+        public Variable(Data.Variable var, Type type) : base(var.Type, var.Name, var.Relation)
+        {
+            this.type = type;
+            this.objectName = var.Name;
             this.alias = string.Empty;
             this.isList = false;
         }

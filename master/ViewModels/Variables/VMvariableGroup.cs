@@ -1,5 +1,6 @@
 ﻿using master.Basis;
 using master.Models.Variables;
+using master.ViewModels.Contract.Block;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,19 +25,26 @@ namespace master.ViewModels.Variables
 
         }
 
-        public string Type
+        public Type Type
         {
-            get { return this.Root.Type.Name; }
+            get { return this.Root.Type; }
         }
 
-        //public IList<VMvariableGroupAlias> Aliases
-        //{
-        //    get
-        //    {
-        //        return (from a in this.Root.Aliases
-        //                select new VMvariableGroupAlias(a, this)).ToList();
-        //    }
-        //}
+        public IList<VMvariable> Variables
+        {
+            get
+            {
+                //return (from a in this.Root.Aliases
+                //        select new VMvariableGroupAlias(a, this)).ToList();
+                return new List<VMvariable>()
+                {
+                    new VMvariable(new Models.Contract.Block.Variable(typeof(string))
+                    {
+                        Alias = "A"
+                    })
+                };
+            }
+        }
 
     }
 }

@@ -1,6 +1,9 @@
 ﻿using master.Basis;
 using master.Models.Contract.Block;
 using master.Models.Data;
+using master.Models.Data.Component;
+using master.Models.Data.Component.Components;
+using master.ViewModels.Contract.Block;
 using master.ViewModels.Data;
 using master.ViewModels.Variables;
 using master.Windows;
@@ -9,30 +12,36 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace master.ViewModels.Windows
 {
     class VMselectVariable : MyBindableBase
     {
-        private SelectVariableWIndow parent;
-        private VMdataModel model;
+        private SelectVariableWindow parent;
+        public SelectVariableWindow Parent
+        {
+            get { return this.parent; }
+        }
 
         private VMvariableList list;
         public VMvariableList List
         {
             get { return this.list; }
         }
-        private VariableLink output;
-        public VariableLink Output
+        private VMdataModel model;
+        public VMdataModel Model
+        {
+            get { return this.model; }
+        }
+        private VMvariableLink output;
+        public VMvariableLink Output
         {
             get { return this.output; }
         }
-        private ObservableCollection<VMvariable> options;
-        public ObservableCollection<VMvariable> Options
+        private ObservableCollection<Contract.Block.VMvariable> properties;
+        public ObservableCollection<Contract.Block.VMvariable> Properties
         {
-            get { return this.options; }
+            get { return this.properties; }
         }
 
         public DelegateCommand<object> CommandTreeSelectionChanged { get; private set; }
@@ -40,65 +49,13 @@ namespace master.ViewModels.Windows
         public DelegateCommand CommandRemoveProperty { get; private set; }
         public DelegateCommand CommandConfirm { get; private set; }
 
-        public VMselectVariable(SelectVariableWIndow parent, DataModel model) : base()
+        public VMselectVariable(SelectVariableWindow parent, VMvariableList variables, VMdataModel model) : base()
         {
             this.parent = parent;
-            this.model = new VMdataModel(model);
-
-            //this.listing = new VMvariableListing
-
-
-            //var objectGroup = new List<ObjectGrouping>()
-            //{
-            //    new ObjectGrouping()
-            //    {
-            //        Type = typeof(MyAsset),
-            //        Objects = this.model.GetObjectList<MyAsset>()
-            //    },
-            //    new ObjectGrouping()
-            //    {
-            //        Type = typeof(MyConcept),
-            //        Objects = this.model.GetObjectList<MyConcept>()
-            //    },
-            //    new ObjectGrouping()
-            //    {
-            //        Type = typeof(MyEnum),
-            //        Objects = this.model.GetObjectListEnum()
-            //    },
-            //    new ObjectGrouping()
-            //    {
-            //        Type = typeof(MyEvent),
-            //        Objects = this.model.GetObjectList<MyEvent>()
-            //    },
-            //    new ObjectGrouping()
-            //    {
-            //        Type = typeof(MyParticipant),
-            //        Objects = this.model.GetObjectList<MyParticipant>()
-            //    },
-            //    new ObjectGrouping()
-            //    {
-            //        Type = typeof(MyTransaction),
-            //        Objects = this.model.GetObjectList<MyTransaction>()
-            //    }
-            //};
-            //objectGroup[0].Objects[0].Aliases.Add("A");
-
-
-            //this.vars = new VMvariableListing(new VariableListing()
-            //{
-            //    VariableTypes = new List<VariableGrouping>()
-            //    {
-            //        new VariableGrouping() { Type = typeof(string) },
-            //        new VariableGrouping() { Type = typeof(double) },
-            //        new VariableGrouping() { Type = typeof(int) },
-            //        new VariableGrouping() { Type = typeof(long) },
-            //        new VariableGrouping() { Type = typeof(DateTime) },
-            //        new VariableGrouping() { Type = typeof(bool) },
-            //    },
-            //    ObjectTypes = objectGroup
-            //});
-            //this.propertyList = new ObservableCollection<Tuple<string, string>>();
-            //this.propertyOptions = new ObservableCollection<Tuple<string, string>>();
+            this.list = variables;
+            this.model = model;
+            this.output = new VMvariableLink(new VariableLink(new Models.Contract.Block.Variable(typeof(Nullable))));
+            this.properties = new ObservableCollection<Contract.Block.VMvariable>();
 
             this.CommandTreeSelectionChanged = new DelegateCommand<object>(this.TreeSelectionChanged);
             this.CommandListSelectionChanged = new DelegateCommand<object>(this.ListSelectionChanged);
@@ -108,19 +65,10 @@ namespace master.ViewModels.Windows
 
         private void TreeSelectionChanged(object input)
         {
-            //this.propertyList.Clear();
-
-            //if (input.GetType() == typeof(VMvariableGroupAlias))
-            //{
-            //    var value = input as VMvariableGroupAlias;
-            //    this.propertyList.Add(Tuple.Create(value.Root, value.Parent.Type));
-            //}
-            //if (input.GetType() == typeof(VMobjectValueAlias))
-            //{
-            //    var value = input as VMobjectValueAlias;
-            //    this.propertyList.Add(Tuple.Create(value.Root, value.Parent.Name));
-            //    this.PopulatePropertyList();
-            //}
+            this.Output.Clear();
+            if (input.GetType() == typeof(Contract.Block.VMvariable))
+                this.Output.Value = input as Contract.Block.VMvariable;
+            this.PopulatePropertyList();
 
             //if (input.GetType() == typeof(VMvariableGroup))
             //{
@@ -142,7 +90,7 @@ namespace master.ViewModels.Windows
             if (input == null)
                 return;
 
-            //this.propertyList.Add(input as Tuple<string, string>);
+            this.Output.AddLast(input as Contract.Block.VMvariable);
             this.PopulatePropertyList();
             this.CommandRemoveProperty.RaiseCanExecuteChanged();
             this.CommandConfirm.RaiseCanExecuteChanged();
@@ -150,6 +98,8 @@ namespace master.ViewModels.Windows
 
         private void RemoveProperty()
         {
+            this.Output.RemoveLast();
+
             //this.propertyList.RemoveAt(this.propertyList.Count - 1);
             //this.PopulatePropertyList();
             //this.CommandRemoveProperty.RaiseCanExecuteChanged();
@@ -176,16 +126,41 @@ namespace master.ViewModels.Windows
 
         private void PopulatePropertyList()
         {
-            //this.propertyOptions.Clear();
+            this.Properties.Clear();
+            Contract.Block.VMvariable current;
+            if (this.Output.Value.Type == typeof(Nullable)) // Root is not set
+                return;
+            if (this.Output.Listing.Count == 0)             // No children
+                current = this.Output.Value;
+            else                                            // Last child
+                current = this.Output.Listing.Last();
 
-            //var last = this.propertyList.Last();
-            //foreach (var ot in this.vars.Root.ObjectTypes)
-            //{
-            //    var current = ot.Objects.Where(o => o.Name == last.Item2);
-            //    if (current.Count() > 0)
-            //        this.propertyOptions.AddRange(from p in current.First().Properties
-            //                                      select Tuple.Create(p.Name, p.Type));
-            //}
+
+            if (current.ObjectName == string.Empty)
+                this.PopulatePropertyListVariables(current);
+            else
+                this.PopulatePropertyListObjects(current);
+        }
+
+        private void PopulatePropertyListObjects(Contract.Block.VMvariable input)
+        {
+            var varList = this.Model.GetComponents();
+           var group = varList.Where(vl => vl.Name == input.ObjectName).First();
+            if (group.GetType() == typeof(MyEnum))
+                return;
+
+            var components = (group as Identity).Components;
+
+            var variables = new List<Contract.Block.VMvariable>();
+            foreach(var x in components)
+                variables.Add(new Contract.Block.VMvariable(new Models.Contract.Block.Variable(x, group.GetType())));
+
+            this.Properties.AddRange(variables);
+        }
+
+        private void PopulatePropertyListVariables(Contract.Block.VMvariable input)
+        {
+            //Add special properties?
         }
     }
 }

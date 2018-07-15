@@ -17,9 +17,9 @@ namespace master.Windows
     /// <summary>
     /// Interaction logic for SelectVariableWIndow.xaml
     /// </summary>
-    public partial class SelectVariableWIndow : Window
+    public partial class SelectVariableWindow : Window
     {
-        public SelectVariableWIndow()
+        public SelectVariableWindow()
         {
             InitializeComponent();
         }

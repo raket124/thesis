@@ -24,9 +24,9 @@ namespace master.ViewModels.Variables
 
         }
 
-        public string Type
+        public Type Type
         {
-            get { return this.Root.Type.Name; }
+            get { return this.Root.Type; }
         }
 
         public IList<VMobjects> Objects

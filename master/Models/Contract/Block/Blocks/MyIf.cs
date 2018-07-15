@@ -21,8 +21,6 @@ namespace master.Models.Contract.Block.Blocks
         public MyIf() : base()
         {
             this.condition = new Condition();
-            this.condition.Conditions.Add(new ConditionBase());
-            this.condition.Groups.Add(new ConditionGroup());
         }
 
         public override object Clone()
@@ -31,8 +29,7 @@ namespace master.Models.Contract.Block.Blocks
             {
                 Name = this.Name,
                 Docs = this.Docs,
-                Condition = this.Condition,
-                //TODO other vars
+                Condition = this.Condition.Clone() as Condition,
             };
         }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace master.Models.Data.Component
 {
     [DataContract]
-    abstract class Inheritance : Base
+    public abstract class Inheritance : Base
     {
         [DataMember]
         protected string parent;
