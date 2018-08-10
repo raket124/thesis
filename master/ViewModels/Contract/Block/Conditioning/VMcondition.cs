@@ -65,8 +65,22 @@ namespace master.ViewModels.Contract.Block.Conditioning
         {
             this.Wrap();
 
-            this.CommandAddCondition = new DelegateCommand(() => this.Root.Conditions.Add(new ConditionBase()));
-            this.CommandAddGroup = new DelegateCommand(() => this.Root.Groups.Add(new ConditionGroup()));
+            this.CommandAddCondition = new DelegateCommand(() => this.Root.Conditions.Add(new ConditionBase()
+            {
+
+            }));
+            this.CommandAddGroup = new DelegateCommand(() => this.Root.Groups.Add(new ConditionGroup()
+            {
+                Conditions = new ObservableCollection<string>()
+                                {
+                                    string.Empty,
+                                    string.Empty
+                                },
+                Connectors = new ObservableCollection<Models.Contract.Block.Conditioning.ConditionGroup.COMPARE>()
+                                {
+                                    Models.Contract.Block.Conditioning.ConditionGroup.COMPARE.and
+                                }
+            }));
             this.CommandAddOption = new DelegateCommand(() => this.ValueAdd());
             this.CommandRemoveOption = new DelegateCommand(this.ValueRemove, this.Value.CanRemove);
 
@@ -119,19 +133,22 @@ namespace master.ViewModels.Contract.Block.Conditioning
             this.CommandRemoveOption.RaiseCanExecuteChanged();
         }
 
-        //public ObservableCollection<string> AliasList
-        //{
-        //    get
-        //    {
-        //        var conditionAliases = this.conditions.Select(c => c.Alias);
-        //        var groupAliases = this.groups.Select(g => g.Alias);
+        public List<string> AliasList
+        {
+            get
+            {
+                //var conditionAliases = this.conditions.Select(c => c.Alias);
+                //var groupAliases = this.groups.Select(g => g.Alias);
 
-        //        var output = new ObservableCollection<string>();
-        //        output.AddRange(conditionAliases);
-        //        output.AddRange(groupAliases);
-        //        return output;
-        //    }
-        //}
+                var output = new List<string>();
+                output.Add("X");
+                output.Add("Y");
+                output.Add("Z");
+                //output.AddRange(conditionAliases);
+                //output.AddRange(groupAliases);
+                return output;
+            }
+        }
 
         public object Clone()
         {
@@ -141,9 +158,9 @@ namespace master.ViewModels.Contract.Block.Conditioning
             };
         }
 
-        public void RenewAliasList()
+        public override void FullRefresh()
         {
-            //this.NotifyPropertyChanged("AliasList");
+            this.NotifyPropertyChanged("AliasList");
         }
     }
 }

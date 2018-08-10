@@ -43,6 +43,7 @@ namespace master.ViewModels.Contract.Block.Blocks
                 this.NotifyPropertyChanged("ObjectName");
                 this.NotifyPropertyChanged("IsObject");
                 this.NotifyPropertyChanged("TypeOptions");
+                this.Parent.Parent.FullRefresh();
             }
         }
 

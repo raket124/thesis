@@ -57,7 +57,7 @@ namespace master.ViewModels.Contract.Block.Blocks
             return new VMinput(this.Root.Clone() as MyInput, this.Parent);
         }
 
-        protected override string BlockName() { return "Input block"; }
+        protected override string BlockName() { return "Input - block"; }
         protected override string Required() { return string.Format(this.reqFormat, "1+ variable(s)"); }
         protected override string Optional() { return string.Empty; }
 

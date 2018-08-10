@@ -27,7 +27,7 @@ namespace master.ViewModels.Contract.Block.Blocks
             return new VMuseRegistry(this.Root.Clone() as MyRegistry, this.Parent);
         }
 
-        protected override string BlockName() { return "Registry block"; }
+        protected override string BlockName() { return "Registry - block"; }
         protected override string Required() { return string.Format(this.reqFormat, "1 variable, 1 action"); }
         protected override string Optional() { return string.Format(this.optFormat, "1 boolean"); }
 

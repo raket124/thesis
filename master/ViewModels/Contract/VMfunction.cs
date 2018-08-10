@@ -74,6 +74,8 @@ namespace master.ViewModels.Contract
                     output.Add(new VMend(block as MyEnd, this));
                 if (block.GetType() == typeof(MyError))
                     output.Add(new VMerror(block as MyError, this));
+                if (block.GetType() == typeof(MyForeach))
+                    output.Add(new VMforeach(block as MyForeach, this));
                 if (block.GetType() == typeof(MyIf))
                     output.Add(new VMif(block as MyIf, this));
                 if (block.GetType() == typeof(MyInput))
@@ -161,6 +163,14 @@ namespace master.ViewModels.Contract
 
         public string SelectVar()
         {
+            //var window = new NewGroupWindow();
+            //var vmWindow = new VMnewGroup(window,
+            //                              new List<string>());
+            //window.DataContext = vmWindow;
+
+            //if (window.ShowDialog() == true)
+            //    return vmWindow.Name;
+            //return string.Empty;
             var window = new SelectVariableWindow();
             var vmWindow = new VMselectVariable(window, this.VariableList, this.Parent.Parent.Parent.Model);
             window.DataContext = vmWindow;

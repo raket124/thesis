@@ -10,6 +10,243 @@ namespace master.Models.Data
 {
     class DataModelDemo
     {
+        public static DataModel Example1()
+        {
+            var doc = new DataModel();
+            doc.AddComponent(new MyParticipant("Farmer")
+            {
+                Identifier = "Id",
+                Components = new List<Variable>()
+                {
+                    new Variable("String", "Id", Variable.RELATION.variable),
+                    new Variable("String", "Name", Variable.RELATION.variable)
+                }
+            });
+            doc.AddComponent(new MyAsset("Cow")
+            {
+                Identifier = "Id",
+                Components = new List<Variable>()
+                {
+                    new Variable("String", "Id", Variable.RELATION.variable),
+                    new Variable("Farmer", "owner", Variable.RELATION.reference),
+                    new Variable("Cow", "father", Variable.RELATION.reference),
+                    new Variable("Cow", "mother", Variable.RELATION.reference),
+                    new Variable("DateTime", "date_of_birth", Variable.RELATION.variable),
+                    new Variable("Boolean", "dead", Variable.RELATION.variable),
+                    new Variable("DateTime", "date_of_death", Variable.RELATION.variable),
+                    new Variable("Sex", "sex", Variable.RELATION.variable),
+                }
+            });
+            doc.AddComponent(new MyEnum("Sex")
+            {
+                Options = new List<string>()
+                {
+                    "Male",
+                    "Female"
+                }
+            });
+            return doc;
+        }
+
+        public static DataModel Example2()
+        {
+            var doc = new DataModel();
+            doc.AddComponent(new MyParticipant("User")
+            {
+                Identifier = "Id",
+                Abstract = true,
+                Components = new List<Variable>()
+                {
+                    new Variable("String", "Id", Variable.RELATION.variable),
+                    new Variable("String", "Name", Variable.RELATION.variable)
+                }
+            });
+            doc.AddComponent(new MyParticipant("Student")
+            {
+                Parent = "User"
+            });
+            doc.AddComponent(new MyParticipant("Teacher")
+            {
+                Parent = "User"
+            });
+            doc.AddComponent(new MyAsset("Thesis")
+            {
+                Identifier = "Id",
+                Components = new List<Variable>()
+                {
+                    new Variable("String", "Id", Variable.RELATION.variable),
+                    new Variable("String", "title", Variable.RELATION.variable),
+                    new Variable("String", "content", Variable.RELATION.variable),
+                    new Variable("Student", "student", Variable.RELATION.reference),
+                    new Variable("Teacher", "supervisor", Variable.RELATION.reference),
+                    new Variable("Grader", "graders", Variable.RELATION.variable) { List = true, Optional = true },
+                    new Variable("Integer", "grade", Variable.RELATION.variable) { Optional = true },
+                }
+            });
+            doc.AddComponent(new MyConcept("Grader")
+            {
+                Components = new List<Variable>()
+                {
+                    new Variable("Teacher", "teacher", Variable.RELATION.reference),
+                    new Variable("Integer", "grade", Variable.RELATION.variable) { Optional = true }
+                }
+            });
+            return doc;
+        }
+
+        public static DataModel Example3()
+        {
+            var doc = new DataModel();
+            doc.AddComponent(new MyParticipant("User")
+            {
+                Identifier = "Id",
+                Abstract = true,
+                Components = new List<Variable>()
+                {
+                    new Variable("String", "Id", Variable.RELATION.variable),
+                    new Variable("String", "firstName", Variable.RELATION.variable),
+                    new Variable("String", "lastName", Variable.RELATION.variable),
+                }
+            });
+            doc.AddComponent(new MyParticipant("CompoundMember")
+            {
+                Parent = "User",
+                Components = new List<Variable>()
+                {
+                    new Variable("CompoundOrganisation", "organisation", Variable.RELATION.reference)
+                }
+            });
+            doc.AddComponent(new MyParticipant("CarrierMember")
+            {
+                Parent = "User",
+                Components = new List<Variable>()
+                {
+                    new Variable("CarrierOrganisation", "organisation", Variable.RELATION.reference)
+                }
+            });
+            doc.AddComponent(new MyParticipant("RecipientMember")
+            {
+                Parent = "User",
+                Components = new List<Variable>()
+                {
+                    new Variable("RecipientOrganisation", "organisation", Variable.RELATION.reference)
+                }
+            });
+
+            doc.AddComponent(new MyAsset("Organisation")
+            {
+                Identifier = "Id",
+                Abstract = true,
+                Components = new List<Variable>()
+                {
+                    new Variable("String", "Id", Variable.RELATION.variable),
+                    new Variable("String", "name", Variable.RELATION.variable)
+                }
+            });
+            doc.AddComponent(new MyAsset("LegalOwnerOrganisation")
+            {
+                Parent = "Organisation"
+            });
+            doc.AddComponent(new MyAsset("CarrierOrganisation")
+            {
+                Parent = "Organisation"
+            });
+            doc.AddComponent(new MyAsset("RecipientOrganisation")
+            {
+                Parent = "Organisation"
+            });
+            doc.AddComponent(new MyAsset("CompoundOrganisation")
+            {
+                Parent = "Organisation"
+            });
+
+            DataModelDemo.EcmrStatus(doc);
+            DataModelDemo.OrderStatus(doc);
+
+            doc.AddComponent(new MyConcept("Address")
+            {
+                Components = new List<Variable>()
+                {
+                    new Variable("String", "street", Variable.RELATION.variable),
+                    new Variable("String", "houseNumber", Variable.RELATION.variable),
+                    new Variable("String", "city", Variable.RELATION.variable),
+                    new Variable("String", "zipCode", Variable.RELATION.variable),
+                    new Variable("String", "country", Variable.RELATION.variable)
+                }
+            });
+            doc.AddComponent(new MyConcept("DateWindow")
+            {
+                Components = new List<Variable>()
+                {
+                    new Variable("DateTime", "start", Variable.RELATION.variable),
+                    new Variable("DateTime", "end", Variable.RELATION.variable)
+                }
+            });
+
+            doc.AddComponent(new MyAsset("Vehicle")
+            {
+                Identifier = "vin",
+                Components = new List<Variable>()
+                {
+                    new Variable("String", "vin", Variable.RELATION.variable),
+                    new Variable("String", "plateNumber", Variable.RELATION.variable)
+                }
+            });
+            doc.AddComponent(new MyConcept("Signature")
+            {
+                Components = new List<Variable>()
+                {
+                    new Variable("User", "user", Variable.RELATION.reference),
+                    new Variable("DateTime", "timestamp", Variable.RELATION.variable),
+                    new Variable("String", "remark", Variable.RELATION.variable) { Optional=true }
+                }
+            });
+            doc.AddComponent(new MyConcept("Good")
+            {
+                Components = new List<Variable>()
+                {
+                    new Variable("Vehicle", "vehicle", Variable.RELATION.variable),
+                    new Variable("Address", "loadingAddress", Variable.RELATION.variable),
+                    new Variable("Address", "deliveryAddress", Variable.RELATION.variable),
+                    new Variable("DateWindow", "pickupWindow", Variable.RELATION.variable),
+                    new Variable("DateWindow", "deliveryWindow", Variable.RELATION.variable),
+                }
+            });
+
+            doc.AddComponent(new MyAsset("TransportOrder")
+            {
+                Identifier = "íd",
+                Components = new List<Variable>()
+                {
+                    new Variable("String", "id", Variable.RELATION.variable),
+                    new Variable("LegalOwnerOrganisation", "owner", Variable.RELATION.reference),
+                    new Variable("CarrierOrganisation", "carrier", Variable.RELATION.reference),
+                    new Variable("ECMR", "ecmrs", Variable.RELATION.reference) { List=true },
+                    new Variable("OrderStatus", "status", Variable.RELATION.variable),
+                }
+            });
+            doc.AddComponent(new MyAsset("ECMR")
+            {
+                Identifier = "id",
+                Components = new List<Variable>()
+                {
+                    new Variable("String", "id", Variable.RELATION.variable),
+                    new Variable("TransportOrder", "transportOrder", Variable.RELATION.reference),
+                    new Variable("CompoundOrganisation", "source", Variable.RELATION.reference),
+                    new Variable("RecipientOrganisation", "recipient", Variable.RELATION.reference),
+                    new Variable("Signature", "compoundSignature", Variable.RELATION.variable) { Optional=true },
+                    new Variable("Signature", "carrierLoadingSignature", Variable.RELATION.variable) { Optional=true },
+                    new Variable("Signature", "carrierDeliverySignature", Variable.RELATION.variable) { Optional=true },
+                    new Variable("Signature", "recipientSignature", Variable.RELATION.variable) { Optional=true },
+                    new Variable("Good", "good", Variable.RELATION.variable),
+                    new Variable("EcmrStatus", "status", Variable.RELATION.variable),
+                }
+            });
+
+            return doc;
+        }
+
+
         public static DataModel KoopmanCTO()
         {
             var doc = new DataModel() { Namespace = "org.digitalcmr" };

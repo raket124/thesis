@@ -157,7 +157,7 @@ namespace master.Graphs
             {
                 if (activeAbstractions)
                     if (refs.TryGetValue(c.Parent, out _))
-                        this.graph.AddEdge(new DataEdge(refs[c.Name], refs[c.Parent]) { Color = Brushes.Blue });
+                        this.graph.AddEdge(new DataEdge(refs[c.Parent], refs[c.Name]) { Color = Brushes.Blue });
 
                 if (activeReferences)
                     foreach (Variable var in c.Components)

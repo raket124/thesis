@@ -117,6 +117,7 @@
     <Compile Include="Models\Contract\Block\Blocks\Custom\MyTotalEcmrs.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyElse.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyEnd.cs" />
+    <Compile Include="Models\Contract\Block\Blocks\MyForeach.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyIf.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyInput.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyLog.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="ViewModels\BaseTypes\VMenum.cs" />
     <Compile Include="ViewModels\BaseTypes\VMstring.cs" />
     <Compile Include="ViewModels\BaseTypes\VMtype.cs" />
+    <Compile Include="ViewModels\Contract\Block\Blocks\VMforeach.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\Custom\VMtotalEcmrs.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMerror.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMinputVariable.cs" />
@@ -185,6 +187,7 @@
     <Compile Include="ViewModels\Windows\VMnewFunction.cs" />
     <Compile Include="ViewModels\Windows\VMnewGroup.cs" />
     <Compile Include="ViewModels\Windows\VMselectVariable.cs" />
+    <Compile Include="Windows\EqualityConverter.cs" />
     <Compile Include="Windows\NewFunctionWindow.xaml.cs">
       <DependentUpon>NewFunctionWindow.xaml</DependentUpon>
     </Compile>

@@ -1,6 +1,7 @@
 ﻿using master.Basis;
 using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
+using master.Models.Contract.Block.Blocks.Custom;
 using master.Models.Variables;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,14 @@ namespace master.Models.Contract
         KnownType(typeof(MyElse)), 
         KnownType(typeof(MyEnd)),
         KnownType(typeof(MyError)),
+        KnownType(typeof(MyForeach)),
         KnownType(typeof(MyIf)),
         KnownType(typeof(MyInput)),
         KnownType(typeof(MyLog)),
+        KnownType(typeof(MyRegistry)),
         KnownType(typeof(MySimpleIf)),
-        KnownType(typeof(MyRegistry))
+
+        KnownType(typeof(MyTotalEcmrs)),
     ]
     public class Function : ObjectBase
     {

@@ -16,6 +16,7 @@ namespace master.ViewModels.Data
         public VMvariable(Variable root)
         {
             this.root = root;
+            this.isIdentifier = false;
         }
 
         public string Name
@@ -41,6 +42,13 @@ namespace master.ViewModels.Data
         public string Optional
         {
             get { return this.root.Optional ? "optional" : string.Empty; }
+        }
+
+        protected bool isIdentifier;
+        public bool Identifier
+        {
+            get { return this.isIdentifier; }
+            set { this.isIdentifier = value; }
         }
     }
 }

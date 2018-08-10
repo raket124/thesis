@@ -20,7 +20,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <ListBox dd:DragDrop.IsDragSource="True"
              dd:DragDrop.IsDropTarget="True"
              dd:DragDrop.UseDefaultEffectDataTemplate="True"
@@ -41,8 +41,6 @@
             </Style>
         </ListBox.Style>
         <ListBox.Resources>
-
-            
             <DataTemplate DataType="{x:Type vm_blocks:VMif}">
                 <Border Style="{StaticResource MyBorder}">
                     <Expander Header="{Binding Name}" IsExpanded="True">
@@ -136,8 +134,1522 @@
                     </Expander>
                 </Border>
             </DataTemplate>
-
-
         </ListBox.Resources>
+
+        <!--Example1 - addNewCow -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Asset"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Cow"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="cow"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="cow"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="owner equals #currentUser" FontWeight="Bold"/>
+                            <TextBlock Text="    Can only add cows for the current farmer"/>
+                            <TextBlock Text="father.sex equals Male" FontWeight="Bold"/>
+                            <TextBlock Text="    Father cow has to be male"/>
+                            <TextBlock Text="father.date_of_birth before date_of_birth" FontWeight="Bold"/>
+                            <TextBlock Text="    Child cannot be born before father"/>
+                            <TextBlock Text="mother.sex equals Female" FontWeight="Bold"/>
+                            <TextBlock Text="    Mother cow has to be female"/>
+                            <TextBlock Text="mother.date_of_birth before date_of_birth" FontWeight="Bold"/>
+                            <TextBlock Text="    Child cannot be born before mother"/>
+                            <TextBlock Text="mother.date_of_death later date_of_birth" FontWeight="Bold"/>
+                            <TextBlock Text="    The mother cow cannot be dead."/>
+                            <TextBlock Text="date_of_death before currentDateTime" FontWeight="Bold"/>
+                            <TextBlock Text="    Cannot create future cows"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="cow"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Insert"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+
+        <!--Example1 - cowDied -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Asset"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft" IsChecked="True"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Cow"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="cow"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="DateTime"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="dateTime"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="cow"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="owner equals #currentUser" FontWeight="Bold"/>
+                            <TextBlock Text="    Only the owner can modify this cow"/>
+                            <TextBlock Text="death not equal True" FontWeight="Bold"/>
+                            <TextBlock Text="    Cow is already marked dead"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="dateTime"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="before currentDateTime" FontWeight="Bold"/>
+                            <TextBlock Text="     Cannot declare death in the future"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="cow"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="death = True" FontWeight="Bold"/>
+                            <TextBlock Text="date_of_death = #input.dateTime" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="cow"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Update"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+
+        <!--Example1 - cowTransfer -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Asset"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft" IsChecked="True"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Cow"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="cow"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Participant"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft" IsChecked="True"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Farmer"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="newOwner"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="cow"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="owner equals #currentUser" FontWeight="Bold"/>
+                            <TextBlock Text="    Only the owner can transfer this cow"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="newOwner"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="not equals #currentUser" FontWeight="Bold"/>
+                            <TextBlock Text="    Cannot transfer the cow to self"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="cow"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="owner = #input.newOwner" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="cow"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Update"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+
+        <!--Example2 - NewThesis -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="String"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="id"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="String"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="title"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Participant"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft" IsChecked="True"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Teacher"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="supervisor"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Creation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="Thesis"/>
+                            </ComboBox>
+                            <TextBlock Text="Id: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="id"/>
+                            </ComboBox>
+                            <TextBlock Text="Alias: " Margin="5"/>
+                            <TextBox Text="thesis" Margin="5" Width="100"/>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="title = #input.title" FontWeight="Bold"/>
+                            <TextBlock Text="content = empty" FontWeight="Bold"/>
+                            <TextBlock Text="student = #currentUser" FontWeight="Bold"/>
+                            <TextBlock Text="supervisor = #input.supervisor" FontWeight="Bold"/>
+                            <TextBlock Text="graders = empty list" FontWeight="Bold"/>
+                            <TextBlock Text="grade = -1" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="thesis"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Insert"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+        
+        <!--Example2 - SetContent -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Asset"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft" IsChecked="True"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Thesis"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="thesis"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="String"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="content"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="thesis"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="student equals #currentUser" FontWeight="Bold"/>
+                            <TextBlock Text="    Only the student can set the content"/>
+                            <TextBlock Text="content equals empty" FontWeight="Bold"/>
+                            <TextBlock Text="    Content already set"/>
+                            <TextBlock Text="count(graders) larger than or equals 4" FontWeight="Bold"/>
+                            <TextBlock Text="    Atleast 4 graders need to be present before uploading content"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="thesis"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="content = #input.content" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="thesis"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Update"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+
+        <!--Example2 - AddGrader -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Asset"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft" IsChecked="True"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Thesis"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="thesis"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="thesis"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="content equals empty" FontWeight="Bold"/>
+                            <TextBlock Text="    Thesis already contains content"/>
+                            <TextBlock Text="count(graders) smaller than 6 " FontWeight="Bold"/>
+                            <TextBlock Text="    Max number of graders is reached"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Creation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="Grader"/>
+                            </ComboBox>
+                            <TextBlock Text="Alias: " Margin="5"/>
+                            <TextBox Text="grader" Margin="5" Width="100"/>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="teacher = #currentUser" FontWeight="Bold"/>
+                            <TextBlock Text="grade = -1" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="thesis"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="graders.Add(grader)" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="thesis"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Update"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+
+        <!--Example2 - Grade -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Asset"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft" IsChecked="True"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Thesis"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="thesis"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Integer"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="grade"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="Input"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="thesis.content not equels empty" FontWeight="Bold"/>
+                            <TextBlock Text="    Cannot grade a thesis without content"/>
+                            <TextBlock Text="0 &lt;= grade &lt;= 100" FontWeight="Bold"/>
+                            <TextBlock Text="    Grade not within valid range"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Creation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="Integer"/>
+                            </ComboBox>
+                            <TextBlock Text="Alias: " Margin="5"/>
+                            <TextBox Text="count" Margin="5" Width="100"/>
+                            <TextBlock Text="Value: " Margin="5"/>
+                            <TextBox Text="0" Margin="5" Width="100"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="Integer"/>
+                            </ComboBox>
+                            <TextBlock Text="Alias: " Margin="5"/>
+                            <TextBox Text="total" Margin="5" Width="100"/>
+                            <TextBlock Text="Value: " Margin="5"/>
+                            <TextBox Text="0" Margin="5" Width="100"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Foreach - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Foreach " Margin="5"/>
+                            <TextBox Text="grader" Margin="5" Width="100"/>
+                            <TextBlock Text=" in thesis.graders" Margin="5"/>
+                        </StackPanel>
+                        <ListBox HorizontalContentAlignment="Stretch">
+                            <ListBoxItem>
+                                <Border Style="{StaticResource MyBorder}">
+                                    <Expander Header="If - block" IsExpanded="True">
+                                        <StackPanel Margin="5">
+                                            <StackPanel Margin="10,0,10,10">
+                                                <TextBlock Text="#input.grader.teacher equals #currentUser" FontWeight="Bold"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Expander>
+                                </Border>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <Border Style="{StaticResource MyBorder}">
+                                    <Expander Header="Modification - block" IsExpanded="True">
+                                        <StackPanel Margin="5">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Object: " Margin="5"/>
+                                                <ComboBox SelectedIndex="0" Margin="5">
+                                                    <ComboBoxItem Content="grader"/>
+                                                </ComboBox>
+                                            </StackPanel>
+                                            <StackPanel Margin="10,0,10,10">
+                                                <TextBlock Text="grade = #input.grade" FontWeight="Bold"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Expander>
+                                </Border>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <Border Style="{StaticResource MyBorder}">
+                                    <Expander Header="If - block" IsExpanded="True">
+                                        <StackPanel Margin="5">
+                                            <StackPanel Margin="10,0,10,10">
+                                                <TextBlock Text="grade not equals -1" FontWeight="Bold"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Expander>
+                                </Border>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <Border Style="{StaticResource MyBorder}">
+                                    <Expander Header="Modification - block" IsExpanded="True">
+                                        <StackPanel Margin="5">
+                                            <StackPanel Margin="10,0,10,10">
+                                                <TextBlock Text="increment count by 1" FontWeight="Bold"/>
+                                                <TextBlock Text="add grader.grade too total" FontWeight="Bold"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Expander>
+                                </Border>
+                            </ListBoxItem>
+                        </ListBox>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="If - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="count equals count(thesis.graders)" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="thesis.grade = total divided by count" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="thesis"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Update"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+
+        <!--Example3 - CreateTransportOrder -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Asset"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="TransportOrder"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="transportOrder"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="transportOrder"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="status = Open" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Foreach - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Foreach " Margin="5"/>
+                            <TextBox Text="ecmr" Margin="5" Width="100"/>
+                            <TextBlock Text=" in transportOrder.ecmrs" Margin="5"/>
+                        </StackPanel>
+                        <ListBox HorizontalContentAlignment="Stretch">
+                            <ListBoxItem>
+                                <Border Style="{StaticResource MyBorder}">
+                                    <Expander Header="Modification - block" IsExpanded="True">
+                                        <StackPanel Margin="5">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Object: " Margin="5"/>
+                                                <ComboBox SelectedIndex="0" Margin="5">
+                                                    <ComboBoxItem Content="ecmr"/>
+                                                </ComboBox>
+                                            </StackPanel>
+                                            <StackPanel Margin="10,0,10,10">
+                                                <TextBlock Text="status = CREATED" FontWeight="Bold"/>
+                                                <TextBlock Text="compoundSignature = empty" FontWeight="Bold"/>
+                                                <TextBlock Text="carrierLoadingSignature = empty" FontWeight="Bold"/>
+                                                <TextBlock Text="carrierDeliverySignature = empty" FontWeight="Bold"/>
+                                                <TextBlock Text="recipientSignature = empty" FontWeight="Bold"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Expander>
+                                </Border>
+                            </ListBoxItem>
+                        </ListBox>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="transportOrder"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Insert"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="transportOrder.ecmrs"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Insert"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+
+        <!--Example3 - ProvideGood -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Asset"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft" IsChecked="True"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="ECMR"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="ecmr"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="String"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="remark"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="ecmr"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="status equals Created" FontWeight="Bold"/>
+                            <TextBlock Text="    Invalid status"/>
+                            <TextBlock Text="source equals #currentUser.organisation" FontWeight="Bold"/>
+                            <TextBlock Text="    Current user not affiliated with the correct organisation"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Creation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="Signature"/>
+                            </ComboBox>
+                            <TextBlock Text="Alias: " Margin="5"/>
+                            <TextBox Text="signature" Margin="5" Width="100"/>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="user = #currentUser" FontWeight="Bold"/>
+                            <TextBlock Text="timestamp = #currentDateTime" FontWeight="Bold"/>
+                            <TextBlock Text="remark = #input.remark" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="ecmr"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="status = Loaded" FontWeight="Bold"/>
+                            <TextBlock Text="compoundSignature = signature" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="ecmr"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Update"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="If - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="ecmr.transportOrder.status not equals IN_PROGRESS" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="ecmr.transportOrder"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="status = IN_PROGRESS" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="ecmr.transportOrder"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Update"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="End - block" IsExpanded="True">
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+
+        <!--Example3 - LoadGood -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Asset"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft" IsChecked="True"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="ECMR"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="ecmr"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="String"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="remark"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="ecmr"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="status equals LOADED" FontWeight="Bold"/>
+                            <TextBlock Text="    Invalid status"/>
+                            <TextBlock Text="source equals #currentUser.organisation" FontWeight="Bold"/>
+                            <TextBlock Text="    Current user not affiliated with the correct organisation"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Creation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="Signature"/>
+                            </ComboBox>
+                            <TextBlock Text="Alias: " Margin="5"/>
+                            <TextBox Text="signature" Margin="5" Width="100"/>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="user = #currentUser" FontWeight="Bold"/>
+                            <TextBlock Text="timestamp = #currentDateTime" FontWeight="Bold"/>
+                            <TextBlock Text="remark = #input.remark" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="ecmr"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="status = IN_TRANSIT" FontWeight="Bold"/>
+                            <TextBlock Text="carrierLoadingSignature = signature" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="ecmr"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Update"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+        
+        <!--Example3 - DeliverGood -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Asset"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft" IsChecked="True"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="ECMR"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="ecmr"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="String"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="remark"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="ecmr"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="status equals IN_TRANSIT" FontWeight="Bold"/>
+                            <TextBlock Text="    Invalid status"/>
+                            <TextBlock Text="source equals #currentUser.organisation" FontWeight="Bold"/>
+                            <TextBlock Text="    Current user not affiliated with the correct organisation"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Creation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="Signature"/>
+                            </ComboBox>
+                            <TextBlock Text="Alias: " Margin="5"/>
+                            <TextBox Text="signature" Margin="5" Width="100"/>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="user = #currentUser" FontWeight="Bold"/>
+                            <TextBlock Text="timestamp = #currentDateTime" FontWeight="Bold"/>
+                            <TextBlock Text="remark = #input.remark" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="ecmr"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="status = DELIVERED" FontWeight="Bold"/>
+                            <TextBlock Text="carrierDeliverySignature = signature" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="ecmr"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Update"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+        
+        <!--Example3 - ReceivedGood -->
+        <!--<ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Input - block" IsExpanded="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="Asset"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <CheckBox Margin="5" Content=":Ref" FlowDirection="RightToLeft" IsChecked="True"/>
+                            <TextBlock Margin="5" Text="Object:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="ECMR"/>
+                            </ComboBox>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="ecmr"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="5">
+                                <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                            </Button>
+                            <TextBlock Margin="5" Text="Type:"/>
+                            <ComboBox Margin="5" Width="100" SelectedIndex="0">
+                                <ComboBoxItem Content="String"/>
+                            </ComboBox>
+                            <CheckBox Margin="5" Content=":List" FlowDirection="RightToLeft"/>
+                            <TextBlock Margin="5" Text="Alias:"/>
+                            <TextBox Margin="5" Width="100" Text="remark"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Validation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="ecmr"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="status equals DELIVERED" FontWeight="Bold"/>
+                            <TextBlock Text="    Invalid status"/>
+                            <TextBlock Text="source equals #currentUser.organisation" FontWeight="Bold"/>
+                            <TextBlock Text="    Current user not affiliated with the correct organisation"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Creation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="Signature"/>
+                            </ComboBox>
+                            <TextBlock Text="Alias: " Margin="5"/>
+                            <TextBox Text="signature" Margin="5" Width="100"/>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="user = #currentUser" FontWeight="Bold"/>
+                            <TextBlock Text="timestamp = #currentDateTime" FontWeight="Bold"/>
+                            <TextBlock Text="remark = #input.remark" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="ecmr"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="status = Loaded" FontWeight="Bold"/>
+                            <TextBlock Text="recipientSignature = signature" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="ecmr"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Update"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Creation - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="Integer"/>
+                            </ComboBox>
+                            <TextBlock Text="Alias: " Margin="5"/>
+                            <TextBox Text="count" Margin="5" Width="100"/>
+                            <TextBlock Text="Value: " Margin="5"/>
+                            <TextBox Text="0" Margin="5" Width="100"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Foreach - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Foreach " Margin="5"/>
+                            <TextBox Text="local_ecmr" Margin="5" Width="100"/>
+                            <TextBlock Text=" in ecmr.transportOrder.ecmrs" Margin="5"/>
+                        </StackPanel>
+                        <ListBox HorizontalContentAlignment="Stretch">
+                            <ListBoxItem>
+                                <Border Style="{StaticResource MyBorder}">
+                                    <Expander Header="If - block" IsExpanded="True">
+                                        <StackPanel Margin="5">
+                                            <StackPanel Margin="10,0,10,10">
+                                                <TextBlock Text="local_ecmr.status equals CONFIRMED_DELIVERED" FontWeight="Bold"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Expander>
+                                </Border>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <Border Style="{StaticResource MyBorder}">
+                                    <Expander Header="Modification - block" IsExpanded="True">
+                                        <StackPanel Margin="5">
+                                            <StackPanel Margin="10,0,10,10">
+                                                <TextBlock Text="increment count by 1" FontWeight="Bold"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Expander>
+                                </Border>
+                            </ListBoxItem>
+                        </ListBox>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="If - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="count(ecmr.transportOrder.ecmrs) equals count" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Modification - block" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Object: " Margin="5"/>
+                            <ComboBox SelectedIndex="0" Margin="5">
+                                <ComboBoxItem Content="ecmr"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,10,10">
+                            <TextBlock Text="transportOrder.status = COMPLETED" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="Registry - block" IsExpanded="True">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Object: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="ecmr.transportOrder"/>
+                        </ComboBox>
+                        <TextBlock Text="Action: " Margin="5"/>
+                        <ComboBox SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="Update"/>
+                        </ComboBox>
+                        <CheckBox Content="Direct:" Margin="5"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+        </ListBoxItem>
+        <ListBoxItem>
+            <Border Style="{StaticResource MyBorder}">
+                <Expander Header="End - block" IsExpanded="True">
+                </Expander>
+            </Border>
+        </ListBoxItem>-->
+
     </ListBox>
 </UserControl>

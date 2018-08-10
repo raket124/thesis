@@ -43,25 +43,43 @@
                                 <TextBlock Text="[" />
                                 <TextBlock Text="{Binding ClassName}" />
                                 <TextBlock Text="] - " />
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Name}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Abstract}" Value="Yes">
+                                                    <Setter Property="TextDecorations" Value="Underline"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                             <ItemsControl ItemsSource="{Binding Components}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
+                                            <StackPanel.Resources>
+                                                <Style TargetType="TextBlock">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Identifier}" Value="true">
+                                                            <Setter Property="FontWeight" Value="Bold"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Resources>
                                             <TextBlock Text="{Binding Relation}" />
                                             <TextBlock Text=" " />
                                             <TextBlock Text="{Binding Type}" />
                                             <TextBlock Text="{Binding List}" />
                                             <TextBlock Text=" " />
-                                            <TextBlock Text="{Binding Name}" />
+                                            <TextBlock Text="{Binding Name}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </StackPanel>
                     </DataTemplate>
-                    
                 </graphs:MyGraphArea.Resources>
             </graphs:MyGraphArea>
         </controls:ZoomControl>

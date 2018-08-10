@@ -48,22 +48,58 @@ namespace master.ViewModels
 
             this.list2 = new ObservableCollection<VMbase>
             {
-                new VMassign(new MyAssign(), null),
                 new VMinput(new MyInput(){
                     Vars = new ObservableCollection<Variable>()
                     {
                         new Variable(typeof(String))
                     }
                 }, null),
+                new VMassign(new MyAssign(), null),
                 new VMlog(new MyLog(), null),
                 new VMerror(new MyError(), null),
-                new VMif(new MyIf(), null),
+                new VMif(new MyIf()
+                {
+                    Condition = new Models.Contract.Block.Conditioning.Condition()
+                    {
+                        Conditions = new ObservableCollection<Models.Contract.Block.Conditioning.ConditionBase>()
+                        {
+                            new Models.Contract.Block.Conditioning.ConditionBase()
+                        },
+                        Groups = new ObservableCollection<Models.Contract.Block.Conditioning.ConditionGroup>()
+                        {
+                            new Models.Contract.Block.Conditioning.ConditionGroup()
+                            {
+                                Conditions = new ObservableCollection<string>()
+                                {
+                                    string.Empty,
+                                    string.Empty
+                                },
+                                Connectors = new ObservableCollection<Models.Contract.Block.Conditioning.ConditionGroup.COMPARE>()
+                                {
+                                    Models.Contract.Block.Conditioning.ConditionGroup.COMPARE.and
+                                }
+                            }
+                        },
+                        Value = new Models.Contract.Block.Conditioning.ConditionGroup()
+                        {
+                            Conditions = new ObservableCollection<string>()
+                            {
+                                string.Empty,
+                                string.Empty
+                            },
+                            Connectors = new ObservableCollection<Models.Contract.Block.Conditioning.ConditionGroup.COMPARE>()
+                            {
+                                Models.Contract.Block.Conditioning.ConditionGroup.COMPARE.and
+                            }
+                        }
+                    }
+                }, null),
                 new VMsimpleIf(new MySimpleIf(), null),
-                //new VMelseIf(null),
                 new VMelse(new MyElse(), null),
                 new VMend(new MyEnd(), null),
-                new VMtotalEcmrs(new MyTotalEcmrs(), null),               
+                new VMtotalEcmrs(new MyTotalEcmrs(), null),
                 new VMuseRegistry(new MyRegistry(), null),
+                new VMforeach(new MyForeach(), null)
             };
         }
 

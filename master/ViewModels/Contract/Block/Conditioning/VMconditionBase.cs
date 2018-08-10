@@ -42,8 +42,8 @@ namespace master.ViewModels.Contract.Block.Conditioning
             this.parent = parent;
 
             this.CommandRemove = new DelegateCommand(() => this.Parent.Root.Conditions.Remove(this.Root));
-            //this.CommandSetLHS = new DelegateCommand(() => this.LHS = this.Parent.Parent.SelectVar());
-            //this.CommandSetRHS = new DelegateCommand(() => this.RHS = this.Parent.Parent.SelectVar());
+            this.CommandSetLHS = new DelegateCommand(() => this.LHS = this.Parent.Parent.Parent.SelectVar());
+            this.CommandSetRHS = new DelegateCommand(() => this.RHS = this.Parent.Parent.Parent.SelectVar());
         }
 
         public object Clone()
@@ -100,6 +100,7 @@ namespace master.ViewModels.Contract.Block.Conditioning
             {
                 this.Root.Alias = value;
                 this.NotifyPropertyChanged();
+                this.Parent.FullRefresh();
             }
         }
 

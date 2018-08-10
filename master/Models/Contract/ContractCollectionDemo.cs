@@ -131,11 +131,22 @@ namespace master.Models.Contract
                                 Text = "The total amount of goods of the ECMRs exceeds the total listed in the TransportOrder"
                             },
                             new MyEnd(),
+                            new MyForeach()
+                            {
+                                Variable = "ecmrs",
+                                Alias = "ecmr"
+                            },
+                            new MyAssign()
+                            {
+                                Variable = "ecmr.orderID",
+                                Value = "transportOrder.getIdentifier()"
+                            },
                             new MyRegistry()
                             {
                                 Action = MyRegistry.ACTION.Insert,
                                 Alias = "ecmrs"
-                            }
+                            },
+                            new MyEnd()
                         }
                     },
                     new Function("updateEcmrStatusToLoaded", Function.ACCESSIBILITY.Public)

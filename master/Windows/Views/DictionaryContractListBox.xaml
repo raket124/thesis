@@ -32,6 +32,19 @@
         </Border>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm_blocks:VMforeach}">
+        <Border Style="{StaticResource MyBorder}">
+            <Expander Header="{Binding Name}" IsExpanded="True">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0" Text="List:"/>
+                    <Button MinWidth="100" Margin="0,0,10,0" Content="{Binding Variable}" Command="{Binding CommandSetVariable}"/>
+                    <TextBlock Margin="0,0,10,0" Text="Alias:"/>
+                    <TextBox MinWidth="100" Margin="0,0,10,0" Text="{Binding Alias}"/>
+                </StackPanel>
+            </Expander>
+        </Border>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vm_blocks:VMuseRegistry}">
         <Border Style="{StaticResource MyBorder}">
             <Expander Header="{Binding Name}" IsExpanded="True">

@@ -48,6 +48,8 @@ namespace master.CodeGenerator
                 return FunctionConverter.Convert(b as MyLog, f, ref i);
             if (b.GetType() == typeof(MyError))
                 return FunctionConverter.Convert(b as MyError, f, ref i);
+            if (b.GetType() == typeof(MyForeach))
+                return FunctionConverter.Convert(b as MyForeach, ref i);
             return string.Empty;
         }
 
@@ -104,14 +106,23 @@ namespace master.CodeGenerator
 
         private static string Convert(MyLog input, Function f, ref int i)
         {
-            return string.Format("{0}console.log('[{1}] {2}')", FunctionConverter.Indent(i), f.Name, input.Text);
+            return string.Format("{0}console.log('[{1}] {2}');", FunctionConverter.Indent(i), f.Name, input.Text);
         }
 
         private static string Convert(MyError input, Function f, ref int i)
         {
-            return string.Format("{0}throw new Error('[{1}] {2}')", FunctionConverter.Indent(i), f.Name, input.Text);
+            return string.Format("{0}throw new Error('[{1}] {2}');", FunctionConverter.Indent(i), f.Name, input.Text);
         }
 
+        private static string Convert(MyForeach input, ref int i)
+        {
+            return string.Format("{0}tx.{1}.forEach(function ({2}) {{", FunctionConverter.Indent(i++), input.Variable, input.Alias);
+        }
+
+        private static string Convert(MyAssign input, ref int i)
+        {
+            return string.Format("{0}{tx.1} = {tx.2};", FunctionConverter.Indent(i++), input.Variable, input.Value);
+        }
 
         private static bool Validator(Function f)
         {

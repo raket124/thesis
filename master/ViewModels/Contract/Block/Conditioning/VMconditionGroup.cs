@@ -86,7 +86,15 @@ namespace master.ViewModels.Contract.Block.Conditioning
             {
                 this.Root.Alias = value;
                 this.NotifyPropertyChanged();
-                this.Parent.RenewAliasList();
+                this.Parent.FullRefresh();
+            }
+        }
+
+        public List<string> AliasList
+        {
+            get
+            {
+                return this.Parent.AliasList;
             }
         }
 

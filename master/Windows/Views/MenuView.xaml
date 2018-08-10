@@ -24,7 +24,6 @@
         </MenuItem>
         <MenuItem Header="Data model" Command="{Binding GraphWindow}"/>
         <MenuItem Header="Chain code" Command="{Binding CodeWindow}"/>
-        <MenuItem Header="Test window" Command="{Binding TestWindow}"/>
     </Menu>
 
 </UserControl>

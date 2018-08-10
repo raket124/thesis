@@ -1,38 +1,35 @@
-﻿using master.Models;
-using master.Models.Contract.Block.Blocks;
-using master.Models.Data.Component.Components;
-using Prism.Commands;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using master.Models.Contract.Block;
+using master.Models.Contract.Block.Blocks;
+using Prism.Commands;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
-    class VMassign : VMbase
+    class VMforeach : VMbase
     {
-        public new MyAssign Root
+        public new MyForeach Root
         {
-            get { return this.root as MyAssign; }
+            get { return this.root as MyForeach; }
         }
 
         public DelegateCommand CommandSetVariable { get; private set; }
-        public DelegateCommand CommandSetValue { get; private set; }
 
-        public VMassign(MyAssign root, VMfunction parent) : base(root, parent)
+        public VMforeach(MyForeach root, VMfunction parent) : base(root, parent)
         {
             this.CommandSetVariable = new DelegateCommand(() => this.Variable = this.Parent.SelectVar());
-            this.CommandSetValue = new DelegateCommand(() => this.Value = this.Parent.SelectVar());
         }
 
         public override object Clone()
         {
-            return new VMassign(this.Root.Clone() as MyAssign, this.Parent);
+            return new VMforeach(this.Root.Clone() as MyForeach, this.Parent);
         }
 
-        protected override string BlockName() { return "Assign - block"; }
-        protected override string Required() { return string.Format(this.reqFormat, "2 variables"); }
+        protected override string BlockName() { return "Foreach - block"; }
+        protected override string Required() { return string.Format(this.reqFormat, "1 variable, 1 alias"); }
         protected override string Optional() { return string.Empty; }
 
         public string Variable
@@ -45,12 +42,12 @@ namespace master.ViewModels.Contract.Block.Blocks
             }
         }
 
-        public string Value
+        public string Alias
         {
-            get { return this.Root.Value; }
+            get { return this.Root.Alias; }
             set
             {
-                this.Root.Value = value;
+                this.Root.Alias = value;
                 this.NotifyPropertyChanged();
             }
         }
