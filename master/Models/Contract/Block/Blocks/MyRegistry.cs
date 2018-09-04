@@ -1,4 +1,5 @@
-﻿using System;
+﻿using master.Models.Data.Component.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -20,11 +21,11 @@ namespace master.Models.Contract.Block.Blocks
             set { this.action = value; }
         }
         [DataMember]
-        protected string alias;
-        public string Alias
+        protected VariableLink variable;
+        public VariableLink Variable
         {
-            get { return this.alias; }
-            set { this.alias = value; }
+            get { return this.variable; }
+            set { this.variable = value; }
         }
         [DataMember]
         protected bool preventDelay;
@@ -37,7 +38,7 @@ namespace master.Models.Contract.Block.Blocks
         public MyRegistry() : base()
         {
             this.action = ACTION.Insert;
-            this.alias = string.Empty;
+            this.variable = new VariableLink(new MyVariable(typeof(MyAsset)));
             this.preventDelay = false;
         }
 
@@ -48,7 +49,8 @@ namespace master.Models.Contract.Block.Blocks
                 Name = this.Name,
                 Docs = this.Docs,
                 Action = this.Action,
-                Alias = this.Alias
+                Variable = this.Variable,
+                Delay = this.Delay
             };
         }
     }

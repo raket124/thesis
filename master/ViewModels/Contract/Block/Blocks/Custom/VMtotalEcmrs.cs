@@ -56,7 +56,7 @@ namespace master.ViewModels.Contract.Block.Blocks.Custom
         {
             return new List<VMvariable>()
             {
-                new VMvariable(new Variable(typeof(int))
+                new VMvariable(new MyVariable(typeof(int))
                 {
                     Alias = this.Alias,
                 })

@@ -5,10 +5,12 @@ using master.Models.Contract;
 using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
 using master.Models.Contract.Block.Blocks.Custom;
+using master.Models.Contract.Block.Combinations;
 using master.Models.Variables;
 using master.ViewModels.Contract.Block;
 using master.ViewModels.Contract.Block.Blocks;
 using master.ViewModels.Contract.Block.Blocks.Custom;
+using master.ViewModels.Contract.Block.Combinations;
 using master.ViewModels.Variables;
 using master.ViewModels.Windows;
 using master.Windows;
@@ -78,14 +80,21 @@ namespace master.ViewModels.Contract
                     output.Add(new VMforeach(block as MyForeach, this));
                 if (block.GetType() == typeof(MyIf))
                     output.Add(new VMif(block as MyIf, this));
-                if (block.GetType() == typeof(MyInput))
-                    output.Add(new VMinput(block as MyInput, this));
                 if (block.GetType() == typeof(MyLog))
                     output.Add(new VMlog(block as MyLog, this));
-                if (block.GetType() == typeof(MySimpleIf))
-                    output.Add(new VMsimpleIf(block as MySimpleIf, this));
                 if (block.GetType() == typeof(MyRegistry))
                     output.Add(new VMuseRegistry(block as MyRegistry, this));
+
+                if (block.GetType() == typeof(MyCreation))
+                    output.Add(new VMcreation(block as MyCreation, this));
+                if (block.GetType() == typeof(MyIfError))
+                    output.Add(new VMifError(block as MyIfError, this));
+                if (block.GetType() == typeof(MyInput))
+                    output.Add(new VMinput(block as MyInput, this));
+                if (block.GetType() == typeof(MyModification))
+                    output.Add(new VMmodification(block as MyModification, this));
+                if (block.GetType() == typeof(MyValidation))
+                    output.Add(new VMvalidation(block as MyValidation, this));
 
                 if (block.GetType() == typeof(MyTotalEcmrs))
                     output.Add(new VMtotalEcmrs(block as MyTotalEcmrs, this));

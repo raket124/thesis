@@ -32,18 +32,18 @@ namespace master.ViewModels.Contract.Block.Conditioning
             get { return this.parent as VMcondition; }
         }
 
-        public DelegateCommand CommandRemove { get; private set; }
-        public DelegateCommand CommandSetLHS { get; private set; }
-        public DelegateCommand CommandSetRHS { get; private set; }
+        //public DelegateCommand CommandRemove { get; private set; }
+        //public DelegateCommand CommandSetLHS { get; private set; }
+        //public DelegateCommand CommandSetRHS { get; private set; }
 
         public VMconditionBase(ConditionBase root, VMcondition parent) : base(root, parent)
         {
             this.root = root;
             this.parent = parent;
 
-            this.CommandRemove = new DelegateCommand(() => this.Parent.Root.Conditions.Remove(this.Root));
-            this.CommandSetLHS = new DelegateCommand(() => this.LHS = this.Parent.Parent.Parent.SelectVar());
-            this.CommandSetRHS = new DelegateCommand(() => this.RHS = this.Parent.Parent.Parent.SelectVar());
+            //this.CommandRemove = new DelegateCommand(() => this.Parent.Root.Conditions.Remove(this.Root));
+            //this.CommandSetLHS = new DelegateCommand(() => this.LHS = this.Parent.Parent.Parent.SelectVar());
+            //this.CommandSetRHS = new DelegateCommand(() => this.RHS = this.Parent.Parent.Parent.SelectVar());
         }
 
         public object Clone()
@@ -51,47 +51,52 @@ namespace master.ViewModels.Contract.Block.Conditioning
             return new VMconditionBase(this.Root.Clone() as ConditionBase, this.Parent);
         }
 
-        public string LHS
+        public string ViewLHS
         {
-            get { return this.Root.LHS; }
+            get { return this.Root.LHS.Output; }
             set
             {
-                this.Root.LHS = value;
+                //this.Root.LHS = value;
                 this.NotifyPropertyChanged();
             }
         }
 
-        public string Comparison
+        public ConditionBase.COMPARE ViewComparison
         {
-            get { return this.COMPARE_DIC[this.Root.Comparison]; }
+            get { return this.Root.Comparison; }
+        }
+
+        public string ViewRHS
+        {
+            get { return this.Root.RHS.Output; }
             set
             {
-                this.Root.Comparison = (from entry in this.COMPARE_DIC
-                                        where entry.Value == value
-                                        select entry.Key).First();
-                this.NotifyPropertyChanged();
+                //this.Root.RHS = value;
+                //this.NotifyPropertyChanged();
             }
         }
 
-        public string RHS
-        {
-            get { return this.Root.RHS; }
-            set
-            {
-                this.Root.RHS = value;
-                this.NotifyPropertyChanged();
-            }
-        }
+        //public string Comparison
+        //{
+        //    get { return this.COMPARE_DIC[this.Root.Comparison]; }
+        //    set
+        //    {
+        //        this.Root.Comparison = (from entry in this.COMPARE_DIC
+        //                                where entry.Value == value
+        //                                select entry.Key).First();
+        //        this.NotifyPropertyChanged();
+        //    }
+        //}
 
-        public bool Invert
-        {
-            get { return this.Root.Invert; }
-            set
-            {
-                this.Root.Invert = value;
-                this.NotifyPropertyChanged();
-            }
-        }
+        //public bool Invert
+        //{
+        //    get { return this.Root.Invert; }
+        //    set
+        //    {
+        //        this.Root.Invert = value;
+        //        this.NotifyPropertyChanged();
+        //    }
+        //}
 
         public string Alias
         {

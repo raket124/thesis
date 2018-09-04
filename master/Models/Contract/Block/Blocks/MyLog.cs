@@ -20,7 +20,7 @@ namespace master.Models.Contract.Block.Blocks
 
         public MyLog() : base()
         {
-            this.text = "The user object was updated with the following ID: #alias:persoon1";
+            this.text = string.Empty;
         }
 
         public override object Clone()

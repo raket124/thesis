@@ -55,34 +55,34 @@ namespace master.ViewModels.Contract.Block.Conditioning
             }
         }
 
-        public DelegateCommand CommandAddCondition { get; private set; }
-        public DelegateCommand CommandAddGroup { get; private set; }
+        //public DelegateCommand CommandAddCondition { get; private set; }
+        //public DelegateCommand CommandAddGroup { get; private set; }
 
-        public DelegateCommand CommandAddOption { get; private set; }
-        public DelegateCommand CommandRemoveOption { get; private set; }
+        //public DelegateCommand CommandAddOption { get; private set; }
+        //public DelegateCommand CommandRemoveOption { get; private set; }
 
         public VMcondition(Condition root, VMbase parent) : base(root, parent)
         {
             this.Wrap();
 
-            this.CommandAddCondition = new DelegateCommand(() => this.Root.Conditions.Add(new ConditionBase()
-            {
+            //this.CommandAddCondition = new DelegateCommand(() => this.Root.Conditions.Add(new ConditionBase()
+            //{
 
-            }));
-            this.CommandAddGroup = new DelegateCommand(() => this.Root.Groups.Add(new ConditionGroup()
-            {
-                Conditions = new ObservableCollection<string>()
-                                {
-                                    string.Empty,
-                                    string.Empty
-                                },
-                Connectors = new ObservableCollection<Models.Contract.Block.Conditioning.ConditionGroup.COMPARE>()
-                                {
-                                    Models.Contract.Block.Conditioning.ConditionGroup.COMPARE.and
-                                }
-            }));
-            this.CommandAddOption = new DelegateCommand(() => this.ValueAdd());
-            this.CommandRemoveOption = new DelegateCommand(this.ValueRemove, this.Value.CanRemove);
+            //}));
+            //this.CommandAddGroup = new DelegateCommand(() => this.Root.Groups.Add(new ConditionGroup()
+            //{
+            //    Conditions = new ObservableCollection<string>()
+            //                    {
+            //                        string.Empty,
+            //                        string.Empty
+            //                    },
+            //    Connectors = new ObservableCollection<Models.Contract.Block.Conditioning.ConditionGroup.COMPARE>()
+            //                    {
+            //                        Models.Contract.Block.Conditioning.ConditionGroup.COMPARE.and
+            //                    }
+            //}));
+            //this.CommandAddOption = new DelegateCommand(() => this.ValueAdd());
+            //this.CommandRemoveOption = new DelegateCommand(this.ValueRemove, this.Value.CanRemove);
 
             this.Root.Conditions.CollectionChanged += new NotifyCollectionChangedEventHandler(ConditionsChanged);
             this.Root.Groups.CollectionChanged += new NotifyCollectionChangedEventHandler(GroupsChanged);
@@ -123,14 +123,14 @@ namespace master.ViewModels.Contract.Block.Conditioning
 
         protected void ValueAdd()
         {
-            this.Value.Add();
-            this.CommandRemoveOption.RaiseCanExecuteChanged();
+            //this.Value.Add();
+            //this.CommandRemoveOption.RaiseCanExecuteChanged();
         }
 
         protected void ValueRemove()
         {
-            this.Value.Remove();
-            this.CommandRemoveOption.RaiseCanExecuteChanged();
+            //this.Value.Remove();
+            //this.CommandRemoveOption.RaiseCanExecuteChanged();
         }
 
         public List<string> AliasList

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
 using Prism.Commands;
+using master.Windows.Blocks;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
@@ -16,11 +17,9 @@ namespace master.ViewModels.Contract.Block.Blocks
             get { return this.root as MyForeach; }
         }
 
-        public DelegateCommand CommandSetVariable { get; private set; }
-
         public VMforeach(MyForeach root, VMfunction parent) : base(root, parent)
         {
-            this.CommandSetVariable = new DelegateCommand(() => this.Variable = this.Parent.SelectVar());
+            this.CommandOpen = new DelegateCommand(() => new ForeachWindow() { DataContext = this }.ShowDialog());
         }
 
         public override object Clone()
@@ -32,23 +31,30 @@ namespace master.ViewModels.Contract.Block.Blocks
         protected override string Required() { return string.Format(this.reqFormat, "1 variable, 1 alias"); }
         protected override string Optional() { return string.Empty; }
 
-        public string Variable
+        public string ViewObjectAlias
         {
-            get { return this.Root.Variable; }
-            set
+            get
             {
-                this.Root.Variable = value;
-                this.NotifyPropertyChanged();
+                if (this.Root.ObjectAlias.Value.Alias == string.Empty)
+                    return "?";
+                else
+                    return this.Root.ObjectAlias.Value.Alias;
             }
         }
 
-        public string Alias
+        public string ViewIteratorAlias
         {
-            get { return this.Root.Alias; }
-            set
+            get { return this.Root.IteratorAlias.Value.Alias; }
+        }
+
+        public string ViewListAlias
+        {
+            get
             {
-                this.Root.Alias = value;
-                this.NotifyPropertyChanged();
+                if (this.Root.List.Value.Alias == string.Empty)
+                    return "?";
+                else
+                    return this.Root.List.Value.Alias;
             }
         }
     }

@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using master.Models.Contract.Block;
+using master.Models.Contract.Block.Combinations;
+using Prism.Commands;
+using master.Windows.Blocks;
+
+namespace master.ViewModels.Contract.Block.Combinations
+{
+    class VMcreation : VMbase
+    {
+        public new MyCreation Root
+        {
+            get { return this.root as MyCreation; }
+        }
+
+        public VMcreation(MyCreation root, VMfunction parent) : base(root, parent)
+        {
+            this.CommandOpen = new DelegateCommand(() => new CreationWindow() { DataContext = this }.ShowDialog());
+        }
+
+        public override object Clone()
+        {
+            return new VMcreation(this.Root.Clone() as MyCreation, this.Parent);
+        }
+
+        protected override string BlockName() { return "Creation - block"; }
+        protected override string Required() { return string.Format(this.reqFormat, "1 new object"); }
+        protected override string Optional() { return string.Format(this.reqFormat, "1 identifier, X features"); }
+    }
+}

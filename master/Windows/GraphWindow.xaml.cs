@@ -24,7 +24,7 @@ namespace master.Windows
         {
             InitializeComponent();
             this.graphArea.ZoomControl = this.zoomctrl;
-            this.graphArea.Model = DataModelDemo.KoopmanCTO();
+            this.graphArea.Model = DataModelDemo.Example3();
             this.DataContext = this.graphArea;
         }
     }

@@ -15,6 +15,8 @@ using master.ViewModels.Contract.Block;
 using master.ViewModels.Contract.Block.Blocks;
 using master.ViewModels.Contract.Block.Blocks.Custom;
 using master.Models.Contract.Block.Blocks.Custom;
+using master.ViewModels.Contract.Block.Combinations;
+using master.Models.Contract.Block.Combinations;
 
 namespace master.ViewModels
 {
@@ -48,15 +50,11 @@ namespace master.ViewModels
 
             this.list2 = new ObservableCollection<VMbase>
             {
-                new VMinput(new MyInput(){
-                    Vars = new ObservableCollection<Variable>()
-                    {
-                        new Variable(typeof(String))
-                    }
-                }, null),
                 new VMassign(new MyAssign(), null),
-                new VMlog(new MyLog(), null),
+                new VMelse(new MyElse(), null),
+                new VMend(new MyEnd(), null),
                 new VMerror(new MyError(), null),
+                new VMforeach(new MyForeach(), null),
                 new VMif(new MyIf()
                 {
                     Condition = new Models.Contract.Block.Conditioning.Condition()
@@ -94,12 +92,16 @@ namespace master.ViewModels
                         }
                     }
                 }, null),
-                new VMsimpleIf(new MySimpleIf(), null),
-                new VMelse(new MyElse(), null),
-                new VMend(new MyEnd(), null),
-                new VMtotalEcmrs(new MyTotalEcmrs(), null),
+                new VMlog(new MyLog(), null),
                 new VMuseRegistry(new MyRegistry(), null),
-                new VMforeach(new MyForeach(), null)
+
+                new VMtotalEcmrs(new MyTotalEcmrs(), null),
+                
+                new VMcreation(new MyCreation(), null),
+                new VMifError(new MyIfError(), null),
+                new VMinput(new MyInput(), null),
+                new VMmodification(new MyModification(), null),
+                new VMvalidation(new MyValidation(), null),
             };
         }
 

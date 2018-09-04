@@ -2,8 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:master.Windows.Views"
                     xmlns:vm_contract="clr-namespace:master.ViewModels.Contract"
-                    xmlns:vm_blocks="clr-namespace:master.ViewModels.Contract.Block.Blocks"
-                    xmlns:vm_custom="clr-namespace:master.ViewModels.Contract.Block.Blocks.Custom">
+                    xmlns:vm_block="clr-namespace:master.ViewModels.Contract.Block">
 
     <Style x:Key="MyBorder" TargetType="Border">
         <Setter Property="Background" Value="LightGray"/>
@@ -20,64 +19,57 @@
         </Border>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm_blocks:VMassign}">
+    <DataTemplate DataType="{x:Type vm_block:VMbase}">
         <Border Style="{StaticResource MyBorder}">
+            <Border.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding CommandOpen}"/>
+                <MouseBinding Gesture="RightDoubleClick" Command="{Binding CommandDelete}"/>
+            </Border.InputBindings>
+            <Border.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="DictionaryBlocks.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Border.Resources>
             <Expander Header="{Binding Name}" IsExpanded="True">
-                <StackPanel Orientation="Horizontal">
-                    <Button MinWidth="100" Margin="0,0,10,0" Content="{Binding Variable}" Command="{Binding CommandSetVariable}"/>
-                    <TextBlock Margin="0,0,10,0" Text="="/>
-                    <Button MinWidth="100" Margin="0,0,10,0" Content="{Binding Value}" Command="{Binding CommandSetValue}"/>
-                </StackPanel>
+                <ContentControl Content="{Binding}"/>
             </Expander>
         </Border>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm_blocks:VMforeach}">
+    <!--<DataTemplate DataType="{x:Type vm_combs:VMinput}">
         <Border Style="{StaticResource MyBorder}">
             <Expander Header="{Binding Name}" IsExpanded="True">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="0,0,10,0" Text="List:"/>
-                    <Button MinWidth="100" Margin="0,0,10,0" Content="{Binding Variable}" Command="{Binding CommandSetVariable}"/>
-                    <TextBlock Margin="0,0,10,0" Text="Alias:"/>
-                    <TextBox MinWidth="100" Margin="0,0,10,0" Text="{Binding Alias}"/>
-                </StackPanel>
-            </Expander>
-        </Border>
-    </DataTemplate>
+                <Expander.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding CommandOpen}"/>
+                    <MouseBinding Gesture="RightClick" Command="{Binding CommandDelete}"/>
+                </Expander.InputBindings>
 
-    <DataTemplate DataType="{x:Type vm_blocks:VMuseRegistry}">
-        <Border Style="{StaticResource MyBorder}">
-            <Expander Header="{Binding Name}" IsExpanded="True">
-                <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
-                    <TextBlock Margin="0,0,10,0" Text="Alias:"/>
-                    <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding AliasOptions}" SelectedItem="{Binding Alias}"/>
-                    <TextBlock Margin="0,0,10,0" Text="Action:"/>
-                    <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Actions}" SelectedItem="{Binding Action}"/>
-                    <CheckBox Margin="0,0,10,0" Content=":Direct" IsChecked="{Binding Delay}" FlowDirection="RightToLeft"/>
-                </StackPanel>
-            </Expander>
-        </Border>
-    </DataTemplate>
+                <TextBlock>XXX</TextBlock>
+                --><!--<ItemsControl HorizontalContentAlignment="Stretch"
+                                  ItemsSource="{Binding Vars}">
+                    <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type vm_blocks:VMinputVariable}">
+                            <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                                <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="0,0,5,0">
+                                    <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                                </Button>
+                                <TextBlock Margin="0,0,10,0" Text="Type:"/>
+                                <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Types}" SelectedItem="{Binding Type}" DisplayMemberPath="Name"/>
+                                <CheckBox Margin="0,0,10,0" IsChecked="{Binding List}" Content=":List" FlowDirection="RightToLeft"/>
+                                <CheckBox Margin="0,0,10,0" IsChecked="{Binding Ref}" Content=":Ref" FlowDirection="RightToLeft"/>
+                                <TextBlock Margin="0,0,10,0" Text="Object:" IsEnabled="{Binding IsObject}"/>
+                                <ComboBox Margin="0,0,10,0" Width="100" SelectedItem="{Binding ObjectName}" ItemsSource="{Binding TypeOptions}" IsEnabled="{Binding IsObject}"/>
+                                <TextBlock Margin="0,0,10,0" Text="Alias:"/>
+                                <TextBox Margin="0,0,10,0" Width="100" Text="{Binding Alias}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                </ItemsControl>
 
-    <DataTemplate DataType="{x:Type vm_blocks:VMlog}">
-        <Border Style="{StaticResource MyBorder}">
-            <Expander Header="{Binding Name}" IsExpanded="True">
-                <TextBox AcceptsReturn="True" Margin="5,5,5,5" Text="{Binding Text}"/>
-            </Expander>
-        </Border>
-    </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm_blocks:VMerror}">
-        <Border Style="{StaticResource MyBorder}">
-            <Expander Header="{Binding Name}" IsExpanded="True">
-                <TextBox AcceptsReturn="True" Margin="5,5,5,5" Text="{Binding Text}"/>
-            </Expander>
-        </Border>
-    </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm_blocks:VMinput}">
-        <Border Style="{StaticResource MyBorder}">
-            <Expander Header="{Binding Name}" IsExpanded="True">
                 <StackPanel>
                     <ItemsControl HorizontalContentAlignment="Stretch"
                                   ItemsSource="{Binding Vars}">
@@ -102,46 +94,9 @@
                     <Button Command="{Binding CommandAdd}" Margin="0,0,5,0">
                         <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
                     </Button>
-                </StackPanel>
+                </StackPanel>--><!--
             </Expander>
         </Border>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm_blocks:VMsimpleIf}">
-        <Border Style="{StaticResource MyBorder}">
-            <Expander Header="{Binding Name}" IsExpanded="True">
-                <StackPanel Orientation="Horizontal">
-                    <Button MinWidth="100" Margin="0,0,10,0" Content="{Binding Condition.LHS}" Command="{Binding CommandSetLHS}"/>
-                    <ComboBox  MinWidth="100" Margin="0,0,10,0" SelectedItem="{Binding Condition.Comparison}" ItemsSource="{Binding Condition.Comparisons}"/>
-                    <Button MinWidth="100" Margin="0,0,10,0" Content="{Binding Condition.RHS}" Command="{Binding CommandSetRHS}"/>
-                    <CheckBox MinWidth="0,0,10,0" Content="Inverse:" IsChecked="{Binding Condition.Invert}"/>
-                </StackPanel>
-            </Expander>
-        </Border>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm_blocks:VMend}">
-        <Border Style="{StaticResource MyBorder}">
-            <TextBlock Text="{Binding Name}" Margin="25,0,0,0"/>
-        </Border>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm_blocks:VMelse}">
-        <Border Style="{StaticResource MyBorder}">
-            <TextBlock Text="{Binding Name}" Margin="25,0,0,0"/>
-        </Border>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm_custom:VMtotalEcmrs}">
-        <Border Style="{StaticResource MyBorder}">
-            <Expander Header="{Binding Name}" IsExpanded="True">
-                <StackPanel Orientation="Horizontal">
-                    <Button MinWidth="100" Margin="0,0,10,0" Content="{Binding Input}" Command="{Binding CommandSetInput}"/>
-                    <TextBox MinWidth="100" Margin="0,0,10,0" Text="{Binding Alias}"/>
-                </StackPanel>
-            </Expander>
-        </Border>
-    </DataTemplate>
-
+    </DataTemplate>-->
 
 </ResourceDictionary>

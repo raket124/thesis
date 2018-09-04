@@ -2,6 +2,7 @@
 using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
 using master.Models.Contract.Block.Blocks.Custom;
+using master.Models.Contract.Block.Combinations;
 using master.Models.Variables;
 using System;
 using System.Collections.Generic;
@@ -21,14 +22,18 @@ namespace master.Models.Contract
         KnownType(typeof(MyError)),
         KnownType(typeof(MyForeach)),
         KnownType(typeof(MyIf)),
-        KnownType(typeof(MyInput)),
         KnownType(typeof(MyLog)),
         KnownType(typeof(MyRegistry)),
-        KnownType(typeof(MySimpleIf)),
 
         KnownType(typeof(MyTotalEcmrs)),
+
+        KnownType(typeof(MyCreation)),
+        KnownType(typeof(MyIfError)),
+        KnownType(typeof(MyInput)),
+        KnownType(typeof(MyModification)),
+        KnownType(typeof(MyValidation)),
     ]
-    public class Function : ObjectBase
+    public class Function : ObjectBase, ICloneable
     {
         public enum ACCESSIBILITY { Public, Private, Controlled }
 
@@ -40,8 +45,8 @@ namespace master.Models.Contract
             set { this.access = value; }
         }
         [DataMember]
-        protected ObservableCollection<Block.Base> blocks;
-        public ObservableCollection<Block.Base> Blocks
+        protected ObservableCollection<Base> blocks;
+        public ObservableCollection<Base> Blocks
         {
             get { return this.blocks; }
             set { this.blocks = value; }
@@ -51,6 +56,17 @@ namespace master.Models.Contract
         {
             this.access = access;
             this.blocks = new ObservableCollection<Block.Base>();
+        }
+
+        public object Clone()
+        {
+            return new Function(this.Name, this.Access)
+            {
+                Docs = this.Docs,
+                Blocks = new ObservableCollection<Base>(
+                         from b in this.Blocks
+                         select b.Clone() as Base)
+            };
         }
     }
 }

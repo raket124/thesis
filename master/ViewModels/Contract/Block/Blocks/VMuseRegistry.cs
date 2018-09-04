@@ -7,6 +7,8 @@ using master.Basis;
 using master.Models.Contract.Block.Blocks;
 using master.Utils;
 using master.Models.Data.Component.Components;
+using Prism.Commands;
+using master.Windows.Blocks;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
@@ -19,7 +21,7 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public VMuseRegistry(MyRegistry root, VMfunction parent) : base(root, parent)
         {
-
+            this.CommandOpen = new DelegateCommand(() => new RegistryWindow() { DataContext = this }.ShowDialog());
         }
 
         public override object Clone()
@@ -56,12 +58,12 @@ namespace master.ViewModels.Contract.Block.Blocks
             get { return EnumUtil.EnumToList<MyRegistry.ACTION>(); }
         }
 
-        public string Alias
+        public string ViewAlias
         {
-            get { return this.Root.Alias; }
+            get { return this.Root.Variable.Output; }
             set
             {
-                this.Root.Alias = value;
+                //this.Root.Variable = value;
                 this.NotifyPropertyChanged();
             }
         }

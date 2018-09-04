@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using master.Models.Contract.Block;
 using Prism.Commands;
 using master.Models.Data.Component.Components;
+using master.ViewModels.Contract.Block.Combinations;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
@@ -19,7 +20,7 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public DelegateCommand<object> CommandRemove { get; private set; }
 
-        public VMinputVariable(Variable root, VMinput parent) : base(root)
+        public VMinputVariable(MyVariable root, VMinput parent) : base(root)
         {
             this.parent = parent;
 
@@ -28,7 +29,12 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public void Remove(object input)
         {
-            this.Parent.Root.Vars.Remove((input as VMvariable).Root);
+            //this.Parent.Root.Vars.Remove((input as VMvariable).Root);
+        }
+
+        public string Relation
+        {
+            get { return this.Root.Relation == Models.Data.Variable.RELATION.reference ? "->" : " o"; }
         }
 
         public new Type Type

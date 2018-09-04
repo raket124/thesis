@@ -74,12 +74,14 @@
       <HintPath>..\packages\QuickGraphPCL.3.6.61114.2\lib\net40-client\QuickGraph.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -89,6 +91,18 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TomsToolbox.Core, Version=1.0.72.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2, processorArchitecture=MSIL">
+      <HintPath>..\packages\TomsToolbox.Core.1.0.72\lib\net40-client\TomsToolbox.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="TomsToolbox.Desktop, Version=1.0.72.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2, processorArchitecture=MSIL">
+      <HintPath>..\packages\TomsToolbox.Desktop.1.0.72\lib\net45\TomsToolbox.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="TomsToolbox.ObservableCollections, Version=1.0.72.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2, processorArchitecture=MSIL">
+      <HintPath>..\packages\TomsToolbox.ObservableCollections.1.0.72\lib\net45\TomsToolbox.ObservableCollections.dll</HintPath>
+    </Reference>
+    <Reference Include="TomsToolbox.Wpf, Version=1.0.72.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2, processorArchitecture=MSIL">
+      <HintPath>..\packages\TomsToolbox.Wpf.1.0.72\lib\net45\TomsToolbox.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -105,6 +119,7 @@
     <Compile Include="Basis\DefaultDropHandler.cs" />
     <Compile Include="Basis\MyRootedBindableBase.cs" />
     <Compile Include="Basis\MyRootedParentalBindableBase.cs" />
+    <Compile Include="CodeGenerator\BlockConverter.cs" />
     <Compile Include="CodeGenerator\DocConverter.cs" />
     <Compile Include="CodeGenerator\FunctionConverter.cs" />
     <Compile Include="Files\FileHandler.cs" />
@@ -119,14 +134,16 @@
     <Compile Include="Models\Contract\Block\Blocks\MyEnd.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyForeach.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyIf.cs" />
-    <Compile Include="Models\Contract\Block\Blocks\MyInput.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyLog.cs" />
-    <Compile Include="Models\Contract\Block\Blocks\MySimpleIf.cs" />
-    <Compile Include="Models\Contract\Block\Combinations\MySimpleIfError.cs" />
+    <Compile Include="Models\Contract\Block\Combinations\MyCreation.cs" />
+    <Compile Include="Models\Contract\Block\Combinations\MyIfError.cs" />
+    <Compile Include="Models\Contract\Block\Combinations\MyInput.cs" />
+    <Compile Include="Models\Contract\Block\Combinations\MyModification.cs" />
+    <Compile Include="Models\Contract\Block\Combinations\MyValidation.cs" />
     <Compile Include="Models\Contract\Block\Conditioning\Condition.cs" />
     <Compile Include="Models\Contract\Block\Conditioning\ConditionBase.cs" />
     <Compile Include="Models\Contract\Block\Conditioning\ConditionGroup.cs" />
-    <Compile Include="Models\Contract\Block\Variable.cs" />
+    <Compile Include="Models\Contract\Block\MyVariable.cs" />
     <Compile Include="Models\Contract\Block\VariableLink.cs" />
     <Compile Include="Models\Contract\ContractCollectionDemo.cs" />
     <Compile Include="Models\Contract\Block\Blocks\MyAssign.cs" />
@@ -156,11 +173,13 @@
     <Compile Include="ViewModels\Contract\Block\Blocks\Custom\VMtotalEcmrs.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMerror.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMinputVariable.cs" />
-    <Compile Include="ViewModels\Contract\Block\Blocks\VMsimpleIf.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMuseRegistry.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMend.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMelse.cs" />
-    <Compile Include="ViewModels\Contract\Block\Blocks\VMelseIf.cs" />
+    <Compile Include="ViewModels\Contract\Block\Combinations\VMcreation.cs" />
+    <Compile Include="ViewModels\Contract\Block\Combinations\VMifError.cs" />
+    <Compile Include="ViewModels\Contract\Block\Combinations\VMmodification.cs" />
+    <Compile Include="ViewModels\Contract\Block\Combinations\VMvalidation.cs" />
     <Compile Include="ViewModels\Contract\Block\Conditioning\VMcondition.cs" />
     <Compile Include="ViewModels\Contract\Block\Conditioning\VMconditionBase.cs" />
     <Compile Include="ViewModels\Contract\Block\Conditioning\VMconditionGroup.cs" />
@@ -169,7 +188,7 @@
     <Compile Include="ViewModels\Contract\Block\VMvariable.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMlog.cs" />
     <Compile Include="ViewModels\Contract\Block\Blocks\VMassign.cs" />
-    <Compile Include="ViewModels\Contract\Block\Blocks\VMinput.cs" />
+    <Compile Include="ViewModels\Contract\Block\Combinations\VMinput.cs" />
     <Compile Include="ViewModels\Contract\Block\VMvariableLink.cs" />
     <Compile Include="ViewModels\Contract\VMcontractModel.cs" />
     <Compile Include="ViewModels\Contract\VMcontractCollection.cs" />
@@ -187,6 +206,39 @@
     <Compile Include="ViewModels\Windows\VMnewFunction.cs" />
     <Compile Include="ViewModels\Windows\VMnewGroup.cs" />
     <Compile Include="ViewModels\Windows\VMselectVariable.cs" />
+    <Compile Include="Windows\Blocks\AssignWindow.xaml.cs">
+      <DependentUpon>AssignWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Blocks\CreationWindow.xaml.cs">
+      <DependentUpon>CreationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Blocks\ErrorWindow.xaml.cs">
+      <DependentUpon>ErrorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Blocks\ForeachWindow.xaml.cs">
+      <DependentUpon>ForeachWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Blocks\IfErrorWindow.xaml.cs">
+      <DependentUpon>IfErrorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Blocks\IfWindow.xaml.cs">
+      <DependentUpon>IfWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Blocks\InputWindow.xaml.cs">
+      <DependentUpon>InputWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Blocks\LogWindow.xaml.cs">
+      <DependentUpon>LogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Blocks\ModificationWindow.xaml.cs">
+      <DependentUpon>ModificationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Blocks\RegistryWindow.xaml.cs">
+      <DependentUpon>RegistryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Blocks\ValidationWindow.xaml.cs">
+      <DependentUpon>ValidationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EqualityConverter.cs" />
     <Compile Include="Windows\NewFunctionWindow.xaml.cs">
       <DependentUpon>NewFunctionWindow.xaml</DependentUpon>
@@ -247,6 +299,50 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\Blocks\AssignWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Blocks\CreationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Blocks\ErrorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Blocks\ForeachWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Blocks\IfErrorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Blocks\IfWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Blocks\InputWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Blocks\LogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Blocks\ModificationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Blocks\RegistryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Blocks\ValidationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\NewFunctionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -264,6 +360,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Views\ContractTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Views\DictionaryBlocks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -321,7 +421,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Authorization\" />
-    <Folder Include="ViewModels\Contract\Block\Combinations\" />
+    <Folder Include="ViewModels\Windows\Blocks\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Windows\Images\circle_green.png" />

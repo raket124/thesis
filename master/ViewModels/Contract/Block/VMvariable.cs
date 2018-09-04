@@ -16,12 +16,12 @@ namespace master.ViewModels.Contract.Block
 {
     class VMvariable : MyRootedBindableBase
     {
-        public new Variable Root
+        public new MyVariable Root
         {
-            get { return this.root as Variable; }
+            get { return this.root as MyVariable; }
         }
 
-        public VMvariable(Variable root) : base(root)
+        public VMvariable(MyVariable root) : base(root)
         {
             this.root = root;
         }

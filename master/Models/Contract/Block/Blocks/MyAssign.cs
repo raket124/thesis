@@ -11,15 +11,15 @@ namespace master.Models.Contract.Block.Blocks
     class MyAssign : Base
     {
         [DataMember]
-        protected string variable;
-        public string Variable
+        protected VariableLink variable;
+        public VariableLink Variable
         {
             get { return this.variable; }
             set { this.variable = value; }
         }
         [DataMember]
-        protected string value;
-        public string Value
+        protected VariableLink value;
+        public VariableLink Value
         {
             get { return this.value; }
             set { this.value = value; }
@@ -27,8 +27,8 @@ namespace master.Models.Contract.Block.Blocks
 
         public MyAssign() : base()
         {
-            this.variable = string.Empty;
-            this.value = string.Empty;
+            this.variable = new VariableLink(new Block.MyVariable(typeof(Nullable)));
+            this.value = new VariableLink(new Block.MyVariable(typeof(Nullable)));
         }
 
         public override object Clone()
@@ -37,8 +37,8 @@ namespace master.Models.Contract.Block.Blocks
             {
                 Name = this.Name,
                 Docs = this.Docs,
-                Variable = this.Variable,
-                Value = this.Value
+                Variable = this.Variable.Clone() as VariableLink,
+                Value = this.Value.Clone() as VariableLink
             };
         }
     }

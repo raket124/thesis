@@ -16,8 +16,8 @@ namespace master.Models.Variables
             set { this.name = value; }
         }
 
-        protected List<Variable> variables;
-        public List<Variable> Variables
+        protected List<MyVariable> variables;
+        public List<MyVariable> Variables
         {
             get { return this.variables; }
             set { this.variables = value; }
@@ -26,7 +26,7 @@ namespace master.Models.Variables
         public Objects(string name)
         {
             this.name = name;
-            this.Variables = new List<Variable>();
+            this.Variables = new List<MyVariable>();
         }
     }
 }

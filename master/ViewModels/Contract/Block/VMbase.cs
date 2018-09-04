@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using master.Models.Contract.Block.Blocks;
 using master.ViewModels.Variables;
+using Prism.Commands;
+using System.Windows;
 
 namespace master.ViewModels.Contract.Block
 {
@@ -29,8 +31,12 @@ namespace master.ViewModels.Contract.Block
             set { this.parent = value; }
         }
 
+        public DelegateCommand CommandOpen { get; protected set; }
+        public DelegateCommand CommandDelete { get; protected set; }
+
         public VMbase(Base root, VMfunction parent) : base(root, parent)
         {
+            this.CommandDelete = new DelegateCommand(() => this.Parent.Blocks.Remove(this));
         }
 
         public string Documentation

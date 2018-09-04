@@ -26,15 +26,15 @@ namespace master.ViewModels.Contract.Block.Conditioning
         public List<VMstring> conditions;
         public List<VMconditionGroupCompare> connectors;
 
-        public DelegateCommand CommandAdd { get; private set; }
-        public DelegateCommand CommandRemove { get; private set; }
+        //public DelegateCommand CommandAdd { get; private set; }
+        //public DelegateCommand CommandRemove { get; private set; }
 
         public VMconditionGroup(ConditionGroup root, VMcondition parent) : base(root, parent)
         {
             this.Wrap();
 
-            this.CommandAdd = new DelegateCommand(this.Add);
-            this.CommandRemove = new DelegateCommand(() => this.Parent.Root.Groups.Remove(this.Root));
+            //this.CommandAdd = new DelegateCommand(this.Add);
+            //this.CommandRemove = new DelegateCommand(() => this.Parent.Root.Groups.Remove(this.Root));
 
             this.Root.Conditions.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CollectionChanged);
             this.Root.Connectors.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CollectionChanged);
@@ -53,24 +53,24 @@ namespace master.ViewModels.Contract.Block.Conditioning
                                                                 select new VMconditionGroupCompare(compare));
         }
 
-        public void Add()
-        {
-            this.Root.Conditions.Add(string.Empty);
-            this.Root.Connectors.Add(ConditionGroup.COMPARE.and);
-            this.NotifyPropertyChanged("ConditionSet");
-        }
+        //public void Add()
+        //{
+        //    this.Root.Conditions.Add(string.Empty);
+        //    this.Root.Connectors.Add(ConditionGroup.COMPARE.and);
+        //    this.NotifyPropertyChanged("ConditionSet");
+        //}
 
-        public void Remove()
-        {
-            this.Root.Conditions.RemoveAt(this.Root.Conditions.Count - 1);
-            this.Root.Connectors.RemoveAt(this.Root.Connectors.Count - 1);
-            this.NotifyPropertyChanged("ConditionSet");
-        }
+        //public void Remove()
+        //{
+        //    this.Root.Conditions.RemoveAt(this.Root.Conditions.Count - 1);
+        //    this.Root.Connectors.RemoveAt(this.Root.Connectors.Count - 1);
+        //    this.NotifyPropertyChanged("ConditionSet");
+        //}
 
-        public bool CanRemove()
-        {
-            return this.Root.Connectors.Count > 1;
-        }
+        //public bool CanRemove()
+        //{
+        //    return this.Root.Connectors.Count > 1;
+        //}
 
         public object Clone()
         {

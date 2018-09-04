@@ -54,7 +54,7 @@ namespace master.ViewModels.Windows
             this.parent = parent;
             this.list = variables;
             this.model = model;
-            this.output = new VMvariableLink(new VariableLink(new Models.Contract.Block.Variable(typeof(Nullable))));
+            this.output = new VMvariableLink(new VariableLink(new Models.Contract.Block.MyVariable(typeof(Nullable))));
             this.properties = new ObservableCollection<Contract.Block.VMvariable>();
 
             this.CommandTreeSelectionChanged = new DelegateCommand<object>(this.TreeSelectionChanged);
@@ -145,7 +145,7 @@ namespace master.ViewModels.Windows
 
             var variables = new List<Contract.Block.VMvariable>();
             foreach(var x in (group as Inheritance).Components)
-                variables.Add(new Contract.Block.VMvariable(new Models.Contract.Block.Variable(x, group.GetType())));
+                variables.Add(new Contract.Block.VMvariable(new Models.Contract.Block.MyVariable(x, group.GetType())));
 
             this.Properties.AddRange(variables);
         }

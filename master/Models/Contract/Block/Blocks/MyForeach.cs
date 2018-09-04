@@ -11,32 +11,41 @@ namespace master.Models.Contract.Block.Blocks
     class MyForeach : Base
     {
         [DataMember]
-        protected string variable;
-        public string Variable
+        protected VariableLink list;
+        public VariableLink List
         {
-            get { return this.variable; }
-            set { this.variable = value; }
+            get { return this.list; }
+            set { this.list = value; }
         }
         [DataMember]
-        protected string alias;
-        public string Alias
+        protected VariableLink objectAlias;
+        public VariableLink ObjectAlias
         {
-            get { return this.alias; }
-            set { this.alias = value; }
+            get { return this.objectAlias; }
+            set { this.objectAlias = value; }
+        }
+        [DataMember]
+        protected VariableLink iteratorAlias;
+        public VariableLink IteratorAlias
+        {
+            get { return this.iteratorAlias; }
+            set { this.iteratorAlias = value; }
         }
 
         public MyForeach()
         {
-            this.variable = string.Empty;
-            this.alias = string.Empty;
+            this.list = new VariableLink(new Block.MyVariable(typeof(Nullable)) { List = true });
+            this.objectAlias = new VariableLink(new Block.MyVariable(typeof(Nullable)));
+            this.iteratorAlias = new VariableLink(new Block.MyVariable(typeof(int)));
         }
 
         public override object Clone()
         {
             return new MyForeach()
             {
-                Variable = this.Variable,
-                Alias = this.Alias
+                List = this.List.Clone() as VariableLink,
+                ObjectAlias = this.ObjectAlias.Clone() as VariableLink,
+                IteratorAlias = this.IteratorAlias.Clone() as VariableLink
             };
         }
     }

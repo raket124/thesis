@@ -13,8 +13,8 @@ namespace master.Models.Contract.Block.Conditioning
         public enum COMPARE { equal, not_equal, greater, greater_or_equal, lesser, lesser_or_equal }
 
         [DataMember]
-        protected string lhs;
-        public string LHS
+        protected VariableLink lhs;
+        public VariableLink LHS
         {
             get { return this.lhs; }
             set { this.lhs = value; }
@@ -27,8 +27,8 @@ namespace master.Models.Contract.Block.Conditioning
             set { this.comparison = value; }
         }
         [DataMember]
-        protected string rhs;
-        public string RHS
+        protected VariableLink rhs;
+        public VariableLink RHS
         {
             get { return this.rhs; }
             set { this.rhs = value; }
@@ -50,9 +50,9 @@ namespace master.Models.Contract.Block.Conditioning
 
         public ConditionBase()
         {
-            this.lhs = string.Empty;
+            this.lhs = new VariableLink(new MyVariable(typeof(Nullable)));
             this.comparison = COMPARE.equal;
-            this.rhs = string.Empty;
+            this.rhs = new VariableLink(new MyVariable(typeof(Nullable)));
             this.alias = string.Empty;
             this.invert = false;
         }

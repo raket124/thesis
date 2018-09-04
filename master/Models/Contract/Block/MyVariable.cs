@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace master.Models.Contract.Block
 {
     [DataContract]
-    public class Variable : Data.Variable, ICloneable
+    public class MyVariable : Data.Variable, ICloneable
     {
         [DataMember]
         protected new Type type;
@@ -33,16 +33,24 @@ namespace master.Models.Contract.Block
             get { return this.alias; }
             set { this.alias = value; }
         }
+        [DataMember]
+        protected bool input;
+        public bool Input
+        {
+            get { return this.input; }
+            set { this.input = value; }
+        }
 
-        public Variable(Type type) : base(string.Empty, string.Empty, RELATION.variable)
+        public MyVariable(Type type) : base(string.Empty, string.Empty, RELATION.variable)
         {
             this.type = type;
             this.objectName = string.Empty;
             this.alias = string.Empty;
             this.isList = false;
+            this.input = false;
         }
 
-        public Variable(Data.Variable var, Type type) : base(var.Type, var.Name, var.Relation)
+        public MyVariable(Data.Variable var, Type type) : base(var.Type, var.Name, var.Relation)
         {
             this.type = type;
             this.objectName = var.Type;
@@ -52,7 +60,7 @@ namespace master.Models.Contract.Block
 
         public object Clone()
         {
-            return new Variable(this.Type)
+            return new MyVariable(this.Type)
             {
                 Name = this.Name,
                 Docs = this.Docs,

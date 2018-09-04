@@ -1,0 +1,229 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm_blocks="clr-namespace:master.ViewModels.Contract.Block.Blocks"
+                    xmlns:vm_combs="clr-namespace:master.ViewModels.Contract.Block.Combinations"
+                    xmlns:vm_condition="clr-namespace:master.ViewModels.Contract.Block.Conditioning"
+                    xmlns:vm_basetypes="clr-namespace:master.ViewModels.BaseTypes"
+                    xmlns:local="clr-namespace:master.Windows.Views">
+    
+    
+    <DataTemplate DataType="{x:Type vm_blocks:VMassign}">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="10,0,0,0" Text="{Binding ViewVariable}" FontWeight="Bold"/>
+            <TextBlock Text=" = "/>
+            <TextBlock Text="{Binding ViewValue}" FontWeight="Bold"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm_blocks:VMelse}"/>
+
+    <DataTemplate DataType="{x:Type vm_blocks:VMend}"/>
+    
+    <DataTemplate DataType="{x:Type vm_blocks:VMerror}">
+        <TextBlock Margin="10,0,0,0" Text="{Binding Text}"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm_blocks:VMforeach}">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="10,0,0,0" Text="Foreach "/>
+            <TextBlock Text="{Binding ViewObjectAlias}" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ViewIteratorAlias}" Value="">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <TextBlock Text=" | " FontWeight="Bold"/>
+                <TextBlock Text="{Binding ViewIteratorAlias}" FontWeight="Bold"/>
+            </StackPanel>
+            <TextBlock Text=" in list "/>
+            <TextBlock Text="{Binding ViewListAlias}" FontWeight="Bold"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm_blocks:VMif}">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Simple}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+
+
+                <TextBlock Margin="10,0,0,0" Text="{Binding Condition.Conditions[0].ViewLHS}" FontWeight="Bold"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{Binding Condition.Conditions[0].ViewComparison}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{Binding Condition.Conditions[0].ViewRHS}" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel>
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Simple}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+
+                <TextBlock Text="Base conditions:" Margin="10,5,0,0"/>
+                <ItemsControl HorizontalContentAlignment="Stretch"
+                            ItemsSource="{Binding Condition.Conditions}">
+                    <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type vm_condition:VMconditionBase}">
+                            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                                <TextBlock Text="{Binding LHS}" FontWeight="Bold"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding Comparison}" FontWeight="Bold"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding RHS}" FontWeight="Bold"/>
+                                <TextBlock Text=" Alias:"/>
+                                <TextBlock Text="{Binding Alias}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                </ItemsControl>
+
+                <TextBlock Text="Condition groups:" Margin="10,5,0,0"/>
+                <ItemsControl HorizontalContentAlignment="Stretch"
+                            ItemsSource="{Binding Condition.Groups}">
+                    <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type vm_condition:VMconditionGroup}">
+                            <StackPanel Orientation="Horizontal">
+                                <ItemsControl HorizontalContentAlignment="Stretch"
+                                            ItemsSource="{Binding ConditionSet}">
+                                    <ItemsControl.Resources>
+                                        <DataTemplate DataType="{x:Type vm_basetypes:VMstring}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text=" "/>
+                                                <TextBlock Text="{Binding Value}" FontWeight="Bold"/>
+                                                <TextBlock Text=" "/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                        <DataTemplate DataType="{x:Type vm_basetypes:VMconditionGroupCompare}">
+                                            <TextBlock Text="{Binding Value}" FontWeight="Bold"/>
+                                        </DataTemplate>
+                                    </ItemsControl.Resources>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" Margin="20,0,0,0"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                                <TextBlock Text=" Alias:"/>
+                                <TextBlock Text="{Binding Alias}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                </ItemsControl>
+
+                <TextBlock Text="Master condition:" Margin="10,5,0,0"/>
+                <ItemsControl HorizontalContentAlignment="Stretch"
+                            ItemsSource="{Binding Condition.Value.ConditionSet}">
+                    <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type vm_basetypes:VMstring}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding Value}"/>
+                                <TextBlock Text=" "/>
+                            </StackPanel>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type vm_basetypes:VMconditionGroupCompare}">
+                            <TextBlock Text="{Binding Value}"/>
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="20,0,0,0"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm_blocks:VMlog}">
+        <TextBlock Margin="10,0,0,0" Text="{Binding Text}"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm_blocks:VMuseRegistry}">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="10,0,0,0" Text="Action ("/>
+            <TextBlock Text="{Binding Action}" FontWeight="Bold"/>
+            <TextBlock Text=") -> Object ("/>
+            <TextBlock Text="{Binding ViewAlias}" FontWeight="Bold"/>
+            <TextBlock Text=")"/>
+            <TextBlock Text=" without delay">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Delay}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm_combs:VMcreation}">
+                    
+    </DataTemplate>
+                
+    <DataTemplate DataType="{x:Type vm_combs:VMifError}">
+        <StackPanel>
+            <ContentControl Content="{Binding If}"/>
+            <Separator/>
+            <ContentControl Content="{Binding Error}"/>
+        </StackPanel>
+    </DataTemplate>
+                
+    <DataTemplate DataType="{x:Type vm_combs:VMinput}">
+        <ItemsControl HorizontalContentAlignment="Stretch"
+                      ItemsSource="{Binding Variables}">
+            <ItemsControl.Resources>
+                <DataTemplate DataType="{x:Type vm_blocks:VMinputVariable}">
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                        <TextBlock Text="{Binding Relation}" />
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding ObjectName}" />
+                        <TextBlock Text="[] ">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding List}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text=" as "/>
+                        <TextBlock Text="{Binding Alias}" TextDecorations="Underline"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.Resources>
+        </ItemsControl>
+    </DataTemplate>
+                
+    <DataTemplate DataType="{x:Type vm_combs:VMmodification}">
+                    
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm_combs:VMvalidation}">
+
+    </DataTemplate>
+
+</ResourceDictionary>

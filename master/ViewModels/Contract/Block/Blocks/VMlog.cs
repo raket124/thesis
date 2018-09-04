@@ -1,5 +1,7 @@
 ﻿using master.Models;
 using master.Models.Contract.Block.Blocks;
+using master.Windows.Blocks;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public VMlog(MyLog root, VMfunction parent) : base(root, parent)
         {
-
+            this.CommandOpen = new DelegateCommand(() => new LogWindow() { DataContext = this }.ShowDialog());
         }
 
         public override object Clone()

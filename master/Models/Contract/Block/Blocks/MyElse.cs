@@ -10,14 +10,15 @@ namespace master.Models.Contract.Block.Blocks
     [DataContract]
     class MyElse : Base
     {
-        public MyElse() : base()
-        {
-
-        }
+        public MyElse() : base() { }
 
         public override object Clone()
         {
-            return new MyElse();
+            return new MyElse()
+            {
+                Name = this.Name,
+                Docs = this.Docs
+            };
         }
     }
 }

@@ -9,6 +9,8 @@ using master.Models.Contract.Block.Blocks;
 using master.Models.Contract.Block.Conditioning;
 using master.Utils;
 using master.ViewModels.Contract.Block.Conditioning;
+using Prism.Commands;
+using master.Windows.Blocks;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
@@ -31,6 +33,8 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public VMif(MyIf root, VMfunction parent) : base(root, parent)
         {
+            this.CommandOpen = new DelegateCommand(() => new IfWindow() { DataContext = this }.ShowDialog());
+
             this.Condition = new VMcondition(this.Root.Condition, this);
         }
 
@@ -42,5 +46,10 @@ namespace master.ViewModels.Contract.Block.Blocks
         protected override string BlockName() { return "If - block"; }
         protected override string Required() { return string.Format(this.reqFormat, "1+ condition(s)"); }
         protected override string Optional() { return string.Empty; }
+
+        public bool Simple
+        {
+            get { return this.Root.Condition.Conditions.Count > 1; }
+        }
     }
 }

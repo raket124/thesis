@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
+using Prism.Commands;
+using master.Windows.Blocks;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
@@ -17,7 +19,7 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public VMerror(MyError root, VMfunction parent) : base(root, parent)
         {
-
+            this.CommandOpen = new DelegateCommand(() => new ErrorWindow() { DataContext = this }.ShowDialog());
         }
 
         public override object Clone()
@@ -37,11 +39,6 @@ namespace master.ViewModels.Contract.Block.Blocks
                 this.Root.Text = value;
                 this.NotifyPropertyChanged();
             }
-        }
-
-        public override void FullRefresh()
-        {
-            this.NotifyPropertyChanged("Text");
         }
     }
 }

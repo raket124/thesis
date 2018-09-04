@@ -8,8 +8,8 @@ namespace master.Models.Contract.Block
 {
     class VariableLink : ICloneable
     {
-        protected Variable value;
-        public Variable Value
+        protected MyVariable value;
+        public MyVariable Value
         {
             get { return this.value; }
             set { this.value = value; }
@@ -21,9 +21,9 @@ namespace master.Models.Contract.Block
             set { this.child = value; }
         }
 
-        public VariableLink(Variable value) : this(value, null) { }
+        public VariableLink(MyVariable value) : this(value, null) { }
 
-        public VariableLink(Variable value, VariableLink child)
+        public VariableLink(MyVariable value, VariableLink child)
         {
             this.value = value;
             this.child = child;
@@ -31,13 +31,13 @@ namespace master.Models.Contract.Block
 
         public object Clone()
         {
-            return new VariableLink(this.Value.Clone() as Variable)
+            return new VariableLink(this.Value.Clone() as MyVariable)
             {
                 Child = this.Child == null ? null : this.Child.Clone() as VariableLink,
             };
         }
 
-        public void AddLast(Variable input)
+        public void AddLast(MyVariable input)
         {
             var current = this;
             while (current.Child != null)
@@ -73,11 +73,11 @@ namespace master.Models.Contract.Block
             this.child = null;
         }
 
-        public IList<Variable> Listing
+        public IList<MyVariable> Listing
         {
             get
             {
-                var output = new List<Variable>();
+                var output = new List<MyVariable>() { this.Value };
                 var current = this.Child;
                 while (current != null)
                 {
@@ -85,6 +85,22 @@ namespace master.Models.Contract.Block
                     current = current.Child;
                 }
                 return output;
+            }
+        }
+
+        public string Output
+        {
+            get
+            {
+                var listing = this.Listing;
+
+                var aliases = (from l in listing
+                               select l.Alias).ToList();
+                if (listing.First().Input)
+                    aliases.Insert(0, "input");
+
+
+                return string.Join("->", aliases);
             }
         }
     }

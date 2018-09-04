@@ -42,7 +42,7 @@ namespace master.Models
         public void SetupDemo()
         {
             this.contracts = ContractCollectionDemo.KoopmanContract();
-            this.model = DataModelDemo.KoopmanCTO();
+            this.model = DataModelDemo.Example3();
             this.authorization = null;
         }
     }

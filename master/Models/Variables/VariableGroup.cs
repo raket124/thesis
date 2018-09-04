@@ -16,8 +16,8 @@ namespace master.Models.Variables
             set { this.type = value; }
         }
 
-        protected List<Variable> variables;
-        public List<Variable> Variables
+        protected List<MyVariable> variables;
+        public List<MyVariable> Variables
         {
             get { return this.variables; }
             set { this.variables = value; }
@@ -26,7 +26,7 @@ namespace master.Models.Variables
         public VariableGroup(Type type)
         {
             this.type = type;
-            this.variables = new List<Variable>();
+            this.variables = new List<MyVariable>();
         }
     }
 }
