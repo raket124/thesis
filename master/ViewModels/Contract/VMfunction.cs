@@ -170,7 +170,7 @@ namespace master.ViewModels.Contract
             }
         }
 
-        public string SelectVar()
+        public VariableLink SelectVar()
         {
             //var window = new NewGroupWindow();
             //var vmWindow = new VMnewGroup(window,
@@ -185,8 +185,8 @@ namespace master.ViewModels.Contract
             window.DataContext = vmWindow;
 
             if (window.ShowDialog() == true)
-                return vmWindow.Output.Output;
-            return string.Empty;
+                return vmWindow.Output.Root;
+            return null;
         }
     }
 }

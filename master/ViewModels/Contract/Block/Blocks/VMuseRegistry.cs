@@ -9,6 +9,7 @@ using master.Utils;
 using master.Models.Data.Component.Components;
 using Prism.Commands;
 using master.Windows.Blocks;
+using master.Models.Contract.Block;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
@@ -19,9 +20,12 @@ namespace master.ViewModels.Contract.Block.Blocks
             get { return this.root as MyRegistry; }
         }
 
+        public DelegateCommand CommandSet { get; private set; }
+
         public VMuseRegistry(MyRegistry root, VMfunction parent) : base(root, parent)
         {
             this.CommandOpen = new DelegateCommand(() => new RegistryWindow() { DataContext = this }.ShowDialog());
+            this.CommandSet = new DelegateCommand(() => this.SetVar = this.Parent.SelectVar());
         }
 
         public override object Clone()
@@ -64,6 +68,16 @@ namespace master.ViewModels.Contract.Block.Blocks
             set
             {
                 //this.Root.Variable = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public VariableLink SetVar
+        {
+            get { return this.Root.Variable; }
+            set
+            {
+                this.Root.Variable = value;
                 this.NotifyPropertyChanged();
             }
         }

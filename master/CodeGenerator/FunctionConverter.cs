@@ -28,7 +28,15 @@ namespace master.CodeGenerator
             var output = new List<string>();
             var indent = 0;
             foreach (Base block in function.Blocks)
+            {
                 output.Add(BlockConverter.ConvertBlock(block, function, ref indent));
+                output.Add(string.Empty);
+            }
+                
+
+            output.Insert(1 , "\tconst factory = getFactory();");
+            output.Insert(1 , "\tconst me = getCurrentParticipant();");
+
 
             return string.Join("\n", output);
         }

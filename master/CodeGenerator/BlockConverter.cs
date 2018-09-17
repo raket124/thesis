@@ -3,6 +3,7 @@ using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
 using master.Models.Contract.Block.Blocks.Custom;
 using master.Models.Contract.Block.Combinations;
+using master.ViewModels.BaseTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,45 +19,59 @@ namespace master.CodeGenerator
             return new String('\t', indent);
         }
 
+        private static string ConvertOutput(string input)
+        {
+            var variable = input.Replace("->", ".");
+            if (variable.StartsWith("input."))
+                variable = variable.Replace("input.", "tx.");
+            return variable;
+        }
+
         public static string ConvertBlock(Base b, Function f, ref int i)
         {
             if (b.GetType() == typeof(MyAssign))
-                return BlockConverter.Convert(b as MyAssign, f, ref i);
+                return Convert(b as MyAssign, f, ref i);
             if (b.GetType() == typeof(MyElse))
-                return BlockConverter.Convert(b as MyElse, f, ref i);
+                return Convert(b as MyElse, f, ref i);
             if (b.GetType() == typeof(MyEnd))
-                return BlockConverter.Convert(b as MyEnd, f, ref i);
+                return Convert(b as MyEnd, f, ref i);
             if (b.GetType() == typeof(MyError))
-                return BlockConverter.Convert(b as MyError, f, ref i);
+                return Convert(b as MyError, f, ref i);
             if (b.GetType() == typeof(MyForeach))
-                return BlockConverter.Convert(b as MyForeach, f, ref i);
+                return Convert(b as MyForeach, f, ref i);
             if (b.GetType() == typeof(MyIf))
-                return BlockConverter.Convert(b as MyIf, f, ref i);
+                return Convert(b as MyIf, f, ref i);
             if (b.GetType() == typeof(MyLog))
-                return BlockConverter.Convert(b as MyLog, f, ref i);
+                return Convert(b as MyLog, f, ref i);
             if (b.GetType() == typeof(MyRegistry))
-                return BlockConverter.Convert(b as MyRegistry, f, ref i);
+                return Convert(b as MyRegistry, f, ref i);
 
             if (b.GetType() == typeof(MyTotalEcmrs))
-                return BlockConverter.Convert(b as MyTotalEcmrs, f, ref i);
+                return Convert(b as MyTotalEcmrs, f, ref i);
 
             if (b.GetType() == typeof(MyCreation))
-                return BlockConverter.Convert(b as MyCreation, f, ref i);
+                return Convert(b as MyCreation, f, ref i);
             if (b.GetType() == typeof(MyIfError))
-                return BlockConverter.Convert(b as MyIfError, f, ref i);
+                return Convert(b as MyIfError, f, ref i);
             if (b.GetType() == typeof(MyInput))
-                return BlockConverter.Convert(b as MyInput, f, ref i);
+                return Convert(b as MyInput, f, ref i);
             if (b.GetType() == typeof(MyModification))
-                return BlockConverter.Convert(b as MyModification, f, ref i);
+                return Convert(b as MyModification, f, ref i);
             if (b.GetType() == typeof(MyValidation))
-                return BlockConverter.Convert(b as MyValidation, f, ref i);
+                return Convert(b as MyValidation, f, ref i);
 
             return "Unidentified block provided.";
         }
 
         private static string Convert(MyAssign input, Function f, ref int i)
         {
-            return "Unidentified block provided.";
+            var variable = ConvertOutput(input.Variable.Output);
+            var value = ConvertOutput(input.Value.Output);
+
+            if (input.Value.Value.Alias == string.Empty)
+                value = string.Format("factory.NewResource('namespace','{0}');", input.Value.Value.ObjectName);
+
+            return string.Format("{0}{1} = {2};", BlockConverter.Indent(i), variable, value);
         }
         private static string Convert(MyElse input, Function f, ref int i)
         {
@@ -68,7 +83,7 @@ namespace master.CodeGenerator
         }
         private static string Convert(MyError input, Function f, ref int i)
         {
-            return string.Format("{0}throw new Error('[{1}] {2}');", BlockConverter.Indent(i), f.Name, BlockConverter.Convert(input.Text));
+            return string.Format("{0}throw new Error('[{1}] {2}');", BlockConverter.Indent(i), f.Name, ConvertText(input.Text));
         }
         private static string Convert(MyForeach input, Function f, ref int i)
         {
@@ -76,22 +91,61 @@ namespace master.CodeGenerator
         }
         private static string Convert(MyIf input, Function f, ref int i)
         {
+            var conditionList = new Dictionary<string, string>();
+            foreach(var c in input.Condition.Conditions)
+            {
+                conditionList.Add(c.Alias, string.Format("{0} {1} {2}", ConvertOutput(c.LHS.Output), new VMconditionBaseCompare(c.Comparison).Value, ConvertOutput(c.RHS.Output)));
+            }
+
+            if (conditionList.Count == 1)
+                return string.Format("{0}if({1}){{", Indent(i++), conditionList.First().Value);
+
+            var groupList = new Dictionary<string, string>();
+            foreach (var g in input.Condition.Groups)
+            {
+                var content = conditionList[g.Conditions[0]] + " ";
+
+                for (int j = 0; j < g.Connectors.Count; j++)
+                {
+                    content += new VMconditionGroupCompare(g.Connectors[j]).Value + " ";
+                    content += conditionList[g.Conditions[j + 1]] + " ";
+                }
+
+                conditionList.Add(g.Alias, content);
+            }
+
+            var output = groupList[input.Condition.Value.Conditions[0]];
+            for (int j = 0; j < input.Condition.Value.Connectors.Count; j++)
+            {
+                output += new VMconditionGroupCompare(input.Condition.Value.Connectors[j]).Value + " ";
+                output += groupList[input.Condition.Value.Conditions[j + 1]] + " ";
+            }
+
+            return string.Format("{0}if({1}){{", Indent(i++), output);
+
+            ////    return string.Format("{0}if {1}(tx.{2} {3} tx.{4}) {{", 
+            ////        FunctionConverter.Indent(i++), 
+            ////        input.Condition.Invert ? "!" : string.Empty, 
+            ////        input.Condition.LHS,
+            ////        new VMconditionBase(null, null).COMPARE_DIC[input.Condition.Comparison], 
+            ////        input.Condition.RHS);
+
+
             return "Unidentified block provided.";
         }
         private static string Convert(MyLog input, Function f, ref int i)
         {
-            return string.Format("{0}console.log('[{1}] {2}');", BlockConverter.Indent(i), f.Name, BlockConverter.Convert(input.Text));
+            return string.Format("{0}console.log('[{1}] {2}');", BlockConverter.Indent(i), f.Name, ConvertText(input.Text));
         }
         private static string Convert(MyRegistry input, Function f, ref int i)
         {
             return string.Join("\n", new List<string> {
-                    string.Format("{0}const reg = await get{1}Registry(namespace.{2}).catch(function (error) {{", BlockConverter.Indent(i), "Asset", input.Variable),
-                    string.Format("{0}throw new Error('[{1}] An error occurred: ' + error);", BlockConverter.Indent(i + 1), f.Name),
-                    string.Format("{0}}});", BlockConverter.Indent(i)),
-                    string.Empty,
-                    string.Format("{0}await reg.{1}(tx.{2}).catch(function (error) {{", BlockConverter.Indent(i), input.Action, input.Variable),
-                    string.Format("{0}throw new Error('[{1}] An error occurred: ' + error);", BlockConverter.Indent(i + 1), f.Name),
-                    string.Format("{0}}});", BlockConverter.Indent(i))
+                    string.Format("{0}const reg = await get{1}Registry(namespace.{2}).catch(function (error) {{", Indent(i), input.Variable.Value.Type.Name.Replace("My", ""), input.Variable.Value.ObjectName),
+                    string.Format("{0}throw new Error('[{1}] An error occurred: ' + error);", Indent(i + 1), f.Name),
+                    string.Format("{0}}});", Indent(i)),
+                    string.Format("{0}await reg.{1}({2}).catch(function (error) {{", Indent(i), input.Action, ConvertOutput(input.Variable.Output)),
+                    string.Format("{0}throw new Error('[{1}] An error occurred: ' + error);", Indent(i + 1), f.Name),
+                    string.Format("{0}}});", Indent(i))
                 });
         }
 
@@ -110,11 +164,12 @@ namespace master.CodeGenerator
         }
         private static string Convert(MyIfError input, Function f, ref int i)
         {
-            return "Unidentified block provided.";
+            return Convert(input.If, f, ref i) + "\n" + Convert(input.Error, f, ref i) + "\n" + Convert(new MyEnd(), f, ref i);
         }
         private static string Convert(MyInput input, Function f, ref int i)
         {
-            return "Unidentified block provided.";
+            i++;
+            return DocConverter.Convert(f);
         }
         private static string Convert(MyModification input, Function f, ref int i)
         {
@@ -127,7 +182,7 @@ namespace master.CodeGenerator
 
         //------------------------------------------------------------------------
 
-        private static string Convert(string input)
+        private static string ConvertText(string input)
         {
             var alias_marker = "#alias:";
             var input_marker = "input.";
@@ -136,19 +191,19 @@ namespace master.CodeGenerator
             for (int i = 0; i < parts.Count(); i++)
             {
                 var part = parts[i];
-                if (parts[i].StartsWith(alias_marker))
+                if (part.StartsWith(alias_marker))
                 {
                     var variable = part.Replace(alias_marker, string.Empty);
                     if(variable.StartsWith(input_marker))
-                        variable.Replace(alias_marker, "tx.");
+                        variable = variable.Replace(input_marker, "tx.");
 
-                    parts[i] = string.Format("' + **variable** + '", variable);
+                    parts[i] = string.Format("' + **{0}** + '", variable);
                     if (part.EndsWith("\n"))
                         parts[i] += "\n";
                 }
                 
             }
-            return string.Join("\n", parts);
+            return string.Join(" ", parts);
         }
 
         //private static string Convert(MyInput input, Function f, ref int i)

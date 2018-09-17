@@ -179,7 +179,28 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm_combs:VMcreation}">
-                    
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                <TextBlock Text="Create new "/>
+                <TextBlock Text="{Binding Object.ViewValue2}" FontWeight="Bold"/>
+                <TextBlock Text=" as "/>
+                <TextBlock Text="{Binding Object.ViewValue}" TextDecorations="Underline"/>
+            </StackPanel>
+            <Separator/>
+            <!--<ItemsControl HorizontalContentAlignment="Stretch"
+                            ItemsSource="{Binding Features}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                            --><!--<ContentControl Content="{Binding}"/>--><!--
+                            <TextBlock>Hi</TextBlock>
+                        </StackPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>-->
+
+
+        </StackPanel>
     </DataTemplate>
                 
     <DataTemplate DataType="{x:Type vm_combs:VMifError}">
@@ -198,7 +219,18 @@
                     <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                         <TextBlock Text="{Binding Relation}" />
                         <TextBlock Text=" " />
-                        <TextBlock Text="{Binding ObjectName}" />
+                        <TextBlock>
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="{Binding ObjectName}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ObjectName}" Value="">
+                                            <Setter Property="Text" Value="{Binding Type.Name}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                         <TextBlock Text="[] ">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">

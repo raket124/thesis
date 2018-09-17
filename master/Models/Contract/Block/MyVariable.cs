@@ -72,6 +72,7 @@ namespace master.Models.Contract.Block
                 Regex = this.Regex,
                 ObjectName = this.ObjectName,
                 Alias = this.Alias,
+                Input = this.Input
             };
         }
     }

@@ -20,7 +20,7 @@ namespace master.ViewModels.Contract.Block.Blocks.Custom
 
         public VMtotalEcmrs(MyTotalEcmrs root, VMfunction parent) : base(root, parent)
         {
-            this.CommandSetInput = new DelegateCommand(() => this.Input = this.Parent.SelectVar());
+            //this.CommandSetInput = new DelegateCommand(() => this.Input = this.Parent.SelectVar());
         }
 
         public override object Clone()

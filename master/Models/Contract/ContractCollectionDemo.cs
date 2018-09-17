@@ -132,318 +132,29 @@ namespace master.Models.Contract
                     //    //    new MyEnd()
                     //    //}
                     //},
-                    //new Function("updateEcmrStatusToLoaded", Function.ACCESSIBILITY.Public)
-                    //{
-                    //    Docs = "UpdateEcmrStatusToLoaded transaction processor function.",
-                    //    Blocks = new ObservableCollection<Base>()
-                    //    {
-                    //        new MyInput()
-                    //        {
-                    //            Variables = new ObservableCollection<MyAssign>()
-                    //            {
-                    //                new MyAssign()
-                    //                {
-                    //                    Value = new VariableLink(new MyVariable(typeof(MyAsset))
-                    //                    {
-                    //                        Alias = "ecmr",
-                    //                        ObjectName = "ECMR",
-                    //                        Relation = Data.Variable.RELATION.reference
-                    //                    })
-                    //                },
-                    //                new MyAssign()
-                    //                {
-                    //                    Value = new VariableLink(new MyVariable(typeof(string))
-                    //                    {
-                    //                        Alias = "remark"
-                    //                    })
-                    //                }
-                    //            }
-                    //        },
-                    //        new MyIfError()
-                    //        {
-                    //            If = new MyIf()
-                    //            {
-                    //                Condition = new Condition()
-                    //                {
-                    //                    Conditions = new ObservableCollection<ConditionBase>()
-                    //                    {
-                    //                        new ConditionBase()
-                    //                        {
-                    //                            LHS = new VariableLink(new MyVariable(typeof(MyAsset))
-                    //                            {
-                    //                                Input = true,
-                    //                                ObjectName = "ECMR",
-                    //                                Alias = "ecmr"
-                    //                            }, new VariableLink(new MyVariable(typeof(MyEnum))
-                    //                            {
-                    //                                ObjectName = "EcmrStatus",
-                    //                                Alias = "status"
-                    //                            })),
-                    //                            Comparison = ConditionBase.COMPARE.not_equal,
-                    //                            RHS = new VariableLink(new MyVariable(typeof(MyEnum))
-                    //                            {
-                    //                                ObjectName = "EcmrStatus",
-                    //                                Alias = "Loaded"
-                    //                            }),
-                    //                        }
-                    //                    }
-                    //                }
-                    //            },
-                    //            Error = new MyError()
-                    //            {
-                    //                Text = "Invalid transaction. Trying to set status IN_TRANSIT to an ECMR with status: #alias.input.ecmr.status"
-                    //            }
-                    //        },
-                    //        new MyCreation()
-                    //        {
-                    //            Object = new MyAssign()
-                    //            {
-                    //                Value = new VariableLink(new MyVariable(typeof(MyConcept))
-                    //                {
-                    //                    ObjectName = "Signature",
-                    //                    Alias = "signature"
-                    //                })
-                    //            },
-                    //            Modifications = new MyModification()
-                    //            {
-                    //                Assignments = new ObservableCollection<MyAssign>()
-                    //                {
-                    //                    new MyAssign()
-                    //                    {
-                    //                        Variable = new VariableLink(new MyVariable(typeof(MyParticipant))
-                    //                        {
-                    //                            ObjectName = "User"
-                    //                        }),
-                    //                        Value = new VariableLink(new MyVariable(typeof(MyParticipant))
-                    //                        {
-                    //                            ObjectName = "User",
-                    //                            Alias = "#currentUser"
-                    //                        })
-                    //                    },
-                    //                    new MyAssign()
-                    //                    {
-                    //                        Variable = new VariableLink(new MyVariable(typeof(DateTime))
-                    //                        {
-                    //                            Alias = "timestamp"
-                    //                        }),
-                    //                        Value = new VariableLink(new MyVariable(typeof(DateTime))
-                    //                        {
-                    //                            Alias = "#currentDateTime"
-                    //                        })
-                    //                    },
-                    //                    new MyAssign()
-                    //                    {
-                    //                        Variable = new VariableLink(new MyVariable(typeof(string))
-                    //                        {
-                    //                            Alias = "remark",
-                    //                        }),
-                    //                        Value = new VariableLink(new MyVariable(typeof(string))
-                    //                        {
-                    //                            Input = true,
-                    //                            Alias = "remark",
-                    //                        })
-                    //                    }
-                    //                }
-                    //            }
-                    //        },
-                    //        new MyAssign()
-                    //        {
-                    //            Variable = new VariableLink(new MyVariable(typeof(MyAsset))
-                    //            {
-                    //                Input = true,
-                    //                ObjectName = "ECMR",
-                    //                Alias = "ecmr"
-                    //            }, new VariableLink(new MyVariable(typeof(MyConcept))
-                    //            {
-                    //                ObjectName = "Signature",
-                    //                Alias = "signature"
-                    //            })),
-                    //            Value = new VariableLink(new MyVariable(typeof(MyConcept))
-                    //            {
-                    //                ObjectName = "Signature",
-                    //                Alias = "signature"
-                    //            })
-                    //        },
-                    //        new MyRegistry()
-                    //        {
-                    //            Action = MyRegistry.ACTION.Update,
-                    //            Variable = new VariableLink(new MyVariable(typeof(MyAsset))
-                    //            {
-                    //                Input = true,
-                    //                ObjectName = "ECMR",
-                    //                Alias = "ecmr"
-                    //            })
-                    //        }
-                    //    } 
-                    //},
-                    //new Function("updateEcmrStatusToInTransit", Function.ACCESSIBILITY.Public)
-                    //{
-                    //    Docs = "UpdateEcmrStatusToInTransit transaction processor function."
-                    //},
-                    //new Function("updateEcmrStatusToConfirmedDelivered", Function.ACCESSIBILITY.Public)
-                    //{
-                    //    Docs = "UpdateEcmrStatusToDelivered transaction processor function."
-                    //},
-                    //new Function("updateECMRStatusToCancelled", Function.ACCESSIBILITY.Public)
-                    //{
-                    //    Docs = "UpdateECMRStatusToCancelled transaction processor function.",
-                    //    Blocks = new ObservableCollection<Block.Base>()
-                    //    {
-                    //        new MyInput()
-                    //        {
-                    //            //Vars = new ObservableCollection<Block.MyVariable>()
-                    //            //{
-                    //            //    new Block.MyVariable(typeof(MyAsset))
-                    //            //    {
-                    //            //        Relation = Data.Variable.RELATION.reference,
-                    //            //        ObjectName = "ECMR",
-                    //            //        Alias = "ecmr"
-                    //            //    },
-                    //            //    new Block.MyVariable(typeof(MyConcept))
-                    //            //    {
-                    //            //        ObjectName = "Cancellation",
-                    //            //        Alias = "cancellation"
-                    //            //    }
-                    //            //}
-                    //        },
-                    //        new MyAssign()
-                    //        {
-                    //            //Variable = "ecmr.status",
-                    //            //Value = "EcmrStatus.Cancelled"
-                    //        },
-                    //        new MyAssign()
-                    //        {
-                    //            //Variable = "ecmr.cancellation",
-                    //            //Value = "new Cancellation"
-                    //        },
-                    //        new MyAssign()
-                    //        {
-                    //            //Variable = "ecmr.cancellation.cancelledBy",
-                    //            //Value = "CurrentParticipant"
-                    //        },
-                    //        new MyAssign()
-                    //        {
-                    //            //Variable = "ecmr.cancellation.date",
-                    //            //Value = "cancellation.date"
-                    //        },
-                    //        new MyAssign()
-                    //        {
-                    //            //Variable = "ecmr.cancellation.reason",
-                    //            //Value = "cancellation.reason"
-                    //        },
-                    //        new MyRegistry()
-                    //        {
-                    //            Action = MyRegistry.ACTION.Update,
-                    //            //Variable = new VariableLink(new MyVariable("ecmr")
-                    //        }
-                    //    }
-                    //},
-                    new Function("updateExpectedPickupWindow", Function.ACCESSIBILITY.Public)
+                    new Function("updateEcmrStatusToLoaded", Function.ACCESSIBILITY.Public)
                     {
-                        Docs = "UpdateExpectedPickupWindow transaction processor function.",
+                        Docs = "UpdateEcmrStatusToLoaded transaction processor function.",
                         Blocks = new ObservableCollection<Base>()
                         {
-                            new MyAssign(),
-                            new MyElse(),
-                            new MyEnd(),
-                            new MyError() { Text = "The error message" },
-                            new MyForeach()
+                            new MyInput()
                             {
-                                IteratorAlias = new VariableLink(new MyVariable(typeof(int)) { Alias = "iter" }),
-                                ObjectAlias = new VariableLink(new MyVariable(typeof(string)) { Alias = "name" }),
-                                List = new VariableLink(new MyVariable(typeof(string)) { Alias = "names", List=true })
-                            },
-                            new MyIf()
-                            {
-                                Condition = new Condition()
+                                Variables = new ObservableCollection<MyVariable>()
                                 {
-                                    Conditions = new ObservableCollection<ConditionBase>()
+                                    new MyVariable(typeof(MyAsset))
                                     {
-                                        new ConditionBase()
-                                        {
-                                            LHS = new VariableLink(new MyVariable(typeof(MyAsset))
-                                            {
-                                                Input = true,
-                                                ObjectName = "ECMR",
-                                                Alias = "ecmr"
-                                            }),
-                                            Comparison = ConditionBase.COMPARE.not_equal,
-                                            RHS = new VariableLink(new MyVariable(typeof(MyEnum))
-                                            {
-                                                ObjectName = "EcmrStatus",
-                                                Alias = "Loaded"
-                                            }),
-                                            Alias = "comp1"
-                                        },
-                                        new ConditionBase()
-                                        {
-                                            LHS = new VariableLink(new MyVariable(typeof(MyAsset))
-                                            {
-                                                Input = true,
-                                                ObjectName = "User",
-                                                Alias = "new_user"
-                                            }),
-                                            Comparison = ConditionBase.COMPARE.equal,
-                                            RHS = new VariableLink(new MyVariable(typeof(MyEnum))
-                                            {
-                                                ObjectName = "User",
-                                                Alias = "old_user"
-                                            }),
-                                            Alias = "comp2"
-                                        }
+                                        Input = true,
+                                        Relation = Data.Variable.RELATION.reference,
+                                        ObjectName = "Ecmr",
+                                        Alias = "ecmr"
                                     },
-                                    Groups = new ObservableCollection<ConditionGroup>()
+                                    new MyVariable(typeof(String))
                                     {
-                                        new ConditionGroup()
-                                        {
-                                            Conditions = new ObservableCollection<string>()
-                                            {
-                                                "comp1",
-                                                "comp2"
-                                            },
-                                            Connectors = new ObservableCollection<ConditionGroup.COMPARE>()
-                                            {
-                                                ConditionGroup.COMPARE.and
-                                            },
-                                            Alias = "combination1"
-                                        },
-                                        new ConditionGroup()
-                                        {
-                                            Conditions = new ObservableCollection<string>()
-                                            {
-                                                "comp2",
-                                                "comp1"
-                                            },
-                                            Connectors = new ObservableCollection<ConditionGroup.COMPARE>()
-                                            {
-                                                ConditionGroup.COMPARE.or
-                                            },
-                                            Alias = "combination2"
-                                        }
-                                    },
-                                    Value = new ConditionGroup()
-                                    {
-                                        Conditions = new ObservableCollection<string>()
-                                        {
-                                            "combination1",
-                                            "combination2"
-                                        },
-                                        Connectors = new ObservableCollection<ConditionGroup.COMPARE>()
-                                        {
-                                            ConditionGroup.COMPARE.and
-                                        }
+                                        Input = true,
+                                        Alias = "remark"
                                     }
                                 }
                             },
-                            new MyLog() { Text = "The log message" },
-                            new MyRegistry()
-                            {
-                                Action = MyRegistry.ACTION.Insert,
-                                Variable = new VariableLink(new MyVariable(typeof(MyParticipant)) { Alias = "new_user" }),
-                                Delay = false
-                            },
-
-                            new MyCreation(),
                             new MyIfError()
                             {
                                 If = new MyIf()
@@ -459,7 +170,11 @@ namespace master.Models.Contract
                                                     Input = true,
                                                     ObjectName = "ECMR",
                                                     Alias = "ecmr"
-                                                }),
+                                                }, new VariableLink(new MyVariable(typeof(MyEnum))
+                                                {
+                                                    ObjectName = "EcmrStatus",
+                                                    Alias = "status"
+                                                })),
                                                 Comparison = ConditionBase.COMPARE.not_equal,
                                                 RHS = new VariableLink(new MyVariable(typeof(MyEnum))
                                                 {
@@ -467,15 +182,246 @@ namespace master.Models.Contract
                                                     Alias = "Loaded"
                                                 }),
                                             }
-                                        },
+                                        }
                                     }
                                 },
-                                Error = new MyError() { Text = "The error message" }
+                                Error = new MyError()
+                                {
+                                    Text = "Invalid transaction. Trying to set status IN_TRANSIT to an ECMR with status: #alias:input.ecmr.status"
+                                }
                             },
-                            new MyInput(),
-                            new MyModification(),
-                            new MyValidation()
+                            new MyCreation()
+                            {
+                                Object = new MyAssign()
+                                {
+                                    Value = new VariableLink(new MyVariable(typeof(MyConcept))
+                                    {
+                                        ObjectName = "Signature",
+                                        Alias = "signature"
+                                    })
+                                },
+                                Modifications = new MyModification()
+                                {
+                                    Assignments = new ObservableCollection<MyAssign>()
+                                    {
+                                        new MyAssign()
+                                        {
+                                            Variable = new VariableLink(new MyVariable(typeof(MyParticipant))
+                                            {
+                                                ObjectName = "User"
+                                            }),
+                                            Value = new VariableLink(new MyVariable(typeof(MyParticipant))
+                                            {
+                                                ObjectName = "User",
+                                                Alias = "#currentUser"
+                                            })
+                                        },
+                                        new MyAssign()
+                                        {
+                                            Variable = new VariableLink(new MyVariable(typeof(DateTime))
+                                            {
+                                                Alias = "timestamp"
+                                            }),
+                                            Value = new VariableLink(new MyVariable(typeof(DateTime))
+                                            {
+                                                Alias = "#currentDateTime"
+                                            })
+                                        },
+                                        new MyAssign()
+                                        {
+                                            Variable = new VariableLink(new MyVariable(typeof(string))
+                                            {
+                                                Alias = "remark",
+                                            }),
+                                            Value = new VariableLink(new MyVariable(typeof(string))
+                                            {
+                                                Input = true,
+                                                Alias = "remark",
+                                            })
+                                        }
+                                    }
+                                }
+                            },
+                            new MyAssign()
+                            {
+                                Variable = new VariableLink(new MyVariable(typeof(MyAsset))
+                                {
+                                    Input = true,
+                                    ObjectName = "ECMR",
+                                    Alias = "ecmr"
+                                }, new VariableLink(new MyVariable(typeof(MyConcept))
+                                {
+                                    ObjectName = "Signature",
+                                    Alias = "signature"
+                                })),
+                                Value = new VariableLink(new MyVariable(typeof(MyConcept))
+                                {
+                                    ObjectName = "Signature",
+                                    Alias = "signature"
+                                })
+                            },
+                            new MyRegistry()
+                            {
+                                Action = MyRegistry.ACTION.Update,
+                                Variable = new VariableLink(new MyVariable(typeof(MyAsset))
+                                {
+                                    Input = true,
+                                    ObjectName = "ECMR",
+                                    Alias = "ecmr"
+                                })
+                            }
                         }
+                    },
+                    //new Function("updateEcmrStatusToInTransit", Function.ACCESSIBILITY.Public)
+                    //{
+                    //    Docs = "UpdateEcmrStatusToInTransit transaction processor function."
+                    //},
+                    //new Function("updateEcmrStatusToConfirmedDelivered", Function.ACCESSIBILITY.Public)
+                    //{
+                    //    Docs = "UpdateEcmrStatusToDelivered transaction processor function."
+                    //},
+                    //new Function("updateECMRStatusToCancelled", Function.ACCESSIBILITY.Public)
+                    //{
+                    //    Docs = "UpdateECMRStatusToCancelled transaction processor function.",
+                    //},
+                    new Function("updateExpectedPickupWindow", Function.ACCESSIBILITY.Public)
+                    {
+                        Docs = "UpdateExpectedPickupWindow transaction processor function.",
+                        //Blocks = new ObservableCollection<Base>()
+                        //{
+                        //    new MyAssign(),
+                        //    new MyElse(),
+                        //    new MyEnd(),
+                        //    new MyError() { Text = "The error message" },
+                        //    new MyForeach()
+                        //    {
+                        //        IteratorAlias = new VariableLink(new MyVariable(typeof(int)) { Alias = "iter" }),
+                        //        ObjectAlias = new VariableLink(new MyVariable(typeof(string)) { Alias = "name" }),
+                        //        List = new VariableLink(new MyVariable(typeof(string)) { Alias = "names", List=true })
+                        //    },
+                        //    new MyIf()
+                        //    {
+                        //        Condition = new Condition()
+                        //        {
+                        //            Conditions = new ObservableCollection<ConditionBase>()
+                        //            {
+                        //                new ConditionBase()
+                        //                {
+                        //                    LHS = new VariableLink(new MyVariable(typeof(MyAsset))
+                        //                    {
+                        //                        Input = true,
+                        //                        ObjectName = "ECMR",
+                        //                        Alias = "ecmr"
+                        //                    }),
+                        //                    Comparison = ConditionBase.COMPARE.not_equal,
+                        //                    RHS = new VariableLink(new MyVariable(typeof(MyEnum))
+                        //                    {
+                        //                        ObjectName = "EcmrStatus",
+                        //                        Alias = "Loaded"
+                        //                    }),
+                        //                    Alias = "comp1"
+                        //                },
+                        //                new ConditionBase()
+                        //                {
+                        //                    LHS = new VariableLink(new MyVariable(typeof(MyAsset))
+                        //                    {
+                        //                        Input = true,
+                        //                        ObjectName = "User",
+                        //                        Alias = "new_user"
+                        //                    }),
+                        //                    Comparison = ConditionBase.COMPARE.equal,
+                        //                    RHS = new VariableLink(new MyVariable(typeof(MyEnum))
+                        //                    {
+                        //                        ObjectName = "User",
+                        //                        Alias = "old_user"
+                        //                    }),
+                        //                    Alias = "comp2"
+                        //                }
+                        //            },
+                        //            Groups = new ObservableCollection<ConditionGroup>()
+                        //            {
+                        //                new ConditionGroup()
+                        //                {
+                        //                    Conditions = new ObservableCollection<string>()
+                        //                    {
+                        //                        "comp1",
+                        //                        "comp2"
+                        //                    },
+                        //                    Connectors = new ObservableCollection<ConditionGroup.COMPARE>()
+                        //                    {
+                        //                        ConditionGroup.COMPARE.and
+                        //                    },
+                        //                    Alias = "combination1"
+                        //                },
+                        //                new ConditionGroup()
+                        //                {
+                        //                    Conditions = new ObservableCollection<string>()
+                        //                    {
+                        //                        "comp2",
+                        //                        "comp1"
+                        //                    },
+                        //                    Connectors = new ObservableCollection<ConditionGroup.COMPARE>()
+                        //                    {
+                        //                        ConditionGroup.COMPARE.or
+                        //                    },
+                        //                    Alias = "combination2"
+                        //                }
+                        //            },
+                        //            Value = new ConditionGroup()
+                        //            {
+                        //                Conditions = new ObservableCollection<string>()
+                        //                {
+                        //                    "combination1",
+                        //                    "combination2"
+                        //                },
+                        //                Connectors = new ObservableCollection<ConditionGroup.COMPARE>()
+                        //                {
+                        //                    ConditionGroup.COMPARE.and
+                        //                }
+                        //            }
+                        //        }
+                        //    },
+                        //    new MyLog() { Text = "The log message" },
+                        //    new MyRegistry()
+                        //    {
+                        //        Action = MyRegistry.ACTION.Insert,
+                        //        Variable = new VariableLink(new MyVariable(typeof(MyParticipant)) { Alias = "new_user" }),
+                        //        Delay = false
+                        //    },
+
+                        //    new MyCreation(),
+                        //    new MyIfError()
+                        //    {
+                        //        If = new MyIf()
+                        //        {
+                        //            Condition = new Condition()
+                        //            {
+                        //                Conditions = new ObservableCollection<ConditionBase>()
+                        //                {
+                        //                    new ConditionBase()
+                        //                    {
+                        //                        LHS = new VariableLink(new MyVariable(typeof(MyAsset))
+                        //                        {
+                        //                            Input = true,
+                        //                            ObjectName = "ECMR",
+                        //                            Alias = "ecmr"
+                        //                        }),
+                        //                        Comparison = ConditionBase.COMPARE.not_equal,
+                        //                        RHS = new VariableLink(new MyVariable(typeof(MyEnum))
+                        //                        {
+                        //                            ObjectName = "EcmrStatus",
+                        //                            Alias = "Loaded"
+                        //                        }),
+                        //                    }
+                        //                },
+                        //            }
+                        //        },
+                        //        Error = new MyError() { Text = "The error message" }
+                        //    },
+                        //    new MyInput(),
+                        //    new MyModification(),
+                        //    new MyValidation()
+                        //}
                     },
                     new Function("updateExpectedDeliveryWindow", Function.ACCESSIBILITY.Public)
                     {

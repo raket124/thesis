@@ -7,6 +7,7 @@ using master.Models.Contract.Block;
 using master.Models.Contract.Block.Combinations;
 using Prism.Commands;
 using master.Windows.Blocks;
+using master.ViewModels.Contract.Block.Blocks;
 
 namespace master.ViewModels.Contract.Block.Combinations
 {
@@ -30,5 +31,10 @@ namespace master.ViewModels.Contract.Block.Combinations
         protected override string BlockName() { return "Creation - block"; }
         protected override string Required() { return string.Format(this.reqFormat, "1 new object"); }
         protected override string Optional() { return string.Format(this.reqFormat, "1 identifier, X features"); }
+
+        public VMassign Object
+        {
+            get { return new VMassign(this.Root.Object, this.Parent); }
+        }
     }
 }

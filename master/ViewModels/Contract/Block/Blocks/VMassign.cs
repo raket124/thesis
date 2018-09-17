@@ -56,5 +56,15 @@ namespace master.ViewModels.Contract.Block.Blocks
             //    this.NotifyPropertyChanged();
             //}
         }
+
+        public string ViewValue2
+        {
+            get { return this.Root.Value.Value.ObjectName; }
+            //set
+            //{
+            //    this.Root.Value = value;
+            //    this.NotifyPropertyChanged();
+            //}
+        }
     }
 }
