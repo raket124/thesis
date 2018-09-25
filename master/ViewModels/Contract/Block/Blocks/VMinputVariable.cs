@@ -29,7 +29,7 @@ namespace master.ViewModels.Contract.Block.Blocks
 
         public void Remove(object input)
         {
-            //this.Parent.Root.Vars.Remove((input as VMvariable).Root);
+            this.Parent.Root.Variables.Remove((input as VMvariable).Root);
         }
 
         public string Relation

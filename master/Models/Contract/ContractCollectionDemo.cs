@@ -145,7 +145,7 @@ namespace master.Models.Contract
                                     {
                                         Input = true,
                                         Relation = Data.Variable.RELATION.reference,
-                                        ObjectName = "Ecmr",
+                                        ObjectName = "ECMR",
                                         Alias = "ecmr"
                                     },
                                     new MyVariable(typeof(String))
@@ -436,7 +436,7 @@ namespace master.Models.Contract
                                     {
                                         Input = true,
                                         Relation = Data.Variable.RELATION.reference,
-                                        ObjectName = "Ecmr",
+                                        ObjectName = "ECMR",
                                         Alias = "ecmr"
                                     },
                                     new MyVariable(typeof(MyConcept))
@@ -490,7 +490,7 @@ namespace master.Models.Contract
                                 {
                                     Input = true,
                                     Relation = Data.Variable.RELATION.reference,
-                                    ObjectName = "Ecmr",
+                                    ObjectName = "ECMR",
                                     Alias = "ecmr"
                                 }, 
                                 new VariableLink(new MyVariable(typeof(MyConcept))
@@ -518,7 +518,7 @@ namespace master.Models.Contract
                                 {
                                     Input = true,
                                     Relation = Data.Variable.RELATION.reference,
-                                    ObjectName = "Ecmr",
+                                    ObjectName = "ECMR",
                                     Alias = "ecmr"
                                 })
                             }

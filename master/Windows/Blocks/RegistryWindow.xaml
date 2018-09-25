@@ -5,25 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:master.Windows.Blocks"
         mc:Ignorable="d"
-        Title="Registry config" Height="100" Width="200">
-    <StackPanel>
+        Title="Registry config" Height="125" Width="225">
+    <StackPanel Margin="5">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Action: "/>
+            <TextBlock Text="Action: " Width="50"/>
             <ComboBox Margin="10,0,0,0" Width="100" ItemsSource="{Binding Actions}" SelectedItem="{Binding Action}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Variable: "/>
+            <TextBlock Text="Variable: " Width="50"/>
             <Button Margin="10,0,0,0" Width="100" Content="{Binding SetVar.Output}" Command="{Binding CommandSet}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Directly: "/>
-            <CheckBox Margin="10,0,0,0" Width="100" IsChecked="{Binding Delay}"/>
+            <TextBlock Text="Directly: " Width="50"/>
+            <CheckBox Margin="9,0,0,0" Width="100" IsChecked="{Binding Delay}"/>
         </StackPanel>
-        
-        <!--<ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding Actions}" SelectedItem="{Binding Action}"/>
-                    <TextBlock Margin="0,0,10,0" Text="Alias:"/>
-                    <ComboBox Margin="0,0,10,0" Width="100" ItemsSource="{Binding AliasOptions}" SelectedItem="{Binding Alias}"/>
-                    <TextBlock Margin="0,0,10,0" Text="Action:"/>
-                    <CheckBox Margin="0,0,10,0" Content=":Direct" IsChecked="{Binding Delay}" FlowDirection="RightToLeft"/>-->
     </StackPanel>
 </Window>

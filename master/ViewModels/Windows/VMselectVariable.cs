@@ -54,7 +54,7 @@ namespace master.ViewModels.Windows
             this.parent = parent;
             this.list = variables;
             this.model = model;
-            this.output = new VMvariableLink(new VariableLink(new Models.Contract.Block.MyVariable(typeof(Nullable))));
+            this.output = new VMvariableLink(new VariableLink(new MyVariable(typeof(Nullable))));
             this.properties = new ObservableCollection<Contract.Block.VMvariable>();
 
             this.CommandTreeSelectionChanged = new DelegateCommand<object>(this.TreeSelectionChanged);
@@ -66,11 +66,23 @@ namespace master.ViewModels.Windows
         private void TreeSelectionChanged(object input)
         {
             this.Output.Clear();
-            if (input.GetType() == typeof(Contract.Block.VMvariable))
+            var inputType = input.GetType();
+            if (inputType == typeof(Contract.Block.VMvariable))
             {
                 this.Output.Value = input as Contract.Block.VMvariable;
                 this.PopulatePropertyList();
             }
+            if (inputType == typeof(VMvariableGroup))
+            {
+                var vg = input as VMvariableGroup;
+                this.Output.Value = new Contract.Block.VMvariable(new MyVariable(inputType) { Alias = "new_" + vg.Type.Name });
+            }
+            if (inputType == typeof(VMobjects))
+            {
+                var o = input as VMobjects;
+                this.Output.Value = new Contract.Block.VMvariable(new MyVariable(inputType) { Alias = "new_" + o.Name, ObjectName = o.Name });
+            }
+
 
             this.CommandRemoveProperty.RaiseCanExecuteChanged();
             this.CommandConfirm.RaiseCanExecuteChanged();
@@ -81,7 +93,9 @@ namespace master.ViewModels.Windows
             if (input == null)
                 return;
 
-            this.Output.AddLast(input as Contract.Block.VMvariable);
+            var v = input as Contract.Block.VMvariable;
+            v.Alias = v.Root.Name;
+            this.Output.AddLast(v);
             this.PopulatePropertyList();
             this.CommandRemoveProperty.RaiseCanExecuteChanged();
             this.CommandConfirm.RaiseCanExecuteChanged();

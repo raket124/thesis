@@ -94,9 +94,6 @@ namespace master.ViewModels
                 }, null),
                 new VMlog(new MyLog(), null),
                 new VMuseRegistry(new MyRegistry(), null),
-
-                new VMtotalEcmrs(new MyTotalEcmrs(), null),
-                
                 new VMcreation(new MyCreation(), null),
                 new VMifError(new MyIfError(), null),
                 new VMinput(new MyInput(), null),

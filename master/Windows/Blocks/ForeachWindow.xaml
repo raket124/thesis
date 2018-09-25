@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:master.Windows.Blocks"
         mc:Ignorable="d"
-        Title="Foreach config" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="Foreach config" Height="150" Width="250">
+    <StackPanel Margin="10,10,0,0">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Object name: " Width="75"/>
+            <TextBox Margin="10,0,0,0" Width="100" Text="{Binding ObjectAlias}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Index name: " Width="75"/>
+            <TextBox Margin="10,0,0,0" Width="100" Text="{Binding IteratorAlias}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="List: " Width="75"/>
+            <Button Margin="10,0,0,0" Width="100" Command="{Binding CommandSetList}" Content="{Binding List.Output}"/>
+        </StackPanel>
+    </StackPanel>
 </Window>

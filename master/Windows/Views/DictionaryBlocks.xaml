@@ -26,22 +26,44 @@
     <DataTemplate DataType="{x:Type vm_blocks:VMforeach}">
         <StackPanel Orientation="Horizontal">
             <TextBlock Margin="10,0,0,0" Text="Foreach "/>
-            <TextBlock Text="{Binding ViewObjectAlias}" FontWeight="Bold"/>
+            <TextBlock FontWeight="Bold">
+                <TextBlock.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Text" Value="{Binding ObjectAlias}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ObjectAlias}" Value="">
+                                <Setter Property="Text" Value="?"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Resources>
+            </TextBlock>
             <StackPanel Orientation="Horizontal">
                 <StackPanel.Style>
                     <Style TargetType="StackPanel">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding ViewIteratorAlias}" Value="">
+                            <DataTrigger Binding="{Binding IteratorAlias}" Value="">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </StackPanel.Style>
                 <TextBlock Text=" | " FontWeight="Bold"/>
-                <TextBlock Text="{Binding ViewIteratorAlias}" FontWeight="Bold"/>
+                <TextBlock Text="{Binding IteratorAlias}" FontWeight="Bold"/>
             </StackPanel>
             <TextBlock Text=" in list "/>
-            <TextBlock Text="{Binding ViewListAlias}" FontWeight="Bold"/>
+            <TextBlock FontWeight="Bold">
+                <TextBlock.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Text" Value="{Binding List.Output}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding List.Output}" Value="">
+                                <Setter Property="Text" Value="?"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Resources>
+            </TextBlock>
         </StackPanel>
     </DataTemplate>
 

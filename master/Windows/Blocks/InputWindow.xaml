@@ -12,8 +12,7 @@
                                 ItemsSource="{Binding Variables}">
             <ItemsControl.Resources>
                 <DataTemplate DataType="{x:Type vm_blocks:VMinputVariable}">
-                    <Button>T</Button>
-                    <!--<StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
                         <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}"  Margin="0,0,5,0">
                             <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
                         </Button>
@@ -25,7 +24,7 @@
                         <ComboBox Margin="0,0,10,0" Width="100" SelectedItem="{Binding ObjectName}" ItemsSource="{Binding TypeOptions}" IsEnabled="{Binding IsObject}"/>
                         <TextBlock Margin="0,0,10,0" Text="Alias:"/>
                         <TextBox Margin="0,0,10,0" Width="100" Text="{Binding Alias}"/>
-                    </StackPanel>-->
+                    </StackPanel>
                 </DataTemplate>
             </ItemsControl.Resources>
         </ItemsControl>

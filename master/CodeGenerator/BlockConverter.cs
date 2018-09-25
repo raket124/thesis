@@ -87,7 +87,11 @@ namespace master.CodeGenerator
         }
         private static string Convert(MyForeach input, Function f, ref int i)
         {
-            return "Unidentified block provided.";
+            var indentifierName = input.IteratorAlias.Value.Alias == string.Empty ? "i" : input.IteratorAlias.Value.Alias;
+            return string.Join("\n", new List<string> {
+                    string.Format("{0}for (var {1} = 0; {1} < {2}.length; {1}++)  {{", Indent(i++), indentifierName, input.List.Output),
+                    string.Format("{0}var {1} = {2}[{3}];", Indent(i), input.ObjectAlias.Output, input.List.Output, indentifierName)
+                });
         }
         private static string Convert(MyIf input, Function f, ref int i)
         {
@@ -129,9 +133,6 @@ namespace master.CodeGenerator
             ////        input.Condition.LHS,
             ////        new VMconditionBase(null, null).COMPARE_DIC[input.Condition.Comparison], 
             ////        input.Condition.RHS);
-
-
-            return "Unidentified block provided.";
         }
         private static string Convert(MyLog input, Function f, ref int i)
         {
@@ -206,25 +207,6 @@ namespace master.CodeGenerator
             return string.Join(" ", parts);
         }
 
-        //private static string Convert(MyInput input, Function f, ref int i)
-        //{
-        //    i++;
-        //    return DocConverter.Convert(f);
-        //}
-
-        //private static string Convert(MyRegistry input, Function f, ref int i)
-        //{
-        //    return string.Join("\n", new List<string> {
-        //        string.Format("{0}const reg = await get{1}Registry(namespace.{2}).catch(function (error) {{", FunctionConverter.Indent(i), "Asset", input.Variable),
-        //        string.Format("{0}throw new Error('[{1}] An error occurred: ' + error);", FunctionConverter.Indent(i + 1), f.Name),
-        //        string.Format("{0}}});", FunctionConverter.Indent(i)),
-        //        string.Empty,
-        //        string.Format("{0}await reg.{1}(tx.{2}).catch(function (error) {{", FunctionConverter.Indent(i), input.Action, input.Variable),
-        //        string.Format("{0}throw new Error('[{1}] An error occurred: ' + error);", FunctionConverter.Indent(i + 1), f.Name),
-        //        string.Format("{0}}});", FunctionConverter.Indent(i))
-        //    });
-        //}
-
         //private static string Convert(MyTotalEcmrs input, ref int i)
         //{
         //    return string.Join("\n", new List<string> {
@@ -246,26 +228,5 @@ namespace master.CodeGenerator
         ////        new VMconditionBase(null, null).COMPARE_DIC[input.Condition.Comparison], 
         ////        input.Condition.RHS);
         ////}
-
-        //private static string Convert(MyLog input, Function f, ref int i)
-        //{
-        //    return string.Format("{0}console.log('[{1}] {2}');", FunctionConverter.Indent(i), f.Name, input.Text);
-        //}
-
-        //private static string Convert(MyError input, Function f, ref int i)
-        //{
-        //    return string.Format("{0}throw new Error('[{1}] {2}');", FunctionConverter.Indent(i), f.Name, input.Text);
-        //}
-
-        //private static string Convert(MyForeach input, ref int i)
-        //{
-        //    return string.Format("{0}tx.{1}.forEach(function ({2}) {{", FunctionConverter.Indent(i++));
-        //}
-
-        //private static string Convert(MyAssign input, ref int i)
-        //{
-        //    return string.Format("{0}{tx.1} = {tx.2};", FunctionConverter.Indent(i++), input.Variable, input.Value);
-        //}
-
     }
 }

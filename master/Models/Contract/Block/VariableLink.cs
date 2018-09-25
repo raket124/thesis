@@ -69,7 +69,7 @@ namespace master.Models.Contract.Block
 
         public void Clear()
         {
-            this.value = null;
+            this.value = new MyVariable(typeof(Nullable));
             this.child = null;
         }
 
@@ -98,7 +98,6 @@ namespace master.Models.Contract.Block
                                select l.Alias).ToList();
                 if (listing.First().Input)
                     aliases.Insert(0, "input");
-
 
                 return string.Join("->", aliases);
             }

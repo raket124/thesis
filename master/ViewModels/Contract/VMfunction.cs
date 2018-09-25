@@ -172,14 +172,6 @@ namespace master.ViewModels.Contract
 
         public VariableLink SelectVar()
         {
-            //var window = new NewGroupWindow();
-            //var vmWindow = new VMnewGroup(window,
-            //                              new List<string>());
-            //window.DataContext = vmWindow;
-
-            //if (window.ShowDialog() == true)
-            //    return vmWindow.Name;
-            //return string.Empty;
             var window = new SelectVariableWindow();
             var vmWindow = new VMselectVariable(window, this.VariableList, this.Parent.Parent.Parent.Model);
             window.DataContext = vmWindow;

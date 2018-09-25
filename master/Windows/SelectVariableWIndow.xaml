@@ -75,63 +75,21 @@
 
         <StackPanel Grid.Column="2" Orientation="Horizontal">
             <Border Style="{StaticResource MyBorder}" Margin="5">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock>
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
-                                <Setter Property="Text" Value="{Binding Output.Value.Alias}"/>
+                                <Setter Property="Text" Value="{Binding Output.Output}"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Output.Value.Alias}" Value="">
+                                    <DataTrigger Binding="{Binding Output.Output}" Value="">
                                         <Setter Property="Text" Value="Nothing selected"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <TextBlock Text=" ("/>
-                    <TextBlock>
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Text" Value="{Binding Output.Value.Type.Name}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Output.Value.Alias}" Value="">
-                                        <Setter Property="Text" Value="null"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <TextBlock Text=")"/>
                 </StackPanel>
             </Border>
-
-            <ItemsControl ItemsSource="{Binding Output.Listing}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Style="{StaticResource MyBorder}" Margin="5">
-                            <StackPanel Margin="5" Orientation="Horizontal">
-                                <TextBlock>
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="Text" Value="{Binding ObjectName}"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ObjectName}" Value="">
-                                                    <Setter Property="Text" Value="{Binding Type.Name}"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
         </StackPanel>
 
         <Button Grid.Column="3" Margin="5" Command="{Binding CommandConfirm}">

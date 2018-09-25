@@ -7,6 +7,7 @@ using master.Models.Contract.Block;
 using master.Models.Contract.Block.Blocks;
 using Prism.Commands;
 using master.Windows.Blocks;
+using master.Models.Data.Component.Components;
 
 namespace master.ViewModels.Contract.Block.Blocks
 {
@@ -17,9 +18,12 @@ namespace master.ViewModels.Contract.Block.Blocks
             get { return this.root as MyForeach; }
         }
 
+        public DelegateCommand CommandSetList { get; private set; }
+
         public VMforeach(MyForeach root, VMfunction parent) : base(root, parent)
         {
             this.CommandOpen = new DelegateCommand(() => new ForeachWindow() { DataContext = this }.ShowDialog());
+            this.CommandSetList = new DelegateCommand(() => this.List = this.Parent.SelectVar());
         }
 
         public override object Clone()
@@ -31,31 +35,42 @@ namespace master.ViewModels.Contract.Block.Blocks
         protected override string Required() { return string.Format(this.reqFormat, "1 variable, 1 alias"); }
         protected override string Optional() { return string.Empty; }
 
-        public string ViewObjectAlias
+        public string ObjectAlias
         {
-            get
+            get { return this.Root.ObjectAlias.Value.Alias; }
+            set
             {
-                if (this.Root.ObjectAlias.Value.Alias == string.Empty)
-                    return "?";
-                else
-                    return this.Root.ObjectAlias.Value.Alias;
+                this.Root.ObjectAlias.Value.Alias = value;
+                this.NotifyPropertyChanged();
             }
         }
 
-        public string ViewIteratorAlias
+        public string IteratorAlias
         {
             get { return this.Root.IteratorAlias.Value.Alias; }
+            set
+            {
+                this.Root.IteratorAlias.Value.Alias = value;
+                this.NotifyPropertyChanged();
+            }
         }
 
-        public string ViewListAlias
+        public VariableLink List
         {
-            get
+            get { return this.Root.List; }
+            set
             {
-                if (this.Root.List.Value.Alias == string.Empty)
-                    return "?";
-                else
-                    return this.Root.List.Value.Alias;
+                this.Root.List = value;
+                this.NotifyPropertyChanged();
             }
+        }
+
+        protected override List<VMvariable> GetVariables()
+        {
+            return new List<VMvariable>() {
+                new VMvariable(new MyVariable(typeof(int)) { Alias = "i" }),
+                new VMvariable(new MyVariable(typeof(MyParticipant)) { Alias = "user", ObjectName = "User" })
+            };
         }
     }
 }

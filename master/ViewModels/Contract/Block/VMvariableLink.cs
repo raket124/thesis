@@ -33,6 +33,7 @@ namespace master.ViewModels.Contract.Block
                 this.Root.Value = value.Root;
                 this.NotifyPropertyChanged();
                 this.NotifyPropertyChanged("Listing");
+                this.NotifyPropertyChanged("Output");
             }
         }
 
@@ -40,12 +41,14 @@ namespace master.ViewModels.Contract.Block
         {
             this.Root.AddLast(input.Root);
             this.NotifyPropertyChanged("Listing");
+            this.NotifyPropertyChanged("Output");
         }
 
         public void RemoveLast()
         {
             this.Root.RemoveLast();
             this.NotifyPropertyChanged("Listing");
+            this.NotifyPropertyChanged("Output");
         }
 
         public bool CanRemoveLast
@@ -57,6 +60,7 @@ namespace master.ViewModels.Contract.Block
         {
             this.Root.Clear();
             this.NotifyPropertyChanged("Listing");
+            this.NotifyPropertyChanged("Output");
         }
 
         public IList<VMvariable> Listing
@@ -70,15 +74,7 @@ namespace master.ViewModels.Contract.Block
 
         public string Output
         {
-            get
-            {
-                var list = new List<string>()
-                {
-                    this.Root.Value.Alias
-                };
-                list.AddRange(this.Listing.Select(l => l.ObjectName));
-                return string.Join(".", list);
-            }
+            get { return this.Root.Output; }
         }
     }
 }

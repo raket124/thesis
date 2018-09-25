@@ -32,7 +32,8 @@ namespace master.ViewModels.Contract.Block.Combinations
                 this.NotifyPropertyChanged();
             }
         }
-        //public DelegateCommand CommandAdd { get; private set; }
+
+        public DelegateCommand CommandAdd { get; private set; }
 
         public VMinput(MyInput root, VMfunction parent) : base(root, parent)
         {
@@ -41,7 +42,7 @@ namespace master.ViewModels.Contract.Block.Combinations
 
             this.WrapVars();
 
-            //this.CommandAdd = new DelegateCommand(this.Add);
+            this.CommandAdd = new DelegateCommand(this.Add);
             this.Root.Variables.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
         }
 
@@ -72,11 +73,16 @@ namespace master.ViewModels.Contract.Block.Combinations
         //}
 
 
-        //public void Add()
-        //{
-        //    this.Root.Vars.Add(new MyVariable(typeof(string)));
-        //    this.Parent.FullRefresh();
-        //}
+        public void Add()
+        {
+            this.Root.Variables.Add(new MyVariable(typeof(string)));
+            this.Parent.FullRefresh();
+        }
+
+        protected override List<VMvariable> GetVariables()
+        {
+            return new List<VMvariable>(this.Variables);
+        }
 
         //protected override List<VMvariable> GetVariables()
         //{
