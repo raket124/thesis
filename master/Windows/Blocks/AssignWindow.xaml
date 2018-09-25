@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:master.Windows.Blocks"
         mc:Ignorable="d"
         Title="Assign config" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Views/DictionaryDisplays.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <StackPanel Orientation="Vertical">
+        <ContentControl Content="{Binding}"/>
+    </StackPanel>
 </Window>

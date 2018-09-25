@@ -6,7 +6,28 @@
         xmlns:local="clr-namespace:master.Windows.Blocks"
         mc:Ignorable="d"
         Title="Modification config" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Views/DictionaryDisplays.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Main object: "/>
+            <Button MinWidth="100"/>
+        </StackPanel>
+        <GridSplitter/>
+        <ItemsControl HorizontalContentAlignment="Stretch"
+                      ItemsSource="{Binding Assignments}"
+                      Margin="5"/>
+
+        <Button Command="{Binding CommandAdd}" Margin="5">
+            <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
+        </Button>
+    </StackPanel>
+    
+
 </Window>

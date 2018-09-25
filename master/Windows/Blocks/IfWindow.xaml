@@ -8,6 +8,37 @@
         xmlns:local="clr-namespace:master.Windows.Blocks"
         mc:Ignorable="d"
         Title="If config" Height="300" Width="300">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm_condition:VMconditionGroup}">
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding CommandAdd}" Margin="20,0,0,0">
+                    <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
+                </Button>
+                <Button Command="{Binding CommandAdd}">
+                    <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
+                </Button>
+                <ItemsControl HorizontalContentAlignment="Stretch"
+                                            ItemsSource="{Binding ConditionSet}">
+                    <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type vm_basetypes:VMstring}">
+                            <TextBox Text="{Binding Value}" FontWeight="Bold" Width="100"/>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type vm_basetypes:VMconditionGroupCompare}">
+                            <ComboBox Width="100" />
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <TextBlock Text=" Alias:"/>
+                <TextBlock Text="{Binding Alias}" Width="100"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    
     <StackPanel Margin="5">
         
         <TextBlock Text="Base conditions:" Margin="5"/>
@@ -31,60 +62,13 @@
 
         <TextBlock Text="Condition groups:" Margin="5"/>
         <ItemsControl HorizontalContentAlignment="Stretch"
-                            ItemsSource="{Binding Condition.Groups}">
-            <ItemsControl.Resources>
-                <DataTemplate DataType="{x:Type vm_condition:VMconditionGroup}">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Command="{Binding CommandAdd}" Margin="20,0,0,0">
-                            <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
-                        </Button>
-                        <Button Command="{Binding CommandAdd}">
-                            <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
-                        </Button>
-                        <ItemsControl HorizontalContentAlignment="Stretch"
-                                            ItemsSource="{Binding ConditionSet}">
-                            <ItemsControl.Resources>
-                                <DataTemplate DataType="{x:Type vm_basetypes:VMstring}">
-                                    <TextBox Text="{Binding Value}" FontWeight="Bold" Width="100"/>
-                                </DataTemplate>
-                                <DataTemplate DataType="{x:Type vm_basetypes:VMconditionGroupCompare}">
-                                    <ComboBox Width="100" />
-                                    <!--Text="{Binding Value}"-->
-                                </DataTemplate>
-                            </ItemsControl.Resources>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                        <TextBlock Text=" Alias:"/>
-                        <TextBlock Text="{Binding Alias}" Width="100"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.Resources>
-        </ItemsControl>
+                            ItemsSource="{Binding Condition.Groups}"/>
+        
         <Button Command="{Binding CommandAdd}" Margin="20,0,0,0">
             <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
         </Button>
 
         <TextBlock Text="Master condition:" Margin="5"/>
-        <ItemsControl HorizontalContentAlignment="Stretch"
-                            ItemsSource="{Binding Condition.Value.ConditionSet}">
-            <ItemsControl.Resources>
-                <DataTemplate DataType="{x:Type vm_basetypes:VMstring}">
-                    <TextBox Text="{Binding Value}" Width="100"/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm_basetypes:VMconditionGroupCompare}">
-                    <ComboBox Width="100"/>
-                </DataTemplate>
-            </ItemsControl.Resources>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="20,0,0,0"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-
+        <ContentControl Content="{Binding Condition.Value}"/>
     </StackPanel>
 </Window>

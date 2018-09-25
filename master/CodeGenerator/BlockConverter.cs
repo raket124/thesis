@@ -70,6 +70,11 @@ namespace master.CodeGenerator
 
             if (input.Value.Value.Alias == string.Empty)
                 value = string.Format("factory.NewResource('namespace','{0}');", input.Value.Value.ObjectName);
+            if (input.Value.Value.Alias == "#currentUser")
+                value = "me.getIdentifier()";
+            if (input.Value.Value.Alias == "#currentDateTime")
+                value = "tx.timestamp";
+
 
             return string.Format("{0}{1} = {2};", BlockConverter.Indent(i), variable, value);
         }
@@ -126,13 +131,6 @@ namespace master.CodeGenerator
             }
 
             return string.Format("{0}if({1}){{", Indent(i++), output);
-
-            ////    return string.Format("{0}if {1}(tx.{2} {3} tx.{4}) {{", 
-            ////        FunctionConverter.Indent(i++), 
-            ////        input.Condition.Invert ? "!" : string.Empty, 
-            ////        input.Condition.LHS,
-            ////        new VMconditionBase(null, null).COMPARE_DIC[input.Condition.Comparison], 
-            ////        input.Condition.RHS);
         }
         private static string Convert(MyLog input, Function f, ref int i)
         {
@@ -154,14 +152,25 @@ namespace master.CodeGenerator
 
         private static string Convert(MyTotalEcmrs input, Function f, ref int i)
         {
-            return "Unidentified block provided.";
+            return string.Join("\n", new List<string> {
+                    string.Format("{0}var {1} = tx.{2}", Indent(i), input.Alias, input.Input),
+                    string.Format("{0}.map(function (ecmr) {{", Indent(i + 1)),
+                    string.Format("{0}return ecmr.goods.length;", Indent(i + 2)),
+                    string.Format("{0}}}).reduce(function (prev, curr) {{", Indent(i + 1)),
+                    string.Format("{0}return prev + curr;", Indent(i + 2)),
+                    string.Format("{0}}});", Indent(i))
+                });
         }
 
         //------------------------------------------------------------------------
 
         private static string Convert(MyCreation input, Function f, ref int i)
         {
-            return "Unidentified block provided.";
+            var output = string.Format("{0}const {1} = factory.new{2}('namespace', '{3}');", Indent(i), input.Object.Value.Value.Alias, input.Object.Value.Value.Type.Name, input.Object.Value.Value.ObjectName);
+            foreach (var a in input.Modifications.Assignments)
+                output += string.Format("\n{0}", Convert(a, f, ref i));
+            return output;
+                    
         }
         private static string Convert(MyIfError input, Function f, ref int i)
         {
@@ -174,11 +183,17 @@ namespace master.CodeGenerator
         }
         private static string Convert(MyModification input, Function f, ref int i)
         {
-            return "Unidentified block provided.";
+            var modifications = new List<string>();
+            foreach (var a in input.Assignments)
+                modifications.Add(Convert(a, f, ref i));
+            return string.Join("\n", modifications);
         }
         private static string Convert(MyValidation input, Function f, ref int i)
         {
-            return "Unidentified block provided.";
+            var validations = new List<string>();
+            foreach (var v in input.Validations)
+                validations.Add(Convert(v, f, ref i));
+            return string.Join("\n", validations);
         }
 
         //------------------------------------------------------------------------
@@ -198,7 +213,7 @@ namespace master.CodeGenerator
                     if(variable.StartsWith(input_marker))
                         variable = variable.Replace(input_marker, "tx.");
 
-                    parts[i] = string.Format("' + **{0}** + '", variable);
+                    parts[i] = string.Format("' + {0} + '", variable);
                     if (part.EndsWith("\n"))
                         parts[i] += "\n";
                 }
@@ -206,27 +221,5 @@ namespace master.CodeGenerator
             }
             return string.Join(" ", parts);
         }
-
-        //private static string Convert(MyTotalEcmrs input, ref int i)
-        //{
-        //    return string.Join("\n", new List<string> {
-        //        string.Format("{0}var {1} = tx.{2}", FunctionConverter.Indent(i), input.Alias, input.Input),
-        //        string.Format("{0}.map(function (ecmr) {{", FunctionConverter.Indent(i + 1)),
-        //        string.Format("{0}return ecmr.goods.length;", FunctionConverter.Indent(i + 2)),
-        //        string.Format("{0}}}).reduce(function (prev, curr) {{", FunctionConverter.Indent(i + 1)),
-        //        string.Format("{0}return prev + curr;", FunctionConverter.Indent(i + 2)),
-        //        string.Format("{0}}});", FunctionConverter.Indent(i))
-        //    });
-        //}
-
-        ////private static string Convert(MySimpleIf input, ref int i)
-        ////{
-        ////    return string.Format("{0}if {1}(tx.{2} {3} tx.{4}) {{", 
-        ////        FunctionConverter.Indent(i++), 
-        ////        input.Condition.Invert ? "!" : string.Empty, 
-        ////        input.Condition.LHS,
-        ////        new VMconditionBase(null, null).COMPARE_DIC[input.Condition.Comparison], 
-        ////        input.Condition.RHS);
-        ////}
     }
 }
