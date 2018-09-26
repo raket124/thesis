@@ -9,62 +9,25 @@
         mc:Ignorable="d"
         Title="If config" Height="300" Width="300">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vm_condition:VMconditionGroup}">
-            <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding CommandAdd}" Margin="20,0,0,0">
-                    <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
-                </Button>
-                <Button Command="{Binding CommandAdd}">
-                    <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
-                </Button>
-                <ItemsControl HorizontalContentAlignment="Stretch"
-                                            ItemsSource="{Binding ConditionSet}">
-                    <ItemsControl.Resources>
-                        <DataTemplate DataType="{x:Type vm_basetypes:VMstring}">
-                            <TextBox Text="{Binding Value}" FontWeight="Bold" Width="100"/>
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type vm_basetypes:VMconditionGroupCompare}">
-                            <ComboBox Width="100" />
-                        </DataTemplate>
-                    </ItemsControl.Resources>
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-                <TextBlock Text=" Alias:"/>
-                <TextBlock Text="{Binding Alias}" Width="100"/>
-            </StackPanel>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Views/DictionaryDisplays.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     
     <StackPanel Margin="5">
         
         <TextBlock Text="Base conditions:" Margin="5"/>
-        <ItemsControl HorizontalContentAlignment="Stretch"
-                            ItemsSource="{Binding Condition.Conditions}">
-            <ItemsControl.Resources>
-                <DataTemplate DataType="{x:Type vm_condition:VMconditionBase}">
-                    <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
-                        <Button Content="{Binding LHS}" FontWeight="Bold" Width="100"/>
-                        <ComboBox Width="100"/>
-                        <Button Content="{Binding RHS}" FontWeight="Bold" Width="100"/>
-                        <TextBlock Text=" Alias:"/>
-                        <TextBlock Text="{Binding Alias}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.Resources>
-        </ItemsControl>
-        <Button Command="{Binding CommandAdd}" Margin="20,0,0,0">
+        <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Condition.Conditions}"/>
+        <Button Command="{Binding Condition.CommandAddBase}" Margin="20,0,0,0">
             <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
         </Button>
 
         <TextBlock Text="Condition groups:" Margin="5"/>
-        <ItemsControl HorizontalContentAlignment="Stretch"
-                            ItemsSource="{Binding Condition.Groups}"/>
-        
-        <Button Command="{Binding CommandAdd}" Margin="20,0,0,0">
+        <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Condition.Groups}"/>
+
+        <Button Command="{Binding Condition.CommandAddGroup}" Margin="20,0,0,0">
             <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
         </Button>
 

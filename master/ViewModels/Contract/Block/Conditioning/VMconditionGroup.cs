@@ -26,15 +26,17 @@ namespace master.ViewModels.Contract.Block.Conditioning
         public List<VMstring> conditions;
         public List<VMconditionGroupCompare> connectors;
 
-        //public DelegateCommand CommandAdd { get; private set; }
-        //public DelegateCommand CommandRemove { get; private set; }
+        public DelegateCommand CommandAddSet { get; private set; }
+        public DelegateCommand CommandRemoveSet { get; private set; }
+        public DelegateCommand CommandRemove { get; private set; }
 
         public VMconditionGroup(ConditionGroup root, VMcondition parent) : base(root, parent)
         {
             this.Wrap();
 
-            //this.CommandAdd = new DelegateCommand(this.Add);
-            //this.CommandRemove = new DelegateCommand(() => this.Parent.Root.Groups.Remove(this.Root));
+            this.CommandAddSet = new DelegateCommand(this.Add);
+            this.CommandRemoveSet = new DelegateCommand(this.Remove, this.CanRemove);
+            this.CommandRemove = new DelegateCommand(() => this.Parent.Root.Groups.Remove(this.Root));
 
             this.Root.Conditions.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CollectionChanged);
             this.Root.Connectors.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CollectionChanged);
@@ -53,30 +55,30 @@ namespace master.ViewModels.Contract.Block.Conditioning
                                                                 select new VMconditionGroupCompare(compare));
         }
 
-        //public void Add()
-        //{
-        //    this.Root.Conditions.Add(string.Empty);
-        //    this.Root.Connectors.Add(ConditionGroup.COMPARE.and);
-        //    this.NotifyPropertyChanged("ConditionSet");
-        //}
+        public void Add()
+        {
+            this.Root.Conditions.Add(string.Empty);
+            this.Root.Connectors.Add(ConditionGroup.COMPARE.and);
+            this.NotifyPropertyChanged("ConditionSet");
+            this.CommandRemoveSet.RaiseCanExecuteChanged();
+        }
 
-        //public void Remove()
-        //{
-        //    this.Root.Conditions.RemoveAt(this.Root.Conditions.Count - 1);
-        //    this.Root.Connectors.RemoveAt(this.Root.Connectors.Count - 1);
-        //    this.NotifyPropertyChanged("ConditionSet");
-        //}
+        public void Remove()
+        {
+            this.Root.Conditions.RemoveAt(this.Root.Conditions.Count - 1);
+            this.Root.Connectors.RemoveAt(this.Root.Connectors.Count - 1);
+            this.NotifyPropertyChanged("ConditionSet");
+            this.CommandRemoveSet.RaiseCanExecuteChanged();
+        }
 
-        //public bool CanRemove()
-        //{
-        //    return this.Root.Connectors.Count > 1;
-        //}
+        public bool CanRemove()
+        {
+            return this.Root.Connectors.Count > 1;
+        }
 
         public object Clone()
         {
             return new VMconditionGroup(this.Root.Clone() as ConditionGroup, this.Parent);
-            //TODO set parent for other vms
-
         }
 
         public string Alias
@@ -87,14 +89,6 @@ namespace master.ViewModels.Contract.Block.Conditioning
                 this.Root.Alias = value;
                 this.NotifyPropertyChanged();
                 this.Parent.FullRefresh();
-            }
-        }
-
-        public List<string> AliasList
-        {
-            get
-            {
-                return this.Parent.AliasList;
             }
         }
 

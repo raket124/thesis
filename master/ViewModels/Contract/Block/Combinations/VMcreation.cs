@@ -36,5 +36,12 @@ namespace master.ViewModels.Contract.Block.Combinations
         {
             get { return new VMassign(this.Root.Object, this.Parent); }
         }
+
+        protected override List<VMvariable> GetVariables()
+        {
+            return new List<VMvariable>() {
+                new VMvariable(new MyVariable(this.Root.Object.Value.Value.Type) { Alias = this.Root.Object.Value.Value.Alias, ObjectName = this.Root.Object.Value.Value.ObjectName })
+            };
+        }
     }
 }

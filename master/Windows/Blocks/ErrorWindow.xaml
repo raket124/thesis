@@ -6,5 +6,15 @@
         xmlns:local="clr-namespace:master.Windows.Blocks"
         mc:Ignorable="d"
         Title="Error config" Height="100" Width="400">
-    <TextBox AcceptsReturn="True" Text="{Binding Text}"/>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Views/DictionaryDisplays.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <ContentControl Content="{Binding}"/>
+
+    <!--<TextBox AcceptsReturn="True" Text="{Binding Text}"/>-->
 </Window>

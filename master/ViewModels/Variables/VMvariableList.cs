@@ -54,6 +54,8 @@ namespace master.ViewModels.Variables
         {
             foreach (var variable in input)
             {
+                if (variable.Type == typeof(Nullable))
+                    continue; //Skip dummy vars
                 if(variable.ObjectName == string.Empty)
                     this.Root.VariableGroups.Where(vg => vg.Type == variable.Type).First().Variables.Add(variable.Root);
                 else

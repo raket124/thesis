@@ -68,8 +68,8 @@ namespace master.ViewModels.Contract.Block.Blocks
         protected override List<VMvariable> GetVariables()
         {
             return new List<VMvariable>() {
-                new VMvariable(new MyVariable(typeof(int)) { Alias = "i" }),
-                new VMvariable(new MyVariable(typeof(MyParticipant)) { Alias = "user", ObjectName = "User" })
+                new VMvariable(new MyVariable(typeof(int)) { Alias = this.IteratorAlias }),
+                new VMvariable(new MyVariable(this.List.Value.Type) { Alias = this.ObjectAlias, ObjectName = this.List.Value.ObjectName })
             };
         }
     }
