@@ -15,7 +15,8 @@
     </Window.Resources>
 
     <StackPanel>
-        <ContentControl Content="{Binding If}"/>
-        <ContentControl Content="{Binding Error}"/>
+        <ContentControl Content="{Binding If.Condition}"/>
+        <Separator/>
+        <ContentControl Content="{Binding Error}" Margin="20,20,0,0"/>
     </StackPanel>
 </Window>

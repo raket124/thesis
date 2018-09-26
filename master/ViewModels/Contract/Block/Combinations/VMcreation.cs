@@ -37,6 +37,15 @@ namespace master.ViewModels.Contract.Block.Combinations
             get { return new VMassign(this.Root.Object, this.Parent); }
         }
 
+        public IList<VMassign> Assignments
+        {
+            get
+            {
+                return new List<VMassign>(from a in this.Root.Modifications.Assignments
+                                          select new VMassign(a, this.Parent));
+            }
+        }
+
         protected override List<VMvariable> GetVariables()
         {
             return new List<VMvariable>() {

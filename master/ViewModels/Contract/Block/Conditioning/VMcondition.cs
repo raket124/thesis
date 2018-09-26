@@ -62,19 +62,27 @@ namespace master.ViewModels.Contract.Block.Conditioning
         {
             this.Wrap();
 
-            this.CommandAddBase = new DelegateCommand(() => this.Root.Conditions.Add(new ConditionBase()));
-            this.CommandAddGroup = new DelegateCommand(() => this.Root.Groups.Add(new ConditionGroup()
+            this.CommandAddBase = new DelegateCommand(() => 
             {
-                Conditions = new ObservableCollection<string>()
+                this.Root.Conditions.Add(new ConditionBase());
+                this.NotifyPropertyChanged("Simple");
+            });
+            this.CommandAddGroup = new DelegateCommand(() =>
+            {
+                this.Root.Groups.Add(new ConditionGroup()
                 {
-                    string.Empty,
-                    string.Empty
-                },
-                Connectors = new ObservableCollection<ConditionGroup.COMPARE>()
-                {
-                    ConditionGroup.COMPARE.and
-                }
-            }));
+                    Conditions = new ObservableCollection<string>()
+                    {
+                        string.Empty,
+                        string.Empty
+                    },
+                    Connectors = new ObservableCollection<ConditionGroup.COMPARE>()
+                    {
+                        ConditionGroup.COMPARE.and
+                    }
+                });
+                this.NotifyPropertyChanged("Simple");
+            });
 
             this.Root.Conditions.CollectionChanged += new NotifyCollectionChangedEventHandler(ConditionsChanged);
             this.Root.Groups.CollectionChanged += new NotifyCollectionChangedEventHandler(GroupsChanged);
@@ -113,24 +121,17 @@ namespace master.ViewModels.Contract.Block.Conditioning
             this.WrapValue();
         }
 
-        protected void ValueAdd()
-        {
-            //this.Value.Add();
-            //this.CommandRemoveOption.RaiseCanExecuteChanged();
-        }
-
-        protected void ValueRemove()
-        {
-            //this.Value.Remove();
-            //this.CommandRemoveOption.RaiseCanExecuteChanged();
-        }
-
         public object Clone()
         {
             return new VMcondition(this.Root, this.Parent)
             {
                 //TODO complete this
             };
+        }
+
+        public bool Simple
+        {
+            get { return this.Root.Conditions.Count > 1; }
         }
     }
 }

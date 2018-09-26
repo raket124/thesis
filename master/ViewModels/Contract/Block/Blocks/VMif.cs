@@ -46,10 +46,5 @@ namespace master.ViewModels.Contract.Block.Blocks
         protected override string BlockName() { return "If - block"; }
         protected override string Required() { return string.Format(this.reqFormat, "1+ condition(s)"); }
         protected override string Optional() { return string.Empty; }
-
-        public bool Simple
-        {
-            get { return this.Root.Condition.Conditions.Count > 1; }
-        }
     }
 }

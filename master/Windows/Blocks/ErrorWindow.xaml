@@ -13,8 +13,6 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
-    <ContentControl Content="{Binding}"/>
 
-    <!--<TextBox AcceptsReturn="True" Text="{Binding Text}"/>-->
+    <ContentControl Content="{Binding}"/>
 </Window>

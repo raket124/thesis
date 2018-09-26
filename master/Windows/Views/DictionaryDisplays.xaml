@@ -10,14 +10,34 @@
             <Button Command="{Binding CommandRemove}" CommandParameter="{Binding}">
                 <Image Source="..\Images\cross_red.png" Width="16" Height="16"/>
             </Button>
-            <Button Content="{Binding ViewVariable}" Width="100"/>
+            <Button Content="{Binding Variable.Output}" MinWidth="100" Command="{Binding CommandSetVariable}"/>
             <TextBlock Text=" = "/>
-            <Button Content="{Binding ViewValue}" Width="100"/>
+            <Button Content="{Binding Value.Output}" MinWidth="100" Command="{Binding CommandSetValue}"/>
         </StackPanel>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm_blocks:VMerror}">
         <TextBox AcceptsReturn="True" Text="{Binding Text}"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm_condition:VMcondition}">
+        <StackPanel Margin="5">
+            <TextBlock Text="Base conditions:" Margin="5"/>
+            <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Conditions}"/>
+            <Button Command="{Binding CommandAddBase}" Margin="20,0,0,0">
+                <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
+            </Button>
+
+            <TextBlock Text="Condition groups:" Margin="5"/>
+            <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Groups}"/>
+
+            <Button Command="{Binding CommandAddGroup}" Margin="20,0,0,0">
+                <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
+            </Button>
+
+            <TextBlock Text="Master condition:" Margin="5"/>
+            <ContentControl Content="{Binding Value}"/>
+        </StackPanel>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm_condition:VMconditionGroup}">
@@ -64,6 +84,8 @@
             <TextBox Text="{Binding Alias}" MinWidth="100"/>
         </StackPanel>
     </DataTemplate>
+
+
 
 
 </ResourceDictionary>

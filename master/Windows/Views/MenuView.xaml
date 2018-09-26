@@ -9,16 +9,12 @@
     <Menu>
         <MenuItem Header="File">
             <MenuItem Header="New" Command="{Binding FileNew}"/>
-            <MenuItem Header="Demo">
-                <MenuItem Header="Tutorial" />
-                <MenuItem Header="Koopman" Command="{Binding FileDemo}" />
-            </MenuItem>
             <Separator />
             <MenuItem Header="Open" Command="{Binding FileOpen}"/>
             <MenuItem Header="Save" Command="{Binding FileSave}" />
             <MenuItem Header="Save as" Command="{Binding FileSaveAs}"/>
             <Separator />
-            <MenuItem Header="Export"/>
+            <MenuItem Header="Export" IsEnabled="False"/>
             <Separator />
             <MenuItem Header="Exit" Command="{Binding FileExit}"/>
         </MenuItem>

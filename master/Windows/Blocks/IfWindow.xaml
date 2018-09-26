@@ -15,23 +15,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
-    <StackPanel Margin="5">
-        
-        <TextBlock Text="Base conditions:" Margin="5"/>
-        <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Condition.Conditions}"/>
-        <Button Command="{Binding Condition.CommandAddBase}" Margin="20,0,0,0">
-            <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
-        </Button>
 
-        <TextBlock Text="Condition groups:" Margin="5"/>
-        <ItemsControl HorizontalContentAlignment="Stretch" ItemsSource="{Binding Condition.Groups}"/>
+    <ContentControl Content="{Binding Condition}"/>
 
-        <Button Command="{Binding Condition.CommandAddGroup}" Margin="20,0,0,0">
-            <Image Source="..\Images\add_green.png" Width="16" Height="16"/>
-        </Button>
-
-        <TextBlock Text="Master condition:" Margin="5"/>
-        <ContentControl Content="{Binding Condition.Value}"/>
-    </StackPanel>
 </Window>
